@@ -205,18 +205,8 @@ const App = (() => {
    * Inicializa Firebase y configura la sincronización en tiempo real.
    */
   function setupFirebaseSync() {
-    const firebaseConfig = {
-      apiKey: "AIzaSyAMQKrHDvK-XiPVuUWVKE9N2JK231P68BM",
-      authDomain: "efectividad.firebaseapp.com",
-      projectId: "efectividad",
-      storageBucket: "efectividad.firebasestorage.app",
-      messagingSenderId: "727705891475",
-      appId: "1:727705891475:web:8bb241e2091648ad0a1366",
-      measurementId: "G-K8SV40LSN7"
-    };
-
     try {
-      FirebaseDB.init(firebaseConfig);
+      FirebaseDB.init();
 
       // Cada vez que Storage guarde en localStorage, también sube a Firestore
       Storage.setOnSaveCallback((data) => {
@@ -282,9 +272,56 @@ const App = (() => {
     setupUploadScreen();
     setupSidebar();
     setupExportButtons();
+
+    // Inicializar Firebase app antes de auth o FirebaseDB
+    initFirebase();
+
+    if (sharedViewName) {
+      // Vista compartida: no requiere autenticación
+      initApp();
+    } else {
+      // Dashboard principal: requiere autenticación
+      initAuth();
+    }
+  }
+
+  /**
+   * Inicializa la app de Firebase (una sola vez).
+   */
+  function initFirebase() {
+    if (window.__firebaseInitialized) return;
+    window.__firebaseInitialized = true;
+    const firebaseConfig = {
+      apiKey: "AIzaSyAMQKrHDvK-XiPVuUWVKE9N2JK231P68BM",
+      authDomain: "efectividad.firebaseapp.com",
+      projectId: "efectividad",
+      storageBucket: "efectividad.firebasestorage.app",
+      messagingSenderId: "727705891475",
+      appId: "1:727705891475:web:8bb241e2091648ad0a1366",
+      measurementId: "G-K8SV40LSN7"
+    };
+    try {
+      firebase.initializeApp(firebaseConfig);
+    } catch (e) {
+      console.warn('[App] Firebase init:', e);
+    }
+  }
+
+  /**
+   * Inicializa Firebase, datos locales y entra a la app.
+   * Se llama tras confirmar autenticación o en vista compartida.
+   */
+  function initApp() {
     setupFirebaseSync();
 
     // Verificar si hay datos en localStorage
+    loadAppData();
+  }
+
+  /**
+   * Carga datos desde localStorage y muestra la vista correspondiente.
+   */
+  function loadAppData() {
     if (!appData && Storage.hasData()) {
       const saved = Storage.loadData();
       if (saved && saved.programmers) {
@@ -301,6 +338,62 @@ const App = (() => {
     } else if (!appData) {
       UI.showScreen('screen-upload');
     }
+  }
+
+  /**
+   * Configura la pantalla de login y espera autenticación.
+   */
+  function initAuth() {
+    Auth.init();
+
+    Auth.onAuthChange((user) => {
+      if (user) {
+        document.getElementById('btn-logout').classList.remove('hidden');
+        UI.showScreen('screen-upload');
+        initApp();
+      } else {
+        UI.showScreen('screen-login');
+      }
+    });
+
+    // Formulario de login
+    document.getElementById('login-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      const errorEl = document.getElementById('login-error');
+      errorEl.classList.add('hidden');
+
+      Auth.signIn(email, password).catch((err) => {
+        errorEl.textContent = authErrorMessage(err);
+        errorEl.classList.remove('hidden');
+      });
+    });
+
+    // Cerrar sesión
+    document.getElementById('btn-logout')?.addEventListener('click', () => {
+      Auth.signOut();
+      document.getElementById('btn-logout').classList.add('hidden');
+      sharedViewName = null;
+      appData = null;
+    });
+  }
+
+  /**
+   * Traduce errores de Firebase Auth a mensajes legibles.
+   * @param {Error} err
+   * @returns {string}
+   */
+  function authErrorMessage(err) {
+    const map = {
+      'auth/user-not-found': 'No hay una cuenta con este correo',
+      'auth/wrong-password': 'Contraseña incorrecta',
+      'auth/invalid-email': 'Correo electrónico inválido',
+      'auth/invalid-credential': 'Correo o contraseña incorrectos',
+      'auth/too-many-requests': 'Demasiados intentos. Espera un momento',
+      'auth/network-request-failed': 'Error de red. Verifica tu conexión',
+    };
+    return map[err.code] || 'Error al iniciar sesión. Intenta de nuevo.';
   }
 
   // ----------------------------------------------------------------

@@ -6,9 +6,8 @@ const FirebaseDB = (() => {
   const COLLECTION = 'dashboard';
   const DOCUMENT = 'data';
 
-  function init(config) {
+  function init() {
     if (initialized) return;
-    firebase.initializeApp(config);
     dbInstance = firebase.firestore();
     dbInstance.settings({ merge: true });
     initialized = true;
