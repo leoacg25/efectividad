@@ -487,6 +487,30 @@ img { display: block; max-width: 100%; }
   color: var(--accent-1);
 }
 
+.nav-share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 1px;
+  opacity: .35;
+  transition: opacity var(--transition), background var(--transition), color var(--transition);
+}
+.nav-item:hover .nav-share-btn,
+.nav-item.active .nav-share-btn {
+  opacity: .7;
+}
+.nav-share-btn:hover {
+  opacity: 1;
+  background: rgba(255,255,255,.1);
+  color: var(--text-primary);
+}
+
 .nav-section-title {
   font-size: 10px;
   font-weight: 700;
@@ -530,6 +554,10 @@ img { display: block; max-width: 100%; }
   font-size: 13px;
   font-weight: 600;
   flex-shrink: 0;
+}
+.shared-banner--error {
+  background: var(--accent-danger, #ef4444);
+  color: #fff;
 }
 
 /* TOPBAR */

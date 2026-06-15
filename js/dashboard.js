@@ -471,6 +471,12 @@ const Dashboard = (() => {
           <span class="effectiveness-badge ${theme.cssClass}" style="background:rgba(${theme.colorRgb.split(',').join(',')},0.15)">
             ${r.pct}%
           </span>
+          <span class="nav-share-btn" title="Copiar enlace compartible" onclick="event.stopPropagation();Dashboard.copyShareLink('${encodeURIComponent(r.name)}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+            </svg>
+          </span>
         </button>
       `;
     }).join('');
@@ -497,6 +503,27 @@ const Dashboard = (() => {
     return document.getElementById('chart-bar');
   }
 
+  /**
+   * Copia al portapapeles el enlace compartible de un programador.
+   * @param {string} encodedName - Nombre codificado con encodeURIComponent
+   */
+  function copyShareLink(encodedName) {
+    const name = decodeURIComponent(encodedName);
+    const url = window.location.origin + window.location.pathname.replace(/\/?$/, '/') + '?compartir=' + encodedName;
+    navigator.clipboard.writeText(url).then(() => {
+      UI.showToast(`Enlace copiado: ${name}`, 'success');
+    }).catch(() => {
+      // Fallback para navegadores sin Clipboard API
+      const input = document.createElement('input');
+      input.value = url;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+      UI.showToast(`Enlace copiado: ${name}`, 'success');
+    });
+  }
+
   // Exportar stats para uso externo
   return {
     render,
@@ -505,6 +532,7 @@ const Dashboard = (() => {
     renderSidebarProgrammers,
     renderRankingTable,
     getBarChartCanvas,
+    copyShareLink,
   };
 
 })();
