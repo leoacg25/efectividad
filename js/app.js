@@ -474,12 +474,23 @@ const App = (() => {
    * @param {string} name
    */
   function enterSharedView(name) {
-    if (!appData || !appData.programmers[name]) {
-      UI.showToast(`No se encontraron datos para "${name}"`, 'error');
-      sharedViewName = null;
-      goToDashboard();
+    if (!appData || !appData.programmers) {
+      showSharedError('No hay datos cargados');
       return;
     }
+
+    // Búsqueda insensible a mayúsculas
+    const realName = Object.keys(appData.programmers).find(
+      k => k.toLowerCase() === name.toLowerCase()
+    );
+
+    if (!realName) {
+      showSharedError(`No se encontró "${name}"`);
+      return;
+    }
+
+    // Actualizar sharedViewName con el nombre real (preservando mayúsculas)
+    sharedViewName = realName;
 
     UI.showScreen('screen-app');
     UI.showView('view-programmer');
@@ -490,7 +501,7 @@ const App = (() => {
     document.getElementById('main-content').style.marginLeft = '0';
 
     // Breadcrumb simple
-    document.getElementById('topbar-breadcrumb').textContent = `Vista compartida: ${name}`;
+    document.getElementById('topbar-breadcrumb').textContent = `Vista compartida: ${realName}`;
     updateTopbarActions('programmer');
 
     // Agregar banner de solo lectura (evitar duplicados)
@@ -507,8 +518,39 @@ const App = (() => {
     }
 
     // Renderizar vista del programador en modo solo lectura
-    const tickets = appData.programmers[name];
-    Tickets.render(name, tickets, true);
+    const tickets = appData.programmers[realName];
+    Tickets.render(realName, tickets, true);
+  }
+
+  /**
+   * Muestra pantalla de error limpia en vista compartida (sin exponer el dashboard).
+   * @param {string} msg
+   */
+  function showSharedError(msg) {
+    UI.showScreen('screen-app');
+    UI.showView('view-programmer');
+    document.getElementById('sidebar').style.display = 'none';
+    document.getElementById('menu-btn').style.display = 'none';
+    document.getElementById('main-content').style.marginLeft = '0';
+    document.getElementById('topbar-breadcrumb').textContent = 'Vista compartida';
+
+    const existing = document.getElementById('shared-banner');
+    if (!existing) {
+      const banner = document.createElement('div');
+      banner.id = 'shared-banner';
+      banner.className = 'shared-banner shared-banner--error';
+      document.getElementById('main-content').insertBefore(
+        banner,
+        document.getElementById('main-content').firstChild
+      );
+    }
+
+    // Ocultar secciones editables y mostrar solo el error
+    document.getElementById('prog-header')?.classList.add('hidden');
+    document.getElementById('prog-tickets-section')?.classList.add('hidden');
+
+    const banner = document.getElementById('shared-banner');
+    if (banner) banner.textContent = `⚠️ ${msg}`;
   }
 
   /**
