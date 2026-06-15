@@ -168,6 +168,7 @@ const App = (() => {
   // Estado de la aplicación
   let appData = null; // { programmers: {...}, loadedAt: string }
   let lastSnapshotJson = null;
+  let sharedViewName = null; // Nombre del programador en vista compartida
 
   // ----------------------------------------------------------------
   // INICIALIZACIÓN
@@ -234,13 +235,17 @@ const App = (() => {
         appData = remoteData;
 
         // Re-renderizar según la vista actual
-        const viewDashboard = document.getElementById('view-dashboard');
-        if (viewDashboard?.classList.contains('active')) {
-          Dashboard.render(appData.programmers, navigateToProgrammer);
+        if (sharedViewName && appData.programmers[sharedViewName]) {
+          Tickets.render(sharedViewName, appData.programmers[sharedViewName], true);
         } else {
-          const currentName = document.getElementById('prog-name')?.textContent;
-          if (currentName && appData.programmers[currentName]) {
-            Tickets.render(currentName, appData.programmers[currentName]);
+          const viewDashboard = document.getElementById('view-dashboard');
+          if (viewDashboard?.classList.contains('active')) {
+            Dashboard.render(appData.programmers, navigateToProgrammer);
+          } else {
+            const currentName = document.getElementById('prog-name')?.textContent;
+            if (currentName && appData.programmers[currentName]) {
+              Tickets.render(currentName, appData.programmers[currentName]);
+            }
           }
         }
 
@@ -253,7 +258,11 @@ const App = (() => {
           Storage.saveData(remoteData);
           appData = remoteData;
           lastSnapshotJson = JSON.stringify(remoteData);
-          goToDashboard();
+          if (sharedViewName) {
+            enterSharedView(sharedViewName);
+          } else {
+            goToDashboard();
+          }
         }
       });
     } catch (err) {
@@ -265,6 +274,10 @@ const App = (() => {
    * Punto de entrada. Se llama cuando el DOM está listo.
    */
   function init() {
+    // Detectar vista compartida por URL (?compartir=Nombre)
+    const params = new URLSearchParams(window.location.search);
+    sharedViewName = params.get('compartir') || null;
+
     setupTheme();
     setupUploadScreen();
     setupSidebar();
@@ -276,7 +289,11 @@ const App = (() => {
       const saved = Storage.loadData();
       if (saved && saved.programmers) {
         appData = saved;
-        goToDashboard();
+        if (sharedViewName) {
+          enterSharedView(sharedViewName);
+        } else {
+          goToDashboard();
+        }
       } else {
         Storage.clearData();
         UI.showScreen('screen-upload');
@@ -450,6 +467,48 @@ const App = (() => {
 
     // Scroll al inicio
     document.getElementById('main-content')?.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /**
+   * Entra en modo vista compartida (solo lectura) para un programador.
+   * @param {string} name
+   */
+  function enterSharedView(name) {
+    if (!appData || !appData.programmers[name]) {
+      UI.showToast(`No se encontraron datos para "${name}"`, 'error');
+      sharedViewName = null;
+      goToDashboard();
+      return;
+    }
+
+    UI.showScreen('screen-app');
+    UI.showView('view-programmer');
+
+    // Ocultar sidebar completamente
+    document.getElementById('sidebar').style.display = 'none';
+    document.getElementById('menu-btn').style.display = 'none';
+    document.getElementById('main-content').style.marginLeft = '0';
+
+    // Breadcrumb simple
+    document.getElementById('topbar-breadcrumb').textContent = `Vista compartida: ${name}`;
+    updateTopbarActions('programmer');
+
+    // Agregar banner de solo lectura (evitar duplicados)
+    const existing = document.getElementById('shared-banner');
+    if (!existing) {
+      const banner = document.createElement('div');
+      banner.id = 'shared-banner';
+      banner.className = 'shared-banner';
+      banner.textContent = '🔍 Vista compartida — solo lectura';
+      document.getElementById('main-content').insertBefore(
+        banner,
+        document.getElementById('main-content').firstChild
+      );
+    }
+
+    // Renderizar vista del programador en modo solo lectura
+    const tickets = appData.programmers[name];
+    Tickets.render(name, tickets, true);
   }
 
   /**

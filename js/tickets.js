@@ -18,6 +18,7 @@ const Tickets = (() => {
   let searchQuery = '';
   let currentTicketIdForNotes = null;
   let notesModalSetup = false;
+  let readOnly = false;
 
   // ----------------------------------------------------------------
   // HELPERS
@@ -244,52 +245,17 @@ const Tickets = (() => {
 
     tbody.innerHTML = filtered.map((ticket, rowIdx) => {
       const sClass = statusClass(ticket.status);
-      return `
-        <tr id="row-${ticket.id}" class="ticket-row" data-id="${ticket.id}">
-          <td class="td-ticket" data-field="ticket" data-id="${ticket.id}">
-            <span class="editable-field" title="Clic para editar" tabindex="0">
-              ${escHtml(ticket.ticket || '—')}
-            </span>
-          </td>
-          <td class="td-description" data-field="description" data-id="${ticket.id}">
-            <span class="editable-field" title="Clic para editar" tabindex="0">
-              ${escHtml(ticket.description || '—')}
-            </span>
-          </td>
-          <td class="td-project" data-field="project" data-id="${ticket.id}">
-            <span class="editable-field" title="Clic para editar" tabindex="0">
-              ${escHtml(ticket.project || '—')}
-            </span>
-          </td>
-          <td class="td-notes" data-field="notes" data-id="${ticket.id}">
-            <div class="td-notes-cell">
-              <span class="notes-preview ${ticket.notes ? '' : 'notes-preview--empty'}"
-                    onclick="Tickets.openNotesModal('${ticket.id}')"
-                    title="Clic para abrir notas" tabindex="0">
-                ${escHtml(ticket.notes ? (ticket.notes.length > 80 ? ticket.notes.substring(0, 80) + '...' : ticket.notes) : 'Sin notas')}
-              </span>
-              <button class="notes-open-btn ${ticket.notes ? 'has-content' : ''}"
-                      onclick="Tickets.openNotesModal('${ticket.id}')"
-                      aria-label="Editar notas" title="Editar notas">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
-                  <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                  <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                </svg>
-              </button>
-            </div>
-          </td>
-          <td>
-              <select
-                class="status-select"
-                data-ticket-id="${ticket.id}"
-                aria-label="Estado del ticket ${ticket.ticket}">
-                <option value="No resuelto"  ${ticket.status === 'No resuelto'  ? 'selected' : ''}>No resuelto</option>
-                <option value="En proceso"   ${ticket.status === 'En proceso'   ? 'selected' : ''}>En proceso</option>
-                <option value="Solventado"   ${ticket.status === 'Solventado'   ? 'selected' : ''}>Solventado</option>
-                <option value="No Aplica"    ${ticket.status === 'No Aplica'    ? 'selected' : ''}>No Aplica</option>
-              </select>
-          </td>
-          <td>
+      const statusBadge = readOnly
+        ? `<span class="status-badge status-badge--${sClass}">${escHtml(ticket.status)}</span>`
+        : `<select class="status-select" data-ticket-id="${ticket.id}" aria-label="Estado del ticket ${ticket.ticket}">
+            <option value="No resuelto"  ${ticket.status === 'No resuelto'  ? 'selected' : ''}>No resuelto</option>
+            <option value="En proceso"   ${ticket.status === 'En proceso'   ? 'selected' : ''}>En proceso</option>
+            <option value="Solventado"   ${ticket.status === 'Solventado'   ? 'selected' : ''}>Solventado</option>
+            <option value="No Aplica"    ${ticket.status === 'No Aplica'    ? 'selected' : ''}>No Aplica</option>
+           </select>`;
+      const editTitle = readOnly ? '' : 'title="Clic para editar"';
+      const actionsCell = readOnly ? ''
+        : `<td>
             <div class="td-actions">
               <button
                 class="btn btn--ghost btn--icon btn--sm"
@@ -301,10 +267,51 @@ const Tickets = (() => {
                 </svg>
               </button>
             </div>
+          </td>`;
+      const notesOpenBtn = readOnly ? ''
+        : `<button class="notes-open-btn ${ticket.notes ? 'has-content' : ''}"
+                  onclick="Tickets.openNotesModal('${ticket.id}')"
+                  aria-label="Editar notas" title="Editar notas">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+              <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+          </button>`;
+      return `
+        <tr id="row-${ticket.id}" class="ticket-row" data-id="${ticket.id}">
+          <td class="td-ticket" data-field="ticket" data-id="${ticket.id}">
+            <span class="editable-field" ${editTitle} tabindex="0">
+              ${escHtml(ticket.ticket || '—')}
+            </span>
           </td>
+          <td class="td-description" data-field="description" data-id="${ticket.id}">
+            <span class="editable-field" ${editTitle} tabindex="0">
+              ${escHtml(ticket.description || '—')}
+            </span>
+          </td>
+          <td class="td-project" data-field="project" data-id="${ticket.id}">
+            <span class="editable-field" ${editTitle} tabindex="0">
+              ${escHtml(ticket.project || '—')}
+            </span>
+          </td>
+          <td class="td-notes" data-field="notes" data-id="${ticket.id}">
+            <div class="td-notes-cell">
+              <span class="notes-preview ${ticket.notes ? '' : 'notes-preview--empty'}"
+                    ${readOnly ? '' : 'onclick="Tickets.openNotesModal(\'' + ticket.id + '\')"'}
+                    title="${readOnly ? 'Ver notas' : 'Clic para abrir notas'}" tabindex="0">
+                ${escHtml(ticket.notes ? (ticket.notes.length > 80 ? ticket.notes.substring(0, 80) + '...' : ticket.notes) : 'Sin notas')}
+              </span>
+              ${notesOpenBtn}
+            </div>
+          </td>
+          <td>${statusBadge}</td>
+          ${actionsCell}
         </tr>
       `;
     }).join('');
+
+    // En modo solo lectura no se adjuntan listeners de edición ni cambio de estado
+    if (readOnly) return;
 
     // Attach listeners de edición inline a todas las celdas editables
     filtered.forEach(ticket => {
@@ -333,6 +340,7 @@ const Tickets = (() => {
    * @param {string} newStatus
    */
   function handleStatusChange(ticketId, newStatus) {
+    if (readOnly) return;
     const ticket = currentTickets.find(t => t.id === ticketId);
     if (!ticket) return;
 
@@ -457,11 +465,23 @@ const Tickets = (() => {
     textarea.value = ticket.notes || '';
     updateNotesCharCount();
 
+    if (readOnly) {
+      textarea.disabled = true;
+      document.getElementById('notes-modal-save').style.display = 'none';
+      document.getElementById('notes-modal-clear').style.display = 'none';
+      document.getElementById('notes-char-count').style.display = 'none';
+    } else {
+      textarea.disabled = false;
+      document.getElementById('notes-modal-save').style.display = '';
+      document.getElementById('notes-modal-clear').style.display = '';
+      document.getElementById('notes-char-count').style.display = '';
+    }
+
     const modal = document.getElementById('notes-modal');
     modal.classList.remove('hidden');
     modal.classList.add('active');
 
-    setTimeout(() => textarea?.focus(), 100);
+    if (!readOnly) setTimeout(() => textarea?.focus(), 100);
   }
 
   function closeNotesModal() {
@@ -472,7 +492,7 @@ const Tickets = (() => {
   }
 
   function saveNotesChanges() {
-    if (!currentTicketIdForNotes) return;
+    if (!currentTicketIdForNotes || readOnly) return;
 
     const textarea = document.getElementById('notes-textarea');
     const newValue = textarea.value.trim();
@@ -530,6 +550,7 @@ const Tickets = (() => {
   }
 
   function openAddTicketModal() {
+    if (readOnly) return;
     document.getElementById('add-ticket-number').value = '';
     document.getElementById('add-ticket-description').value = '';
     document.getElementById('add-ticket-project').value = '';
@@ -549,6 +570,7 @@ const Tickets = (() => {
   }
 
   function saveNewTicket() {
+    if (readOnly) return;
     const ticketNumber = document.getElementById('add-ticket-number').value.trim();
     const description = document.getElementById('add-ticket-description').value.trim();
     const project = document.getElementById('add-ticket-project').value.trim();
@@ -601,11 +623,12 @@ const Tickets = (() => {
    * @param {string} name - Nombre del programador
    * @param {Array} tickets - Array de tickets del programador
    */
-  function render(name, tickets) {
+  function render(name, tickets, isReadOnly) {
     currentProgrammer = name;
     currentTickets = tickets;
     activeFilter = 'all';
     searchQuery = '';
+    readOnly = isReadOnly === true;
 
     const stats = Dashboard.calcStats(tickets);
 
@@ -633,6 +656,22 @@ const Tickets = (() => {
     const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
     if (allBtn) allBtn.classList.add('active');
 
+    // Mostrar/ocultar elementos según modo
+    const progActions = document.querySelector('.prog-actions');
+    if (progActions) progActions.style.display = readOnly ? 'none' : '';
+
+    const filtersBar = document.querySelector('.filters-bar');
+    if (filtersBar) filtersBar.style.display = readOnly ? 'none' : '';
+
+    const headerRow = document.querySelector('#tickets-table thead tr');
+    if (headerRow && readOnly) {
+      const thAcciones = headerRow.querySelector('th:last-child');
+      if (thAcciones) thAcciones.style.display = 'none';
+    } else if (headerRow) {
+      const thAcciones = headerRow.querySelector('th:last-child');
+      if (thAcciones) thAcciones.style.display = '';
+    }
+
     setupFilters();
     renderTicketsTable();
 
@@ -646,6 +685,7 @@ const Tickets = (() => {
    * @param {string} ticketId
    */
   function startEditRow(ticketId) {
+    if (readOnly) return;
     const ticket = currentTickets.find(t => t.id === ticketId);
     if (!ticket) return;
 

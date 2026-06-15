@@ -519,6 +519,19 @@ img { display: block; max-width: 100%; }
   background: var(--bg-primary);
 }
 
+/* SHARED VIEW BANNER */
+.shared-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-xl);
+  background: var(--accent-warning);
+  color: #1a1a2e;
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
 /* TOPBAR */
 .topbar {
   height: var(--topbar-h);
