@@ -67,8 +67,9 @@ const Exporter = (() => {
     const noAplica = tickets.filter(t => t.status === 'No Aplica').length;
     const inProgress = tickets.filter(t => t.status === 'En proceso').length;
     const unsolved = tickets.filter(t => t.status === 'No resuelto').length;
-    const pct = total > 0 ? Math.round(((solved + noAplica) / total) * 100) : 0;
-    return { total, solved, noAplica, inProgress, unsolved, pct };
+    const effectiveTotal = total - noAplica;
+    const pct = effectiveTotal > 0 ? Math.round((solved / effectiveTotal) * 100) : 0;
+    return { total, solved, noAplica, inProgress, unsolved, pct, effectiveTotal };
   }
 
   /**

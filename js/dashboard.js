@@ -30,8 +30,9 @@ const Dashboard = (() => {
     const noAplica = tickets.filter(t => t.status === 'No Aplica').length;
     const inProgress = tickets.filter(t => t.status === 'En proceso').length;
     const unsolved = tickets.filter(t => t.status === 'No resuelto').length;
-    const pct = total > 0 ? Math.round(((solved + noAplica) / total) * 100) : 0;
-    return { total, solved, noAplica, inProgress, unsolved, pct };
+    const effectiveTotal = total - noAplica;
+    const pct = effectiveTotal > 0 ? Math.round((solved / effectiveTotal) * 100) : 0;
+    return { total, solved, noAplica, inProgress, unsolved, pct, effectiveTotal };
   }
 
   /**
@@ -306,18 +307,16 @@ const Dashboard = (() => {
     doughnutChartInstance = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['Solventados', 'No Aplica', 'En Proceso', 'No Resueltos'],
+        labels: ['Solventados', 'En Proceso', 'No Resueltos'],
         datasets: [{
-          data: [stats.solved, stats.noAplica, stats.inProgress, stats.unsolved],
+          data: [stats.solved, stats.inProgress, stats.unsolved],
           backgroundColor: [
             'rgba(16,185,129,.8)',
-            'rgba(168,85,247,.8)',
             'rgba(245,158,11,.8)',
             'rgba(239,68,68,.75)',
           ],
           borderColor: [
             'rgb(16,185,129)',
-            'rgb(168,85,247)',
             'rgb(245,158,11)',
             'rgb(239,68,68)',
           ],
