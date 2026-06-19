@@ -270,6 +270,19 @@
                 </svg>
                 PDF Global
               </button>
+              <button class="btn btn--ghost btn--sm" id="btn-export-json" title="Exportar respaldo JSON">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                </svg>
+                Exportar JSON
+              </button>
+              <button class="btn btn--ghost btn--sm" id="btn-import-json" title="Importar respaldo JSON">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                </svg>
+                Importar JSON
+              </button>
+              <input type="file" id="file-json-input" accept=".json" style="display:none" />
             </div>
           </div>
           <div class="table-wrapper">
@@ -494,6 +507,43 @@
       <div class="form-modal__footer">
         <button class="btn btn--ghost btn--sm" id="add-ticket-cancel">Cancelar</button>
         <button class="btn btn--primary btn--sm" id="add-ticket-save">Agregar Ticket</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL TRANSFERIR TICKET
+   ============================================================ -->
+  <div id="transfer-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="transfer-modal-title">
+    <div class="form-modal">
+      <div class="form-modal__header">
+        <div class="form-modal__header-left">
+          <div class="form-modal__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20">
+              <path d="M17 1l4 4-4 4M7 23l-4-4 4-4"/>
+              <path d="M3 5h14a4 4 0 014 4v2M21 13v2a4 4 0 01-4 4H3"/>
+            </svg>
+          </div>
+          <h3 id="transfer-modal-title">Transferir Ticket</h3>
+        </div>
+        <button class="form-modal__close" id="transfer-modal-close" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="form-modal__body">
+        <p style="color:var(--text-secondary);font-size:14px;margin-bottom:var(--space-md)" id="transfer-modal-desc">
+          Transferir ticket a:
+        </p>
+        <div class="form-group">
+          <label class="form-label" for="transfer-target">Programador destino</label>
+          <select class="form-input" id="transfer-target"></select>
+        </div>
+      </div>
+      <div class="form-modal__footer">
+        <button class="btn btn--ghost btn--sm" id="transfer-modal-cancel">Cancelar</button>
+        <button class="btn btn--primary btn--sm" id="transfer-modal-confirm">Transferir</button>
       </div>
     </div>
   </div>

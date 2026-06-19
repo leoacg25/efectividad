@@ -773,6 +773,53 @@ const App = (() => {
         UI.showToast('Error al generar el PDF: ' + err.message, 'error');
       }
     });
+
+    // --- Exportar BD como JSON ---
+    document.getElementById('btn-export-json')?.addEventListener('click', () => {
+      if (!appData) { UI.showToast('No hay datos para exportar', 'error'); return; }
+      try {
+        const json = JSON.stringify(appData, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `efectividad_backup_${new Date().toISOString().slice(0,10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        UI.showToast('Respaldo JSON descargado', 'success');
+      } catch (err) {
+        UI.showToast('Error al exportar: ' + err.message, 'error');
+      }
+    });
+
+    // --- Importar BD desde JSON ---
+    const jsonInput = document.getElementById('file-json-input');
+    document.getElementById('btn-import-json')?.addEventListener('click', () => {
+      jsonInput?.click();
+    });
+    jsonInput?.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        try {
+          const data = JSON.parse(ev.target.result);
+          if (!data || !data.programmers || typeof data.programmers !== 'object') {
+            throw new Error('Formato inválido: debe contener "programmers"');
+          }
+          Storage.saveData(data);
+          appData = data;
+          UI.showToast('Datos restaurados correctamente', 'success');
+          goToDashboard();
+        } catch (err) {
+          UI.showToast('Error al importar: ' + err.message, 'error');
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
   }
 
   // ----------------------------------------------------------------
@@ -801,10 +848,15 @@ const App = (() => {
   // ----------------------------------------------------------------
   // API PÚBLICA
   // ----------------------------------------------------------------
+  function getAllProgrammerNames() {
+    return appData ? Object.keys(appData.programmers) : [];
+  }
+
   return {
     init,
     navigateToProgrammer,
     goToDashboard,
+    getAllProgrammerNames,
   };
 
 })();

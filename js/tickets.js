@@ -268,17 +268,35 @@ const Tickets = (() => {
                   <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
                 </svg>
               </button>
+              <button
+                class="btn btn--ghost btn--icon btn--sm"
+                title="Transferir ticket"
+                onclick="Tickets.openTransferModal('${ticket.id}')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+                  <path d="M17 1l4 4-4 4M7 23l-4-4 4-4"/>
+                  <path d="M3 5h14a4 4 0 014 4v2M21 13v2a4 4 0 01-4 4H3"/>
+                </svg>
+              </button>
+              <button
+                class="btn btn--ghost btn--icon btn--sm btn--icon-danger"
+                title="Eliminar ticket"
+                onclick="Tickets.deleteTicket('${ticket.id}')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+                  <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
+                </svg>
+              </button>
             </div>
           </td>`;
-      const notesOpenBtn = readOnly ? ''
-        : `<button class="notes-open-btn ${ticket.notes ? 'has-content' : ''}"
-                  onclick="Tickets.openNotesModal('${ticket.id}')"
-                  aria-label="Editar notas" title="Editar notas">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
-              <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-              <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-            </svg>
-          </button>`;
+      const notesOpenAttr = `onclick="Tickets.openNotesModal('${ticket.id}')"`;
+      const notesOpenBtn = `<button class="notes-open-btn ${ticket.notes ? 'has-content' : ''}"
+                onclick="Tickets.openNotesModal('${ticket.id}')"
+                aria-label="${readOnly ? 'Ver notas' : 'Editar notas'}"
+                title="${readOnly ? 'Ver notas' : 'Editar notas'}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+        </button>`;
       return `
         <tr id="row-${ticket.id}" class="ticket-row" data-id="${ticket.id}">
           <td class="td-ticket" data-field="ticket" data-id="${ticket.id}">
@@ -299,9 +317,9 @@ const Tickets = (() => {
           <td class="td-notes" data-field="notes" data-id="${ticket.id}">
             <div class="td-notes-cell">
               <span class="notes-preview ${ticket.notes ? '' : 'notes-preview--empty'}"
-                    ${readOnly ? '' : 'onclick="Tickets.openNotesModal(\'' + ticket.id + '\')"'}
-                    title="${readOnly ? 'Ver notas' : 'Clic para abrir notas'}" tabindex="0">
-                ${escHtml(ticket.notes ? (ticket.notes.length > 80 ? ticket.notes.substring(0, 80) + '...' : ticket.notes) : 'Sin notas')}
+                    ${notesOpenAttr}
+                    title="Ver notas" tabindex="0">
+                ${escHtml(ticket.notes ? (readOnly ? ticket.notes : (ticket.notes.length > 120 ? ticket.notes.substring(0, 120) + '...' : ticket.notes)) : 'Sin notas')}
               </span>
               ${notesOpenBtn}
             </div>
@@ -710,6 +728,138 @@ const Tickets = (() => {
     return { name: currentProgrammer, tickets: currentTickets };
   }
 
+  // ----------------------------------------------------------------
+  // ELIMINAR TICKET
+  // ----------------------------------------------------------------
+
+  /**
+   * Elimina un ticket tras confirmación del usuario.
+   * @param {string} ticketId
+   */
+  function deleteTicket(ticketId) {
+    if (readOnly) return;
+    const ticket = currentTickets.find(t => t.id === ticketId);
+    if (!ticket) return;
+
+    UI.confirm('Eliminar ticket', `¿Eliminar el ticket "${ticket.ticket || ticketId}"?`).then(confirmed => {
+      if (!confirmed) return;
+
+      currentTickets = currentTickets.filter(t => t.id !== ticketId);
+
+      const data = Storage.loadData();
+      if (data) {
+        data.programmers[currentProgrammer] = currentTickets;
+        Storage.saveData(data);
+      }
+
+      const stats = Dashboard.calcStats(currentTickets);
+      updateRing(stats.pct);
+
+      const subtitle = document.getElementById('prog-subtitle');
+      if (subtitle) {
+        subtitle.textContent = `${stats.total} tickets · ${stats.solved} solventados · ${stats.noAplica} no aplica · ${stats.infoAdicional} informaci\u00f3n adicional · ${stats.inProgress} en proceso · ${stats.unsolved} sin resolver`;
+      }
+      updateSidebarBadge(currentProgrammer, stats.pct);
+
+      renderTicketsTable();
+      UI.showToast('Ticket eliminado', 'success');
+    });
+  }
+
+  // ----------------------------------------------------------------
+  // TRANSFERIR TICKET
+  // ----------------------------------------------------------------
+
+  let transferTicketId = null;
+
+  function setupTransferModal() {
+    const modal = document.getElementById('transfer-modal');
+    if (!modal) return;
+    if (modal.dataset.setup) return;
+    modal.dataset.setup = 'true';
+
+    document.getElementById('transfer-modal-close')?.addEventListener('click', closeTransferModal);
+    document.getElementById('transfer-modal-cancel')?.addEventListener('click', closeTransferModal);
+    document.getElementById('transfer-modal-confirm')?.addEventListener('click', executeTransfer);
+
+    modal.addEventListener('mousedown', (e) => {
+      if (e.target === modal) closeTransferModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeTransferModal();
+      }
+    });
+  }
+
+  function openTransferModal(ticketId) {
+    if (readOnly) return;
+    const ticket = currentTickets.find(t => t.id === ticketId);
+    if (!ticket) return;
+
+    transferTicketId = ticketId;
+    setupTransferModal();
+
+    document.getElementById('transfer-modal-title').textContent = `Transferir Ticket ${ticket.ticket || ''}`;
+    document.getElementById('transfer-modal-desc').textContent =
+      `Transferir "${ticket.description || ticket.ticket || ticketId}" a:`;
+
+    const select = document.getElementById('transfer-target');
+    const allNames = App.getAllProgrammerNames();
+    select.innerHTML = allNames
+      .filter(n => n !== currentProgrammer)
+      .map(n => `<option value="${escHtml(n)}">${escHtml(n)}</option>`)
+      .join('');
+
+    const modal = document.getElementById('transfer-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('active');
+  }
+
+  function closeTransferModal() {
+    const modal = document.getElementById('transfer-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('active');
+    transferTicketId = null;
+  }
+
+  function executeTransfer() {
+    if (!transferTicketId) return;
+    const targetName = document.getElementById('transfer-target').value;
+    if (!targetName || targetName === currentProgrammer) return;
+
+    const ticket = currentTickets.find(t => t.id === transferTicketId);
+    if (!ticket) return;
+
+    // Remove from current
+    currentTickets = currentTickets.filter(t => t.id !== transferTicketId);
+
+    // Add to target
+    const data = Storage.loadData();
+    if (!data) return;
+    if (!data.programmers[targetName]) data.programmers[targetName] = [];
+    data.programmers[targetName].push(ticket);
+    data.programmers[currentProgrammer] = currentTickets;
+    Storage.saveData(data);
+
+    closeTransferModal();
+
+    // Re-render current view
+    const stats = Dashboard.calcStats(currentTickets);
+    updateRing(stats.pct);
+
+    const subtitle = document.getElementById('prog-subtitle');
+    if (subtitle) {
+      subtitle.textContent = `${stats.total} tickets · ${stats.solved} solventados · ${stats.noAplica} no aplica · ${stats.infoAdicional} informaci\u00f3n adicional · ${stats.inProgress} en proceso · ${stats.unsolved} sin resolver`;
+    }
+    updateSidebarBadge(currentProgrammer, stats.pct);
+    updateSidebarBadge(targetName, Dashboard.calcStats(data.programmers[targetName]).pct);
+
+    renderTicketsTable();
+    UI.showToast(`Ticket transferido a ${targetName}`, 'success');
+  }
+
   // API pública del módulo
   return {
     render,
@@ -717,6 +867,8 @@ const Tickets = (() => {
     getCurrentData,
     updateSidebarBadge,
     openNotesModal,
+    deleteTicket,
+    openTransferModal,
   };
 
 })();
