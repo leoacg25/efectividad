@@ -972,6 +972,12 @@ img { display: block; max-width: 100%; }
 }
 .status-badge--noaplica::before { background: #a855f7; }
 
+.status-badge--info {
+  background: rgba(20,184,166,.15);
+  color: #14b8a6;
+}
+.status-badge--info::before { background: #14b8a6; }
+
 .status-badge--noresuelto {
   background: rgba(239,68,68,.12);
   color: #ef4444;

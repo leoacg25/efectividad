@@ -59,17 +59,19 @@ const Exporter = (() => {
   /**
    * Calcula efectividad de un array de tickets.
    * @param {Array} tickets
-   * @returns {{ total: number, solved: number, noAplica: number, inProgress: number, unsolved: number, pct: number }}
+   * @returns {{ total: number, solved: number, noAplica: number, infoAdicional: number, inProgress: number, unsolved: number, pct: number }}
    */
   function calcStats(tickets) {
     const total = tickets.length;
     const solved = tickets.filter(t => t.status === 'Solventado').length;
     const noAplica = tickets.filter(t => t.status === 'No Aplica').length;
+    const infoAdicional = tickets.filter(t => t.status === 'Información Adicional').length;
     const inProgress = tickets.filter(t => t.status === 'En proceso').length;
     const unsolved = tickets.filter(t => t.status === 'No resuelto').length;
-    const effectiveTotal = total - noAplica;
+    const excluded = noAplica + infoAdicional;
+    const effectiveTotal = total - excluded;
     const pct = effectiveTotal > 0 ? Math.round((solved / effectiveTotal) * 100) : 0;
-    return { total, solved, noAplica, inProgress, unsolved, pct, effectiveTotal };
+    return { total, solved, noAplica, infoAdicional, inProgress, unsolved, pct, effectiveTotal };
   }
 
   /**
@@ -175,6 +177,7 @@ const Exporter = (() => {
       [`Total tickets`, stats.total],
       [`Solventados`, stats.solved],
       [`No Aplica`, stats.noAplica],
+      [`Info. Adicional`, stats.infoAdicional],
       [`En proceso`, stats.inProgress],
       [`No resueltos`, stats.unsolved],
       [], // Fila vacía separadora
@@ -208,8 +211,8 @@ const Exporter = (() => {
     const rows = [
       ['Reporte Consolidado — Dashboard de Efectividad de Programadores'],
       [],
-      ['#', 'Programador', 'Total Tickets', 'Solventados', 'No Aplica', 'En Proceso', 'No Resueltos', 'Efectividad (%)'],
-      ...ranking.map((r, i) => [i + 1, r.name, r.total, r.solved, r.noAplica, r.inProgress, r.unsolved, r.pct]),
+      ['#', 'Programador', 'Total Tickets', 'Solventados', 'No Aplica', 'Info. Adicional', 'En Proceso', 'No Resueltos', 'Efectividad (%)'],
+      ...ranking.map((r, i) => [i + 1, r.name, r.total, r.solved, r.noAplica, r.infoAdicional, r.inProgress, r.unsolved, r.pct]),
     ];
 
     const csv = rows.map(row => row.map(escapeCsv).join(',')).join('\r\n');
@@ -240,11 +243,12 @@ const Exporter = (() => {
       { label: 'Total Tickets', value: stats.total, color: [99, 102, 241] },
       { label: 'Solventados',   value: stats.solved,     color: [16, 185, 129] },
       { label: 'No Aplica',     value: stats.noAplica,   color: [168, 85, 247] },
+      { label: 'Info. Adic.',   value: stats.infoAdicional, color: [20, 184, 166] },
       { label: 'En Proceso',    value: stats.inProgress, color: [245, 158, 11] },
       { label: 'No Resueltos',  value: stats.unsolved,   color: [239, 68, 68] },
     ];
 
-    const cardW = 33;
+    const cardW = 27;
     const cardH = 22;
     const margin = 14;
     const gap = 3;
@@ -349,6 +353,9 @@ const Exporter = (() => {
           } else if (status === 'No Aplica') {
             hookData.cell.styles.textColor = [168, 85, 247];
             hookData.cell.styles.fontStyle = 'bold';
+          } else if (status === 'Informaci\u00f3n Adicional') {
+            hookData.cell.styles.textColor = [20, 184, 166];
+            hookData.cell.styles.fontStyle = 'bold';
           } else {
             hookData.cell.styles.textColor = [239, 68, 68];
           }
@@ -398,12 +405,13 @@ const Exporter = (() => {
       { label: 'Total Tickets',  value: globalStats.total,      color: [99, 102, 241] },
       { label: 'Solventados',    value: globalStats.solved,     color: [16, 185, 129] },
       { label: 'No Aplica',      value: globalStats.noAplica,   color: [168, 85, 247] },
+      { label: 'Info. Adic.',    value: globalStats.infoAdicional, color: [20, 184, 166] },
       { label: 'En Proceso',     value: globalStats.inProgress, color: [245, 158, 11] },
       { label: 'No Resueltos',   value: globalStats.unsolved,   color: [239, 68, 68] },
       { label: 'Programadores',  value: Object.keys(programmers).length, color: [34, 211, 238] },
     ];
 
-    const cardW = (pageWidth - margin * 2 - 5 * 3) / 6;
+    const cardW = (pageWidth - margin * 2 - (kpiData.length - 1) * 3) / kpiData.length;
     let x = margin;
     const cardH = 20;
 
@@ -454,6 +462,7 @@ const Exporter = (() => {
       r.total,
       r.solved,
       r.noAplica,
+      r.infoAdicional,
       r.inProgress,
       r.unsolved,
       `${r.pct}%`,
@@ -461,7 +470,7 @@ const Exporter = (() => {
 
     doc.autoTable({
       startY: cursorY,
-      head: [['#', 'Programador', 'Total', 'Solventados', 'No Aplica', 'En Proceso', 'No Resueltos', 'Efectividad']],
+      head: [['#', 'Programador', 'Total', 'Solventados', 'No Aplica', 'Info. Adic.', 'En Proceso', 'No Resueltos', 'Efectividad']],
       body: tableData,
       theme: 'striped',
       margin: { left: margin, right: margin },

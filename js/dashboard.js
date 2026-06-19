@@ -22,17 +22,19 @@ const Dashboard = (() => {
   /**
    * Calcula todas las métricas de efectividad para un array de tickets.
    * @param {Array} tickets
-   * @returns {{ total: number, solved: number, noAplica: number, inProgress: number, unsolved: number, pct: number }}
+   * @returns {{ total: number, solved: number, noAplica: number, infoAdicional: number, inProgress: number, unsolved: number, pct: number }}
    */
   function calcStats(tickets) {
     const total = tickets.length;
     const solved = tickets.filter(t => t.status === 'Solventado').length;
     const noAplica = tickets.filter(t => t.status === 'No Aplica').length;
+    const infoAdicional = tickets.filter(t => t.status === 'Información Adicional').length;
     const inProgress = tickets.filter(t => t.status === 'En proceso').length;
     const unsolved = tickets.filter(t => t.status === 'No resuelto').length;
-    const effectiveTotal = total - noAplica;
+    const excluded = noAplica + infoAdicional;
+    const effectiveTotal = total - excluded;
     const pct = effectiveTotal > 0 ? Math.round((solved / effectiveTotal) * 100) : 0;
-    return { total, solved, noAplica, inProgress, unsolved, pct, effectiveTotal };
+    return { total, solved, noAplica, infoAdicional, inProgress, unsolved, pct, effectiveTotal };
   }
 
   /**
@@ -127,6 +129,17 @@ const Dashboard = (() => {
         iconColor: '#a855f7',
         accent: '#a855f7',
         delay: '.13s',
+      },
+      {
+        label: 'Info Adicional',
+        value: globalStats.infoAdicional,
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                 <circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/>
+               </svg>`,
+        iconBg: 'rgba(20,184,166,.15)',
+        iconColor: '#14b8a6',
+        accent: '#14b8a6',
+        delay: '.14s',
       },
       {
         label: 'En Proceso',
@@ -413,6 +426,7 @@ const Dashboard = (() => {
           <td style="font-weight:600">${r.total}</td>
           <td style="color:#10b981;font-weight:600">${r.solved}</td>
           <td style="color:#a855f7;font-weight:600">${r.noAplica}</td>
+          <td style="color:#14b8a6;font-weight:600">${r.infoAdicional}</td>
           <td style="color:#f59e0b;font-weight:600">${r.inProgress}</td>
           <td style="color:#ef4444;font-weight:600">${r.unsolved}</td>
           <td>

@@ -34,6 +34,7 @@ const Tickets = (() => {
       case 'Solventado':  return 'status-badge--solventado';
       case 'En proceso':  return 'status-badge--proceso';
       case 'No Aplica':   return 'status-badge--noaplica';
+      case 'Información Adicional': return 'status-badge--info';
       default:            return 'status-badge--noresuelto';
     }
   }
@@ -252,6 +253,7 @@ const Tickets = (() => {
             <option value="En proceso"   ${ticket.status === 'En proceso'   ? 'selected' : ''}>En proceso</option>
             <option value="Solventado"   ${ticket.status === 'Solventado'   ? 'selected' : ''}>Solventado</option>
             <option value="No Aplica"    ${ticket.status === 'No Aplica'    ? 'selected' : ''}>No Aplica</option>
+            <option value="Información Adicional" ${ticket.status === 'Información Adicional' ? 'selected' : ''}>Info. Adicional</option>
            </select>`;
       const editTitle = readOnly ? '' : 'title="Clic para editar"';
       const actionsCell = readOnly ? ''
@@ -357,7 +359,7 @@ const Tickets = (() => {
       // Actualizar el subtítulo
       const subtitle = document.getElementById('prog-subtitle');
       if (subtitle) {
-        subtitle.textContent = `${stats.total} tickets · ${stats.solved} solventados · ${stats.noAplica} no aplica · ${stats.inProgress} en proceso · ${stats.unsolved} sin resolver`;
+        subtitle.textContent = `${stats.total} tickets · ${stats.solved} solventados · ${stats.noAplica} no aplica · ${stats.infoAdicional} informaci\u00f3n adicional · ${stats.inProgress} en proceso · ${stats.unsolved} sin resolver`;
       }
 
       // Actualizar badge en sidebar
@@ -606,7 +608,7 @@ const Tickets = (() => {
 
     const subtitle = document.getElementById('prog-subtitle');
     if (subtitle) {
-      subtitle.textContent = `${stats.total} tickets · ${stats.solved} solventados · ${stats.noAplica} no aplica · ${stats.inProgress} en proceso · ${stats.unsolved} sin resolver`;
+      subtitle.textContent = `${stats.total} tickets · ${stats.solved} solventados · ${stats.noAplica} no aplica · ${stats.infoAdicional} informaci\u00f3n adicional · ${stats.inProgress} en proceso · ${stats.unsolved} sin resolver`;
     }
 
     renderTicketsTable();
@@ -642,7 +644,7 @@ const Tickets = (() => {
 
     const subtitleEl = document.getElementById('prog-subtitle');
     if (subtitleEl) {
-      subtitleEl.textContent = `${stats.total} tickets · ${stats.solved} solventados · ${stats.noAplica} no aplica · ${stats.inProgress} en proceso · ${stats.unsolved} sin resolver`;
+      subtitleEl.textContent = `${stats.total} tickets · ${stats.solved} solventados · ${stats.noAplica} no aplica · ${stats.infoAdicional} informaci\u00f3n adicional · ${stats.inProgress} en proceso · ${stats.unsolved} sin resolver`;
     }
 
     // Anillo de efectividad
