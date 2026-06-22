@@ -1776,10 +1776,9 @@ img { display: block; max-width: 100%; }
   border-radius: var(--radius-sm);
   padding: 3px 6px;
   transition: background var(--transition), color var(--transition);
-  word-break: break-word;
-  line-height: 1.4;
-  max-height: 60px;
-  overflow-y: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .notes-preview:hover {
