@@ -1,5 +1,8 @@
 name: Backup Diario
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '0 22 * * *'
