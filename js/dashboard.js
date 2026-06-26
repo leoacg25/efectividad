@@ -137,8 +137,8 @@ const Dashboard = (() => {
                  <circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/>
                </svg>`,
         iconBg: 'rgba(20,184,166,.15)',
-        iconColor: '#14b8a6',
-        accent: '#14b8a6',
+        iconColor: '#50bee6',
+        accent: '#50bee6',
         delay: '.14s',
       },
       {
@@ -426,7 +426,7 @@ const Dashboard = (() => {
           <td style="font-weight:600">${r.total}</td>
           <td style="color:#10b981;font-weight:600">${r.solved}</td>
           <td style="color:#a855f7;font-weight:600">${r.noAplica}</td>
-          <td style="color:#14b8a6;font-weight:600">${r.infoAdicional}</td>
+          <td style="color:#50bee6;font-weight:600">${r.infoAdicional}</td>
           <td style="color:#f59e0b;font-weight:600">${r.inProgress}</td>
           <td style="color:#ef4444;font-weight:600">${r.unsolved}</td>
           <td>

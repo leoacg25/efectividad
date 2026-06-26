@@ -243,7 +243,7 @@ const Exporter = (() => {
       { label: 'Total Tickets', value: stats.total, color: [99, 102, 241] },
       { label: 'Solventados',   value: stats.solved,     color: [16, 185, 129] },
       { label: 'No Aplica',     value: stats.noAplica,   color: [168, 85, 247] },
-      { label: 'Info. Adic.',   value: stats.infoAdicional, color: [20, 184, 166] },
+      { label: 'Info. Adic.',   value: stats.infoAdicional, color: [80, 190, 230] },
       { label: 'En Proceso',    value: stats.inProgress, color: [245, 158, 11] },
       { label: 'No Resueltos',  value: stats.unsolved,   color: [239, 68, 68] },
     ];
@@ -354,7 +354,7 @@ const Exporter = (() => {
             hookData.cell.styles.textColor = [168, 85, 247];
             hookData.cell.styles.fontStyle = 'bold';
           } else if (status === 'Informaci\u00f3n Adicional') {
-            hookData.cell.styles.textColor = [20, 184, 166];
+            hookData.cell.styles.textColor = [80, 190, 230];
             hookData.cell.styles.fontStyle = 'bold';
           } else {
             hookData.cell.styles.textColor = [239, 68, 68];
@@ -405,7 +405,7 @@ const Exporter = (() => {
       { label: 'Total Tickets',  value: globalStats.total,      color: [99, 102, 241] },
       { label: 'Solventados',    value: globalStats.solved,     color: [16, 185, 129] },
       { label: 'No Aplica',      value: globalStats.noAplica,   color: [168, 85, 247] },
-      { label: 'Info. Adic.',    value: globalStats.infoAdicional, color: [20, 184, 166] },
+      { label: 'Info. Adic.',    value: globalStats.infoAdicional, color: [80, 190, 230] },
       { label: 'En Proceso',     value: globalStats.inProgress, color: [245, 158, 11] },
       { label: 'No Resueltos',   value: globalStats.unsolved,   color: [239, 68, 68] },
       { label: 'Programadores',  value: Object.keys(programmers).length, color: [34, 211, 238] },
