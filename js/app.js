@@ -272,6 +272,7 @@ const App = (() => {
     setupUploadScreen();
     setupSidebar();
     setupExportButtons();
+    setupAddProgrammerButton();
 
     // Inicializar Firebase app antes de auth o FirebaseDB
     initFirebase();
@@ -835,6 +836,28 @@ const App = (() => {
       };
       reader.readAsText(file);
       e.target.value = '';
+    });
+  }
+
+  /**
+   * Configura el botón "Agregar programador" en el sidebar.
+   */
+  function setupAddProgrammerButton() {
+    document.getElementById('btn-add-programmer')?.addEventListener('click', () => {
+      if (!appData) { UI.showToast('Carga datos primero', 'error'); return; }
+      const name = prompt('Nombre del nuevo programador:');
+      if (!name || !name.trim()) return;
+      const trimmed = name.trim();
+      if (appData.programmers[trimmed]) {
+        UI.showToast(`"${trimmed}" ya existe`, 'error');
+        return;
+      }
+      appData.programmers[trimmed] = [];
+      if (!appData.profiles) appData.profiles = {};
+      appData.profiles[trimmed] = 'desarrollador';
+      Storage.saveData(appData);
+      UI.showToast(`"${trimmed}" agregado`, 'success');
+      goToDashboard();
     });
   }
 
