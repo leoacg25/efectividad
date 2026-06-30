@@ -606,6 +606,30 @@ img { display: block; max-width: 100%; }
   color: var(--text-primary);
 }
 
+.nav-delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 1px;
+  opacity: 0;
+  transition: opacity var(--transition), background var(--transition), color var(--transition);
+}
+.nav-item:hover .nav-delete-btn,
+.nav-item.active .nav-delete-btn {
+  opacity: .35;
+}
+.nav-delete-btn:hover {
+  opacity: 1;
+  background: rgba(239, 68, 68, .15);
+  color: #ef4444;
+}
+
 .nav-section-title {
   font-size: 10px;
   font-weight: 700;

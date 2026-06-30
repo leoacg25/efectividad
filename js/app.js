@@ -230,7 +230,7 @@ const App = (() => {
         } else {
           const viewDashboard = document.getElementById('view-dashboard');
           if (viewDashboard?.classList.contains('active')) {
-            Dashboard.render(appData.programmers, navigateToProgrammer);
+            Dashboard.render(appData.programmers, navigateToProgrammer, appData.profiles);
           } else {
             const currentName = document.getElementById('prog-name')?.textContent;
             if (currentName && appData.programmers[currentName]) {
@@ -533,8 +533,7 @@ const App = (() => {
     // Actualizar nav activo en sidebar
     updateActiveNav(null);
 
-    // Renderizar el dashboard y perfiles
-    Dashboard.render(appData.programmers, navigateToProgrammer);
+    Dashboard.render(appData.programmers, navigateToProgrammer, appData.profiles);
     renderProfiles();
   }
 
@@ -983,11 +982,32 @@ const App = (() => {
     return appData ? Object.keys(appData.programmers) : [];
   }
 
+  /**
+   * Elimina un programador del sistema con confirmación.
+   * @param {string} name
+   */
+  async function deleteProgrammer(name) {
+    if (!appData || !appData.programmers[name]) return;
+    const confirmed = await UI.confirm(
+      `¿Eliminar a "${name}"?`,
+      `Se eliminarán todos sus tickets y su perfil. Esta acción no se puede deshacer.`
+    );
+    if (!confirmed) return;
+    delete appData.programmers[name];
+    if (appData.profiles && appData.profiles[name]) {
+      delete appData.profiles[name];
+    }
+    Storage.saveData(appData);
+    UI.showToast(`"${name}" eliminado`, 'success');
+    goToDashboard();
+  }
+
   return {
     init,
     navigateToProgrammer,
     goToDashboard,
     getAllProgrammerNames,
+    deleteProgrammer,
   };
 
 })();

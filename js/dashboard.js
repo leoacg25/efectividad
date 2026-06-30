@@ -490,6 +490,11 @@ const Dashboard = (() => {
               <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
             </svg>
           </span>
+          <span class="nav-delete-btn" title="Eliminar programador" onclick="event.stopPropagation();App.deleteProgrammer('${r.name.replace(/'/g, "\\'")}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
+            </svg>
+          </span>
         </button>
       `;
     }).join('');
@@ -500,12 +505,22 @@ const Dashboard = (() => {
    * @param {Object} programmers
    * @param {Function} onViewProgrammer - Callback para navegar a la vista individual
    */
-  function render(programmers, onViewProgrammer) {
-    renderKPICards(programmers);
-    renderBarChart(programmers);
-    renderDoughnutChart(programmers);
-    renderRankingTable(programmers, onViewProgrammer);
-    renderSidebarProgrammers(programmers, onViewProgrammer);
+  function render(programmers, onViewProgrammer, profiles) {
+    const devs = filterDevelopers(programmers, profiles || {});
+    renderKPICards(devs);
+    renderBarChart(devs);
+    renderDoughnutChart(devs);
+    renderRankingTable(devs, onViewProgrammer);
+    renderSidebarProgrammers(devs, onViewProgrammer);
+  }
+
+  function filterDevelopers(programmers, profiles) {
+    return Object.fromEntries(
+      Object.entries(programmers).filter(([name]) => {
+        const role = profiles[name];
+        return !role || role === 'desarrollador';
+      })
+    );
   }
 
   /**

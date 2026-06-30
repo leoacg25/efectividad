@@ -538,9 +538,9 @@ const Exporter = (() => {
     const roles = profiles || {};
 
     const entries = Object.entries(programmers);
-    const stats = {};
+    const devStats = {};
     for (const [name, tickets] of entries) {
-      stats[name] = calcStats(tickets);
+      devStats[name] = calcStats(tickets);
     }
 
     // --- Clasificar por rol ---
@@ -550,67 +550,117 @@ const Exporter = (() => {
 
     // --- Calcular promedio de desarrolladores ---
     const devPcts = devs.map(([name]) => {
-      const s = stats[name];
+      const s = devStats[name];
       return s.effectiveTotal > 0 ? (s.solved / s.effectiveTotal) * 100 : 0;
     });
     const avgDevPct = devPcts.length > 0
       ? devPcts.reduce((a, b) => a + b, 0) / devPcts.length
       : 0;
 
-    // --- Construir filas ---
-    const rows = [
+    // --- Desarrolladores ordenados por efectividad descendente ---
+    const sortedDevs = devs
+      .map(([name]) => name)
+      .sort((a, b) => devStats[b].pct - devStats[a].pct);
+
+    // ================================================================
+    // CREAR LIBRO XLSX CON MÚLTIPLES HOJAS
+    // ================================================================
+    const wb = XLSX.utils.book_new();
+
+    // ----------------------------------------------------------------
+    // HOJA 1: RESUMEN
+    // ----------------------------------------------------------------
+    const resumenData = [
       ['Reporte de Efectividad — CSV Global de Pruebas'],
       [],
       ['Desarrollador', 'Actividades Cumplidas', 'Fórmula Aplicada', 'Efectividad'],
     ];
 
-    // Desarrolladores ordenados por efectividad descendente
-    const sortedDevs = devs
-      .map(([name]) => name)
-      .sort((a, b) => stats[b].pct - stats[a].pct);
-
     for (const name of sortedDevs) {
-      const s = stats[name];
-      const efectivo = s.effectiveTotal;
-      const cumplidas = `${s.solved}/${efectivo}`;
-      const pctDecimal = efectivo > 0 ? (s.solved / efectivo) * 100 : 0;
-      const pctFormatted = pctDecimal.toFixed(2);
-
-      // Protección contra Excel: fuerza fórmula de texto para evitar convertir "10/10" en fecha
-      const safeCumplidas = `="${cumplidas}"`;
-
-      rows.push([
+      const s = devStats[name];
+      const cumplidas = `${s.solved}/${s.effectiveTotal}`;
+      const pctDecimal = s.effectiveTotal > 0 ? (s.solved / s.effectiveTotal) * 100 : 0;
+      resumenData.push([
         name,
-        safeCumplidas,
+        cumplidas,
         '(Actividades Cumplidas / Actividades Planificadas) * 100',
-        `${pctFormatted}%`,
+        `${pctDecimal.toFixed(2)}%`,
       ]);
     }
 
     for (const name of leaders) {
-      const pctFormatted = avgDevPct.toFixed(2);
-      rows.push([
+      resumenData.push([
         name,
         'Promedio',
         'Sumatoria efectividad del equipo / Cantidad de desarrolladores',
-        `${pctFormatted}%`,
+        `${avgDevPct.toFixed(2)}%`,
       ]);
     }
 
     for (const name of evaluacion) {
-      const pctFormatted = avgDevPct.toFixed(2);
-      rows.push([
+      resumenData.push([
         name,
         'Promedio',
         'Hereda promedio general del equipo de desarrollo',
-        `${pctFormatted}%`,
+        `${avgDevPct.toFixed(2)}%`,
       ]);
     }
 
-    // --- Generar CSV ---
-    const csv = rows.map(row => row.map(escapeCsv).join(',')).join('\r\n');
-    const content = '\uFEFF' + csv;
-    triggerDownload(content, `reporte_pruebas_${dateStr}.csv`, 'text/csv;charset=utf-8;');
+    const wsResumen = XLSX.utils.aoa_to_sheet(resumenData);
+    XLSX.utils.book_append_sheet(wb, wsResumen, 'Resumen');
+
+    // ----------------------------------------------------------------
+    // HOJAS POR DESARROLLADOR
+    // ----------------------------------------------------------------
+    const statusLabels = {
+      'Solventado': 'Solventado',
+      'En proceso': 'En Proceso',
+      'No resuelto': 'No Resuelto',
+      'No Aplica': 'No Aplica',
+      'Información Adicional': 'Info. Adicional',
+    };
+
+    for (const [name, tickets] of entries) {
+      const s = devStats[name];
+      const pctDecimal = s.effectiveTotal > 0 ? (s.solved / s.effectiveTotal) * 100 : 0;
+
+      const sheetData = [
+        [`Programador: ${name}`],
+        [`Efectividad: ${pctDecimal.toFixed(2)}%`],
+        [`Total Tickets: ${s.total}`],
+        [`Solventados: ${s.solved}  |  No Aplica: ${s.noAplica}  |  Info. Adicional: ${s.infoAdicional}  |  En Proceso: ${s.inProgress}  |  No Resueltos: ${s.unsolved}`],
+        [],
+        ['N° Ticket', 'Descripción', 'Proyecto', 'Notas', 'Estado'],
+        ...tickets.map(t => [t.ticket, t.description, t.project, t.notes, statusLabels[t.status] || t.status]),
+      ];
+
+      const ws = XLSX.utils.aoa_to_sheet(sheetData);
+
+      // Ajustar ancho de columnas
+      ws['!cols'] = [
+        { wch: 14 },  // N° Ticket
+        { wch: 40 },  // Descripción
+        { wch: 20 },  // Proyecto
+        { wch: 30 },  // Notas
+        { wch: 18 },  // Estado
+      ];
+
+      // Nombre de hoja máximo 31 caracteres (límite de Excel)
+      const sheetName = name.length > 31 ? name.substring(0, 31) : name;
+      XLSX.utils.book_append_sheet(wb, ws, sheetName);
+    }
+
+    // --- Generar y descargar XLSX ---
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `reporte_pruebas_${dateStr}.xlsx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
   // API pública del módulo
