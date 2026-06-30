@@ -689,6 +689,35 @@ img { display: block; max-width: 100%; }
   letter-spacing: .05em;
 }
 
+.profile-edit-btn,
+.profile-delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity var(--transition), background var(--transition), color var(--transition);
+}
+.profile-row:hover .profile-edit-btn,
+.profile-row:hover .profile-delete-btn {
+  opacity: .5;
+}
+.profile-edit-btn:hover {
+  opacity: 1;
+  background: rgba(99,102,241,.12);
+  color: var(--accent-1);
+}
+.profile-delete-btn:hover {
+  opacity: 1;
+  background: rgba(239,68,68,.12);
+  color: #ef4444;
+}
+
 .profile-add-btn {
   display: flex;
   align-items: center;

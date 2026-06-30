@@ -882,6 +882,17 @@ const App = (() => {
             <span class="profile-role">${label}</span>
           </div>
           <span class="effectiveness-badge effectiveness-badge--${theme}">${displayPct}%</span>
+          <span class="profile-edit-btn" title="Cambiar rol" onclick="App.editProfile('${name.replace(/'/g, "\\'")}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+              <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+              <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+            </svg>
+          </span>
+          <span class="profile-delete-btn" title="Eliminar" onclick="event.stopPropagation();App.deleteProfile('${name.replace(/'/g, "\\'")}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+              <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
+            </svg>
+          </span>
         </div>
       `;
     }).join('') + `<button class="profile-add-btn" id="btn-add-profile">+</button>`;
@@ -911,6 +922,41 @@ const App = (() => {
     appData.profiles[trimmed] = role.trim().toLowerCase();
     Storage.saveData(appData);
     UI.showToast(`"${trimmed}" agregado como ${role}`, 'success');
+    goToDashboard();
+  }
+
+  /**
+   * Edita el rol de un perfil especial.
+   * @param {string} name
+   */
+  function editProfile(name) {
+    if (!appData || !appData.profiles || !appData.profiles[name]) return;
+    const role = prompt(`Nuevo rol para "${name}" (lider / evaluacion):`, appData.profiles[name]);
+    if (!role || !['lider', 'evaluacion'].includes(role.trim().toLowerCase())) {
+      UI.showToast('Rol inválido. Usa "lider" o "evaluacion"', 'error');
+      return;
+    }
+    appData.profiles[name] = role.trim().toLowerCase();
+    Storage.saveData(appData);
+    UI.showToast(`"${name}" ahora es ${role}`, 'success');
+    goToDashboard();
+  }
+
+  /**
+   * Elimina un perfil especial con confirmación.
+   * @param {string} name
+   */
+  async function deleteProfile(name) {
+    if (!appData || !appData.profiles || !appData.profiles[name]) return;
+    const confirmed = await UI.confirm(
+      `¿Eliminar a "${name}"?`,
+      `Se eliminará su perfil especial y todos sus tickets.`
+    );
+    if (!confirmed) return;
+    delete appData.programmers[name];
+    delete appData.profiles[name];
+    Storage.saveData(appData);
+    UI.showToast(`"${name}" eliminado`, 'success');
     goToDashboard();
   }
 
@@ -1008,6 +1054,8 @@ const App = (() => {
     goToDashboard,
     getAllProgrammerNames,
     deleteProgrammer,
+    editProfile,
+    deleteProfile,
   };
 
 })();
