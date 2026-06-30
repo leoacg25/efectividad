@@ -620,7 +620,10 @@ const Exporter = (() => {
       'Información Adicional': 'Info. Adicional',
     };
 
+    // Solo desarrolladores tienen hoja individual (excluir líder y evaluación)
+    const devNames = new Set(devs.map(([n]) => n));
     for (const [name, tickets] of entries) {
+      if (!devNames.has(name)) continue;
       const s = devStats[name];
       const pctDecimal = s.effectiveTotal > 0 ? (s.solved / s.effectiveTotal) * 100 : 0;
 
@@ -636,16 +639,14 @@ const Exporter = (() => {
 
       const ws = XLSX.utils.aoa_to_sheet(sheetData);
 
-      // Ajustar ancho de columnas
       ws['!cols'] = [
-        { wch: 14 },  // N° Ticket
-        { wch: 40 },  // Descripción
-        { wch: 20 },  // Proyecto
-        { wch: 30 },  // Notas
-        { wch: 18 },  // Estado
+        { wch: 14 },
+        { wch: 40 },
+        { wch: 20 },
+        { wch: 30 },
+        { wch: 18 },
       ];
 
-      // Nombre de hoja máximo 31 caracteres (límite de Excel)
       const sheetName = name.length > 31 ? name.substring(0, 31) : name;
       XLSX.utils.book_append_sheet(wb, ws, sheetName);
     }
