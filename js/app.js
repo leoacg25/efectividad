@@ -839,11 +839,98 @@ const App = (() => {
     });
   }
 
+  // ----------------------------------------------------------------
+  // GESTIÓN DE PERFILES
+  // ----------------------------------------------------------------
+
   /**
-   * Configura el botón "Agregar programador" en el sidebar.
+   * Renderiza los perfiles especiales (QA / Líder Técnico) en el sidebar.
+   */
+  function renderProfiles() {
+    const container = document.getElementById('nav-profiles');
+    if (!container || !appData) return;
+
+    const profiles = appData.profiles || {};
+    const specials = Object.entries(profiles).filter(([, role]) => role !== 'desarrollador');
+
+    if (specials.length === 0) {
+      container.innerHTML = `<button class="profile-add-btn" id="btn-add-profile">+</button>`;
+      document.getElementById('btn-add-profile')?.addEventListener('click', promptAddProfile);
+      return;
+    }
+
+    const calc = (name) => {
+      const tickets = appData.programmers[name];
+      if (!tickets || tickets.length === 0) return 0;
+      const solved = tickets.filter(t => t.status === 'Solventado').length;
+      const noA = tickets.filter(t => t.status === 'No Aplica' || t.status === 'Información Adicional').length;
+      const eff = tickets.length - noA;
+      return eff > 0 ? Math.round((solved / eff) * 100) : 0;
+    };
+
+    container.innerHTML = specials.map(([name, role]) => {
+      const label = role === 'lider' ? 'Líder Técnico' : 'Evaluación';
+      const pct = calc(name);
+      const theme = pct >= 75 ? 'green' : pct >= 40 ? 'yellow' : 'red';
+      return `
+        <div class="profile-row">
+          <div class="profile-info">
+            <span class="profile-name">${name}</span>
+            <span class="profile-role">${label}</span>
+          </div>
+          <span class="effectiveness-badge effectiveness-badge--${theme}">${pct}%</span>
+        </div>
+      `;
+    }).join('') + `<button class="profile-add-btn" id="btn-add-profile">+</button>`;
+
+    document.getElementById('btn-add-profile')?.addEventListener('click', promptAddProfile);
+  }
+
+  /**
+   * Pide nombre y rol para agregar una persona especial.
+   */
+  function promptAddProfile() {
+    if (!appData) { UI.showToast('Carga datos primero', 'error'); return; }
+    const name = prompt('Nombre:');
+    if (!name || !name.trim()) return;
+    const trimmed = name.trim();
+    if (appData.programmers[trimmed]) {
+      UI.showToast(`"${trimmed}" ya existe`, 'error');
+      return;
+    }
+    const role = prompt('Rol (lider / evaluacion):');
+    if (!role || !['lider', 'evaluacion'].includes(role.trim().toLowerCase())) {
+      UI.showToast('Rol inválido. Usa "lider" o "evaluacion"', 'error');
+      return;
+    }
+    appData.programmers[trimmed] = [];
+    if (!appData.profiles) appData.profiles = {};
+    appData.profiles[trimmed] = role.trim().toLowerCase();
+    Storage.saveData(appData);
+    UI.showToast(`"${trimmed}" agregado como ${role}`, 'success');
+    goToDashboard();
+  }
+
+  /**
+   * Configura el botón "Agregar programador de línea" en el sidebar.
    */
   function setupAddProgrammerButton() {
-    document.getElementById('btn-add-programmer')?.addEventListener('click', () => {
+    const btn = document.getElementById('btn-add-programmer');
+    const pContainer = document.getElementById('nav-profiles');
+    if (btn) btn.remove();
+
+    // Crear botón fijo en nav-programmers
+    const navProg = document.getElementById('nav-programmers');
+    if (!navProg) return;
+    const addBtn = document.createElement('button');
+    addBtn.className = 'nav-item nav-item--add';
+    addBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+        <path d="M12 5v14M5 12h14"/>
+      </svg>
+      <span>Agregar programador</span>
+    `;
+    addBtn.addEventListener('click', () => {
       if (!appData) { UI.showToast('Carga datos primero', 'error'); return; }
       const name = prompt('Nombre del nuevo programador:');
       if (!name || !name.trim()) return;
@@ -859,6 +946,7 @@ const App = (() => {
       UI.showToast(`"${trimmed}" agregado`, 'success');
       goToDashboard();
     });
+    navProg.appendChild(addBtn);
   }
 
   // ----------------------------------------------------------------
@@ -882,58 +970,6 @@ const App = (() => {
       const btn = document.querySelector(`#nav-programmers .nav-item[data-programmer="${programmerName}"]`);
       btn?.classList.add('active');
     }
-  }
-
-  // ----------------------------------------------------------------
-  // GESTIÓN DE PERFILES
-  // ----------------------------------------------------------------
-
-  /**
-   * Renderiza los selectores de perfil en el sidebar.
-   */
-  function renderProfiles() {
-    const container = document.getElementById('nav-profiles');
-    if (!container || !appData) return;
-
-    const names = Object.keys(appData.programmers);
-    if (names.length === 0) { container.innerHTML = ''; return; }
-
-    const profiles = appData.profiles || {};
-
-    container.innerHTML = names.map(name => {
-      const current = profiles[name] || 'desarrollador';
-      return `
-        <div class="profile-row">
-          <span class="profile-name">${name}</span>
-          <select class="profile-select" data-name="${name}">
-            <option value="desarrollador" ${current === 'desarrollador' ? 'selected' : ''}>Desarrollador</option>
-            <option value="lider" ${current === 'lider' ? 'selected' : ''}>Líder Técnico</option>
-            <option value="evaluacion" ${current === 'evaluacion' ? 'selected' : ''}>Evaluación</option>
-          </select>
-        </div>
-      `;
-    }).join('');
-
-    container.querySelectorAll('.profile-select').forEach(sel => {
-      sel.addEventListener('change', (e) => {
-        const name = e.target.dataset.name;
-        const role = e.target.value;
-        setProgrammerProfile(name, role);
-      });
-    });
-  }
-
-  /**
-   * Asigna un perfil a un programador y persiste los datos.
-   * @param {string} name
-   * @param {'desarrollador'|'lider'|'evaluacion'} role
-   */
-  function setProgrammerProfile(name, role) {
-    if (!appData) return;
-    if (!appData.profiles) appData.profiles = {};
-    appData.profiles[name] = role;
-    Storage.saveData(appData);
-    UI.showToast(`Perfil de ${name} actualizado a "${role}"`, 'success');
   }
 
   // ----------------------------------------------------------------
