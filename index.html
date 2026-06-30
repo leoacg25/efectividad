@@ -386,6 +386,7 @@
                   <th scope="col">N° Ticket</th>
                   <th scope="col">Descripción</th>
                   <th scope="col">Proyecto</th>
+                  <th scope="col">Tipo</th>
                   <th scope="col">Notas</th>
                   <th scope="col">Estado</th>
                   <th scope="col">Acciones</th>
@@ -508,6 +509,19 @@
         <div class="form-group">
           <label class="form-label" for="add-ticket-project">Proyecto</label>
           <input type="text" class="form-input" id="add-ticket-project" placeholder="Nombre del módulo o proyecto" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tipo</label>
+          <div style="display:flex;gap:8px">
+            <label class="tipo-radio" id="add-tipo-mejora" style="font-size:13px;padding:6px 14px">
+              <input type="radio" name="add-ticket-tipo" value="Mejora/requerimiento" checked>
+              Mejora/requerimiento
+            </label>
+            <label class="tipo-radio" id="add-tipo-averia" style="font-size:13px;padding:6px 14px">
+              <input type="radio" name="add-ticket-tipo" value="Avería/Falla">
+              Avería/Falla
+            </label>
+          </div>
         </div>
         <div class="form-group">
           <label class="form-label" for="add-ticket-notes">Notas</label>

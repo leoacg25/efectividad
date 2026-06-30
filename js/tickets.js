@@ -187,7 +187,7 @@ const Tickets = (() => {
 
       // Filtro por búsqueda (en todos los campos de texto)
       const query = searchQuery.toLowerCase();
-      const searchOk = !query || [t.ticket, t.description, t.project, t.notes, t.status]
+      const searchOk = !query || [t.ticket, t.description, t.project, t.tipo, t.notes, t.status]
         .some(val => String(val).toLowerCase().includes(query));
 
       return statusOk && searchOk;
@@ -233,7 +233,7 @@ const Tickets = (() => {
     const filtered = getFilteredTickets();
 
     if (filtered.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="6">
+      tbody.innerHTML = `<tr><td colspan="7">
         <div class="empty-state">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
@@ -314,6 +314,19 @@ const Tickets = (() => {
               ${escHtml(ticket.project || '—')}
             </span>
           </td>
+          <td class="td-tipo" data-field="tipo" data-id="${ticket.id}">
+            ${readOnly
+              ? escHtml(ticket.tipo || '—')
+              : `<label class="tipo-radio ${ticket.tipo === 'Mejora/requerimiento' ? 'tipo-radio--active' : ''}">
+                   <input type="radio" name="tipo-${ticket.id}" value="Mejora/requerimiento" ${ticket.tipo === 'Mejora/requerimiento' ? 'checked' : ''}>
+                   <span>Mejora/Req.</span>
+                 </label>
+                 <label class="tipo-radio ${ticket.tipo === 'Avería/Falla' ? 'tipo-radio--active' : ''}">
+                   <input type="radio" name="tipo-${ticket.id}" value="Avería/Falla" ${ticket.tipo === 'Avería/Falla' ? 'checked' : ''}>
+                   <span>Avería/Falla</span>
+                 </label>`
+            }
+          </td>
           <td class="td-notes" data-field="notes" data-id="${ticket.id}">
             <div class="td-notes-cell">
               <span class="notes-preview ${ticket.notes ? '' : 'notes-preview--empty'}"
@@ -349,6 +362,22 @@ const Tickets = (() => {
         const ticketId = e.target.dataset.ticketId;
         const newStatus = e.target.value;
         handleStatusChange(ticketId, newStatus);
+      });
+    });
+
+    // Listeners de cambio de tipo (radio buttons)
+    tbody.querySelectorAll('input[type="radio"][name^="tipo-"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const ticketId = e.target.name.replace('tipo-', '');
+        const newTipo = e.target.value;
+        const ticket = currentTickets.find(t => t.id === ticketId);
+        if (!ticket) return;
+        ticket.tipo = newTipo;
+        Storage.updateTicketField(currentProgrammer, ticketId, 'tipo', newTipo);
+        // Actualizar estilo visual de los labels
+        const td = e.target.closest('.td-tipo');
+        td.querySelectorAll('.tipo-radio').forEach(l => l.classList.remove('tipo-radio--active'));
+        e.target.closest('.tipo-radio').classList.add('tipo-radio--active');
       });
     });
   }
@@ -463,7 +492,7 @@ const Tickets = (() => {
     setupNotesModalEvents();
 
     document.getElementById('notes-modal-title').textContent = `Notas del Ticket ${ticket.ticket}`;
-    document.getElementById('notes-modal-subtitle').textContent = `${ticket.description || 'Sin descripción'} · ${ticket.project || 'Sin proyecto'}`;
+    document.getElementById('notes-modal-subtitle').textContent = `${ticket.description || 'Sin descripción'} · ${ticket.project || 'Sin proyecto'}${ticket.tipo ? ` · ${ticket.tipo}` : ''}`;
 
     const meta = document.getElementById('notes-modal-meta');
     meta.innerHTML = `
@@ -575,6 +604,7 @@ const Tickets = (() => {
     document.getElementById('add-ticket-description').value = '';
     document.getElementById('add-ticket-project').value = '';
     document.getElementById('add-ticket-notes').value = '';
+    document.querySelector('input[name="add-ticket-tipo"][value="Mejora/requerimiento"]').checked = true;
 
     const modal = document.getElementById('add-ticket-modal');
     modal.classList.remove('hidden');
@@ -602,11 +632,13 @@ const Tickets = (() => {
       return;
     }
 
+    const tipoRadio = document.querySelector('input[name="add-ticket-tipo"]:checked');
     const newTicket = {
       id: `${currentProgrammer}-new-${Date.now()}`,
       ticket: ticketNumber,
       description: description || '',
       project: project || '',
+      tipo: tipoRadio ? tipoRadio.value : '',
       notes: notes || '',
       status: 'No resuelto',
     };

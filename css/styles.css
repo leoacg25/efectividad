@@ -1942,6 +1942,41 @@ img { display: block; max-width: 100%; }
   background: rgba(99,102,241,.06);
 }
 
+/* Radio buttons de Tipo en tabla de tickets */
+.tipo-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  font-size: 11px;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  user-select: none;
+}
+.tipo-radio input[type="radio"] {
+  display: none;
+}
+.tipo-radio--active {
+  border-color: var(--accent-1);
+  background: rgba(99,102,241,.1);
+  color: var(--accent-1);
+  font-weight: 600;
+}
+.tipo-radio:hover {
+  border-color: var(--accent-1);
+  color: var(--text-primary);
+}
+.td-tipo {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  white-space: nowrap;
+}
+
 /* ----------------------------------------------------------------
    24. FORM MODAL (Nuevo Ticket)
    ---------------------------------------------------------------- */

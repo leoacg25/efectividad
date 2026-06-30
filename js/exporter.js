@@ -182,9 +182,9 @@ const Exporter = (() => {
       [`No resueltos`, stats.unsolved],
       [], // Fila vacía separadora
       // Encabezados de tabla
-      ['N° Ticket', 'Descripción', 'Proyecto', 'Notas', 'Estado'],
+      ['N° Ticket', 'Descripción', 'Proyecto', 'Tipo', 'Notas', 'Estado'],
       // Datos
-      ...tickets.map(t => [t.ticket, t.description, t.project, t.notes, t.status]),
+      ...tickets.map(t => [t.ticket, t.description, t.project, t.tipo || '', t.notes, t.status]),
     ];
 
     const csv = rows.map(row => row.map(escapeCsv).join(',')).join('\r\n');
@@ -301,6 +301,7 @@ const Exporter = (() => {
       t.ticket || '—',
       t.description || '—',
       t.project || '—',
+      t.tipo || '—',
       t.notes || '—',
       t.status,
     ]);
@@ -310,7 +311,7 @@ const Exporter = (() => {
      */
     doc.autoTable({
       startY: cursorY,
-      head: [['N° Ticket', 'Descripción', 'Proyecto', 'Notas', 'Estado']],
+      head: [['N° Ticket', 'Descripción', 'Proyecto', 'Tipo', 'Notas', 'Estado']],
       body: tableData,
       theme: 'grid',
       margin: { left: margin, right: margin },
@@ -332,17 +333,18 @@ const Exporter = (() => {
         fillColor: [248, 248, 255],
       },
       columnStyles: {
-        0: { cellWidth: 22, fontStyle: 'bold' },
-        1: { cellWidth: 60 },
-        2: { cellWidth: 35 },
-        3: { cellWidth: 40 },
-        4: { cellWidth: 25, halign: 'center' },
+        0: { cellWidth: 20, fontStyle: 'bold' },
+        1: { cellWidth: 55 },
+        2: { cellWidth: 28 },
+        3: { cellWidth: 28, halign: 'center' },
+        4: { cellWidth: 35 },
+        5: { cellWidth: 22, halign: 'center' },
       },
       /**
        * Colorear la celda de Estado según el valor.
        */
       didParseCell: (hookData) => {
-        if (hookData.section === 'body' && hookData.column.index === 4) {
+        if (hookData.section === 'body' && hookData.column.index === 5) {
           const status = hookData.cell.raw;
           if (status === 'Solventado') {
             hookData.cell.styles.textColor = [16, 185, 129];
@@ -633,8 +635,8 @@ const Exporter = (() => {
         [`Total Tickets: ${s.total}`],
         [`Solventados: ${s.solved}  |  No Aplica: ${s.noAplica}  |  Info. Adicional: ${s.infoAdicional}  |  En Proceso: ${s.inProgress}  |  No Resueltos: ${s.unsolved}`],
         [],
-        ['N° Ticket', 'Descripción', 'Proyecto', 'Notas', 'Estado'],
-        ...tickets.map(t => [t.ticket, t.description, t.project, t.notes, statusLabels[t.status] || t.status]),
+        ['N° Ticket', 'Descripción', 'Proyecto', 'Tipo', 'Notas', 'Estado'],
+        ...tickets.map(t => [t.ticket, t.description, t.project, t.tipo || '', t.notes, statusLabels[t.status] || t.status]),
       ];
 
       const ws = XLSX.utils.aoa_to_sheet(sheetData);
@@ -643,6 +645,7 @@ const Exporter = (() => {
         { wch: 14 },
         { wch: 40 },
         { wch: 20 },
+        { wch: 22 },
         { wch: 30 },
         { wch: 18 },
       ];
