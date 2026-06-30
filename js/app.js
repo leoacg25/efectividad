@@ -325,6 +325,7 @@ const App = (() => {
     if (!appData && Storage.hasData()) {
       const saved = Storage.loadData();
       if (saved && saved.programmers) {
+        if (!saved.profiles) saved.profiles = {};
         appData = saved;
         if (sharedViewName) {
           enterSharedView(sharedViewName);
@@ -487,7 +488,10 @@ const App = (() => {
         throw new Error('No se encontraron hojas con datos válidos en el archivo.');
       }
 
-      // 5. Guardar en localStorage y actualizar estado
+      // 5. Inicializar perfiles si no existen
+      if (!data.profiles) data.profiles = {};
+
+      // 6. Guardar en localStorage y actualizar estado
       Storage.saveData(data);
       appData = data;
 
@@ -528,8 +532,9 @@ const App = (() => {
     // Actualizar nav activo en sidebar
     updateActiveNav(null);
 
-    // Renderizar el dashboard
+    // Renderizar el dashboard y perfiles
     Dashboard.render(appData.programmers, navigateToProgrammer);
+    renderProfiles();
   }
 
   /**
@@ -736,6 +741,17 @@ const App = (() => {
       }
     });
 
+    // --- Dashboard: Exportar CSV Global de Pruebas ---
+    document.getElementById('btn-export-csv-pruebas')?.addEventListener('click', () => {
+      if (!appData) return;
+      try {
+        Exporter.exportCSVPruebas(appData.programmers, appData.profiles || {});
+        UI.showToast('CSV de pruebas descargado correctamente', 'success');
+      } catch (err) {
+        UI.showToast('Error al generar el CSV de pruebas: ' + err.message, 'error');
+      }
+    });
+
     // --- Dashboard: Exportar PDF Global ---
     document.getElementById('btn-export-pdf-global')?.addEventListener('click', () => {
       if (!appData) return;
@@ -843,6 +859,58 @@ const App = (() => {
       const btn = document.querySelector(`#nav-programmers .nav-item[data-programmer="${programmerName}"]`);
       btn?.classList.add('active');
     }
+  }
+
+  // ----------------------------------------------------------------
+  // GESTIÓN DE PERFILES
+  // ----------------------------------------------------------------
+
+  /**
+   * Renderiza los selectores de perfil en el sidebar.
+   */
+  function renderProfiles() {
+    const container = document.getElementById('nav-profiles');
+    if (!container || !appData) return;
+
+    const names = Object.keys(appData.programmers);
+    if (names.length === 0) { container.innerHTML = ''; return; }
+
+    const profiles = appData.profiles || {};
+
+    container.innerHTML = names.map(name => {
+      const current = profiles[name] || 'desarrollador';
+      return `
+        <div class="profile-row">
+          <span class="profile-name">${name}</span>
+          <select class="profile-select" data-name="${name}">
+            <option value="desarrollador" ${current === 'desarrollador' ? 'selected' : ''}>Desarrollador</option>
+            <option value="lider" ${current === 'lider' ? 'selected' : ''}>Líder Técnico</option>
+            <option value="evaluacion" ${current === 'evaluacion' ? 'selected' : ''}>Evaluación</option>
+          </select>
+        </div>
+      `;
+    }).join('');
+
+    container.querySelectorAll('.profile-select').forEach(sel => {
+      sel.addEventListener('change', (e) => {
+        const name = e.target.dataset.name;
+        const role = e.target.value;
+        setProgrammerProfile(name, role);
+      });
+    });
+  }
+
+  /**
+   * Asigna un perfil a un programador y persiste los datos.
+   * @param {string} name
+   * @param {'desarrollador'|'lider'|'evaluacion'} role
+   */
+  function setProgrammerProfile(name, role) {
+    if (!appData) return;
+    if (!appData.profiles) appData.profiles = {};
+    appData.profiles[name] = role;
+    Storage.saveData(appData);
+    UI.showToast(`Perfil de ${name} actualizado a "${role}"`, 'success');
   }
 
   // ----------------------------------------------------------------

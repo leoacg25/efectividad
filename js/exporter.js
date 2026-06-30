@@ -524,10 +524,108 @@ const Exporter = (() => {
     doc.save(`reporte_consolidado_${dateStr}.pdf`);
   }
 
+  // ----------------------------------------------------------------
+  // CSV GLOBAL DE PRUEBAS (por rol)
+  // ----------------------------------------------------------------
+
+  /**
+   * Exporta CSV con efectividad calculada según el rol de cada programador.
+   * @param {Object} programmers - { [nombre]: [tickets] }
+   * @param {Object} profiles - { [nombre]: 'desarrollador' | 'lider' | 'evaluacion' }
+   */
+  function exportCSVPruebas(programmers, profiles) {
+    const { file: dateStr } = formatDate();
+    const roles = profiles || {};
+
+    const entries = Object.entries(programmers);
+    const stats = {};
+    for (const [name, tickets] of entries) {
+      stats[name] = calcStats(tickets);
+    }
+
+    // --- Clasificar por rol ---
+    const devs = entries.filter(([name]) => !roles[name] || roles[name] === 'desarrollador');
+    const leaders = entries.filter(([name]) => roles[name] === 'lider').map(([n]) => n);
+    const evaluacion = entries.filter(([name]) => roles[name] === 'evaluacion').map(([n]) => n);
+
+    // --- Calcular promedios ---
+    const devPcts = devs.map(([name]) => {
+      const s = stats[name];
+      return s.effectiveTotal > 0 ? (s.solved / s.effectiveTotal) * 100 : 0;
+    });
+    const leaderPct = devPcts.length > 0
+      ? devPcts.reduce((a, b) => a + b, 0) / devPcts.length
+      : 0;
+
+    const allPcts = entries.map(([name]) => {
+      const s = stats[name];
+      return s.effectiveTotal > 0 ? (s.solved / s.effectiveTotal) * 100 : 0;
+    });
+    const overallAvg = allPcts.length > 0
+      ? allPcts.reduce((a, b) => a + b, 0) / allPcts.length
+      : 0;
+
+    // --- Construir filas ---
+    const rows = [
+      ['Reporte de Efectividad — CSV Global de Pruebas'],
+      [],
+      ['Desarrollador', 'Actividades Cumplidas', 'Fórmula Aplicada', 'Efectividad'],
+    ];
+
+    // Desarrolladores ordenados por efectividad descendente
+    const sortedDevs = devs
+      .map(([name]) => name)
+      .sort((a, b) => stats[b].pct - stats[a].pct);
+
+    for (const name of sortedDevs) {
+      const s = stats[name];
+      const efectivo = s.effectiveTotal;
+      const cumplidas = `${s.solved}/${efectivo}`;
+      const pctDecimal = efectivo > 0 ? (s.solved / efectivo) * 100 : 0;
+      const pctFormatted = pctDecimal.toFixed(2);
+
+      // Protección contra Excel: fuerza fórmula de texto para evitar convertir "10/10" en fecha
+      const safeCumplidas = `="${cumplidas}"`;
+
+      rows.push([
+        name,
+        safeCumplidas,
+        '(Actividades Cumplidas / Actividades Planificadas) * 100',
+        `${pctFormatted}%`,
+      ]);
+    }
+
+    for (const name of leaders) {
+      const pctFormatted = leaderPct.toFixed(2);
+      rows.push([
+        name,
+        'Promedio',
+        'Sumatoria efectividad del equipo / Cantidad de desarrolladores',
+        `${pctFormatted}%`,
+      ]);
+    }
+
+    for (const name of evaluacion) {
+      const pctFormatted = overallAvg.toFixed(2);
+      rows.push([
+        name,
+        'Promedio',
+        'Hereda promedio general del equipo de desarrollo',
+        `${pctFormatted}%`,
+      ]);
+    }
+
+    // --- Generar CSV ---
+    const csv = rows.map(row => row.map(escapeCsv).join(',')).join('\r\n');
+    const content = '\uFEFF' + csv;
+    triggerDownload(content, `reporte_pruebas_${dateStr}.csv`, 'text/csv;charset=utf-8;');
+  }
+
   // API pública del módulo
   return {
     exportCSVIndividual,
     exportCSVConsolidated,
+    exportCSVPruebas,
     exportPDFIndividual,
     exportPDFConsolidated,
   };

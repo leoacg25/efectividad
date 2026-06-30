@@ -601,6 +601,40 @@ img { display: block; max-width: 100%; }
   gap: var(--space-xs);
 }
 
+.nav-profiles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 var(--space-md) var(--space-md);
+}
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  padding: 3px 0;
+}
+
+.profile-name {
+  font-size: 11px;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.profile-select {
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  max-width: 110px;
+}
+
 .sidebar__footer {
   padding: var(--space-md);
   border-top: 1px solid var(--border-color);
