@@ -548,21 +548,13 @@ const Exporter = (() => {
     const leaders = entries.filter(([name]) => roles[name] === 'lider').map(([n]) => n);
     const evaluacion = entries.filter(([name]) => roles[name] === 'evaluacion').map(([n]) => n);
 
-    // --- Calcular promedios ---
+    // --- Calcular promedio de desarrolladores ---
     const devPcts = devs.map(([name]) => {
       const s = stats[name];
       return s.effectiveTotal > 0 ? (s.solved / s.effectiveTotal) * 100 : 0;
     });
-    const leaderPct = devPcts.length > 0
+    const avgDevPct = devPcts.length > 0
       ? devPcts.reduce((a, b) => a + b, 0) / devPcts.length
-      : 0;
-
-    const allPcts = entries.map(([name]) => {
-      const s = stats[name];
-      return s.effectiveTotal > 0 ? (s.solved / s.effectiveTotal) * 100 : 0;
-    });
-    const overallAvg = allPcts.length > 0
-      ? allPcts.reduce((a, b) => a + b, 0) / allPcts.length
       : 0;
 
     // --- Construir filas ---
@@ -596,7 +588,7 @@ const Exporter = (() => {
     }
 
     for (const name of leaders) {
-      const pctFormatted = leaderPct.toFixed(2);
+      const pctFormatted = avgDevPct.toFixed(2);
       rows.push([
         name,
         'Promedio',
@@ -606,7 +598,7 @@ const Exporter = (() => {
     }
 
     for (const name of evaluacion) {
-      const pctFormatted = overallAvg.toFixed(2);
+      const pctFormatted = avgDevPct.toFixed(2);
       rows.push([
         name,
         'Promedio',

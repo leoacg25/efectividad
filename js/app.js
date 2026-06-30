@@ -859,26 +859,30 @@ const App = (() => {
       return;
     }
 
-    const calc = (name) => {
-      const tickets = appData.programmers[name];
-      if (!tickets || tickets.length === 0) return 0;
+    // Calcular promedio de efectividad de todos los desarrolladores
+    const devs = Object.entries(appData.programmers).filter(
+      ([name]) => !profiles[name] || profiles[name] === 'desarrollador'
+    );
+    let totalPct = 0;
+    for (const [, tickets] of devs) {
       const solved = tickets.filter(t => t.status === 'Solventado').length;
       const noA = tickets.filter(t => t.status === 'No Aplica' || t.status === 'Información Adicional').length;
       const eff = tickets.length - noA;
-      return eff > 0 ? Math.round((solved / eff) * 100) : 0;
-    };
+      totalPct += eff > 0 ? (solved / eff) * 100 : 0;
+    }
+    const avgPct = devs.length > 0 ? totalPct / devs.length : 0;
+    const displayPct = avgPct.toFixed(2);
+    const theme = avgPct >= 75 ? 'green' : avgPct >= 40 ? 'yellow' : 'red';
 
     container.innerHTML = specials.map(([name, role]) => {
       const label = role === 'lider' ? 'Líder Técnico' : 'Evaluación';
-      const pct = calc(name);
-      const theme = pct >= 75 ? 'green' : pct >= 40 ? 'yellow' : 'red';
       return `
         <div class="profile-row">
           <div class="profile-info">
             <span class="profile-name">${name}</span>
             <span class="profile-role">${label}</span>
           </div>
-          <span class="effectiveness-badge effectiveness-badge--${theme}">${pct}%</span>
+          <span class="effectiveness-badge effectiveness-badge--${theme}">${displayPct}%</span>
         </div>
       `;
     }).join('') + `<button class="profile-add-btn" id="btn-add-profile">+</button>`;
