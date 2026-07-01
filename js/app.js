@@ -1052,6 +1052,19 @@ const App = (() => {
     renderProfiles();
   }
 
+  /**
+   * Sincroniza un programador de appData con localStorage.
+   * Se llama después de modificar tickets desde tickets.js.
+   * @param {string} name
+   */
+  function syncProgrammerFromStorage(name) {
+    if (!appData) return;
+    const stored = Storage.loadData();
+    if (stored && stored.programmers[name]) {
+      appData.programmers[name] = stored.programmers[name];
+    }
+  }
+
   return {
     init,
     navigateToProgrammer,
@@ -1061,6 +1074,7 @@ const App = (() => {
     editProfile,
     deleteProfile,
     refreshProfiles,
+    syncProgrammerFromStorage,
   };
 
 })();
