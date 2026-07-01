@@ -1048,6 +1048,10 @@ const App = (() => {
     goToDashboard();
   }
 
+  function refreshProfiles() {
+    renderProfiles();
+  }
+
   return {
     init,
     navigateToProgrammer,
@@ -1056,6 +1060,7 @@ const App = (() => {
     deleteProgrammer,
     editProfile,
     deleteProfile,
+    refreshProfiles,
   };
 
 })();

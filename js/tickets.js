@@ -387,6 +387,7 @@ const Tickets = (() => {
           subtitle.textContent = `${stats.total} tickets · ${stats.solved} solventados · ${stats.noAplica} no aplica · ${stats.infoAdicional} informaci\u00f3n adicional · ${stats.inProgress} en proceso · ${stats.unsolved} sin resolver`;
         }
         updateSidebarBadge(currentProgrammer, stats.pct);
+        if (typeof App !== 'undefined' && App.refreshProfiles) App.refreshProfiles();
       });
     });
   }
@@ -420,6 +421,8 @@ const Tickets = (() => {
 
       // Actualizar badge en sidebar
       updateSidebarBadge(currentProgrammer, stats.pct);
+      // Actualizar perfiles especiales (promedio puede cambiar)
+      if (typeof App !== 'undefined' && App.refreshProfiles) App.refreshProfiles();
 
       UI.showToast(`Estado actualizado: ${newStatus}`, 'success');
     } else {
