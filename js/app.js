@@ -864,10 +864,8 @@ const App = (() => {
     );
     let totalPct = 0;
     for (const [, tickets] of devs) {
-      const solved = tickets.filter(t => t.status === 'Solventado').length;
-      const noA = tickets.filter(t => t.status === 'No Aplica' || t.status === 'Información Adicional').length;
-      const eff = tickets.length - noA;
-      totalPct += eff > 0 ? (solved / eff) * 100 : 0;
+      const stats = Dashboard.calcStats(tickets);
+      totalPct += stats.pct;
     }
     const avgPct = devs.length > 0 ? totalPct / devs.length : 0;
     const displayPct = avgPct.toFixed(2);
