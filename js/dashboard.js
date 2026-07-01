@@ -25,16 +25,18 @@ const Dashboard = (() => {
    * @returns {{ total: number, solved: number, noAplica: number, infoAdicional: number, inProgress: number, unsolved: number, pct: number }}
    */
   function calcStats(tickets) {
-    const total = tickets.length;
-    const solved = tickets.filter(t => t.status === 'Solventado').length;
-    const noAplica = tickets.filter(t => t.status === 'No Aplica').length;
-    const infoAdicional = tickets.filter(t => t.status === 'Información Adicional').length;
-    const inProgress = tickets.filter(t => t.status === 'En proceso').length;
-    const unsolved = tickets.filter(t => t.status === 'No resuelto').length;
+    const valid = tickets.filter(t => t.tipo !== 'Avería/Falla');
+    const averias = tickets.length - valid.length;
+    const total = valid.length;
+    const solved = valid.filter(t => t.status === 'Solventado').length;
+    const noAplica = valid.filter(t => t.status === 'No Aplica').length;
+    const infoAdicional = valid.filter(t => t.status === 'Información Adicional').length;
+    const inProgress = valid.filter(t => t.status === 'En proceso').length;
+    const unsolved = valid.filter(t => t.status === 'No resuelto').length;
     const excluded = noAplica + infoAdicional;
     const effectiveTotal = total - excluded;
     const pct = effectiveTotal > 0 ? Math.round((solved / effectiveTotal) * 100) : 0;
-    return { total, solved, noAplica, infoAdicional, inProgress, unsolved, pct, effectiveTotal };
+    return { total, solved, noAplica, infoAdicional, inProgress, unsolved, pct, effectiveTotal, averias };
   }
 
   /**
@@ -97,8 +99,8 @@ const Dashboard = (() => {
         delay: '0s',
       },
       {
-        label: 'Total de Tickets',
-        value: allTickets.length,
+        label: 'Total (Mejora/Req.)',
+        value: globalStats.total,
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                  <rect x="3" y="3" width="18" height="18" rx="3"/>
                  <path d="M8 12h8M8 8h8M8 16h5"/>
@@ -107,6 +109,17 @@ const Dashboard = (() => {
         iconColor: '#a855f7',
         accent: '#a855f7',
         delay: '.05s',
+      },
+      {
+        label: 'Averías/Falla',
+        value: globalStats.averias,
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                 <circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/>
+               </svg>`,
+        iconBg: 'rgba(239,68,68,.15)',
+        iconColor: '#ef4444',
+        accent: '#ef4444',
+        delay: '.075s',
       },
       {
         label: 'Solventados',
@@ -392,7 +405,7 @@ const Dashboard = (() => {
       .sort((a, b) => b.pct - a.pct);
 
     if (ranking.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="9">
+      tbody.innerHTML = `<tr><td colspan="10">
         <div class="empty-state">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/>
@@ -424,6 +437,7 @@ const Dashboard = (() => {
             </div>
           </td>
           <td style="font-weight:600">${r.total}</td>
+          <td style="color:#ef4444;font-weight:600">${r.averias}</td>
           <td style="color:#10b981;font-weight:600">${r.solved}</td>
           <td style="color:#a855f7;font-weight:600">${r.noAplica}</td>
           <td style="color:#50bee6;font-weight:600">${r.infoAdicional}</td>

@@ -62,16 +62,18 @@ const Exporter = (() => {
    * @returns {{ total: number, solved: number, noAplica: number, infoAdicional: number, inProgress: number, unsolved: number, pct: number }}
    */
   function calcStats(tickets) {
-    const total = tickets.length;
-    const solved = tickets.filter(t => t.status === 'Solventado').length;
-    const noAplica = tickets.filter(t => t.status === 'No Aplica').length;
-    const infoAdicional = tickets.filter(t => t.status === 'Información Adicional').length;
-    const inProgress = tickets.filter(t => t.status === 'En proceso').length;
-    const unsolved = tickets.filter(t => t.status === 'No resuelto').length;
+    const valid = tickets.filter(t => t.tipo !== 'Avería/Falla');
+    const averias = tickets.length - valid.length;
+    const total = valid.length;
+    const solved = valid.filter(t => t.status === 'Solventado').length;
+    const noAplica = valid.filter(t => t.status === 'No Aplica').length;
+    const infoAdicional = valid.filter(t => t.status === 'Información Adicional').length;
+    const inProgress = valid.filter(t => t.status === 'En proceso').length;
+    const unsolved = valid.filter(t => t.status === 'No resuelto').length;
     const excluded = noAplica + infoAdicional;
     const effectiveTotal = total - excluded;
     const pct = effectiveTotal > 0 ? Math.round((solved / effectiveTotal) * 100) : 0;
-    return { total, solved, noAplica, infoAdicional, inProgress, unsolved, pct, effectiveTotal };
+    return { total, solved, noAplica, infoAdicional, inProgress, unsolved, pct, effectiveTotal, averias };
   }
 
   /**
@@ -211,8 +213,8 @@ const Exporter = (() => {
     const rows = [
       ['Reporte Consolidado — Dashboard de Efectividad de Programadores'],
       [],
-      ['#', 'Programador', 'Total Tickets', 'Solventados', 'No Aplica', 'Info. Adicional', 'En Proceso', 'No Resueltos', 'Efectividad (%)'],
-      ...ranking.map((r, i) => [i + 1, r.name, r.total, r.solved, r.noAplica, r.infoAdicional, r.inProgress, r.unsolved, r.pct]),
+      ['#', 'Programador', 'Tickets (M/R)', 'Averías', 'Solventados', 'No Aplica', 'Info. Adicional', 'En Proceso', 'No Resueltos', 'Efectividad (%)'],
+      ...ranking.map((r, i) => [i + 1, r.name, r.total, r.averias, r.solved, r.noAplica, r.infoAdicional, r.inProgress, r.unsolved, r.pct]),
     ];
 
     const csv = rows.map(row => row.map(escapeCsv).join(',')).join('\r\n');
@@ -240,7 +242,8 @@ const Exporter = (() => {
 
     // Tarjetas de KPI
     const kpiData = [
-      { label: 'Total Tickets', value: stats.total, color: [99, 102, 241] },
+      { label: 'Tickets (M/R)', value: stats.total, color: [99, 102, 241] },
+      { label: 'Averías',       value: stats.averias,    color: [239, 68, 68] },
       { label: 'Solventados',   value: stats.solved,     color: [16, 185, 129] },
       { label: 'No Aplica',     value: stats.noAplica,   color: [168, 85, 247] },
       { label: 'Info. Adic.',   value: stats.infoAdicional, color: [80, 190, 230] },
@@ -248,7 +251,7 @@ const Exporter = (() => {
       { label: 'No Resueltos',  value: stats.unsolved,   color: [239, 68, 68] },
     ];
 
-    const cardW = 27;
+    const cardW = 23;
     const cardH = 22;
     const margin = 14;
     const gap = 3;
@@ -404,7 +407,8 @@ const Exporter = (() => {
 
     // --- KPI Global ---
     const kpiData = [
-      { label: 'Total Tickets',  value: globalStats.total,      color: [99, 102, 241] },
+      { label: 'Tickets (M/R)',  value: globalStats.total,      color: [99, 102, 241] },
+      { label: 'Averías',        value: globalStats.averias,    color: [239, 68, 68] },
       { label: 'Solventados',    value: globalStats.solved,     color: [16, 185, 129] },
       { label: 'No Aplica',      value: globalStats.noAplica,   color: [168, 85, 247] },
       { label: 'Info. Adic.',    value: globalStats.infoAdicional, color: [80, 190, 230] },
@@ -462,6 +466,7 @@ const Exporter = (() => {
       i + 1,
       r.name,
       r.total,
+      r.averias,
       r.solved,
       r.noAplica,
       r.infoAdicional,
@@ -472,7 +477,7 @@ const Exporter = (() => {
 
     doc.autoTable({
       startY: cursorY,
-      head: [['#', 'Programador', 'Total', 'Solventados', 'No Aplica', 'Info. Adic.', 'En Proceso', 'No Resueltos', 'Efectividad']],
+      head: [['#', 'Programador', 'Tickets (M/R)', 'Averías', 'Solventados', 'No Aplica', 'Info. Adic.', 'En Proceso', 'No Resueltos', 'Efectividad']],
       body: tableData,
       theme: 'striped',
       margin: { left: margin, right: margin },
@@ -495,16 +500,18 @@ const Exporter = (() => {
       },
       columnStyles: {
         0: { cellWidth: 10, halign: 'center', fontStyle: 'bold' },
-        1: { cellWidth: 48 },
+        1: { cellWidth: 42 },
         2: { cellWidth: 16, halign: 'center' },
-        3: { cellWidth: 20, halign: 'center' },
+        3: { cellWidth: 14, halign: 'center' },
         4: { cellWidth: 18, halign: 'center' },
-        5: { cellWidth: 18, halign: 'center' },
-        6: { cellWidth: 18, halign: 'center' },
-        7: { cellWidth: 20, halign: 'center', fontStyle: 'bold' },
+        5: { cellWidth: 16, halign: 'center' },
+        6: { cellWidth: 14, halign: 'center' },
+        7: { cellWidth: 16, halign: 'center' },
+        8: { cellWidth: 16, halign: 'center' },
+        9: { cellWidth: 18, halign: 'center', fontStyle: 'bold' },
       },
       didParseCell: (hookData) => {
-        if (hookData.section === 'body' && hookData.column.index === 7) {
+        if (hookData.section === 'body' && hookData.column.index === 9) {
           const pct = parseInt(hookData.cell.raw);
           const color = effectivenessColor(pct);
           hookData.cell.styles.textColor = color;
