@@ -378,6 +378,15 @@ const Tickets = (() => {
         const td = e.target.closest('.td-tipo');
         td.querySelectorAll('.tipo-radio').forEach(l => l.classList.remove('tipo-radio--active'));
         e.target.closest('.tipo-radio').classList.add('tipo-radio--active');
+
+        // Recalcular efectividad y actualizar UI
+        const stats = Dashboard.calcStats(currentTickets);
+        updateRing(stats.pct);
+        const subtitle = document.getElementById('prog-subtitle');
+        if (subtitle) {
+          subtitle.textContent = `${stats.total} tickets · ${stats.solved} solventados · ${stats.noAplica} no aplica · ${stats.infoAdicional} informaci\u00f3n adicional · ${stats.inProgress} en proceso · ${stats.unsolved} sin resolver`;
+        }
+        updateSidebarBadge(currentProgrammer, stats.pct);
       });
     });
   }
