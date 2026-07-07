@@ -224,6 +224,10 @@ const App = (() => {
         Storage.saveData(remoteData);
         appData = remoteData;
 
+        // Si hay un cambio local de tipo en curso, no re-renderizar
+        // para evitar que el snapshot remoto revierta el radio visual
+        if (window.__localTipoChange) return;
+
         // Re-renderizar según la vista actual
         if (sharedViewName && appData.programmers[sharedViewName]) {
           Tickets.render(sharedViewName, appData.programmers[sharedViewName], true);

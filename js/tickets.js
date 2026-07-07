@@ -391,6 +391,11 @@ const Tickets = (() => {
           App.syncProgrammerFromStorage(currentProgrammer);
           App.refreshProfiles();
         }
+        // Fijar la bandera de cambio local para que el snapshot remoto
+        // no sobrescriba el estado visual con datos posiblemente anteriores
+        window.__localTipoChange = true;
+        setTimeout(() => { window.__localTipoChange = false; }, 2000);
+        renderTicketsTable();
       });
     });
   }
