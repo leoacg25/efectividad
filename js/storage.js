@@ -104,6 +104,45 @@ const Storage = (() => {
     return true;
   }
 
+  // ----------------------------------------------------------------
+  // PLANIFICACIONES (snapshots históricos)
+  // ----------------------------------------------------------------
+
+  function savePlanification(name) {
+    const data = loadData();
+    if (!data) { throw new Error('No hay datos para guardar'); }
+    if (!data.planifications) data.planifications = [];
+    const plan = {
+      id: 'plan_' + Date.now(),
+      name: String(name).trim(),
+      timestamp: new Date().toISOString(),
+      data: JSON.parse(JSON.stringify({ programmers: data.programmers, profiles: data.profiles || {} })),
+    };
+    data.planifications.push(plan);
+    saveData(data);
+    return plan;
+  }
+
+  function deletePlanification(planId) {
+    const data = loadData();
+    if (!data || !data.planifications) return false;
+    data.planifications = data.planifications.filter(p => p.id !== planId);
+    saveData(data);
+    return true;
+  }
+
+  function getPlanification(planId) {
+    const data = loadData();
+    if (!data || !data.planifications) return null;
+    return data.planifications.find(p => p.id === planId) || null;
+  }
+
+  function getAllPlanifications() {
+    const data = loadData();
+    if (!data || !data.planifications) return [];
+    return data.planifications;
+  }
+
   // API pública del módulo
   return {
     saveData,
@@ -113,6 +152,10 @@ const Storage = (() => {
     updateTicketStatus,
     updateTicketField,
     setOnSaveCallback,
+    savePlanification,
+    deletePlanification,
+    getPlanification,
+    getAllPlanifications,
   };
 
 })();

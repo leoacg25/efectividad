@@ -169,6 +169,7 @@ const App = (() => {
   let appData = null; // { programmers: {...}, loadedAt: string }
   let lastSnapshotJson = null;
   let sharedViewName = null; // Nombre del programador en vista compartida
+  let _viewingPlanification = null; // ID de planificación en vista (read-only), null si modo normal
 
   // ----------------------------------------------------------------
   // INICIALIZACIÓN
@@ -227,6 +228,8 @@ const App = (() => {
         // Si hay un cambio local de tipo en curso, no re-renderizar
         // para evitar que el snapshot remoto revierta el radio visual
         if (window.__localTipoChange) return;
+        // Si estamos viendo una planificación guardada, no sobrescribir
+        if (_viewingPlanification) return;
 
         // Re-renderizar según la vista actual
         if (sharedViewName && appData.programmers[sharedViewName]) {
@@ -277,6 +280,7 @@ const App = (() => {
     setupSidebar();
     setupExportButtons();
     setupAddProgrammerButton();
+    setupPlanificationButton();
 
     // Inicializar Firebase app antes de auth o FirebaseDB
     initFirebase();
@@ -539,6 +543,7 @@ const App = (() => {
 
     Dashboard.render(appData.programmers, navigateToProgrammer, appData.profiles);
     renderProfiles();
+    renderSavedPlanifications();
   }
 
   /**
@@ -563,9 +568,9 @@ const App = (() => {
     // Cerrar sidebar en mobile
     closeSidebar();
 
-    // Renderizar la vista del programador
+    // Renderizar la vista del programador (solo lectura si estamos viendo una planificación)
     const tickets = appData.programmers[programmerName];
-    Tickets.render(programmerName, tickets);
+    Tickets.render(programmerName, tickets, !!_viewingPlanification);
 
     // Scroll al inicio
     document.getElementById('main-content')?.scrollTo({ top: 0, behavior: 'smooth' });
@@ -725,9 +730,32 @@ const App = (() => {
   function updateTopbarActions(view) {
     const container = document.getElementById('topbar-actions');
     if (!container) return;
-    // Los botones de exportación están dentro de las vistas, no en el topbar.
-    // El topbar solo muestra breadcrumb. Limpiar si hay algo.
     container.innerHTML = '';
+    if (_viewingPlanification) {
+      const loadBtn = document.createElement('button');
+      loadBtn.className = 'btn btn--primary btn--sm';
+      loadBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </svg>
+        Cargar planificación
+      `;
+      loadBtn.addEventListener('click', () => {
+        openPasswordModal(_viewingPlanification);
+      });
+      container.appendChild(loadBtn);
+
+      const exitBtn = document.createElement('button');
+      exitBtn.className = 'btn btn--outline btn--sm';
+      exitBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
+        </svg>
+        Salir de vista
+      `;
+      exitBtn.addEventListener('click', exitPlanificationView);
+      container.appendChild(exitBtn);
+    }
   }
 
   /**
@@ -1024,6 +1052,376 @@ const App = (() => {
   }
 
   // ----------------------------------------------------------------
+  // PLANIFICACIONES GUARDADAS
+  // ----------------------------------------------------------------
+
+  /**
+   * Configura el botón "Efectividad evaluada" y los modales relacionados.
+   */
+  function setupPlanificationButton() {
+    const btn = document.getElementById('btn-save-planification');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+      if (!appData) { UI.showToast('No hay datos para guardar', 'error'); return; }
+      openSavePlanModal();
+    });
+
+    // Modal guardar
+    document.getElementById('save-plan-close')?.addEventListener('click', closeSavePlanModal);
+    document.getElementById('save-plan-cancel')?.addEventListener('click', closeSavePlanModal);
+    document.getElementById('save-plan-confirm')?.addEventListener('click', confirmSavePlan);
+    document.getElementById('save-plan-name')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') confirmSavePlan();
+      if (e.key === 'Escape') closeSavePlanModal();
+    });
+
+    // Modal "guardado exitoso"
+    document.getElementById('plan-saved-close')?.addEventListener('click', closePlanSavedModal);
+    document.getElementById('plan-saved-done')?.addEventListener('click', closePlanSavedModal);
+    document.getElementById('plan-saved-view')?.addEventListener('click', () => {
+      closePlanSavedModal();
+      if (_lastSavedPlanId) viewPlanification(_lastSavedPlanId);
+    });
+    document.getElementById('plan-saved-new')?.addEventListener('click', () => {
+      closePlanSavedModal();
+      openNewPlanningModal();
+    });
+
+    // Modal nueva planificación
+    document.getElementById('new-plan-close')?.addEventListener('click', closeNewPlanningModal);
+    document.getElementById('new-plan-cancel')?.addEventListener('click', closeNewPlanningModal);
+    document.getElementById('new-plan-download-template')?.addEventListener('click', downloadTemplate);
+    document.getElementById('new-plan-start')?.addEventListener('click', startNewPlanning);
+
+    // Modal password
+    document.getElementById('password-modal-close')?.addEventListener('click', closePasswordModal);
+    document.getElementById('password-modal-cancel')?.addEventListener('click', closePasswordModal);
+    document.getElementById('password-modal-confirm')?.addEventListener('click', confirmPassword);
+    document.getElementById('password-pass')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') confirmPassword();
+      if (e.key === 'Escape') closePasswordModal();
+    });
+
+    // Cerrar modales con clic en overlay
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('mousedown', (e) => {
+        if (e.target === overlay) {
+          overlay.classList.add('hidden');
+          overlay.classList.remove('active');
+        }
+      });
+    });
+  }
+
+  let _lastSavedPlanId = null;
+  let _pendingResumePlanId = null;
+
+  // --- Guardar planificación ---
+
+  function openSavePlanModal() {
+    const modal = document.getElementById('save-plan-modal');
+    const input = document.getElementById('save-plan-name');
+    const now = new Date();
+    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    input.value = `Efectividad ${meses[now.getMonth()]} ${now.getFullYear()}`;
+    modal.classList.remove('hidden');
+    modal.classList.add('active');
+    setTimeout(() => input?.focus(), 100);
+  }
+
+  function closeSavePlanModal() {
+    document.getElementById('save-plan-modal')?.classList.add('hidden');
+    document.getElementById('save-plan-modal')?.classList.remove('active');
+  }
+
+  function confirmSavePlan() {
+    const input = document.getElementById('save-plan-name');
+    const name = input.value.trim();
+    if (!name) { UI.showToast('Ingresa un nombre para la planificación', 'error'); input.focus(); return; }
+
+    try {
+      const plan = Storage.savePlanification(name);
+      _lastSavedPlanId = plan.id;
+      UI.showToast(`"${name}" guardada correctamente`, 'success', 3000);
+      closeSavePlanModal();
+      renderSavedPlanifications();
+      // Mostrar modal de opciones post-guardado
+      document.getElementById('plan-saved-modal').classList.remove('hidden');
+      document.getElementById('plan-saved-modal').classList.add('active');
+    } catch (err) {
+      UI.showToast('Error al guardar: ' + err.message, 'error');
+    }
+  }
+
+  function closePlanSavedModal() {
+    document.getElementById('plan-saved-modal')?.classList.add('hidden');
+    document.getElementById('plan-saved-modal')?.classList.remove('active');
+  }
+
+  // --- Renderizar planificaciones guardadas en sidebar ---
+
+  function renderSavedPlanifications() {
+    const container = document.getElementById('nav-planifications');
+    const section = document.getElementById('nav-planifications-section');
+    if (!container || !section) return;
+
+    const plans = Storage.getAllPlanifications();
+    if (plans.length === 0) {
+      section.classList.add('hidden');
+      return;
+    }
+
+    section.classList.remove('hidden');
+    container.innerHTML = plans.slice().reverse().map(p => {
+      const d = new Date(p.timestamp);
+      const fecha = d.toLocaleDateString('es-VE', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      const isViewing = _viewingPlanification === p.id;
+      return `
+        <div class="plan-item ${isViewing ? 'plan-item--viewing' : ''}" data-plan-id="${p.id}">
+          <div class="plan-info">
+            <span class="plan-name">${escHtml(p.name)}</span>
+            <span class="plan-date">${fecha}${isViewing ? ' · Viendo' : ''}</span>
+          </div>
+          ${isViewing ? '<span class="plan-view-badge plan-view-badge--viewing">VIENDO</span>' : ''}
+          <span class="plan-delete-btn" title="Eliminar planificación" onclick="event.stopPropagation();App.deletePlanification('${p.id}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10">
+              <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
+            </svg>
+          </span>
+        </div>
+      `;
+    }).join('');
+
+    // Click para ver planificación
+    container.querySelectorAll('.plan-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const pid = el.dataset.planId;
+        const plan = Storage.getPlanification(pid);
+        if (!plan) { UI.showToast('Planificación no encontrada', 'error'); return; }
+        if (_viewingPlanification === pid) {
+          // Ya la estamos viendo, salir del modo vista
+          exitPlanificationView();
+        } else {
+          viewPlanification(pid);
+        }
+      });
+    });
+  }
+
+  // --- Ver planificación guardada (read-only) ---
+
+  function viewPlanification(planId) {
+    const plan = Storage.getPlanification(planId);
+    if (!plan) { UI.showToast('Planificación no encontrada', 'error'); return; }
+
+    _viewingPlanification = planId;
+
+    // Reemplazar appData temporalmente con los datos de la planificación
+    // SIN guardar a localStorage para no perder los datos activos
+    appData = {
+      programmers: JSON.parse(JSON.stringify(plan.data.programmers)),
+      profiles: JSON.parse(JSON.stringify(plan.data.profiles || {})),
+      _planRef: plan.id,
+    };
+
+    UI.showToast(`Viendo: ${plan.name}`, 'info', 3000);
+    renderSavedPlanifications();
+    goToDashboard();
+
+    // Mostrar badge indicador en el dashboard
+    const breadcrumb = document.getElementById('topbar-breadcrumb');
+    if (breadcrumb) {
+      breadcrumb.innerHTML = `Dashboard <span class="plan-viewing-badge">🔍 ${escHtml(plan.name)}</span>`;
+    }
+  }
+
+  function exitPlanificationView() {
+    if (!_viewingPlanification) return;
+    _viewingPlanification = null;
+
+    // Recargar datos actuales desde localStorage
+    const saved = Storage.loadData();
+    if (saved && saved.programmers) {
+      if (!saved.profiles) saved.profiles = {};
+      appData = saved;
+    }
+    renderSavedPlanifications();
+    goToDashboard();
+    UI.showToast('Has salido del modo vista', 'info', 2000);
+  }
+
+  // --- Eliminar planificación ---
+
+  async function deletePlanification(planId) {
+    const plan = Storage.getPlanification(planId);
+    if (!plan) return;
+    const confirmed = await UI.confirm(
+      'Eliminar planificación',
+      `¿Eliminar "${plan.name}"? Esta acción no se puede deshacer.`
+    );
+    if (!confirmed) return;
+
+    if (_viewingPlanification === planId) {
+      exitPlanificationView();
+    }
+    Storage.deletePlanification(planId);
+    renderSavedPlanifications();
+    UI.showToast('Planificación eliminada', 'success');
+  }
+
+  // --- Nueva planificación (modal parámetros + plantilla) ---
+
+  function openNewPlanningModal() {
+    const input = document.getElementById('new-plan-period');
+    const now = new Date();
+    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    input.value = `${meses[now.getMonth()]} ${now.getFullYear()}`;
+    document.getElementById('new-plan-modal').classList.remove('hidden');
+    document.getElementById('new-plan-modal').classList.add('active');
+    setTimeout(() => input?.focus(), 100);
+  }
+
+  function closeNewPlanningModal() {
+    document.getElementById('new-plan-modal')?.classList.add('hidden');
+    document.getElementById('new-plan-modal')?.classList.remove('active');
+  }
+
+  function downloadTemplate() {
+    try {
+      const wb = XLSX.utils.book_new();
+      const headers = ['N° Ticket', 'Descripcion', 'Proyecto', 'Notas'];
+      const ws = XLSX.utils.aoa_to_sheet([headers]);
+      ws['!cols'] = [{ wch: 12 }, { wch: 40 }, { wch: 20 }, { wch: 30 }];
+      XLSX.utils.book_append_sheet(wb, ws, 'Programador Ejemplo');
+      XLSX.writeFile(wb, 'plantilla_efectividad.xlsx');
+      UI.showToast('Plantilla descargada', 'success');
+    } catch (err) {
+      UI.showToast('Error al generar plantilla: ' + err.message, 'error');
+    }
+  }
+
+  function startNewPlanning() {
+    const period = document.getElementById('new-plan-period').value.trim();
+    if (!period) {
+      UI.showToast('Ingresa el período de evaluación', 'error');
+      return;
+    }
+
+    // Si estamos viendo una planificación, salir del modo vista
+    if (_viewingPlanification) {
+      const saved = Storage.loadData();
+      if (saved && saved.programmers) {
+        if (!saved.profiles) saved.profiles = {};
+        appData = saved;
+      }
+      _viewingPlanification = null;
+      renderSavedPlanifications();
+    }
+
+    // Preguntar si desea limpiar los datos actuales
+    UI.confirm(
+      'Iniciar nueva planificación',
+      `Se limpiarán los datos actuales para comenzar "${period}". ¿Deseas continuar?`
+    ).then(confirmed => {
+      if (!confirmed) return;
+      closeNewPlanningModal();
+
+      // Opción: descargar plantilla antes de continuar
+      downloadTemplate();
+
+      // Mostrar pantalla de upload para cargar nuevo Excel
+      Storage.clearData();
+      appData = null;
+      UI.showScreen('screen-upload');
+      UI.hideUploadError();
+      UI.showToast('Datos eliminados. Carga el nuevo archivo Excel.', 'info', 4000);
+    });
+  }
+
+  // --- Verificación de contraseña para retomar planificación cerrada ---
+
+  let _passwordResolve = null;
+
+  function openPasswordModal(planId) {
+    _pendingResumePlanId = planId;
+    document.getElementById('password-email').value = '';
+    document.getElementById('password-pass').value = '';
+    document.getElementById('password-error').classList.add('hidden');
+    document.getElementById('password-modal').classList.remove('hidden');
+    document.getElementById('password-modal').classList.add('active');
+    setTimeout(() => document.getElementById('password-email')?.focus(), 100);
+  }
+
+  function closePasswordModal() {
+    document.getElementById('password-modal')?.classList.add('hidden');
+    document.getElementById('password-modal')?.classList.remove('active');
+    _pendingResumePlanId = null;
+  }
+
+  function confirmPassword() {
+    const email = document.getElementById('password-email').value.trim();
+    const password = document.getElementById('password-pass').value;
+    const errorEl = document.getElementById('password-error');
+
+    if (!email || !password) {
+      errorEl.textContent = 'Ingresa correo y contraseña';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    errorEl.classList.add('hidden');
+
+    // Verificar con Firebase Auth
+    Auth.signIn(email, password).then(() => {
+      // Autenticación exitosa
+      UI.showToast('Acceso verificado', 'success');
+      closePasswordModal();
+
+      if (_pendingResumePlanId) {
+        loadPlanificationAsActive(_pendingResumePlanId);
+        _pendingResumePlanId = null;
+      }
+    }).catch((err) => {
+      errorEl.textContent = authErrorMessage(err);
+      errorEl.classList.remove('hidden');
+    });
+  }
+
+  /**
+   * Carga una planificación guardada como datos activos (editable).
+   * Requiere haber verificado contraseña antes.
+   */
+  function loadPlanificationAsActive(planId) {
+    const plan = Storage.getPlanification(planId);
+    if (!plan) { UI.showToast('Planificación no encontrada', 'error'); return; }
+
+    // Salir de modo vista si estaba activo
+    _viewingPlanification = null;
+    renderSavedPlanifications();
+
+    // Restaurar los datos de la planificación como activos
+    appData = {
+      programmers: JSON.parse(JSON.stringify(plan.data.programmers)),
+      profiles: JSON.parse(JSON.stringify(plan.data.profiles || {})),
+    };
+    Storage.saveData(appData);
+    UI.showToast(`"${plan.name}" cargada como planificación activa`, 'success', 4000);
+    goToDashboard();
+
+    // Quitar el badge de vista del breadcrumb
+    const breadcrumb = document.getElementById('topbar-breadcrumb');
+    if (breadcrumb) breadcrumb.textContent = 'Dashboard';
+  }
+
+  // --- Helper: escapar HTML ---
+  function escHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = String(str ?? '');
+    return div.innerHTML;
+  }
+
+  // ----------------------------------------------------------------
   // API PÚBLICA
   // ----------------------------------------------------------------
   function getAllProgrammerNames() {
@@ -1077,6 +1475,7 @@ const App = (() => {
     deleteProfile,
     refreshProfiles,
     syncProgrammerFromStorage,
+    deletePlanification,
   };
 
 })();

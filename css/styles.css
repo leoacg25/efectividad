@@ -2202,3 +2202,252 @@ img { display: block; max-width: 100%; }
 
   .notes-modal__hint { display: none; }
 }
+
+/* ----------------------------------------------------------------
+   24. PLANIFICACIONES GUARDADAS
+   ---------------------------------------------------------------- */
+.nav-planifications {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 var(--space-md) var(--space-md);
+}
+
+.plan-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.plan-item:hover {
+  background: rgba(99,102,241,.08);
+}
+.plan-item--viewing {
+  background: rgba(99,102,241,.15);
+  border-left: 2px solid var(--accent-1);
+}
+
+.plan-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.plan-name {
+  font-size: 11px;
+  color: var(--text-primary);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.plan-date {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.plan-delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity var(--transition), background var(--transition), color var(--transition);
+}
+.plan-item:hover .plan-delete-btn {
+  opacity: .4;
+}
+.plan-delete-btn:hover {
+  opacity: 1;
+  background: rgba(239,68,68,.12);
+  color: #ef4444;
+}
+
+.plan-view-badge {
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  background: rgba(99,102,241,.12);
+  color: var(--accent-1);
+  flex-shrink: 0;
+}
+.plan-view-badge--viewing {
+  background: rgba(245,158,11,.15);
+  color: #f59e0b;
+}
+
+/* Badge en sidebar para indicar modo vista */
+.plan-viewing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(245,158,11,.15);
+  color: #f59e0b;
+  margin-left: var(--space-md);
+}
+
+/* ----------------------------------------------------------------
+   25. FORM MODAL (reutilizado)
+   ---------------------------------------------------------------- */
+.form-modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  width: min(500px, 92vw);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  animation: scaleIn .2s ease;
+  overflow: hidden;
+}
+
+.form-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.form-modal__header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.form-modal__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: rgba(99,102,241,.12);
+  border: 1px solid rgba(99,102,241,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.form-modal__icon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--accent-1);
+}
+
+.form-modal__header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.form-modal__subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.form-modal__close {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: rgba(255,255,255,.05);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition);
+  flex-shrink: 0;
+}
+
+.form-modal__close svg { width: 16px; height: 16px; }
+
+.form-modal__close:hover {
+  background: rgba(239,68,68,.15);
+  color: var(--accent-danger);
+}
+
+.form-modal__body {
+  padding: var(--space-lg) var(--space-xl);
+  flex: 1;
+  overflow-y: auto;
+}
+
+.form-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------------------------------
+   26. FORM GROUP
+   ---------------------------------------------------------------- */
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.form-input:focus {
+  border-color: var(--border-focus);
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--transition);
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-textarea:focus {
+  border-color: var(--border-focus);
+}
