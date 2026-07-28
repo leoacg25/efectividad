@@ -246,6 +246,8 @@ const App = (() => {
           }
         }
 
+        renderPosWebView();
+
         UI.showToast('Datos actualizados por otro usuario', 'info', 2000);
       });
 
@@ -337,6 +339,7 @@ const App = (() => {
       if (saved && saved.programmers) {
         if (!saved.profiles) saved.profiles = {};
         appData = saved;
+        renderPosWebView();
         if (sharedViewName) {
           enterSharedView(sharedViewName);
         } else {
@@ -1226,7 +1229,8 @@ const App = (() => {
     placeholder.textContent = 'Selecciona un programador';
     select.appendChild(placeholder);
 
-    const programmerNames = appData && appData.programmers ? Object.keys(appData.programmers) : [];
+    const sourceData = appData && appData.programmers ? appData : Storage.loadData();
+    const programmerNames = sourceData && sourceData.programmers ? Object.keys(sourceData.programmers) : [];
     programmerNames.forEach(name => {
       const option = document.createElement('option');
       option.value = name;
