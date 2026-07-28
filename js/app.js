@@ -1241,8 +1241,10 @@ const App = (() => {
       }
     }
 
+    console.log('[PosWeb] renderPosWebView appData:', appData ? 'exists' : 'null', appData ? typeof appData.programmers : '', appData && appData.programmers ? Object.keys(appData.programmers) : 'no-programmers-key');
     const sourceData = appData && appData.programmers ? appData : Storage.loadData();
     let programmerNames = sourceData && sourceData.programmers ? Object.keys(sourceData.programmers) : [];
+    console.log('[PosWeb] renderPosWebView programmerNames:', programmerNames);
     const casesProgrammers = [...new Set((state.cases || []).map(c => c.programmer).filter(Boolean))];
     if (casesProgrammers.length) {
       programmerNames = [...new Set([...programmerNames, ...casesProgrammers])];
