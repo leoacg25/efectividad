@@ -1289,13 +1289,16 @@ const App = (() => {
       return;
     }
 
+    const typeOpts = ['Mejora', 'Falla'];
+    const statusOpts = ['No resuelto', 'En proceso', 'Solventado', 'No Aplica', 'Información Adicional'];
+
     tbody.innerHTML = visibleCases.map(item => `
       <tr>
         <td>${escHtml(item.programmer || '—')}</td>
         <td>${escHtml(item.ticket || 'Sin ticket')}</td>
-        <td>${escHtml(item.description || '')}</td>
-        <td>${escHtml(item.type || 'Mejora')}</td>
-        <td>${escHtml(item.status || 'No resuelto')}</td>
+        <td><span class="posweb-editable" tabindex="0" data-case-id="${escHtml(item.id)}" data-field="description">${escHtml(item.description || '')}</span></td>
+        <td><select class="posweb-inline-select posweb-type-select" data-case-id="${escHtml(item.id)}">${typeOpts.map(t => `<option value="${t}"${item.type === t ? ' selected' : ''}>${t}</option>`).join('')}</select></td>
+        <td><select class="posweb-inline-select posweb-status-select" data-case-id="${escHtml(item.id)}">${statusOpts.map(s => `<option value="${s}"${item.status === s ? ' selected' : ''}>${s}</option>`).join('')}</select></td>
         <td>
           <button class="posweb-case-remove" data-case-id="${escHtml(item.id || '')}" title="Eliminar caso" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
@@ -1313,6 +1316,58 @@ const App = (() => {
         nextState.cases = nextState.cases.filter(c => String(c.id) !== String(caseId));
         savePosWebState(nextState);
         UI.showToast('Caso eliminado', 'info');
+      });
+    });
+
+    tbody.querySelectorAll('.posweb-editable').forEach(span => {
+      const caseId = span.dataset.caseId;
+      const field = span.dataset.field;
+      span.addEventListener('click', function onClick() {
+        if (this.dataset.editing === 'true') return;
+        this.dataset.editing = 'true';
+        const currentValue = this.textContent;
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'posweb-inline-input';
+        input.value = currentValue;
+        this.textContent = '';
+        this.appendChild(input);
+        input.focus();
+        input.select();
+
+        const save = () => {
+          this.dataset.editing = 'false';
+          const newVal = input.value.trim();
+          const state = getPosWebState();
+          const c = state.cases.find(c => String(c.id) === String(caseId));
+          if (c) {
+            c[field] = newVal;
+            savePosWebState(state);
+            UI.showToast('Descripción actualizada', 'success');
+          } else {
+            this.textContent = currentValue;
+          }
+        };
+
+        input.addEventListener('blur', save);
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') { e.preventDefault(); save(); }
+          if (e.key === 'Escape') { e.preventDefault(); this.dataset.editing = 'false'; this.textContent = currentValue; }
+        });
+      });
+    });
+
+    tbody.querySelectorAll('.posweb-type-select, .posweb-status-select').forEach(sel => {
+      sel.addEventListener('change', () => {
+        const caseId = sel.dataset.caseId;
+        const field = sel.classList.contains('posweb-type-select') ? 'type' : 'status';
+        const state = getPosWebState();
+        const c = state.cases.find(c => String(c.id) === String(caseId));
+        if (c) {
+          c[field] = sel.value;
+          savePosWebState(state);
+          UI.showToast(`${field === 'type' ? 'Tipo' : 'Estado'} actualizado`, 'success');
+        }
       });
     });
   }
