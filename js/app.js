@@ -1128,11 +1128,13 @@ const App = (() => {
       });
     });
 
-    programmerSelect.addEventListener('change', () => {
+    programmerSelect.addEventListener('change', syncProgrammerInput);
+    programmerSelect.addEventListener('blur', syncProgrammerInput);
+    function syncProgrammerInput() {
       const state = getPosWebState();
-      state.programmer = programmerSelect.value;
+      state.programmer = programmerSelect.value.trim();
       savePosWebState(state);
-    });
+    }
 
     saveBtn.addEventListener('click', () => {
       const state = getPosWebState();
@@ -1224,11 +1226,8 @@ const App = (() => {
       btn.classList.toggle('active', (btn.getAttribute('data-filter') || 'Todos') === _posWebFilters.status);
     });
 
-    select.innerHTML = '';
-    const placeholder = document.createElement('option');
-    placeholder.value = '';
-    placeholder.textContent = 'Selecciona un programador';
-    select.appendChild(placeholder);
+    const datalist = document.getElementById('posweb-programmer-list');
+    if (datalist) datalist.innerHTML = '';
 
     if (!appData && Storage.hasData()) {
       const saved = Storage.loadData();
@@ -1243,14 +1242,15 @@ const App = (() => {
     if (casesProgrammers.length) {
       programmerNames = [...new Set([...programmerNames, ...casesProgrammers])];
     }
-    programmerNames.forEach(name => {
-      const option = document.createElement('option');
-      option.value = name;
-      option.textContent = name;
-      select.appendChild(option);
-    });
+    if (datalist) {
+      programmerNames.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        datalist.appendChild(option);
+      });
+    }
 
-    select.value = programmerNames.includes(state.programmer) ? state.programmer : '';
+    if (state.programmer) select.value = state.programmer;
     const visibleCases = getFilteredPosWebCases(state);
     const validCases = visibleCases.filter(item => item.status !== 'No Aplica' && item.status !== 'Información Adicional');
     const effectiveTotal = validCases.length;
