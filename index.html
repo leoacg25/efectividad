@@ -345,108 +345,99 @@
 
       <!-- VISTA: POS WEB -->
       <section id="view-posweb" class="view hidden" aria-label="Vista de Pos Web">
-        <div class="posweb-shell">
-          <div class="posweb-card">
-            <div class="programmer-header posweb-header">
-              <div class="programmer-header__info">
-                <div class="programmer-avatar">PW</div>
-                <div>
-                  <h1>Pos Web</h1>
-                  <p>Seguimiento de mejoras y fallas con un único programador encargado.</p>
-                </div>
-              </div>
-              <div class="programmer-header__kpi">
-                <div class="effectiveness-ring">
-                  <svg viewBox="0 0 120 120" class="ring-svg">
-                    <circle cx="60" cy="60" r="50" class="ring-bg"/>
-                    <circle cx="60" cy="60" r="50" class="ring-fill" id="posweb-ring-fill"/>
-                  </svg>
-                  <div class="ring-label" id="posweb-ring-label">0%<small>avance</small></div>
-                </div>
-              </div>
+        <div class="programmer-header">
+          <div class="programmer-header__info">
+            <div class="programmer-avatar">PW</div>
+            <div>
+              <h1>Pos Web</h1>
+              <p>Seguimiento de mejoras y fallas con la misma estructura visual de la efectividad del programador.</p>
             </div>
-
-            <div class="posweb-grid">
-              <div class="posweb-panel">
-                <label class="form-label" for="posweb-programmer">Programador encargado</label>
-                <select id="posweb-programmer" class="form-input"></select>
-
-                <label class="form-label" for="posweb-ticket-input">Número de ticket</label>
-                <input type="text" id="posweb-ticket-input" class="form-input" placeholder="Ej: 1254" />
-
-                <label class="form-label" for="posweb-description-input">Descripción</label>
-                <input type="text" id="posweb-description-input" class="form-input" placeholder="Ej: Validar flujo de pago" />
-
-                <label class="form-label" for="posweb-type-select">Tipo de ticket</label>
-                <select id="posweb-type-select" class="form-input">
-                  <option value="Mejora">Mejora</option>
-                  <option value="Falla">Falla</option>
-                </select>
-
-                <label class="form-label" for="posweb-status-select">Estatus</label>
-                <select id="posweb-status-select" class="form-input">
-                  <option value="No resuelto">No resuelto</option>
-                  <option value="En proceso">En proceso</option>
-                  <option value="Solventado">Solventado</option>
-                  <option value="No Aplica">No aplica</option>
-                  <option value="Información Adicional">Info. Adicional</option>
-                </select>
-
-                <div class="posweb-actions">
-                  <button class="btn btn--primary btn--sm" id="posweb-add-case">Agregar caso</button>
-                  <button class="btn btn--outline btn--sm" id="posweb-save">Guardar Pos Web</button>
-                </div>
-
-                <div class="posweb-toolbar">
-                  <div class="posweb-toolbar__group">
-                    <label class="form-label" for="posweb-filter-type">Filtrar por tipo</label>
-                    <select id="posweb-filter-type" class="form-input">
-                      <option value="Todos">Todos</option>
-                      <option value="Mejora">Mejora</option>
-                      <option value="Falla">Falla</option>
-                    </select>
-                  </div>
-                  <div class="posweb-toolbar__group">
-                    <label class="form-label" for="posweb-filter-status">Filtrar por estatus</label>
-                    <select id="posweb-filter-status" class="form-input">
-                      <option value="Todos">Todos</option>
-                      <option value="No resuelto">No resuelto</option>
-                      <option value="En proceso">En proceso</option>
-                      <option value="Solventado">Solventado</option>
-                      <option value="No Aplica">No aplica</option>
-                      <option value="Información Adicional">Info. Adicional</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="posweb-actions">
-                  <button class="btn btn--outline btn--sm" id="posweb-download-template">Descargar plantilla</button>
-                  <button class="btn btn--outline btn--sm" id="posweb-import">Importar</button>
-                  <button class="btn btn--outline btn--sm" id="posweb-export-excel">Exportar Excel</button>
-                  <button class="btn btn--outline btn--sm" id="posweb-export-pdf">Exportar PDF</button>
-                  <input type="file" id="posweb-file-input" accept=".xlsx,.xls,.csv,.json" style="display:none" />
-                </div>
-              </div>
-
-              <div class="posweb-panel">
-                <div class="posweb-progress-card">
-                  <div class="posweb-progress-card__header">
-                    <h3>Porcentaje de finalización</h3>
-                    <span id="posweb-progress-badge" class="posweb-count">0%</span>
-                  </div>
-                  <div class="posweb-progress-bar">
-                    <div id="posweb-progress-fill" class="posweb-progress-bar__fill"></div>
-                  </div>
-                  <div id="posweb-summary" class="posweb-summary"></div>
-                </div>
-
-                <div class="posweb-list-header">
-                  <h3>Casos cargados</h3>
-                  <span id="posweb-count" class="posweb-count">0 casos</span>
-                </div>
-                <div id="posweb-case-list" class="posweb-case-list"></div>
-              </div>
+          </div>
+          <div class="programmer-header__kpi">
+            <div class="effectiveness-ring">
+              <svg viewBox="0 0 120 120" class="ring-svg">
+                <circle cx="60" cy="60" r="50" class="ring-bg"/>
+                <circle cx="60" cy="60" r="50" class="ring-fill" id="posweb-ring-fill"/>
+              </svg>
+              <div class="ring-label" id="posweb-ring-label">0%<small>avance</small></div>
             </div>
+          </div>
+        </div>
+
+        <div class="prog-actions">
+          <button class="btn btn--primary btn--sm" id="posweb-add-case">Agregar caso</button>
+          <button class="btn btn--outline btn--sm" id="posweb-save">Guardar Pos Web</button>
+          <button class="btn btn--outline btn--sm" id="posweb-download-template">Descargar plantilla</button>
+          <button class="btn btn--outline btn--sm" id="posweb-import">Importar</button>
+          <button class="btn btn--outline btn--sm" id="posweb-export-excel">Exportar Excel</button>
+          <button class="btn btn--outline btn--sm" id="posweb-export-pdf">Exportar PDF</button>
+          <input type="file" id="posweb-file-input" accept=".xlsx,.xls,.csv,.json" style="display:none" />
+        </div>
+
+        <div class="posweb-form-card">
+          <div class="posweb-form-grid">
+            <div class="posweb-form-field">
+              <label class="form-label" for="posweb-programmer">Programador encargado</label>
+              <select id="posweb-programmer" class="form-input"></select>
+            </div>
+            <div class="posweb-form-field">
+              <label class="form-label" for="posweb-ticket-input">N° de ticket</label>
+              <input type="text" id="posweb-ticket-input" class="form-input" placeholder="Ej: 1254" />
+            </div>
+            <div class="posweb-form-field posweb-form-field--wide">
+              <label class="form-label" for="posweb-description-input">Descripción</label>
+              <input type="text" id="posweb-description-input" class="form-input" placeholder="Ej: Validar flujo de pago" />
+            </div>
+            <div class="posweb-form-field">
+              <label class="form-label" for="posweb-type-select">Tipo</label>
+              <select id="posweb-type-select" class="form-input">
+                <option value="Mejora">Mejora</option>
+                <option value="Falla">Falla</option>
+              </select>
+            </div>
+            <div class="posweb-form-field">
+              <label class="form-label" for="posweb-status-select">Estatus</label>
+              <select id="posweb-status-select" class="form-input">
+                <option value="No resuelto">No resuelto</option>
+                <option value="En proceso">En proceso</option>
+                <option value="Solventado">Solventado</option>
+                <option value="No Aplica">No aplica</option>
+                <option value="Información Adicional">Info. Adicional</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="filters-bar">
+          <button class="filter-btn active" data-filter="Todos">Todos</button>
+          <button class="filter-btn" data-filter="Solventado">Solventados</button>
+          <button class="filter-btn" data-filter="No Aplica">No Aplica</button>
+          <button class="filter-btn" data-filter="Información Adicional">Info. Adicional</button>
+          <button class="filter-btn" data-filter="En proceso">En Proceso</button>
+          <button class="filter-btn" data-filter="No resuelto">No Resueltos</button>
+          <div class="filter-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <input type="text" id="posweb-search" placeholder="Buscar ticket o descripción" aria-label="Buscar caso" />
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-wrapper">
+            <table id="posweb-table" class="data-table data-table--tickets">
+              <thead>
+                <tr>
+                  <th scope="col">N° Ticket</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="posweb-tbody"></tbody>
+            </table>
           </div>
         </div>
       </section>

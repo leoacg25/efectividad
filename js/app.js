@@ -1065,7 +1065,7 @@ const App = (() => {
   // ----------------------------------------------------------------
 
   let _posWebState = null;
-  let _posWebFilters = { type: 'Todos', status: 'Todos' };
+  let _posWebFilters = { status: 'Todos', search: '' };
 
   /**
    * Configura la vista de Pos Web y sus acciones.
@@ -1083,8 +1083,7 @@ const App = (() => {
     const exportExcelBtn = document.getElementById('posweb-export-excel');
     const exportPdfBtn = document.getElementById('posweb-export-pdf');
     const fileInput = document.getElementById('posweb-file-input');
-    const filterType = document.getElementById('posweb-filter-type');
-    const filterStatus = document.getElementById('posweb-filter-status');
+    const searchInput = document.getElementById('posweb-search');
 
     if (!addBtn || !ticketInput || !descriptionInput || !typeSelect || !statusSelect || !programmerSelect || !saveBtn) return;
 
@@ -1143,13 +1142,16 @@ const App = (() => {
       closeSidebar();
     });
 
-    filterType?.addEventListener('change', () => {
-      _posWebFilters.type = filterType.value;
-      renderPosWebView();
+    document.querySelectorAll('#view-posweb .filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#view-posweb .filter-btn').forEach(item => item.classList.toggle('active', item === btn));
+        _posWebFilters.status = btn.getAttribute('data-filter') || 'Todos';
+        renderPosWebView();
+      });
     });
 
-    filterStatus?.addEventListener('change', () => {
-      _posWebFilters.status = filterStatus.value;
+    searchInput?.addEventListener('input', () => {
+      _posWebFilters.search = searchInput.value;
       renderPosWebView();
     });
 
@@ -1187,10 +1189,17 @@ const App = (() => {
   }
 
   function getFilteredPosWebCases(state) {
+    const searchTerm = (_posWebFilters.search || '').trim().toLowerCase();
+
     return (state.cases || []).filter(item => {
-      const matchesType = _posWebFilters.type === 'Todos' || (item.type || 'Mejora') === _posWebFilters.type;
-      const matchesStatus = _posWebFilters.status === 'Todos' || (item.status || 'No resuelto') === _posWebFilters.status;
-      return matchesType && matchesStatus;
+      const normalizedStatus = String(item.status || 'No resuelto').trim();
+      const matchesStatus = _posWebFilters.status === 'Todos'
+        || normalizedStatus === _posWebFilters.status
+        || (_posWebFilters.status === 'En proceso' && normalizedStatus === 'En proceso');
+
+      const haystack = `${item.ticket || ''} ${item.description || ''} ${item.type || ''} ${normalizedStatus}`.toLowerCase();
+      const matchesSearch = !searchTerm || haystack.includes(searchTerm);
+      return matchesStatus && matchesSearch;
     });
   }
 
@@ -1198,19 +1207,18 @@ const App = (() => {
     const state = getPosWebState();
     const select = document.getElementById('posweb-programmer');
     const count = document.getElementById('posweb-count');
-    const list = document.getElementById('posweb-case-list');
+    const tbody = document.getElementById('posweb-tbody');
     const progressBadge = document.getElementById('posweb-progress-badge');
     const progressFill = document.getElementById('posweb-progress-fill');
     const summary = document.getElementById('posweb-summary');
     const ringLabel = document.getElementById('posweb-ring-label');
     const ringFill = document.getElementById('posweb-ring-fill');
-    const filterType = document.getElementById('posweb-filter-type');
-    const filterStatus = document.getElementById('posweb-filter-status');
 
-    if (!select || !count || !list) return;
+    if (!select || !count || !tbody) return;
 
-    if (filterType) filterType.value = _posWebFilters.type;
-    if (filterStatus) filterStatus.value = _posWebFilters.status;
+    document.querySelectorAll('#view-posweb .filter-btn').forEach(btn => {
+      btn.classList.toggle('active', (btn.getAttribute('data-filter') || 'Todos') === _posWebFilters.status);
+    });
 
     select.innerHTML = '';
     const placeholder = document.createElement('option');
@@ -1253,26 +1261,27 @@ const App = (() => {
     count.textContent = `${visibleCases.length} caso${visibleCases.length === 1 ? '' : 's'}`;
 
     if (visibleCases.length === 0) {
-      list.innerHTML = '<div class="posweb-empty-state">No hay casos que coincidan con el filtro actual.</div>';
+      tbody.innerHTML = '<tr><td colspan="5"><div class="posweb-empty-state">No hay casos que coincidan con el filtro actual.</div></td></tr>';
       return;
     }
 
-    list.innerHTML = visibleCases.map(item => `
-      <div class="posweb-case-item">
-        <div class="posweb-case-title">
-          <strong>${escHtml(item.ticket || 'Sin ticket')}</strong><br/>
-          <span>${escHtml(item.description || '')}</span><br/>
-          <small>${escHtml(`${item.type || 'Mejora'} · ${item.status || 'No resuelto'}`)}</small>
-        </div>
-        <button class="posweb-case-remove" data-case-id="${escHtml(item.id || '')}" title="Eliminar caso" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
-            <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
-          </svg>
-        </button>
-      </div>
+    tbody.innerHTML = visibleCases.map(item => `
+      <tr>
+        <td>${escHtml(item.ticket || 'Sin ticket')}</td>
+        <td>${escHtml(item.description || '')}</td>
+        <td>${escHtml(item.type || 'Mejora')}</td>
+        <td>${escHtml(item.status || 'No resuelto')}</td>
+        <td>
+          <button class="posweb-case-remove" data-case-id="${escHtml(item.id || '')}" title="Eliminar caso" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+              <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
+            </svg>
+          </button>
+        </td>
+      </tr>
     `).join('');
 
-    list.querySelectorAll('.posweb-case-remove').forEach(btn => {
+    tbody.querySelectorAll('.posweb-case-remove').forEach(btn => {
       btn.addEventListener('click', () => {
         const caseId = btn.getAttribute('data-case-id');
         const nextState = getPosWebState();
