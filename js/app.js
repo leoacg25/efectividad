@@ -1229,8 +1229,8 @@ const App = (() => {
     const ringLabel = document.getElementById('posweb-ring-label');
     const ringFill = document.getElementById('posweb-ring-fill');
 
-    if (!select || !count || !tbody) {
-      console.log('[PosWeb] renderPosWebView early return - null elements:', {select: !!select, count: !!count, tbody: !!tbody});
+    if (!select || !tbody) {
+      console.log('[PosWeb] renderPosWebView early return - null elements:', {select: !!select, tbody: !!tbody});
       return;
     }
 
