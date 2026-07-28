@@ -1511,6 +1511,37 @@ img { display: block; max-width: 100%; }
   gap: 6px;
 }
 
+.posweb-programmer-wrapper {
+  display: flex;
+  gap: 6px;
+  align-items: stretch;
+}
+.posweb-programmer-wrapper select {
+  flex: 1;
+}
+#posweb-add-programmer {
+  width: 36px;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#posweb-add-programmer:hover {
+  background: var(--bg-hover);
+}
+.posweb-debug-names {
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  min-height: 1em;
+}
+
 .posweb-form-field--wide {
   grid-column: 1 / -1;
 }

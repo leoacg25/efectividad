@@ -1260,6 +1260,10 @@ const App = (() => {
     }
 
     select.innerHTML = '<option value="">Selecciona un programador</option>';
+
+    let debugEl = document.getElementById('posweb-debug-names');
+    if (debugEl) debugEl.textContent = programmerNames.length ? `Programadores cargados: ${programmerNames.join(', ')}` : 'Sin programadores';
+
     programmerNames.forEach(name => {
       const option = document.createElement('option');
       option.value = name;
