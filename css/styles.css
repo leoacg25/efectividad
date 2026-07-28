@@ -1624,6 +1624,8 @@ img { display: block; max-width: 100%; }
   border-color: var(--accent);
 }
 
+#posweb-add-case { font-size: 14px; padding: 7px 14px; }
+
 /* ----------------------------------------------------------------
    16. TOAST NOTIFICATIONS
    ---------------------------------------------------------------- */
