@@ -281,6 +281,7 @@ const App = (() => {
     setupExportButtons();
     setupAddProgrammerButton();
     setupPlanificationButton();
+    setupPosWebView();
 
     // Inicializar Firebase app antes de auth o FirebaseDB
     initFirebase();
@@ -731,6 +732,9 @@ const App = (() => {
     const container = document.getElementById('topbar-actions');
     if (!container) return;
     container.innerHTML = '';
+    if (view === 'posweb') {
+      return;
+    }
     if (_viewingPlanification) {
       const loadBtn = document.createElement('button');
       loadBtn.className = 'btn btn--primary btn--sm';
@@ -1036,10 +1040,15 @@ const App = (() => {
    * Actualiza el nav-item activo en el sidebar.
    * @param {string|null} programmerName - null para dashboard
    */
-  function updateActiveNav(programmerName) {
+  function updateActiveNav(programmerName, activeView = null) {
     document.querySelectorAll('.nav-item').forEach(item => {
       item.classList.remove('active');
     });
+
+    if (activeView === 'posweb') {
+      document.getElementById('nav-posweb')?.classList.add('active');
+      return;
+    }
 
     if (programmerName === null) {
       // Dashboard activo
@@ -1054,6 +1063,142 @@ const App = (() => {
   // ----------------------------------------------------------------
   // PLANIFICACIONES GUARDADAS
   // ----------------------------------------------------------------
+
+  let _posWebState = null;
+
+  /**
+   * Configura la vista de Pos Web y sus acciones.
+   */
+  function setupPosWebView() {
+    const addBtn = document.getElementById('posweb-add-case');
+    const input = document.getElementById('posweb-case-input');
+    const programmerSelect = document.getElementById('posweb-programmer');
+    const saveBtn = document.getElementById('posweb-save');
+
+    if (!addBtn || !input || !programmerSelect || !saveBtn) return;
+
+    addBtn.addEventListener('click', () => {
+      const title = input.value.trim();
+      if (!title) {
+        UI.showToast('Ingresa un caso para agregar', 'error');
+        input.focus();
+        return;
+      }
+
+      const state = getPosWebState();
+      state.cases.push({ id: `case_${Date.now()}`, title });
+      savePosWebState(state);
+      input.value = '';
+      input.focus();
+      UI.showToast('Caso agregado', 'success');
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addBtn.click();
+      }
+    });
+
+    programmerSelect.addEventListener('change', () => {
+      const state = getPosWebState();
+      state.programmer = programmerSelect.value;
+      savePosWebState(state);
+    });
+
+    saveBtn.addEventListener('click', () => {
+      const state = getPosWebState();
+      state.programmer = programmerSelect.value;
+      savePosWebState(state);
+      UI.showToast('Pos Web guardado', 'success');
+    });
+
+    document.getElementById('nav-posweb')?.addEventListener('click', () => {
+      openPosWebView();
+      closeSidebar();
+    });
+
+    renderPosWebView();
+  }
+
+  function getPosWebState() {
+    if (_posWebState) return _posWebState;
+    const saved = Storage.loadPosWebData();
+    _posWebState = saved && typeof saved === 'object'
+      ? { programmer: saved.programmer || '', cases: Array.isArray(saved.cases) ? saved.cases : [] }
+      : { programmer: '', cases: [] };
+    return _posWebState;
+  }
+
+  function savePosWebState(state) {
+    _posWebState = {
+      programmer: state?.programmer || '',
+      cases: Array.isArray(state?.cases) ? state.cases : [],
+    };
+    Storage.savePosWebData(_posWebState);
+    renderPosWebView();
+  }
+
+  function renderPosWebView() {
+    const state = getPosWebState();
+    const select = document.getElementById('posweb-programmer');
+    const count = document.getElementById('posweb-count');
+    const list = document.getElementById('posweb-case-list');
+
+    if (!select || !count || !list) return;
+
+    select.innerHTML = '';
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Selecciona un programador';
+    select.appendChild(placeholder);
+
+    const programmerNames = appData && appData.programmers ? Object.keys(appData.programmers) : [];
+    programmerNames.forEach(name => {
+      const option = document.createElement('option');
+      option.value = name;
+      option.textContent = name;
+      select.appendChild(option);
+    });
+
+    select.value = programmerNames.includes(state.programmer) ? state.programmer : '';
+    count.textContent = `${state.cases.length} caso${state.cases.length === 1 ? '' : 's'}`;
+
+    if (state.cases.length === 0) {
+      list.innerHTML = '<div class="posweb-empty-state">Aún no hay casos cargados.</div>';
+      return;
+    }
+
+    list.innerHTML = state.cases.map(item => `
+      <div class="posweb-case-item">
+        <span class="posweb-case-title">${escHtml(item.title || '')}</span>
+        <button class="posweb-case-remove" data-case-id="${escHtml(item.id || '')}" title="Eliminar caso" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+            <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
+          </svg>
+        </button>
+      </div>
+    `).join('');
+
+    list.querySelectorAll('.posweb-case-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const caseId = btn.getAttribute('data-case-id');
+        const nextState = getPosWebState();
+        nextState.cases = nextState.cases.filter(c => String(c.id) !== String(caseId));
+        savePosWebState(nextState);
+        UI.showToast('Caso eliminado', 'info');
+      });
+    });
+  }
+
+  function openPosWebView() {
+    UI.showScreen('screen-app');
+    UI.showView('view-posweb');
+    document.getElementById('topbar-breadcrumb').textContent = 'Pos Web';
+    updateTopbarActions('posweb');
+    updateActiveNav(null, 'posweb');
+    renderPosWebView();
+  }
 
   /**
    * Configura el botón "Efectividad evaluada" y los modales relacionados.

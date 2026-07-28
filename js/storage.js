@@ -12,6 +12,7 @@ const Storage = (() => {
 
   // Clave principal usada en localStorage
   const KEY = 'prog_dashboard_data';
+  const POSWEB_KEY = 'prog_posweb_data';
   let onSaveCallback = null;
 
   function setOnSaveCallback(cb) {
@@ -61,6 +62,30 @@ const Storage = (() => {
    */
   function clearData() {
     localStorage.removeItem(KEY);
+  }
+
+  function savePosWebData(data) {
+    try {
+      localStorage.setItem(POSWEB_KEY, JSON.stringify(data));
+    } catch (err) {
+      console.error('[Storage] Error al guardar Pos Web:', err);
+      throw new Error('No se pudo guardar la información de Pos Web.');
+    }
+  }
+
+  function loadPosWebData() {
+    try {
+      const raw = localStorage.getItem(POSWEB_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (err) {
+      console.error('[Storage] Error al leer Pos Web:', err);
+      return null;
+    }
+  }
+
+  function clearPosWebData() {
+    localStorage.removeItem(POSWEB_KEY);
   }
 
   /**
@@ -149,6 +174,9 @@ const Storage = (() => {
     loadData,
     hasData,
     clearData,
+    savePosWebData,
+    loadPosWebData,
+    clearPosWebData,
     updateTicketStatus,
     updateTicketField,
     setOnSaveCallback,

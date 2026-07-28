@@ -190,6 +190,14 @@
           <span>Efectividad evaluada</span>
         </button>
 
+        <button class="nav-item" id="nav-posweb" data-view="posweb" aria-label="Ir a Pos Web">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="4" width="18" height="16" rx="2"/>
+            <path d="M8 8h8M8 12h8M8 16h5"/>
+          </svg>
+          <span>Pos Web</span>
+        </button>
+
           <!-- Lista dinámica de programadores -->
           <div class="nav-section-title">Programadores</div>
           <div id="nav-programmers" class="nav-programmers"></div>
@@ -331,6 +339,43 @@
               </thead>
               <tbody id="ranking-tbody"></tbody>
             </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISTA: POS WEB -->
+      <section id="view-posweb" class="view hidden" aria-label="Vista de Pos Web">
+        <div class="posweb-shell">
+          <div class="posweb-card">
+            <div class="posweb-header">
+              <div>
+                <h1>Pos Web</h1>
+                <p>Gestiona los casos del proyecto y asigna un único programador encargado.</p>
+              </div>
+            </div>
+
+            <div class="posweb-grid">
+              <div class="posweb-panel">
+                <label class="form-label" for="posweb-programmer">Programador encargado</label>
+                <select id="posweb-programmer" class="form-input"></select>
+
+                <label class="form-label" for="posweb-case-input">Agregar caso</label>
+                <div class="posweb-add-row">
+                  <input type="text" id="posweb-case-input" class="form-input" placeholder="Ej: Validar flujo de pago" />
+                  <button class="btn btn--primary btn--sm" id="posweb-add-case">Agregar</button>
+                </div>
+
+                <button class="btn btn--outline btn--sm" id="posweb-save">Guardar Pos Web</button>
+              </div>
+
+              <div class="posweb-panel">
+                <div class="posweb-list-header">
+                  <h3>Casos cargados</h3>
+                  <span id="posweb-count" class="posweb-count">0 casos</span>
+                </div>
+                <div id="posweb-case-list" class="posweb-case-list"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
