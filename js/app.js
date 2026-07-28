@@ -243,6 +243,7 @@ const App = (() => {
       });
 
       const remoteData = await FirebaseDB.loadData();
+      console.log('[App] AFTER await remoteData:', remoteData ? 'OK' : 'NULL', remoteData ? Object.keys(remoteData) : '');
       if (remoteData && remoteData.programmers) {
         Storage.saveData(remoteData);
         appData = remoteData;
