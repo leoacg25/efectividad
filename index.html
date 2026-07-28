@@ -347,10 +347,22 @@
       <section id="view-posweb" class="view hidden" aria-label="Vista de Pos Web">
         <div class="posweb-shell">
           <div class="posweb-card">
-            <div class="posweb-header">
-              <div>
-                <h1>Pos Web</h1>
-                <p>Gestiona los casos del proyecto y asigna un único programador encargado.</p>
+            <div class="programmer-header posweb-header">
+              <div class="programmer-header__info">
+                <div class="programmer-avatar">PW</div>
+                <div>
+                  <h1>Pos Web</h1>
+                  <p>Seguimiento de mejoras y fallas con un único programador encargado.</p>
+                </div>
+              </div>
+              <div class="programmer-header__kpi">
+                <div class="effectiveness-ring">
+                  <svg viewBox="0 0 120 120" class="ring-svg">
+                    <circle cx="60" cy="60" r="50" class="ring-bg"/>
+                    <circle cx="60" cy="60" r="50" class="ring-fill" id="posweb-ring-fill"/>
+                  </svg>
+                  <div class="ring-label" id="posweb-ring-label">0%<small>avance</small></div>
+                </div>
               </div>
             </div>
 

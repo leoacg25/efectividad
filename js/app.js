@@ -1202,6 +1202,8 @@ const App = (() => {
     const progressBadge = document.getElementById('posweb-progress-badge');
     const progressFill = document.getElementById('posweb-progress-fill');
     const summary = document.getElementById('posweb-summary');
+    const ringLabel = document.getElementById('posweb-ring-label');
+    const ringFill = document.getElementById('posweb-ring-fill');
     const filterType = document.getElementById('posweb-filter-type');
     const filterStatus = document.getElementById('posweb-filter-status');
 
@@ -1233,6 +1235,14 @@ const App = (() => {
 
     if (progressBadge) progressBadge.textContent = `${pct}%`;
     if (progressFill) progressFill.style.width = `${pct}%`;
+    if (ringLabel) ringLabel.innerHTML = `${pct}%<small>avance</small>`;
+    if (ringFill) {
+      const circumference = 314;
+      const offset = circumference - (pct / 100) * circumference;
+      ringFill.style.strokeDasharray = `${circumference}`;
+      ringFill.style.strokeDashoffset = `${offset}`;
+      ringFill.style.stroke = pct >= 75 ? '#10b981' : pct >= 40 ? '#f59e0b' : '#ef4444';
+    }
     if (summary) {
       summary.innerHTML = `
         <strong>${solved}</strong> solventados / <strong>${effectiveTotal}</strong> casos válidos<br/>

@@ -1498,34 +1498,30 @@ img { display: block; max-width: 100%; }
 }
 
 .posweb-card {
-  width: min(100%, 1100px);
+  width: min(100%, 1200px);
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
   padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
 .posweb-header {
-  margin-bottom: var(--space-lg);
-}
-
-.posweb-header h1 {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-
-.posweb-header p {
-  color: var(--text-secondary);
-  font-size: 14px;
+  margin-bottom: 0;
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(99,102,241,.12), rgba(168,85,247,.08));
 }
 
 .posweb-grid {
   display: grid;
-  grid-template-columns: minmax(280px, 360px) 1fr;
+  grid-template-columns: minmax(320px, 420px) 1fr;
   gap: var(--space-lg);
+  align-items: start;
 }
 
 .posweb-panel {
@@ -1585,10 +1581,10 @@ img { display: block; max-width: 100%; }
 
 .posweb-case-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-sm);
-  padding: 10px 12px;
+  padding: 12px 14px;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   background: var(--bg-card);
@@ -1598,6 +1594,13 @@ img { display: block; max-width: 100%; }
   color: var(--text-primary);
   font-size: 14px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.posweb-case-title small {
+  color: var(--text-secondary);
 }
 
 .posweb-case-remove {
@@ -1612,7 +1615,7 @@ img { display: block; max-width: 100%; }
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: var(--space-md);
-  background: linear-gradient(135deg, rgba(99,102,241,.08), rgba(168,85,247,.05));
+  background: linear-gradient(135deg, rgba(99,102,241,.10), rgba(168,85,247,.06));
 }
 
 .posweb-progress-card__header {
