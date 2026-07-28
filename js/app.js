@@ -253,7 +253,9 @@ const App = (() => {
 
       // Cargar datos desde Firestore si existen
       FirebaseDB.loadData().then((remoteData) => {
+        console.log('[App] Firebase loadData result:', remoteData ? 'data received' : 'null', remoteData ? Object.keys(remoteData) : '');
         if (remoteData && remoteData.programmers) {
+          console.log('[App] programmers found:', Object.keys(remoteData.programmers));
           Storage.saveData(remoteData);
           appData = remoteData;
           lastSnapshotJson = JSON.stringify(remoteData);
@@ -263,6 +265,8 @@ const App = (() => {
           } else {
             goToDashboard();
           }
+        } else {
+          console.warn('[App] Firebase loadData: no data or no programmers');
         }
       });
     } catch (err) {
@@ -1227,6 +1231,8 @@ const App = (() => {
       btn.classList.toggle('active', (btn.getAttribute('data-filter') || 'Todos') === _posWebFilters.status);
     });
 
+    console.log('[PosWeb] renderPosWebView. appData:', appData, 'Storage.hasData:', Storage.hasData());
+
     const datalist = document.getElementById('posweb-programmer-list');
     if (datalist) datalist.innerHTML = '';
 
@@ -1234,14 +1240,17 @@ const App = (() => {
       const saved = Storage.loadData();
       if (saved && saved.programmers) {
         appData = saved;
+        console.log('[PosWeb] restored appData from Storage, programmers:', Object.keys(saved.programmers));
       }
     }
 
     const sourceData = appData && appData.programmers ? appData : Storage.loadData();
     let programmerNames = sourceData && sourceData.programmers ? Object.keys(sourceData.programmers) : [];
+    console.log('[PosWeb] sourceData:', sourceData ? 'exists' : 'null', 'programmerNames:', programmerNames);
     const casesProgrammers = [...new Set((state.cases || []).map(c => c.programmer).filter(Boolean))];
     if (casesProgrammers.length) {
       programmerNames = [...new Set([...programmerNames, ...casesProgrammers])];
+      console.log('[PosWeb] added casesProgrammers:', casesProgrammers);
     }
     if (datalist) {
       programmerNames.forEach(name => {
@@ -1249,6 +1258,7 @@ const App = (() => {
         option.value = name;
         datalist.appendChild(option);
       });
+      console.log('[PosWeb] datalist populated with', programmerNames.length, 'names');
     }
 
     if (programmerNames.length === 0) {

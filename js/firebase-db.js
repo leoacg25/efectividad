@@ -57,14 +57,19 @@ const FirebaseDB = (() => {
 
   async function loadDataViaRest() {
     try {
-      const resp = await fetch(getRestUrl());
+      const url = getRestUrl();
+      console.log('[FirebaseDB] REST fallback fetching:', url);
+      const resp = await fetch(url);
       if (!resp.ok) {
         console.warn('[FirebaseDB] REST API error:', resp.status, resp.statusText);
         return null;
       }
       const doc = await resp.json();
+      console.log('[FirebaseDB] REST API response:', doc ? 'received' : 'empty', doc && doc.fields ? Object.keys(doc.fields) : 'no fields');
       if (!doc.fields) return null;
-      return convertFirestoreFields(doc.fields);
+      const converted = convertFirestoreFields(doc.fields);
+      console.log('[FirebaseDB] REST converted, programmers:', converted.programmers ? Object.keys(converted.programmers) : 'none');
+      return converted;
     } catch (err) {
       console.warn('[FirebaseDB] REST API fallback falló:', err);
       return null;
@@ -86,11 +91,15 @@ const FirebaseDB = (() => {
   async function loadData() {
     if (initialized) {
       try {
+        console.log('[FirebaseDB] SDK loadData...');
         const doc = await getDocRef().get();
+        console.log('[FirebaseDB] SDK loadData done, exists:', doc.exists);
         if (doc.exists) return doc.data();
       } catch (err) {
         console.warn('[FirebaseDB] SDK load falló, intentando REST API:', err);
       }
+    } else {
+      console.log('[FirebaseDB] SDK not initialized, using REST API');
     }
     return loadDataViaRest();
   }
