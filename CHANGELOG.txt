@@ -1,0 +1,5 @@
+Registro de cambios del proyecto
+===========================
+
+
+- 2026-07-28 - Agregar vista Pos Web
