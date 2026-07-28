@@ -1538,13 +1538,22 @@ img { display: block; max-width: 100%; }
   gap: var(--space-md);
 }
 
-.posweb-add-row {
+.posweb-actions {
   display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.posweb-toolbar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-sm);
 }
 
-.posweb-add-row .form-input {
-  flex: 1;
+.posweb-toolbar__group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .posweb-list-header {
@@ -1597,6 +1606,49 @@ img { display: block; max-width: 100%; }
   color: var(--accent-danger);
   cursor: pointer;
   padding: 4px;
+}
+
+.posweb-progress-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  background: linear-gradient(135deg, rgba(99,102,241,.08), rgba(168,85,247,.05));
+}
+
+.posweb-progress-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.posweb-progress-card__header h3 {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.posweb-progress-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.12);
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.posweb-progress-bar__fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #10b981, #6366f1);
+  transition: width .25s ease;
+}
+
+.posweb-summary {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
 
 .posweb-empty-state {
@@ -1698,6 +1750,10 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 768px) {
   :root { --sidebar-w: 260px; }
+
+  .posweb-toolbar {
+    grid-template-columns: 1fr;
+  }
 
   .posweb-grid {
     grid-template-columns: 1fr;

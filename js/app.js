@@ -1065,39 +1065,64 @@ const App = (() => {
   // ----------------------------------------------------------------
 
   let _posWebState = null;
+  let _posWebFilters = { type: 'Todos', status: 'Todos' };
 
   /**
    * Configura la vista de Pos Web y sus acciones.
    */
   function setupPosWebView() {
     const addBtn = document.getElementById('posweb-add-case');
-    const input = document.getElementById('posweb-case-input');
+    const ticketInput = document.getElementById('posweb-ticket-input');
+    const descriptionInput = document.getElementById('posweb-description-input');
+    const typeSelect = document.getElementById('posweb-type-select');
+    const statusSelect = document.getElementById('posweb-status-select');
     const programmerSelect = document.getElementById('posweb-programmer');
     const saveBtn = document.getElementById('posweb-save');
+    const downloadTemplateBtn = document.getElementById('posweb-download-template');
+    const importBtn = document.getElementById('posweb-import');
+    const exportExcelBtn = document.getElementById('posweb-export-excel');
+    const exportPdfBtn = document.getElementById('posweb-export-pdf');
+    const fileInput = document.getElementById('posweb-file-input');
+    const filterType = document.getElementById('posweb-filter-type');
+    const filterStatus = document.getElementById('posweb-filter-status');
 
-    if (!addBtn || !input || !programmerSelect || !saveBtn) return;
+    if (!addBtn || !ticketInput || !descriptionInput || !typeSelect || !statusSelect || !programmerSelect || !saveBtn) return;
 
     addBtn.addEventListener('click', () => {
-      const title = input.value.trim();
-      if (!title) {
-        UI.showToast('Ingresa un caso para agregar', 'error');
-        input.focus();
+      const ticket = ticketInput.value.trim();
+      const description = descriptionInput.value.trim();
+      const type = typeSelect.value;
+      const status = statusSelect.value;
+      if (!description) {
+        UI.showToast('Ingresa una descripción para agregar el caso', 'error');
+        descriptionInput.focus();
         return;
       }
 
       const state = getPosWebState();
-      state.cases.push({ id: `case_${Date.now()}`, title });
+      state.cases.push({
+        id: `case_${Date.now()}`,
+        ticket: ticket || 'Sin ticket',
+        description,
+        type,
+        status,
+      });
       savePosWebState(state);
-      input.value = '';
-      input.focus();
+      ticketInput.value = '';
+      descriptionInput.value = '';
+      typeSelect.value = 'Mejora';
+      statusSelect.value = 'No resuelto';
+      descriptionInput.focus();
       UI.showToast('Caso agregado', 'success');
     });
 
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        addBtn.click();
-      }
+    [ticketInput, descriptionInput].forEach(input => {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          addBtn.click();
+        }
+      });
     });
 
     programmerSelect.addEventListener('change', () => {
@@ -1116,6 +1141,28 @@ const App = (() => {
     document.getElementById('nav-posweb')?.addEventListener('click', () => {
       openPosWebView();
       closeSidebar();
+    });
+
+    filterType?.addEventListener('change', () => {
+      _posWebFilters.type = filterType.value;
+      renderPosWebView();
+    });
+
+    filterStatus?.addEventListener('change', () => {
+      _posWebFilters.status = filterStatus.value;
+      renderPosWebView();
+    });
+
+    downloadTemplateBtn?.addEventListener('click', downloadPosWebTemplate);
+    importBtn?.addEventListener('click', () => fileInput?.click());
+    exportExcelBtn?.addEventListener('click', exportPosWebExcel);
+    exportPdfBtn?.addEventListener('click', exportPosWebPdf);
+    fileInput?.addEventListener('change', (e) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        importPosWebFile(file);
+      }
+      e.target.value = '';
     });
 
     renderPosWebView();
@@ -1139,13 +1186,29 @@ const App = (() => {
     renderPosWebView();
   }
 
+  function getFilteredPosWebCases(state) {
+    return (state.cases || []).filter(item => {
+      const matchesType = _posWebFilters.type === 'Todos' || (item.type || 'Mejora') === _posWebFilters.type;
+      const matchesStatus = _posWebFilters.status === 'Todos' || (item.status || 'No resuelto') === _posWebFilters.status;
+      return matchesType && matchesStatus;
+    });
+  }
+
   function renderPosWebView() {
     const state = getPosWebState();
     const select = document.getElementById('posweb-programmer');
     const count = document.getElementById('posweb-count');
     const list = document.getElementById('posweb-case-list');
+    const progressBadge = document.getElementById('posweb-progress-badge');
+    const progressFill = document.getElementById('posweb-progress-fill');
+    const summary = document.getElementById('posweb-summary');
+    const filterType = document.getElementById('posweb-filter-type');
+    const filterStatus = document.getElementById('posweb-filter-status');
 
     if (!select || !count || !list) return;
+
+    if (filterType) filterType.value = _posWebFilters.type;
+    if (filterStatus) filterStatus.value = _posWebFilters.status;
 
     select.innerHTML = '';
     const placeholder = document.createElement('option');
@@ -1162,16 +1225,35 @@ const App = (() => {
     });
 
     select.value = programmerNames.includes(state.programmer) ? state.programmer : '';
-    count.textContent = `${state.cases.length} caso${state.cases.length === 1 ? '' : 's'}`;
+    const visibleCases = getFilteredPosWebCases(state);
+    const validCases = visibleCases.filter(item => item.status !== 'No Aplica' && item.status !== 'Información Adicional');
+    const effectiveTotal = validCases.length;
+    const solved = validCases.filter(item => item.status === 'Solventado').length;
+    const pct = effectiveTotal > 0 ? Math.round((solved / effectiveTotal) * 100) : 0;
 
-    if (state.cases.length === 0) {
-      list.innerHTML = '<div class="posweb-empty-state">Aún no hay casos cargados.</div>';
+    if (progressBadge) progressBadge.textContent = `${pct}%`;
+    if (progressFill) progressFill.style.width = `${pct}%`;
+    if (summary) {
+      summary.innerHTML = `
+        <strong>${solved}</strong> solventados / <strong>${effectiveTotal}</strong> casos válidos<br/>
+        <span>No aplica e info. adicional se excluyen del cálculo del porcentaje.</span>
+      `;
+    }
+
+    count.textContent = `${visibleCases.length} caso${visibleCases.length === 1 ? '' : 's'}`;
+
+    if (visibleCases.length === 0) {
+      list.innerHTML = '<div class="posweb-empty-state">No hay casos que coincidan con el filtro actual.</div>';
       return;
     }
 
-    list.innerHTML = state.cases.map(item => `
+    list.innerHTML = visibleCases.map(item => `
       <div class="posweb-case-item">
-        <span class="posweb-case-title">${escHtml(item.title || '')}</span>
+        <div class="posweb-case-title">
+          <strong>${escHtml(item.ticket || 'Sin ticket')}</strong><br/>
+          <span>${escHtml(item.description || '')}</span><br/>
+          <small>${escHtml(`${item.type || 'Mejora'} · ${item.status || 'No resuelto'}`)}</small>
+        </div>
         <button class="posweb-case-remove" data-case-id="${escHtml(item.id || '')}" title="Eliminar caso" type="button">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
             <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
@@ -1198,6 +1280,132 @@ const App = (() => {
     updateTopbarActions('posweb');
     updateActiveNav(null, 'posweb');
     renderPosWebView();
+  }
+
+  function downloadPosWebTemplate() {
+    try {
+      const wb = XLSX.utils.book_new();
+      const headers = [['Número de ticket', 'Descripción', 'Tipo', 'Estatus', 'Programador encargado']];
+      const ws = XLSX.utils.aoa_to_sheet(headers);
+      ws['!cols'] = [{ wch: 16 }, { wch: 40 }, { wch: 12 }, { wch: 20 }, { wch: 24 }];
+      XLSX.utils.book_append_sheet(wb, ws, 'Pos Web');
+      XLSX.writeFile(wb, 'plantilla_pos_web.xlsx');
+      UI.showToast('Plantilla descargada', 'success');
+    } catch (err) {
+      UI.showToast('Error al generar la plantilla: ' + err.message, 'error');
+    }
+  }
+
+  function exportPosWebExcel() {
+    try {
+      const state = getPosWebState();
+      const rows = getFilteredPosWebCases(state).map(item => [
+        item.ticket || '',
+        item.description || '',
+        item.type || 'Mejora',
+        item.status || 'No resuelto',
+        state.programmer || '',
+      ]);
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet([['Número de ticket', 'Descripción', 'Tipo', 'Estatus', 'Programador encargado'], ...rows]);
+      ws['!cols'] = [{ wch: 16 }, { wch: 40 }, { wch: 12 }, { wch: 20 }, { wch: 24 }];
+      XLSX.utils.book_append_sheet(wb, ws, 'Pos Web');
+      XLSX.writeFile(wb, 'posweb_export.xlsx');
+      UI.showToast('Excel exportado', 'success');
+    } catch (err) {
+      UI.showToast('Error al exportar Excel: ' + err.message, 'error');
+    }
+  }
+
+  function exportPosWebPdf() {
+    try {
+      const state = getPosWebState();
+      const rows = getFilteredPosWebCases(state).map((item, index) => [
+        index + 1,
+        item.ticket || '',
+        item.description || '',
+        item.type || 'Mejora',
+        item.status || 'No resuelto',
+      ]);
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.setFontSize(18);
+      doc.text('Reporte Pos Web', 14, 20);
+      doc.setFontSize(11);
+      doc.text(`Programador encargado: ${state.programmer || 'Sin asignar'}`, 14, 30);
+      doc.text(`Casos mostrados: ${rows.length}`, 14, 38);
+      if (doc.autoTable) {
+        doc.autoTable({
+          startY: 45,
+          head: [['#', 'Ticket', 'Descripción', 'Tipo', 'Estatus']],
+          body: rows,
+          styles: { fontSize: 9 },
+          headStyles: { fillColor: [99, 102, 241] },
+        });
+      } else {
+        let y = 45;
+        rows.forEach((row) => {
+          doc.text(row.join(' | '), 14, y);
+          y += 8;
+        });
+      }
+      doc.save('posweb_reporte.pdf');
+      UI.showToast('PDF exportado', 'success');
+    } catch (err) {
+      UI.showToast('Error al exportar PDF: ' + err.message, 'error');
+    }
+  }
+
+  async function importPosWebFile(file) {
+    try {
+      const ext = file.name.toLowerCase().split('.').pop();
+      let rows = [];
+
+      if (ext === 'json') {
+        const text = await file.text();
+        const parsed = JSON.parse(text);
+        rows = Array.isArray(parsed) ? parsed : (parsed.cases || []);
+      } else {
+        const buffer = await file.arrayBuffer();
+        const workbook = XLSX.read(buffer, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        rows = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+      }
+
+      const state = getPosWebState();
+      const importedCases = rows.map((row, index) => {
+        const normalized = Object.keys(row).reduce((acc, key) => {
+          acc[key.toLowerCase().normalize('NFKD').replace(/[^\w]/g, '').replace(/ /g, '')] = row[key];
+          return acc;
+        }, {});
+
+        const ticket = normalized.numerodeticket || normalized.ticket || normalized.nroticket || `Caso ${index + 1}`;
+        const description = normalized.descripcion || normalized.description || normalized.detalle || '';
+        const type = normalized.tipo || normalized.tipodeticket || normalized.tipodeTicket || 'Mejora';
+        const status = normalized.estatus || normalized.status || 'No resuelto';
+        const programmer = normalized.programadorencargado || normalized.programador || normalized.responsable || state.programmer || '';
+
+        return {
+          id: `case_${Date.now()}_${index}`,
+          ticket: String(ticket),
+          description: String(description),
+          type: String(type),
+          status: String(status),
+        };
+      }).filter(item => item.description);
+
+      if (importedCases.length === 0) {
+        throw new Error('No se encontraron datos válidos para importar.');
+      }
+
+      state.programmer = importedCases[0].programmer || state.programmer || '';
+      state.cases = importedCases;
+      savePosWebState(state);
+      UI.showToast(`Importados ${importedCases.length} casos`, 'success');
+    } catch (err) {
+      UI.showToast('Error al importar: ' + err.message, 'error');
+    }
   }
 
   /**
