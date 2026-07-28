@@ -243,7 +243,6 @@ const App = (() => {
       });
 
       const remoteData = await FirebaseDB.loadData();
-      console.log('[App] AFTER await remoteData:', remoteData ? 'OK' : 'NULL', remoteData ? Object.keys(remoteData) : '');
       if (remoteData && remoteData.programmers) {
         Storage.saveData(remoteData);
         appData = remoteData;
@@ -1218,7 +1217,6 @@ const App = (() => {
   }
 
   function renderPosWebView() {
-    console.log('[PosWeb] renderPosWebView CALLED');
     const state = getPosWebState();
     const select = document.getElementById('posweb-programmer');
     const count = document.getElementById('posweb-count');
@@ -1229,10 +1227,7 @@ const App = (() => {
     const ringLabel = document.getElementById('posweb-ring-label');
     const ringFill = document.getElementById('posweb-ring-fill');
 
-    if (!select || !tbody) {
-      console.log('[PosWeb] renderPosWebView early return - null elements:', {select: !!select, tbody: !!tbody});
-      return;
-    }
+    if (!select || !tbody) return;
 
     document.querySelectorAll('#view-posweb .filter-btn').forEach(btn => {
       btn.classList.toggle('active', (btn.getAttribute('data-filter') || 'Todos') === _posWebFilters.status);
@@ -1244,13 +1239,12 @@ const App = (() => {
         appData = saved;
       }
     }
-    console.log('[PosWeb] appData:', appData ? 'exists' : 'null', appData && appData.programmers ? 'programmers exists, keys:'+Object.keys(appData.programmers).join(',') : 'no programmers key');
+
     let programmerNames = appData && appData.programmers ? Object.keys(appData.programmers) : [];
     const casesProgrammers = [...new Set((state.cases || []).map(c => c.programmer).filter(Boolean))];
     if (casesProgrammers.length) {
       programmerNames = [...new Set([...programmerNames, ...casesProgrammers])];
     }
-    console.log('[PosWeb] programmerNames final:', programmerNames);
 
     select.innerHTML = '<option value="">Selecciona un programador</option>';
 
