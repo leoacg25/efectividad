@@ -923,8 +923,10 @@ const Tickets = (() => {
     getCurrentData,
     updateSidebarBadge,
     openNotesModal,
+    closeNotesModal,
     deleteTicket,
     openTransferModal,
+    setupNotesModalEvents,
   };
 
 })();

@@ -1396,6 +1396,8 @@ const App = (() => {
     if (!c) return;
     _posWebNotesCaseId = caseId;
 
+    Tickets.setupNotesModalEvents();
+
     document.getElementById('notes-modal-title').textContent = `Notas del caso`;
     document.getElementById('notes-modal-subtitle').textContent = `${c.ticket || 'Sin ticket'} · ${c.description || 'Sin descripción'}`;
     document.getElementById('notes-modal-meta').innerHTML = `
