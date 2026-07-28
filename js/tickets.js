@@ -564,6 +564,7 @@ const Tickets = (() => {
   }
 
   function saveNotesChanges() {
+    if (window._posWebNotesSave) return window._posWebNotesSave();
     if (!currentTicketIdForNotes || readOnly) return;
 
     const textarea = document.getElementById('notes-textarea');

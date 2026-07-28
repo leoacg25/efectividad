@@ -1100,6 +1100,7 @@ const App = (() => {
         type,
         status,
         programmer: programmerSelect.value,
+        notes: '',
       });
       savePosWebState(state);
       ticketInput.value = '';
@@ -1285,7 +1286,7 @@ const App = (() => {
     count.textContent = `${visibleCases.length} caso${visibleCases.length === 1 ? '' : 's'}`;
 
     if (visibleCases.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="6"><div class="posweb-empty-state">No hay casos que coincidan con el filtro actual.</div></td></tr>';
+      tbody.innerHTML = '<tr><td colspan="7"><div class="posweb-empty-state">No hay casos que coincidan con el filtro actual.</div></td></tr>';
       return;
     }
 
@@ -1299,6 +1300,21 @@ const App = (() => {
         <td><span class="posweb-editable" tabindex="0" data-case-id="${escHtml(item.id)}" data-field="description">${escHtml(item.description || '')}</span></td>
         <td><select class="posweb-inline-select posweb-type-select" data-case-id="${escHtml(item.id)}">${typeOpts.map(t => `<option value="${t}"${item.type === t ? ' selected' : ''}>${t}</option>`).join('')}</select></td>
         <td><select class="posweb-inline-select posweb-status-select" data-case-id="${escHtml(item.id)}">${statusOpts.map(s => `<option value="${s}"${item.status === s ? ' selected' : ''}>${s}</option>`).join('')}</select></td>
+        <td class="td-notes">
+          <div class="td-notes-cell">
+            <span class="notes-preview ${item.notes ? '' : 'notes-preview--empty'}"
+                  onclick="window._openPosWebNotesModal('${escHtml(item.id)}')"
+                  tabindex="0">${escHtml(item.notes || 'Sin notas')}</span>
+            <button class="notes-open-btn ${item.notes ? 'has-content' : ''}"
+                    onclick="window._openPosWebNotesModal('${escHtml(item.id)}')"
+                    title="Editar notas">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+                <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+            </button>
+          </div>
+        </td>
         <td>
           <button class="posweb-case-remove" data-case-id="${escHtml(item.id || '')}" title="Eliminar caso" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
@@ -1371,6 +1387,50 @@ const App = (() => {
       });
     });
   }
+
+  let _posWebNotesCaseId = null;
+
+  window._openPosWebNotesModal = function (caseId) {
+    const state = getPosWebState();
+    const c = state.cases.find(x => String(x.id) === String(caseId));
+    if (!c) return;
+    _posWebNotesCaseId = caseId;
+
+    document.getElementById('notes-modal-title').textContent = `Notas del caso`;
+    document.getElementById('notes-modal-subtitle').textContent = `${c.ticket || 'Sin ticket'} · ${c.description || 'Sin descripción'}`;
+    document.getElementById('notes-modal-meta').innerHTML = `
+      <span class="notes-meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> ${escHtml(c.type || 'Mejora')}</span>
+      <span class="notes-meta-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg> ${escHtml(c.status || '—')}</span>`;
+
+    const textarea = document.getElementById('notes-textarea');
+    textarea.value = c.notes || '';
+    textarea.disabled = false;
+    document.getElementById('notes-modal-save').style.display = '';
+    document.getElementById('notes-modal-clear').style.display = '';
+    document.getElementById('notes-char-count').style.display = '';
+    document.getElementById('notes-char-count').textContent = (c.notes || '').length;
+
+    const modal = document.getElementById('notes-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('active');
+    setTimeout(() => textarea?.focus(), 100);
+  };
+
+  window._posWebNotesSave = function () {
+    const caseId = _posWebNotesCaseId;
+    if (!caseId) { Tickets.closeNotesModal(); return; }
+    const textarea = document.getElementById('notes-textarea');
+    const newVal = textarea.value.trim();
+    const state = getPosWebState();
+    const c = state.cases.find(x => String(x.id) === String(caseId));
+    if (c && newVal !== (c.notes || '')) {
+      c.notes = newVal;
+      savePosWebState(state);
+      UI.showToast('Notas guardadas', 'success');
+    }
+    _posWebNotesCaseId = null;
+    Tickets.closeNotesModal();
+  };
 
   function openPosWebView() {
     UI.showScreen('screen-app');
@@ -1493,6 +1553,7 @@ const App = (() => {
           type: String(type),
           status: String(status),
           programmer: String(programmer),
+          notes: String(normalized.notes || normalized.notas || ''),
         };
       }).filter(item => item.description);
 
