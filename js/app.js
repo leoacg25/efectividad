@@ -257,6 +257,7 @@ const App = (() => {
           Storage.saveData(remoteData);
           appData = remoteData;
           lastSnapshotJson = JSON.stringify(remoteData);
+          renderPosWebView();
           if (sharedViewName) {
             enterSharedView(sharedViewName);
           } else {
@@ -1248,6 +1249,12 @@ const App = (() => {
         option.value = name;
         datalist.appendChild(option);
       });
+    }
+
+    if (programmerNames.length === 0) {
+      select.placeholder = 'No hay programadores — escribe el nombre manualmente';
+    } else {
+      select.placeholder = 'Escribe o selecciona un programador';
     }
 
     if (state.programmer) select.value = state.programmer;
