@@ -205,33 +205,25 @@ const App = (() => {
   /**
    * Inicializa Firebase y configura la sincronización en tiempo real.
    */
-  function setupFirebaseSync() {
+  async function setupFirebaseSync() {
     try {
       FirebaseDB.init();
 
-      // Cada vez que Storage guarde en localStorage, también sube a Firestore
       Storage.setOnSaveCallback((data) => {
         FirebaseDB.saveData(data);
       });
 
-      // Escuchar cambios remotos en tiempo real
       FirebaseDB.onRemoteChange((remoteData) => {
         const remoteJson = JSON.stringify(remoteData);
-        // Evitar bucle: ignorar si es el mismo dato que ya tenemos
         if (remoteJson === lastSnapshotJson) return;
         lastSnapshotJson = remoteJson;
 
-        // Actualizar localStorage y estado local
         Storage.saveData(remoteData);
         appData = remoteData;
 
-        // Si hay un cambio local de tipo en curso, no re-renderizar
-        // para evitar que el snapshot remoto revierta el radio visual
         if (window.__localTipoChange) return;
-        // Si estamos viendo una planificación guardada, no sobrescribir
         if (_viewingPlanification) return;
 
-        // Re-renderizar según la vista actual
         if (sharedViewName && appData.programmers[sharedViewName]) {
           Tickets.render(sharedViewName, appData.programmers[sharedViewName], true);
         } else {
@@ -247,26 +239,23 @@ const App = (() => {
         }
 
         renderPosWebView();
-
         UI.showToast('Datos actualizados por otro usuario', 'info', 2000);
       });
 
-      // Cargar datos desde Firestore si existen
-      FirebaseDB.loadData().then((remoteData) => {
-          if (remoteData && remoteData.programmers) {
-          Storage.saveData(remoteData);
-          appData = remoteData;
-          lastSnapshotJson = JSON.stringify(remoteData);
-          renderPosWebView();
-          if (sharedViewName) {
-            enterSharedView(sharedViewName);
-          } else {
-            goToDashboard();
-          }
+      const remoteData = await FirebaseDB.loadData();
+      if (remoteData && remoteData.programmers) {
+        Storage.saveData(remoteData);
+        appData = remoteData;
+        lastSnapshotJson = JSON.stringify(remoteData);
+        renderPosWebView();
+        if (sharedViewName) {
+          enterSharedView(sharedViewName);
         } else {
-          console.warn('[App] Firebase loadData: no data or no programmers');
+          goToDashboard();
         }
-      });
+      } else {
+        console.warn('[App] Firebase loadData: no data or no programmers');
+      }
     } catch (err) {
       console.warn('[App] Firebase no disponible, modo local:', err);
     }
@@ -326,10 +315,9 @@ const App = (() => {
    * Inicializa Firebase, datos locales y entra a la app.
    * Se llama tras confirmar autenticación o en vista compartida.
    */
-  function initApp() {
-    setupFirebaseSync();
+  async function initApp() {
+    await setupFirebaseSync();
 
-    // Verificar si hay datos en localStorage
     loadAppData();
   }
 
