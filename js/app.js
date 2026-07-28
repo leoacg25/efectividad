@@ -1218,6 +1218,7 @@ const App = (() => {
   }
 
   function renderPosWebView() {
+    console.log('[PosWeb] renderPosWebView CALLED');
     const state = getPosWebState();
     const select = document.getElementById('posweb-programmer');
     const count = document.getElementById('posweb-count');
@@ -1228,7 +1229,10 @@ const App = (() => {
     const ringLabel = document.getElementById('posweb-ring-label');
     const ringFill = document.getElementById('posweb-ring-fill');
 
-    if (!select || !count || !tbody) return;
+    if (!select || !count || !tbody) {
+      console.log('[PosWeb] renderPosWebView early return - null elements:', {select: !!select, count: !!count, tbody: !!tbody});
+      return;
+    }
 
     document.querySelectorAll('#view-posweb .filter-btn').forEach(btn => {
       btn.classList.toggle('active', (btn.getAttribute('data-filter') || 'Todos') === _posWebFilters.status);
@@ -1240,15 +1244,13 @@ const App = (() => {
         appData = saved;
       }
     }
-
-    console.log('[PosWeb] renderPosWebView appData:', appData ? 'exists' : 'null', appData ? typeof appData.programmers : '', appData && appData.programmers ? Object.keys(appData.programmers) : 'no-programmers-key');
-    const sourceData = appData && appData.programmers ? appData : Storage.loadData();
-    let programmerNames = sourceData && sourceData.programmers ? Object.keys(sourceData.programmers) : [];
-    console.log('[PosWeb] renderPosWebView programmerNames:', programmerNames);
+    console.log('[PosWeb] appData:', appData ? 'exists' : 'null', appData && appData.programmers ? 'programmers exists, keys:'+Object.keys(appData.programmers).join(',') : 'no programmers key');
+    let programmerNames = appData && appData.programmers ? Object.keys(appData.programmers) : [];
     const casesProgrammers = [...new Set((state.cases || []).map(c => c.programmer).filter(Boolean))];
     if (casesProgrammers.length) {
       programmerNames = [...new Set([...programmerNames, ...casesProgrammers])];
     }
+    console.log('[PosWeb] programmerNames final:', programmerNames);
 
     select.innerHTML = '<option value="">Selecciona un programador</option>';
 
