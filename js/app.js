@@ -253,9 +253,7 @@ const App = (() => {
 
       // Cargar datos desde Firestore si existen
       FirebaseDB.loadData().then((remoteData) => {
-        console.log('[App] Firebase loadData result:', remoteData ? 'data received' : 'null', remoteData ? Object.keys(remoteData) : '');
-        if (remoteData && remoteData.programmers) {
-          console.log('[App] programmers found:', Object.keys(remoteData.programmers));
+          if (remoteData && remoteData.programmers) {
           Storage.saveData(remoteData);
           appData = remoteData;
           lastSnapshotJson = JSON.stringify(remoteData);
@@ -1133,13 +1131,29 @@ const App = (() => {
       });
     });
 
-    programmerSelect.addEventListener('change', syncProgrammerInput);
-    programmerSelect.addEventListener('blur', syncProgrammerInput);
-    function syncProgrammerInput() {
+    programmerSelect.addEventListener('change', () => {
       const state = getPosWebState();
-      state.programmer = programmerSelect.value.trim();
+      state.programmer = programmerSelect.value;
       savePosWebState(state);
-    }
+    });
+
+    document.getElementById('posweb-add-programmer')?.addEventListener('click', () => {
+      const name = prompt('Nombre del programador:');
+      if (name && name.trim()) {
+        const trimmed = name.trim();
+        const exists = [...select.options].some(opt => opt.value === trimmed);
+        if (!exists) {
+          const opt = document.createElement('option');
+          opt.value = trimmed;
+          opt.textContent = trimmed;
+          select.appendChild(opt);
+        }
+        select.value = trimmed;
+        const state = getPosWebState();
+        state.programmer = trimmed;
+        savePosWebState(state);
+      }
+    });
 
     saveBtn.addEventListener('click', () => {
       const state = getPosWebState();
@@ -1231,43 +1245,29 @@ const App = (() => {
       btn.classList.toggle('active', (btn.getAttribute('data-filter') || 'Todos') === _posWebFilters.status);
     });
 
-    console.log('[PosWeb] renderPosWebView. appData:', appData, 'Storage.hasData:', Storage.hasData());
-
-    const datalist = document.getElementById('posweb-programmer-list');
-    if (datalist) datalist.innerHTML = '';
-
     if (!appData && Storage.hasData()) {
       const saved = Storage.loadData();
       if (saved && saved.programmers) {
         appData = saved;
-        console.log('[PosWeb] restored appData from Storage, programmers:', Object.keys(saved.programmers));
       }
     }
 
     const sourceData = appData && appData.programmers ? appData : Storage.loadData();
     let programmerNames = sourceData && sourceData.programmers ? Object.keys(sourceData.programmers) : [];
-    console.log('[PosWeb] sourceData:', sourceData ? 'exists' : 'null', 'programmerNames:', programmerNames);
     const casesProgrammers = [...new Set((state.cases || []).map(c => c.programmer).filter(Boolean))];
     if (casesProgrammers.length) {
       programmerNames = [...new Set([...programmerNames, ...casesProgrammers])];
-      console.log('[PosWeb] added casesProgrammers:', casesProgrammers);
-    }
-    if (datalist) {
-      programmerNames.forEach(name => {
-        const option = document.createElement('option');
-        option.value = name;
-        datalist.appendChild(option);
-      });
-      console.log('[PosWeb] datalist populated with', programmerNames.length, 'names');
     }
 
-    if (programmerNames.length === 0) {
-      select.placeholder = 'No hay programadores — escribe el nombre manualmente';
-    } else {
-      select.placeholder = 'Escribe o selecciona un programador';
-    }
+    select.innerHTML = '<option value="">Selecciona un programador</option>';
+    programmerNames.forEach(name => {
+      const option = document.createElement('option');
+      option.value = name;
+      option.textContent = name;
+      select.appendChild(option);
+    });
 
-    if (state.programmer) select.value = state.programmer;
+    select.value = programmerNames.includes(state.programmer) ? state.programmer : '';
     const visibleCases = getFilteredPosWebCases(state);
     const validCases = visibleCases.filter(item => item.status !== 'No Aplica' && item.status !== 'Información Adicional');
     const effectiveTotal = validCases.length;
