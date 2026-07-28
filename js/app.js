@@ -1108,6 +1108,7 @@ const App = (() => {
         description,
         type,
         status,
+        programmer: programmerSelect.value,
       });
       savePosWebState(state);
       ticketInput.value = '';
@@ -1229,8 +1230,19 @@ const App = (() => {
     placeholder.textContent = 'Selecciona un programador';
     select.appendChild(placeholder);
 
+    if (!appData && Storage.hasData()) {
+      const saved = Storage.loadData();
+      if (saved && saved.programmers) {
+        appData = saved;
+      }
+    }
+
     const sourceData = appData && appData.programmers ? appData : Storage.loadData();
-    const programmerNames = sourceData && sourceData.programmers ? Object.keys(sourceData.programmers) : [];
+    let programmerNames = sourceData && sourceData.programmers ? Object.keys(sourceData.programmers) : [];
+    const casesProgrammers = [...new Set((state.cases || []).map(c => c.programmer).filter(Boolean))];
+    if (casesProgrammers.length) {
+      programmerNames = [...new Set([...programmerNames, ...casesProgrammers])];
+    }
     programmerNames.forEach(name => {
       const option = document.createElement('option');
       option.value = name;
@@ -1265,12 +1277,13 @@ const App = (() => {
     count.textContent = `${visibleCases.length} caso${visibleCases.length === 1 ? '' : 's'}`;
 
     if (visibleCases.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="5"><div class="posweb-empty-state">No hay casos que coincidan con el filtro actual.</div></td></tr>';
+      tbody.innerHTML = '<tr><td colspan="6"><div class="posweb-empty-state">No hay casos que coincidan con el filtro actual.</div></td></tr>';
       return;
     }
 
     tbody.innerHTML = visibleCases.map(item => `
       <tr>
+        <td>${escHtml(item.programmer || '—')}</td>
         <td>${escHtml(item.ticket || 'Sin ticket')}</td>
         <td>${escHtml(item.description || '')}</td>
         <td>${escHtml(item.type || 'Mejora')}</td>
@@ -1308,9 +1321,9 @@ const App = (() => {
   function downloadPosWebTemplate() {
     try {
       const wb = XLSX.utils.book_new();
-      const headers = [['Número de ticket', 'Descripción', 'Tipo', 'Estatus', 'Programador encargado']];
+      const headers = [['Programador encargado', 'Número de ticket', 'Descripción', 'Tipo', 'Estatus']];
       const ws = XLSX.utils.aoa_to_sheet(headers);
-      ws['!cols'] = [{ wch: 16 }, { wch: 40 }, { wch: 12 }, { wch: 20 }, { wch: 24 }];
+      ws['!cols'] = [{ wch: 24 }, { wch: 16 }, { wch: 40 }, { wch: 12 }, { wch: 20 }];
       XLSX.utils.book_append_sheet(wb, ws, 'Pos Web');
       XLSX.writeFile(wb, 'plantilla_pos_web.xlsx');
       UI.showToast('Plantilla descargada', 'success');
@@ -1323,14 +1336,14 @@ const App = (() => {
     try {
       const state = getPosWebState();
       const rows = getFilteredPosWebCases(state).map(item => [
+        item.programmer || state.programmer || '',
         item.ticket || '',
         item.description || '',
         item.type || 'Mejora',
         item.status || 'No resuelto',
-        state.programmer || '',
       ]);
       const wb = XLSX.utils.book_new();
-      const ws = XLSX.utils.aoa_to_sheet([['Número de ticket', 'Descripción', 'Tipo', 'Estatus', 'Programador encargado'], ...rows]);
+      const ws = XLSX.utils.aoa_to_sheet([['Programador encargado', 'Número de ticket', 'Descripción', 'Tipo', 'Estatus'], ...rows]);
       ws['!cols'] = [{ wch: 16 }, { wch: 40 }, { wch: 12 }, { wch: 20 }, { wch: 24 }];
       XLSX.utils.book_append_sheet(wb, ws, 'Pos Web');
       XLSX.writeFile(wb, 'posweb_export.xlsx');
@@ -1345,6 +1358,7 @@ const App = (() => {
       const state = getPosWebState();
       const rows = getFilteredPosWebCases(state).map((item, index) => [
         index + 1,
+        item.programmer || state.programmer || '—',
         item.ticket || '',
         item.description || '',
         item.type || 'Mejora',
@@ -1360,7 +1374,7 @@ const App = (() => {
       if (doc.autoTable) {
         doc.autoTable({
           startY: 45,
-          head: [['#', 'Ticket', 'Descripción', 'Tipo', 'Estatus']],
+          head: [['#', 'Programador', 'Ticket', 'Descripción', 'Tipo', 'Estatus']],
           body: rows,
           styles: { fontSize: 9 },
           headStyles: { fillColor: [99, 102, 241] },
@@ -1415,6 +1429,7 @@ const App = (() => {
           description: String(description),
           type: String(type),
           status: String(status),
+          programmer: String(programmer),
         };
       }).filter(item => item.description);
 
