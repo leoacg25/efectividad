@@ -866,6 +866,46 @@ const App = (() => {
       reader.readAsText(file);
       e.target.value = '';
     });
+
+    // --- Importar Excel a datos existentes ---
+    const excelInput = document.getElementById('file-excel-input');
+    document.getElementById('btn-import-excel')?.addEventListener('click', () => {
+      excelInput?.click();
+    });
+    excelInput?.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        const valid = Parser.validateFile(file);
+        if (!valid.valid) { UI.showToast(valid.error, 'error'); return; }
+        UI.setLoading(true);
+        const result = await Parser.parseExcel(file);
+        if (!result.data) { UI.showToast('Error al procesar el archivo', 'error'); return; }
+        const imported = result.data;
+        if (!appData) {
+          appData = imported;
+          Storage.saveData(appData);
+        } else {
+          Object.entries(imported.programmers).forEach(([name, tickets]) => {
+            if (appData.programmers[name]) {
+              appData.programmers[name] = [...appData.programmers[name], ...tickets];
+            } else {
+              appData.programmers[name] = tickets;
+            }
+          });
+          appData.loadedAt = imported.loadedAt;
+          if (!appData.profiles) appData.profiles = {};
+          Storage.saveData(appData);
+        }
+        UI.showToast('Tickets importados correctamente', 'success');
+        goToDashboard();
+      } catch (err) {
+        UI.showToast('Error al importar Excel: ' + err.message, 'error');
+      } finally {
+        UI.setLoading(false);
+        e.target.value = '';
+      }
+    });
   }
 
   // ----------------------------------------------------------------
@@ -1807,9 +1847,9 @@ const App = (() => {
   function downloadTemplate() {
     try {
       const wb = XLSX.utils.book_new();
-      const headers = ['N° Ticket', 'Descripcion', 'Proyecto', 'Notas'];
+      const headers = ['N° Ticket', 'Descripción', 'Proyecto', 'Tipo', 'Notas', 'Estado'];
       const ws = XLSX.utils.aoa_to_sheet([headers]);
-      ws['!cols'] = [{ wch: 12 }, { wch: 40 }, { wch: 20 }, { wch: 30 }];
+      ws['!cols'] = [{ wch: 12 }, { wch: 40 }, { wch: 20 }, { wch: 18 }, { wch: 30 }, { wch: 20 }];
       XLSX.utils.book_append_sheet(wb, ws, 'Programador Ejemplo');
       XLSX.writeFile(wb, 'plantilla_efectividad.xlsx');
       UI.showToast('Plantilla descargada', 'success');

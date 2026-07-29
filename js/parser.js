@@ -16,13 +16,16 @@ const Parser = (() => {
    */
   const COLUMN_MAP = {
     'n° ticket':    'ticket',
-    'n ticket':     'ticket',   // por si el carácter especial falla
+    'n ticket':     'ticket',
     'no ticket':    'ticket',
     'nticket':      'ticket',
     'descripcion':  'description',
     'descripción':  'description',
     'proyecto':     'project',
+    'tipo':         'tipo',
     'notas':        'notes',
+    'estado':       'status',
+    'status':       'status',
   };
 
   /**
@@ -47,7 +50,7 @@ const Parser = (() => {
    */
   function detectColumns(headers) {
     const required = ['ticket', 'description', 'project', 'notes'];
-    const foundMap = {}; // { campoInterno: índice }
+    const foundMap = {};
 
     headers.forEach((h, idx) => {
       const norm = normalize(h);
@@ -99,14 +102,14 @@ const Parser = (() => {
 
       ticketCounter++;
       const ticket = {
-        // ID único generado internamente para persistencia
         id: `${programmerName}-${i}-${Date.now()}`,
         rowIndex: i,
         ticket:      String(row[map.ticket]      ?? '').trim(),
         description: String(row[map.description] ?? '').trim(),
         project:     String(row[map.project]     ?? '').trim(),
+        tipo:        map.tipo  !== undefined ? (String(row[map.tipo]   ?? '') || 'Mejora/requerimiento').trim() : 'Mejora/requerimiento',
         notes:       String(row[map.notes]       ?? '').trim(),
-        status:      'No resuelto', // Estado inicial por defecto
+        status:      map.status !== undefined ? (String(row[map.status] ?? '') || 'No resuelto').trim() : 'No resuelto',
       };
 
       tickets.push(ticket);
