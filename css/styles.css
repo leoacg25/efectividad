@@ -1626,6 +1626,9 @@ img { display: block; max-width: 100%; }
 
 #posweb-add-case { font-size: 14px; padding: 7px 14px; }
 
+.nav-item--archive svg { opacity: .55; }
+.nav-item--archive.active svg { opacity: 1; }
+
 /* ----------------------------------------------------------------
    16. TOAST NOTIFICATIONS
    ---------------------------------------------------------------- */

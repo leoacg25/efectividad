@@ -170,6 +170,7 @@ const App = (() => {
   let lastSnapshotJson = null;
   let sharedViewName = null; // Nombre del programador en vista compartida
   let _viewingPlanification = null; // ID de planificación en vista (read-only), null si modo normal
+  let _viewingArchiveIndex = null;   // índice en appData.archives, null si modo normal
 
   // ----------------------------------------------------------------
   // INICIALIZACIÓN
@@ -492,10 +493,10 @@ const App = (() => {
         throw new Error('No se encontraron hojas con datos válidos en el archivo.');
       }
 
-      // 5. Inicializar perfiles si no existen
       if (!data.profiles) data.profiles = {};
 
-      // 6. Guardar en localStorage y actualizar estado
+      data.periodName = appData?.periodName || '';
+      data.archives   = appData?.archives || [];
       Storage.saveData(data);
       appData = data;
 
@@ -523,22 +524,44 @@ const App = (() => {
   /**
    * Navega a la vista del Dashboard principal.
    */
+  function getArchiveData() {
+    if (_viewingArchiveIndex !== null && appData?.archives?.[_viewingArchiveIndex]) {
+      return appData.archives[_viewingArchiveIndex];
+    }
+    return null;
+  }
+
+  function getEffectiveProgrammers() {
+    const arch = getArchiveData();
+    return arch ? arch.programmers : (appData?.programmers || {});
+  }
+
+  function getEffectiveProfiles() {
+    const arch = getArchiveData();
+    return arch ? (arch.profiles || {}) : (appData?.profiles || {});
+  }
+
+  function getEffectivePeriodName() {
+    const arch = getArchiveData();
+    return arch ? arch.periodName : (appData?.periodName || '');
+  }
+
   function goToDashboard() {
     if (!appData) return;
 
     UI.showScreen('screen-app');
     UI.showView('view-dashboard');
 
-    // Actualizar breadcrumb y topbar
-    document.getElementById('topbar-breadcrumb').textContent = 'Dashboard';
+    const label = getEffectivePeriodName();
+    document.getElementById('topbar-breadcrumb').textContent = label ? `Dashboard · ${label}` : 'Dashboard';
     updateTopbarActions('dashboard');
-
-    // Actualizar nav activo en sidebar
     updateActiveNav(null);
 
-    Dashboard.render(appData.programmers, navigateToProgrammer, appData.profiles);
+    Dashboard.render(getEffectiveProgrammers(), navigateToProgrammer, getEffectiveProfiles());
     renderProfiles();
     renderSavedPlanifications();
+    renderArchives();
+    document.getElementById('btn-add-programmer')?.classList.toggle('hidden', _viewingArchiveIndex !== null);
   }
 
   /**
@@ -546,28 +569,22 @@ const App = (() => {
    * @param {string} programmerName
    */
   function navigateToProgrammer(programmerName) {
-    if (!appData || !appData.programmers[programmerName]) {
+    const progs = getEffectiveProgrammers();
+    if (!appData || !progs[programmerName]) {
       UI.showToast(`No se encontraron datos para "${programmerName}"`, 'error');
       return;
     }
 
     UI.showView('view-programmer');
 
-    // Actualizar breadcrumb
-    document.getElementById('topbar-breadcrumb').textContent = `Programadores › ${programmerName}`;
+    const label = getEffectivePeriodName();
+    document.getElementById('topbar-breadcrumb').textContent = label ? `${label} › ${programmerName}` : `Programadores › ${programmerName}`;
     updateTopbarActions('programmer');
-
-    // Actualizar nav activo
     updateActiveNav(programmerName);
-
-    // Cerrar sidebar en mobile
     closeSidebar();
 
-    // Renderizar la vista del programador (solo lectura si estamos viendo una planificación)
-    const tickets = appData.programmers[programmerName];
-    Tickets.render(programmerName, tickets, !!_viewingPlanification);
-
-    // Scroll al inicio
+    const isReadOnly = !!_viewingPlanification || _viewingArchiveIndex !== null;
+    Tickets.render(programmerName, progs[programmerName], isReadOnly);
     document.getElementById('main-content')?.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -728,6 +745,18 @@ const App = (() => {
     container.innerHTML = '';
     if (view === 'posweb') {
       return;
+    }
+    if (_viewingArchiveIndex !== null) {
+      const exitBtn = document.createElement('button');
+      exitBtn.className = 'btn btn--outline btn--sm';
+      exitBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
+        </svg>
+        Volver al activo
+      `;
+      exitBtn.addEventListener('click', () => { exitArchive(); goToDashboard(); });
+      container.appendChild(exitBtn);
     }
     if (_viewingPlanification) {
       const loadBtn = document.createElement('button');
@@ -1766,6 +1795,51 @@ const App = (() => {
     });
   }
 
+  // --- Archivos de periodos anteriores ---
+
+  function renderArchives() {
+    const section = document.getElementById('nav-archives-section');
+    const container = document.getElementById('nav-archives');
+    if (!section || !container) return;
+
+    const archives = appData?.archives || [];
+    if (archives.length === 0) {
+      section.classList.add('hidden');
+      return;
+    }
+    section.classList.remove('hidden');
+
+    container.innerHTML = archives.map((arch, idx) => `
+      <button class="nav-item nav-item--archive ${_viewingArchiveIndex === idx ? 'active' : ''}" data-archive-index="${idx}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+          <path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/>
+        </svg>
+        <span>${escHtml(arch.periodName)}</span>
+      </button>
+    `).join('');
+
+    container.querySelectorAll('.nav-item--archive').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.archiveIndex, 10);
+        viewArchive(idx);
+        closeSidebar();
+      });
+    });
+  }
+
+  function viewArchive(index) {
+    if (!appData?.archives?.[index]) return;
+    _viewingArchiveIndex = index;
+    _viewingPlanification = null;
+    goToDashboard();
+    UI.showToast(`Viendo: ${appData.archives[index].periodName} (solo lectura)`, 'info', 3000);
+  }
+
+  function exitArchive() {
+    _viewingArchiveIndex = null;
+    document.getElementById('btn-add-programmer')?.classList.remove('hidden');
+  }
+
   // --- Ver planificación guardada (read-only) ---
 
   function viewPlanification(planId) {
@@ -1876,23 +1950,40 @@ const App = (() => {
       renderSavedPlanifications();
     }
 
-    // Preguntar si desea limpiar los datos actuales
     UI.confirm(
       'Iniciar nueva planificación',
-      `Se limpiarán los datos actuales para comenzar "${period}". ¿Deseas continuar?`
+      `Se archivarán los datos actuales para comenzar "${period}". ¿Deseas continuar?`
     ).then(confirmed => {
       if (!confirmed) return;
       closeNewPlanningModal();
 
-      // Opción: descargar plantilla antes de continuar
-      downloadTemplate();
+      // Archivar datos actuales antes de empezar nueva planificación
+      if (appData && appData.programmers && Object.keys(appData.programmers).length > 0) {
+        if (!appData.archives) appData.archives = [];
+        appData.archives.push({
+          periodName: appData.periodName || '(sin nombre)',
+          programmers: JSON.parse(JSON.stringify(appData.programmers)),
+          profiles: JSON.parse(JSON.stringify(appData.profiles || {})),
+          loadedAt: appData.loadedAt,
+        });
+      }
 
-      // Mostrar pantalla de upload para cargar nuevo Excel
-      Storage.clearData();
-      appData = null;
+      // Limpiar para nueva planificación
+      appData = {
+        programmers: {},
+        profiles: {},
+        loadedAt: new Date().toISOString(),
+        periodName: period,
+        archives: appData?.archives || [],
+      };
+      Storage.saveData(appData);
+
+      exitArchive();
+
+      downloadTemplate();
       UI.showScreen('screen-upload');
       UI.hideUploadError();
-      UI.showToast('Datos eliminados. Carga el nuevo archivo Excel.', 'info', 4000);
+      UI.showToast('Planificación archivada. Carga el nuevo Excel.', 'info', 4000);
     });
   }
 
