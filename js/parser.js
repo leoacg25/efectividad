@@ -23,9 +23,12 @@ const Parser = (() => {
     'descripción':  'description',
     'proyecto':     'project',
     'tipo':         'tipo',
+    'tipodeticket': 'tipo',
+    'tipodeTicket': 'tipo',
     'notas':        'notes',
     'estado':       'status',
     'status':       'status',
+    'estatus':      'status',
   };
 
   /**
@@ -100,6 +103,23 @@ const Parser = (() => {
       const allEmpty = row.every(cell => String(cell).trim() === '');
       if (allEmpty) continue;
 
+      function normalizeTipo(v) {
+        const s = String(v || '').trim().toLowerCase();
+        if (!s) return 'Mejora/requerimiento';
+        if (s.includes('mejora') || s.includes('requerimiento')) return 'Mejora/requerimiento';
+        if (s.includes('averia') || s.includes('falla')) return 'Avería/Falla';
+        return String(v).trim();
+      }
+      function normalizeStatus(v) {
+        const s = String(v || '').trim().toLowerCase();
+        if (!s) return 'No resuelto';
+        if (s.includes('solventado') || s === 'solventado') return 'Solventado';
+        if (s.includes('proceso')) return 'En proceso';
+        if (s.includes('aplica')) return 'No Aplica';
+        if (s.includes('informacion') || s.includes('información') || s.includes('adicional')) return 'Información Adicional';
+        return 'No resuelto';
+      }
+
       ticketCounter++;
       const ticket = {
         id: `${programmerName}-${i}-${Date.now()}`,
@@ -107,9 +127,9 @@ const Parser = (() => {
         ticket:      String(row[map.ticket]      ?? '').trim(),
         description: String(row[map.description] ?? '').trim(),
         project:     String(row[map.project]     ?? '').trim(),
-        tipo:        map.tipo  !== undefined ? (String(row[map.tipo]   ?? '') || 'Mejora/requerimiento').trim() : 'Mejora/requerimiento',
+        tipo:        map.tipo  !== undefined ? normalizeTipo(row[map.tipo])    : 'Mejora/requerimiento',
         notes:       String(row[map.notes]       ?? '').trim(),
-        status:      map.status !== undefined ? (String(row[map.status] ?? '') || 'No resuelto').trim() : 'No resuelto',
+        status:      map.status !== undefined ? normalizeStatus(row[map.status]) : 'No resuelto',
       };
 
       tickets.push(ticket);
