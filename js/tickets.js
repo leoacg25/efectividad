@@ -561,6 +561,7 @@ const Tickets = (() => {
     modal.classList.add('hidden');
     modal.classList.remove('active');
     currentTicketIdForNotes = null;
+    if (window._posWebNotesCleanup) window._posWebNotesCleanup();
   }
 
   function saveNotesChanges() {

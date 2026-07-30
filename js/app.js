@@ -1464,6 +1464,7 @@ const App = (() => {
     const c = state.cases.find(x => String(x.id) === String(caseId));
     if (!c) return;
     _posWebNotesCaseId = caseId;
+    window._posWebNotesCaseId = caseId;
 
     Tickets.setupNotesModalEvents();
 
@@ -1487,9 +1488,15 @@ const App = (() => {
     setTimeout(() => textarea?.focus(), 100);
   };
 
+  window._posWebNotesCleanup = function () {
+    _posWebNotesCaseId = null;
+    window._posWebNotesCaseId = null;
+    delete window._posWebNotesSave;
+  };
+
   window._posWebNotesSave = function () {
     const caseId = _posWebNotesCaseId;
-    if (!caseId) { Tickets.closeNotesModal(); return; }
+    if (!caseId) { window._posWebNotesCleanup(); Tickets.closeNotesModal(); return; }
     const textarea = document.getElementById('notes-textarea');
     const newVal = textarea.value.trim();
     const state = getPosWebState();
@@ -1499,7 +1506,7 @@ const App = (() => {
       savePosWebState(state);
       UI.showToast('Notas guardadas', 'success');
     }
-    _posWebNotesCaseId = null;
+    window._posWebNotesCleanup();
     Tickets.closeNotesModal();
   };
 
