@@ -25,14 +25,13 @@ const Dashboard = (() => {
    * @returns {{ total: number, solved: number, noAplica: number, infoAdicional: number, inProgress: number, unsolved: number, pct: number }}
    */
   function calcStats(tickets) {
-    const valid = tickets.filter(t => t.tipo !== 'Avería/Falla');
-    const averias = tickets.length - valid.length;
-    const total = valid.length;
-    const solved = valid.filter(t => t.status === 'Solventado').length;
-    const noAplica = valid.filter(t => t.status === 'No Aplica').length;
-    const infoAdicional = valid.filter(t => t.status === 'Información Adicional').length;
-    const inProgress = valid.filter(t => t.status === 'En proceso').length;
-    const unsolved = valid.filter(t => t.status === 'No resuelto').length;
+    const averias = tickets.filter(t => t.tipo === 'Avería/Falla').length;
+    const total = tickets.length;
+    const solved = tickets.filter(t => t.status === 'Solventado').length;
+    const noAplica = tickets.filter(t => t.status === 'No Aplica').length;
+    const infoAdicional = tickets.filter(t => t.status === 'Información Adicional').length;
+    const inProgress = tickets.filter(t => t.status === 'En proceso').length;
+    const unsolved = tickets.filter(t => t.status === 'No resuelto').length;
     const excluded = noAplica + infoAdicional;
     const effectiveTotal = total - excluded;
     const pct = effectiveTotal > 0 ? Math.round((solved / effectiveTotal) * 100) : 0;

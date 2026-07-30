@@ -62,14 +62,13 @@ const Exporter = (() => {
    * @returns {{ total: number, solved: number, noAplica: number, infoAdicional: number, inProgress: number, unsolved: number, pct: number }}
    */
   function calcStats(tickets) {
-    const valid = tickets.filter(t => t.tipo !== 'Avería/Falla');
-    const averias = tickets.length - valid.length;
-    const total = valid.length;
-    const solved = valid.filter(t => t.status === 'Solventado').length;
-    const noAplica = valid.filter(t => t.status === 'No Aplica').length;
-    const infoAdicional = valid.filter(t => t.status === 'Información Adicional').length;
-    const inProgress = valid.filter(t => t.status === 'En proceso').length;
-    const unsolved = valid.filter(t => t.status === 'No resuelto').length;
+    const averias = tickets.filter(t => t.tipo === 'Avería/Falla').length;
+    const total = tickets.length;
+    const solved = tickets.filter(t => t.status === 'Solventado').length;
+    const noAplica = tickets.filter(t => t.status === 'No Aplica').length;
+    const infoAdicional = tickets.filter(t => t.status === 'Información Adicional').length;
+    const inProgress = tickets.filter(t => t.status === 'En proceso').length;
+    const unsolved = tickets.filter(t => t.status === 'No resuelto').length;
     const excluded = noAplica + infoAdicional;
     const effectiveTotal = total - excluded;
     const pct = effectiveTotal > 0 ? Math.round((solved / effectiveTotal) * 100) : 0;
@@ -213,7 +212,7 @@ const Exporter = (() => {
     const rows = [
       ['Reporte Consolidado — Dashboard de Efectividad de Programadores'],
       [],
-      ['#', 'Programador', 'Tickets (M/R)', 'Averías', 'Solventados', 'No Aplica', 'Info. Adicional', 'En Proceso', 'No Resueltos', 'Efectividad (%)'],
+      ['#', 'Programador', 'Tickets', 'Averías', 'Solventados', 'No Aplica', 'Info. Adicional', 'En Proceso', 'No Resueltos', 'Efectividad (%)'],
       ...ranking.map((r, i) => [i + 1, r.name, r.total, r.averias, r.solved, r.noAplica, r.infoAdicional, r.inProgress, r.unsolved, r.pct]),
     ];
 
@@ -242,7 +241,7 @@ const Exporter = (() => {
 
     // Tarjetas de KPI
     const kpiData = [
-      { label: 'Tickets (M/R)', value: stats.total, color: [99, 102, 241] },
+      { label: 'Tickets', value: stats.total, color: [99, 102, 241] },
       { label: 'Averías',       value: stats.averias,    color: [239, 68, 68] },
       { label: 'Solventados',   value: stats.solved,     color: [16, 185, 129] },
       { label: 'No Aplica',     value: stats.noAplica,   color: [168, 85, 247] },
@@ -407,7 +406,7 @@ const Exporter = (() => {
 
     // --- KPI Global ---
     const kpiData = [
-      { label: 'Tickets (M/R)',  value: globalStats.total,      color: [99, 102, 241] },
+      { label: 'Tickets',  value: globalStats.total,      color: [99, 102, 241] },
       { label: 'Averías',        value: globalStats.averias,    color: [239, 68, 68] },
       { label: 'Solventados',    value: globalStats.solved,     color: [16, 185, 129] },
       { label: 'No Aplica',      value: globalStats.noAplica,   color: [168, 85, 247] },
@@ -477,7 +476,7 @@ const Exporter = (() => {
 
     doc.autoTable({
       startY: cursorY,
-      head: [['#', 'Programador', 'Tickets (M/R)', 'Averías', 'Solventados', 'No Aplica', 'Info. Adic.', 'En Proceso', 'No Resueltos', 'Efectividad']],
+      head: [['#', 'Programador', 'Tickets', 'Averías', 'Solventados', 'No Aplica', 'Info. Adic.', 'En Proceso', 'No Resueltos', 'Efectividad']],
       body: tableData,
       theme: 'striped',
       margin: { left: margin, right: margin },
