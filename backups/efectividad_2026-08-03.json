@@ -1,0 +1,3157 @@
+{
+  "programmers": {
+    "Jezer Diaz": [
+      {
+        "rowIndex": 1,
+        "id": "Jezer Diaz-1-1785349792766",
+        "description": "El valor unitario de las retenciones SSO y FAOV deben ser los porcentajes en el reporte de recibo de pago",
+        "ticket": "0002157",
+        "notes": "",
+        "tipo": "Mejora/requerimiento",
+        "project": "Soporte",
+        "status": "No resuelto"
+      },
+      {
+        "rowIndex": 2,
+        "ticket": "0002155",
+        "notes": "",
+        "description": "Cambiar el valor de la retención FAOV en la prenómina con base a salario integral",
+        "tipo": "Mejora/requerimiento",
+        "status": "No resuelto",
+        "id": "Jezer Diaz-2-1785349792766",
+        "project": "Soporte"
+      },
+      {
+        "tipo": "Mejora/requerimiento",
+        "id": "Jezer Diaz-3-1785349792766",
+        "project": "Soporte",
+        "ticket": "0002151",
+        "description": "Agregar por defecto la siguiente información en la parte de archivos / caracterizar salarios",
+        "status": "No resuelto",
+        "notes": "",
+        "rowIndex": 3
+      },
+      {
+        "status": "No resuelto",
+        "project": "Soporte",
+        "tipo": "Mejora/requerimiento",
+        "id": "Jezer Diaz-4-1785349792766",
+        "notes": "",
+        "ticket": "0002035",
+        "rowIndex": 4,
+        "description": "MEJORA EN LA DESCRIPCIÓN DEL COMPROBANTE DE NOMINA"
+      },
+      {
+        "id": "Jezer Diaz-5-1785349792766",
+        "project": "Soporte",
+        "rowIndex": 5,
+        "ticket": "0001607",
+        "status": "No resuelto",
+        "tipo": "Mejora/requerimiento",
+        "notes": "",
+        "description": "COMPROBANTE DE NOMINA SMALL"
+      },
+      {
+        "tipo": "Mejora/requerimiento",
+        "project": "Soporte",
+        "ticket": "0001558",
+        "rowIndex": 6,
+        "description": "En el pin 50593 al imprimir un informe de Nómina de ajuste, no muestra los conceptos es visual",
+        "id": "Jezer Diaz-6-1785349792766",
+        "notes": "",
+        "status": "No resuelto"
+      },
+      {
+        "notes": "",
+        "rowIndex": 7,
+        "status": "No resuelto",
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0001513",
+        "project": "Soporte",
+        "description": "Solicitud de eliminación de Nota Crédito en el pin 47061",
+        "id": "Jezer Diaz-7-1785349792766"
+      },
+      {
+        "project": "Soporte",
+        "id": "Jezer Diaz-8-1785349792766",
+        "notes": "",
+        "status": "No resuelto",
+        "rowIndex": 8,
+        "tipo": "Desarrollo Adicional",
+        "ticket": "0001210",
+        "description": "DESARROLLO DE LOS PROCESOS DE LA NOMINA WEB COLOMBIA"
+      },
+      {
+        "rowIndex": 9,
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0000385",
+        "id": "Jezer Diaz-9-1785349792766",
+        "description": "MANEJO DE PROVISIONES - NOMINA",
+        "status": "No resuelto",
+        "notes": "",
+        "project": "Soporte"
+      },
+      {
+        "status": "No resuelto",
+        "description": "REQUIRIMIENTO EN PROCESO DE RECEPCION DE DOCUMENTOS",
+        "project": "Soporte",
+        "id": "Jezer Diaz-10-1785349792766",
+        "tipo": "Mejora/requerimiento",
+        "rowIndex": 10,
+        "ticket": "0000186",
+        "notes": ""
+      },
+      {
+        "id": "Jezer Diaz-11-1785349792766",
+        "notes": "",
+        "tipo": "Avería/Falla",
+        "rowIndex": 11,
+        "status": "No resuelto",
+        "ticket": "0002156",
+        "project": "Soporte",
+        "description": "Al recalcular en prenomina, el sistema no toma los cambios"
+      },
+      {
+        "ticket": "0002154",
+        "notes": "",
+        "description": "Incidencia en el salario promedio en el reporte de recibo de pago",
+        "tipo": "Avería/Falla",
+        "rowIndex": 12,
+        "id": "Jezer Diaz-12-1785349792766",
+        "project": "Soporte",
+        "status": "No resuelto"
+      },
+      {
+        "project": "Soporte",
+        "status": "No resuelto",
+        "tipo": "Avería/Falla",
+        "description": "Importar característica de nomina da error con trabajadores",
+        "id": "Jezer Diaz-13-1785349792766",
+        "notes": "",
+        "ticket": "0002152",
+        "rowIndex": 13
+      },
+      {
+        "notes": "",
+        "tipo": "Avería/Falla",
+        "project": "Soporte",
+        "description": "INCIDENCIA AL GENERAR NOMINA DE AJUSTE",
+        "status": "No resuelto",
+        "id": "Jezer Diaz-14-1785349792766",
+        "ticket": "0002142",
+        "rowIndex": 14
+      },
+      {
+        "project": "Soporte",
+        "id": "Jezer Diaz-15-1785349792766",
+        "status": "No resuelto",
+        "rowIndex": 15,
+        "tipo": "Avería/Falla",
+        "description": "INCIDENCIA EN TIMBRADO DE DOCUMENTO SOPORTE",
+        "ticket": "0002133",
+        "notes": ""
+      },
+      {
+        "description": "INCIDENCIA EN TIMBRADO DE DOCUMENTO - TAXXA",
+        "id": "Jezer Diaz-16-1785349792766",
+        "notes": "",
+        "status": "No resuelto",
+        "tipo": "Avería/Falla",
+        "ticket": "0002098",
+        "project": "Soporte",
+        "rowIndex": 16
+      }
+    ],
+    "Edgar Sanchez": [
+      {
+        "tipo": "Mejora/requerimiento",
+        "notes": "No aplica - No se puede porque no me habia dado cuenta que prepara internamente un cursor y toma los datos\ncalculando fechas anteriores, eso no permite sacarle un qry",
+        "status": "No Aplica",
+        "id": "Edgar Sanchez-1-1785349792766",
+        "description": "Query para Informe de Inventario Valorizado",
+        "ticket": "0002245",
+        "project": "Soporte",
+        "rowIndex": 1
+      },
+      {
+        "id": "Edgar Sanchez-2-1785349792766",
+        "ticket": "0002177",
+        "description": "IMPRESION DIRECTA AL GRABAR O GUARDAR CHECK-IN",
+        "rowIndex": 2,
+        "project": "Soporte",
+        "notes": "No resuelto",
+        "tipo": "Mejora/requerimiento",
+        "status": "No resuelto"
+      },
+      {
+        "rowIndex": 3,
+        "status": "No resuelto",
+        "id": "Edgar Sanchez-3-1785349792766",
+        "project": "Soporte",
+        "tipo": "Mejora/requerimiento",
+        "notes": "No resuelto",
+        "ticket": "0002086",
+        "description": "Validación de existencias mínimas y máximas por almacen"
+      },
+      {
+        "notes": "No resuelto - hay que arreglar",
+        "status": "No resuelto",
+        "description": "VALIDAR DESCUENTOS POR GRUPO Y ESTE SOLICITE CLAVE DE SUPERVISOR ADM FOX",
+        "tipo": "Mejora/requerimiento",
+        "id": "Edgar Sanchez-4-1785349792766",
+        "rowIndex": 4,
+        "ticket": "0002077",
+        "project": "Soporte"
+      },
+      {
+        "notes": "No resuelto",
+        "tipo": "Mejora/requerimiento",
+        "project": "Soporte",
+        "status": "No resuelto",
+        "id": "Edgar Sanchez-5-1785349792766",
+        "description": "Establecer el precio de la habitación sencilla aunque la habitación sea habitación deluxe",
+        "ticket": "0001840",
+        "rowIndex": 5
+      },
+      {
+        "id": "Edgar Sanchez-6-1785349792766",
+        "ticket": "0001836",
+        "description": "REQUERIMIENTO PARA QUE SE MUESTRE LA FECHA EN EL DETALLE DEL RECARGO",
+        "status": "No resuelto",
+        "project": "Soporte",
+        "tipo": "Mejora/requerimiento",
+        "notes": "No resuelto",
+        "rowIndex": 6
+      },
+      {
+        "tipo": "Mejora/requerimiento",
+        "notes": "",
+        "id": "Edgar Sanchez-7-1785349792766",
+        "status": "No resuelto",
+        "ticket": "0001754",
+        "project": "Soporte",
+        "rowIndex": 7,
+        "description": "AL MOMENTO DE PROCESAR FACTURA SIGUE QUEDANDO MONTO DE VUELTO"
+      },
+      {
+        "description": "Agregar variable de costo promedio en Inv_valorizado",
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0001701",
+        "status": "Solventado",
+        "id": "Edgar Sanchez-8-1785349792766",
+        "notes": "Solventado",
+        "rowIndex": 8,
+        "project": "Soporte"
+      },
+      {
+        "notes": "",
+        "tipo": "Mejora/requerimiento",
+        "description": "Volver habilitar opción de afectar el libro cambiando su descripción a “Registro Administrativo” en la ventana de registro de gastos en compras",
+        "status": "No resuelto",
+        "ticket": "0001614",
+        "rowIndex": 13,
+        "project": "Soporte",
+        "id": "Edgar Sanchez-13-1785349792766"
+      },
+      {
+        "description": "En la ventana de Kardex no debería mostrarse las columnas de costo y costo promedio para los usuarios que no tienen acceso al costo de inv",
+        "status": "Solventado",
+        "project": "Soporte",
+        "tipo": "Mejora/requerimiento",
+        "rowIndex": 14,
+        "notes": "Solventado",
+        "id": "Edgar Sanchez-14-1785349792766",
+        "ticket": "0001482"
+      },
+      {
+        "notes": "",
+        "tipo": "Mejora/requerimiento",
+        "status": "No resuelto",
+        "description": "Generar notas de credito Con la Impresora.",
+        "ticket": "0001387",
+        "id": "Edgar Sanchez-18-1785349792766",
+        "rowIndex": 18,
+        "project": "Soporte"
+      },
+      {
+        "id": "Edgar Sanchez-20-1785349792766",
+        "ticket": "0000998",
+        "tipo": "Mejora/requerimiento",
+        "rowIndex": 20,
+        "project": "Soporte",
+        "status": "Solventado",
+        "description": "Adecuaciones inventario valorizado costo promedio cantidades entrada y salida",
+        "notes": "Solventado"
+      },
+      {
+        "id": "Edgar Sanchez-21-1785349792766",
+        "project": "Soporte",
+        "notes": "",
+        "status": "No resuelto",
+        "rowIndex": 21,
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0000134",
+        "description": "0001689: Desarrollar \"Cargar Corte z automatico para impresora fiscal RigazSa\""
+      },
+      {
+        "project": "Soporte",
+        "rowIndex": 22,
+        "ticket": "0000096",
+        "status": "No resuelto",
+        "tipo": "Mejora/requerimiento",
+        "notes": "",
+        "description": "0001624: Desarrollar que los nro. de control puedan establecerse por tipo de documento por separado (FAC, ND, NC).",
+        "id": "Edgar Sanchez-22-1785349792766"
+      },
+      {
+        "id": "Edgar Sanchez-23-1785349792766",
+        "tipo": "Mejora/requerimiento",
+        "project": "Soporte",
+        "ticket": "0000073",
+        "notes": "",
+        "status": "No resuelto",
+        "rowIndex": 23,
+        "description": "0001500: Formato de factura cuando se establece una moneda extranjera"
+      },
+      {
+        "ticket": "0002212",
+        "project": "Soporte",
+        "tipo": "Avería/Falla",
+        "description": "Arreglar Bug en recalculo de costo en compras",
+        "status": "No resuelto",
+        "notes": "",
+        "rowIndex": 24,
+        "id": "Edgar Sanchez-24-1785349792766"
+      },
+      {
+        "ticket": "0002189",
+        "id": "Edgar Sanchez-25-1785349792766",
+        "notes": "",
+        "rowIndex": 25,
+        "tipo": "Avería/Falla",
+        "description": "El sistema no esta aplicando el porcentaje configurado para las comisiones bancarias",
+        "status": "No resuelto",
+        "project": "Soporte"
+      },
+      {
+        "id": "Edgar Sanchez-26-1785349792766",
+        "tipo": "Avería/Falla",
+        "ticket": "0002179",
+        "status": "No resuelto",
+        "rowIndex": 26,
+        "notes": "",
+        "project": "Soporte",
+        "description": "Desbloquear casilla de costo para los lotes"
+      },
+      {
+        "id": "Edgar Sanchez-27-1785349792766",
+        "ticket": "0002158",
+        "notes": "",
+        "project": "Soporte",
+        "description": "Con la impresora Bematech MP-4000 no aparecen los descuentos en la factura",
+        "rowIndex": 27,
+        "tipo": "Avería/Falla",
+        "status": "No resuelto"
+      },
+      {
+        "project": "Soporte",
+        "ticket": "0002134",
+        "notes": "",
+        "description": "Cuando se coloca un monto en el campo precio neto en la ficha del articulo, ocurre una incidencia.",
+        "tipo": "Avería/Falla",
+        "rowIndex": 28,
+        "id": "Edgar Sanchez-28-1785349792766",
+        "status": "No resuelto"
+      },
+      {
+        "id": "Edgar Sanchez-29-1785349792766",
+        "description": "En la reserva no se muestra tipo unidades y cantidad de la habitacion",
+        "status": "No resuelto",
+        "tipo": "Avería/Falla",
+        "rowIndex": 29,
+        "project": "Soporte",
+        "notes": "",
+        "ticket": "0002125"
+      },
+      {
+        "description": "Cuando se tiene marcado el check de \"Fijar Precios\" para los integrados, al actualizar la tasa, el integrado mantiene tasa y precio anterior.",
+        "status": "No resuelto",
+        "notes": "",
+        "rowIndex": 30,
+        "id": "Edgar Sanchez-30-1785349792766",
+        "ticket": "0002096",
+        "project": "Soporte",
+        "tipo": "Avería/Falla"
+      },
+      {
+        "ticket": "0002089",
+        "notes": "",
+        "tipo": "Avería/Falla",
+        "id": "Edgar Sanchez-31-1785349792766",
+        "rowIndex": 31,
+        "description": "Error en facturas de impresora fiscal cuando se aplica descuento por monto",
+        "project": "Soporte",
+        "status": "No resuelto"
+      },
+      {
+        "status": "No resuelto",
+        "tipo": "Avería/Falla",
+        "rowIndex": 32,
+        "description": "Sistema de talleres- No permitir  totalizar orden de reparacion de items sin existencia",
+        "project": "Soporte",
+        "notes": "",
+        "id": "Edgar Sanchez-32-1785349792766",
+        "ticket": "0002022"
+      },
+      {
+        "status": "No resuelto",
+        "tipo": "Avería/Falla",
+        "id": "Edgar Sanchez-33-1785349792766",
+        "description": "Ocultar retenciones anuladas en ventas en el estado de cuenta del cliente",
+        "project": "Soporte",
+        "rowIndex": 33,
+        "notes": "",
+        "ticket": "0001966"
+      },
+      {
+        "description": "Arreglar Bug, variable que guarda el código del cliente anterior ref. caso 1056 (PVEN y Emisión de facturas)",
+        "tipo": "Avería/Falla",
+        "status": "No resuelto",
+        "rowIndex": 34,
+        "id": "Edgar Sanchez-34-1785349792766",
+        "project": "Soporte",
+        "notes": "",
+        "ticket": "0001876"
+      },
+      {
+        "project": "Soporte",
+        "status": "No resuelto",
+        "id": "Edgar Sanchez-35-1785349792766",
+        "rowIndex": 35,
+        "description": "Cuando se crea una empresa desde cero no deja crear los numeros de control",
+        "tipo": "Avería/Falla",
+        "notes": "",
+        "ticket": "0001852"
+      },
+      {
+        "ticket": "0001799",
+        "rowIndex": 36,
+        "notes": "",
+        "project": "Soporte",
+        "id": "Edgar Sanchez-36-1785349792766",
+        "description": "Campos de medios de pagos de la ventana de CxP oculta el ultimo decimal si el monto supera la cifra de millón",
+        "tipo": "Avería/Falla",
+        "status": "No resuelto"
+      },
+      {
+        "notes": "",
+        "tipo": "Avería/Falla",
+        "project": "Soporte",
+        "status": "No resuelto",
+        "description": "Al ejecutar el calculo de las vacaciones del trabajador esta mostrando el salario actual en vez del mes anterior",
+        "id": "Edgar Sanchez-37-1785349792766",
+        "ticket": "0001781",
+        "rowIndex": 37
+      },
+      {
+        "rowIndex": 38,
+        "ticket": "0001722",
+        "tipo": "Avería/Falla",
+        "description": "Visor de precio del touchScreen no esta mostrando el precio de ventas sino el costo de compras",
+        "status": "No resuelto",
+        "notes": "",
+        "id": "Edgar Sanchez-38-1785349792766",
+        "project": "Soporte"
+      },
+      {
+        "ticket": "0001712",
+        "notes": "Solventado",
+        "rowIndex": 39,
+        "project": "Soporte",
+        "id": "Edgar Sanchez-39-1785349792766",
+        "tipo": "Avería/Falla",
+        "description": "Factura de venta afecta el costo promedio en el kardex y por consecuencia en el reporte de valorización de inventario",
+        "status": "Solventado"
+      },
+      {
+        "rowIndex": 41,
+        "notes": "Solventado",
+        "status": "Solventado",
+        "tipo": "Avería/Falla",
+        "description": "Reporte de inventario valorizado existencia final en bs no la calcula bien",
+        "id": "Edgar Sanchez-41-1785349792766",
+        "ticket": "0001436",
+        "project": "Soporte"
+      },
+      {
+        "tipo": "Avería/Falla",
+        "ticket": "0001432",
+        "project": "Soporte",
+        "status": "Solventado",
+        "notes": "Solventado",
+        "description": "Inventario valorizado no respeta la condición de mostrar costo promedio cuando se le indica que por costo promedio",
+        "id": "Edgar Sanchez-42-1785349792766",
+        "rowIndex": 42
+      },
+      {
+        "rowIndex": 43,
+        "ticket": "0001402",
+        "notes": "Solventado",
+        "description": "Inventario valorizado error en calculo de entradas y salidas cuando se manejan artículos integrados",
+        "id": "Edgar Sanchez-43-1785349792766",
+        "tipo": "Avería/Falla",
+        "status": "Solventado",
+        "project": "Soporte"
+      }
+    ],
+    "Leandro Caicedo": [],
+    "Kerby Tabares": [
+      {
+        "rowIndex": 1,
+        "project": "Soporte",
+        "description": "Desarrollo para la factura electronica en Guatemala",
+        "ticket": "0002059",
+        "tipo": "Mejora/requerimiento",
+        "status": "No resuelto",
+        "id": "Kerby Tabares-1-1785349792767",
+        "notes": ""
+      },
+      {
+        "description": "47310- MULTISERVICIOS Y DISTRIBUIDORA CHM ELECTRIC SOCIEDAD ANONIMA- Solicitud de XML especial para cliente receptor ICE",
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0002040",
+        "rowIndex": 2,
+        "notes": "",
+        "status": "No resuelto",
+        "project": "Soporte",
+        "id": "Kerby Tabares-2-1785349792767"
+      },
+      {
+        "project": "Soporte",
+        "notes": "",
+        "id": "Kerby Tabares-3-1785349792767",
+        "status": "No resuelto",
+        "ticket": "0001793",
+        "tipo": "Mejora/requerimiento",
+        "description": "INTEGRACIÓN CON DATAFONO BOLD COLOMBIA",
+        "rowIndex": 3
+      },
+      {
+        "project": "Soporte",
+        "ticket": "0002082",
+        "id": "Kerby Tabares-4-1785349792767",
+        "tipo": "Avería/Falla",
+        "status": "No resuelto",
+        "description": "Error general del elemento tabla en el editor de formatos web",
+        "notes": "",
+        "rowIndex": 4
+      },
+      {
+        "id": "Kerby Tabares-5-1785349792767",
+        "project": "Soporte",
+        "rowIndex": 5,
+        "tipo": "Avería/Falla",
+        "ticket": "0002020",
+        "description": "Pin 52306 - ERROR AL TIMBRAR NOTA DE CREDITO / DEBITO",
+        "status": "No resuelto",
+        "notes": ""
+      }
+    ],
+    "Erika Molina": [],
+    "Nodgard Armando": [
+      {
+        "rowIndex": 1,
+        "notes": "Solventado",
+        "id": "Nodgard Armando-1-1785349792766",
+        "description": "Ajuste en el Libro de Compras",
+        "status": "Solventado",
+        "ticket": "0002087",
+        "project": "Soporte",
+        "tipo": "Mejora/requerimiento"
+      },
+      {
+        "notes": "En espera de validacion por Franklin",
+        "tipo": "Mejora/requerimiento",
+        "status": "No resuelto",
+        "description": "Agregar al Reporte de Licencias Vencidas el Campo de identificacion fiscal que viene de la ficha de la licencia ( RUT, RIF otros)",
+        "project": "Soporte",
+        "rowIndex": 2,
+        "ticket": "0002054",
+        "id": "Nodgard Armando-2-1785349792766"
+      },
+      {
+        "project": "Soporte",
+        "notes": "Luego de revisar el requerimiento y la información recopilada durante la reunión, hemos decidido no continuar con la cotización de este desarrollo.\n\nLa razón principal es que el alcance funcional aún no está claramente definido. Durante la reunión surgieron nuevos requerimientos y procesos que no habían sido contemplados en la solicitud inicial ni en la documentación proporcionada. Esto evidencia que las necesidades del proyecto todavía están en proceso de definición, lo que dificulta estimar el esfuerzo, los tiempos y los costos con un nivel de certeza adecuado.\n\nEn estas condiciones existe un alto riesgo de que el alcance cambie durante el desarrollo, generando retrabajos y afectando tanto la planificación como las expectativas de ambas partes.\n\nPor este motivo, en esta ocasión preferimos abstenernos de asumir este desarrollo.",
+        "id": "Nodgard Armando-3-1785349792766",
+        "status": "No Aplica",
+        "tipo": "Mejora/requerimiento",
+        "description": "PIN 52544 - REPORTES ADICIONALES PARA VENDEDORES/RUTAS",
+        "rowIndex": 3,
+        "ticket": "0002052"
+      },
+      {
+        "status": "En proceso",
+        "tipo": "Mejora/requerimiento",
+        "notes": "Pendiente  por cliente",
+        "rowIndex": 4,
+        "id": "Nodgard Armando-4-1785349792766",
+        "ticket": "0001986",
+        "description": "PIN 50887 - CAMBIOS EN TITULOS/DESCRIPCION DE CAMPO EN EL REPORTE DEL MODULO DE OPTICA",
+        "project": "Soporte"
+      },
+      {
+        "description": "Pin 52517 - DETALLAR SERVICIOS O PRODUCTOS EN EL REPORTE DE COMISIONES EN VENTAS",
+        "ticket": "0001948",
+        "rowIndex": 5,
+        "status": "En proceso",
+        "project": "Soporte",
+        "id": "Nodgard Armando-5-1785349792766",
+        "notes": "Pendiente por cliente",
+        "tipo": "Mejora/requerimiento"
+      },
+      {
+        "tipo": "Avería/Falla",
+        "notes": "",
+        "id": "Nodgard Armando-6-1785349792766",
+        "status": "Solventado",
+        "project": "Soporte",
+        "description": "Pin 50748 - CLIENTE FACTURO EN CERO Y REQUIERE ANULAR EL DOCUMENTO",
+        "ticket": "0002163",
+        "rowIndex": 6
+      },
+      {
+        "ticket": "0002159",
+        "id": "Nodgard Armando-7-1785349792766",
+        "notes": "",
+        "project": "Soporte",
+        "description": "PIN: 47817- QCHEM- Factura de ventas #FACTURA DE OPERACION INTERNA 0000007470 no se encuentra",
+        "rowIndex": 7,
+        "tipo": "Avería/Falla",
+        "status": "No resuelto"
+      },
+      {
+        "project": "Soporte",
+        "id": "Nodgard Armando-8-1785349792766",
+        "rowIndex": 8,
+        "ticket": "0002150",
+        "tipo": "Avería/Falla",
+        "description": "INCIDENCIA AL EMITIR LIBRO DE COMPRA MAS DE UN MES",
+        "status": "Solventado",
+        "notes": "Solventado"
+      },
+      {
+        "description": "PIN: 47817- QUALITY CHEMICAL S.A- CORREGIR LA EXISTENCIA DE ESTE ARTICULO Codigo: CPI-130",
+        "id": "Nodgard Armando-9-1785349792766",
+        "project": "Soporte",
+        "ticket": "0002129",
+        "status": "No Aplica",
+        "rowIndex": 9,
+        "tipo": "Avería/Falla",
+        "notes": ""
+      },
+      {
+        "notes": "",
+        "tipo": "Avería/Falla",
+        "project": "Soporte",
+        "description": "PIN: 47817- QUALITY CHEMICAL S.A- CORREGIR LA EXISTENCIA DE ESTE ARTICULO Codigo: CPI-039",
+        "status": "No Aplica",
+        "rowIndex": 10,
+        "ticket": "0002128",
+        "id": "Nodgard Armando-10-1785349792766"
+      },
+      {
+        "status": "No resuelto",
+        "project": "Soporte",
+        "tipo": "Avería/Falla",
+        "description": "Pin 48953 - CANTIDAD ERRADA EN EXISTENCIAS Y LO QUE SE MUESTRA EN KARDEX",
+        "notes": "",
+        "id": "Nodgard Armando-11-1785349792766",
+        "ticket": "0002109",
+        "rowIndex": 11
+      },
+      {
+        "notes": "",
+        "rowIndex": 12,
+        "tipo": "Avería/Falla",
+        "status": "No resuelto",
+        "ticket": "0002107",
+        "description": "El sistema esta calculando valores de comisiones que estan suspendidas",
+        "project": "Soporte",
+        "id": "Nodgard Armando-12-1785349792766"
+      },
+      {
+        "project": "Soporte",
+        "status": "No resuelto",
+        "tipo": "Avería/Falla",
+        "rowIndex": 13,
+        "description": "Los Documentos de \"Comprobante de Retención\", no están siendo timbrados electronicamente.",
+        "notes": "",
+        "ticket": "0002070",
+        "id": "Nodgard Armando-13-1785349792766"
+      },
+      {
+        "project": "Soporte",
+        "rowIndex": 14,
+        "status": "No resuelto",
+        "description": "ERROR EN LOS PERFILES",
+        "tipo": "Avería/Falla",
+        "id": "Nodgard Armando-14-1785349792766",
+        "notes": "",
+        "ticket": "0002056"
+      },
+      {
+        "id": "Nodgard Armando-15-1785349792766",
+        "rowIndex": 15,
+        "ticket": "0002032",
+        "description": "el proceso de cargo y descargo se cierra si por al crear nuevo articulo le doy a cerrar",
+        "project": "Soporte",
+        "status": "No resuelto",
+        "tipo": "Avería/Falla",
+        "notes": ""
+      },
+      {
+        "tipo": "Avería/Falla",
+        "project": "Soporte",
+        "ticket": "0002015",
+        "description": "PIN 44079- este pin es demostrativo y no esta timbrado los documentos es improtante para nuestras demos",
+        "status": "No resuelto",
+        "notes": "",
+        "rowIndex": 16,
+        "id": "Nodgard Armando-16-1785349792766"
+      },
+      {
+        "id": "Nodgard Armando-17-1785349792766",
+        "project": "Soporte",
+        "rowIndex": 17,
+        "notes": "",
+        "description": "Falla al momento de cargar el primer artículo que compone un integrado",
+        "status": "No resuelto",
+        "ticket": "0001829",
+        "tipo": "Avería/Falla"
+      }
+    ],
+    "Carolina Rivera": [],
+    "Doniel Acosta": [
+      {
+        "description": "Se deben separar los saldos de cada cuenta en una columna y los totales y subtotales en otra",
+        "ticket": "0002148",
+        "project": "Soporte",
+        "notes": "",
+        "id": "Doniel Acosta-1-1785349792766",
+        "tipo": "Mejora/requerimiento",
+        "rowIndex": 1,
+        "status": "No resuelto"
+      },
+      {
+        "project": "Soporte",
+        "description": "Se requiere que el estado de resultados calcule el COSTO DE VENTAS por sistema de inventario periódico",
+        "rowIndex": 2,
+        "notes": "",
+        "status": "No resuelto",
+        "ticket": "0002145",
+        "id": "Doniel Acosta-2-1785349792766",
+        "tipo": "Mejora/requerimiento"
+      },
+      {
+        "tipo": "Mejora/requerimiento",
+        "description": "En la estructura del ESTADO DE RESULTADOS se visualizan simplemente las cuentas en el orden del plan de cuentas",
+        "notes": "",
+        "project": "Soporte",
+        "id": "Doniel Acosta-3-1785349792766",
+        "status": "No resuelto",
+        "ticket": "0002144",
+        "rowIndex": 3
+      },
+      {
+        "description": "PIN: 47703- coffe shop- AGREGAR boton de descuento global para toda la factura , ya que de momento solo lo realiza por item",
+        "status": "No resuelto",
+        "tipo": "Mejora/requerimiento",
+        "id": "Doniel Acosta-4-1785349792766",
+        "project": "Soporte",
+        "notes": "",
+        "rowIndex": 4,
+        "ticket": "0002141"
+      },
+      {
+        "project": "Soporte",
+        "rowIndex": 5,
+        "ticket": "0002137",
+        "description": "Cualquier pin: app movil- No permitir cambiar, documento, vendedor y almacen- Solicitador por Dist. Karla campos",
+        "tipo": "Mejora/requerimiento",
+        "status": "No resuelto",
+        "id": "Doniel Acosta-5-1785349792766",
+        "notes": ""
+      },
+      {
+        "description": "PIN: 47703-  Permitir modificar la informacion base del nombre consumidor final (flotante)",
+        "ticket": "0002136",
+        "status": "No resuelto",
+        "rowIndex": 6,
+        "id": "Doniel Acosta-6-1785349792766",
+        "project": "Soporte",
+        "tipo": "Mejora/requerimiento",
+        "notes": ""
+      },
+      {
+        "description": "Cualquier pin: solicitado por guillermo rodriguez- simplificar la configuracion de cambios de almacen ventas",
+        "notes": "",
+        "status": "Información Adicional",
+        "ticket": "0002132",
+        "project": "Soporte",
+        "tipo": "Mejora/requerimiento",
+        "rowIndex": 7,
+        "id": "Doniel Acosta-7-1785349792766"
+      },
+      {
+        "ticket": "0002050",
+        "notes": "",
+        "rowIndex": 8,
+        "tipo": "Mejora/requerimiento",
+        "project": "Soporte",
+        "status": "No resuelto",
+        "id": "Doniel Acosta-8-1785349792766",
+        "description": "Pin 52684 - NOMBRE DE LA SUCURSAL EN VEZ DEL NOMBRE DE LA LICENCIA O EMPRESA REGISTRADA"
+      },
+      {
+        "rowIndex": 9,
+        "notes": "",
+        "status": "No Aplica",
+        "project": "Soporte",
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0002049",
+        "id": "Doniel Acosta-9-1785349792766",
+        "description": "Pin 52684 - PERMITIR DIGITAR CUENTA CONTABLE AL PROCESAR COMPROBANTES"
+      },
+      {
+        "ticket": "0002048",
+        "id": "Doniel Acosta-10-1785349792766",
+        "notes": "",
+        "rowIndex": 10,
+        "tipo": "Mejora/requerimiento",
+        "project": "Soporte",
+        "description": "Pin 52684 - GENERAR COMPROBANTE DE APERTURA PARA EL SIGUIENTE EJERCICIO ECONOMICO",
+        "status": "Información Adicional"
+      },
+      {
+        "notes": "",
+        "ticket": "0002147",
+        "tipo": "Avería/Falla",
+        "rowIndex": 11,
+        "description": "Las cuentas de los niveles 1 al 4 se repiten dos veces, al igual que las líneas de los totales y subtotales.",
+        "status": "No resuelto",
+        "id": "Doniel Acosta-11-1785349792766",
+        "project": "Soporte"
+      },
+      {
+        "id": "Doniel Acosta-12-1785349792766",
+        "notes": "",
+        "project": "Soporte",
+        "status": "No resuelto",
+        "tipo": "Avería/Falla",
+        "description": "Las ventas no totalizan de acuerdo a los saldos de cada tipo de cuenta de ventas",
+        "ticket": "0002146",
+        "rowIndex": 12
+      },
+      {
+        "description": "Pin 52684 - Error en el reporte de situación financiera o estado de resultados contabilidad web",
+        "rowIndex": 13,
+        "notes": "",
+        "id": "Doniel Acosta-13-1785349792766",
+        "status": "No resuelto",
+        "tipo": "Avería/Falla",
+        "ticket": "0002138",
+        "project": "Soporte"
+      },
+      {
+        "description": "Cuando el usuario esté empleando contablemente el inventario continuo, no es obligatorio marcar cuentas que suman y restan a las compras",
+        "status": "No resuelto",
+        "project": "Soporte",
+        "id": "Doniel Acosta-14-1785349792766",
+        "tipo": "Avería/Falla",
+        "notes": "",
+        "ticket": "0002118",
+        "rowIndex": 14
+      },
+      {
+        "description": "Cuando no se marca uno de los filtros de cuentas que suman y restan a las compras",
+        "ticket": "0002117",
+        "notes": "",
+        "id": "Doniel Acosta-15-1785349792767",
+        "rowIndex": 15,
+        "project": "Soporte",
+        "tipo": "Avería/Falla",
+        "status": "No resuelto"
+      },
+      {
+        "ticket": "0002116",
+        "notes": "",
+        "rowIndex": 16,
+        "project": "Soporte",
+        "tipo": "Avería/Falla",
+        "description": "En la sección de OTROS INGRESOS faltan cuentas",
+        "status": "No resuelto",
+        "id": "Doniel Acosta-16-1785349792767"
+      },
+      {
+        "description": "Algunas cuentas de movimiento no tienen detalle de su saldo final",
+        "id": "Doniel Acosta-17-1785349792767",
+        "project": "Soporte",
+        "ticket": "0002115",
+        "tipo": "Avería/Falla",
+        "status": "No resuelto",
+        "rowIndex": 17,
+        "notes": ""
+      },
+      {
+        "notes": "",
+        "project": "Soporte",
+        "status": "No resuelto",
+        "id": "Doniel Acosta-18-1785349792767",
+        "ticket": "0002114",
+        "tipo": "Avería/Falla",
+        "rowIndex": 18,
+        "description": "La cuenta de descuento en compras no muestra saldo"
+      },
+      {
+        "rowIndex": 19,
+        "project": "Soporte",
+        "id": "Doniel Acosta-19-1785349792767",
+        "ticket": "0002113",
+        "tipo": "Avería/Falla",
+        "status": "No resuelto",
+        "notes": "",
+        "description": "Las cuentas que suman y restan al CV no muestran su saldo según el mayor"
+      },
+      {
+        "ticket": "0002112",
+        "id": "Doniel Acosta-20-1785349792767",
+        "notes": "",
+        "rowIndex": 20,
+        "tipo": "Avería/Falla",
+        "project": "Soporte",
+        "description": "no se muestran las cuentas que suman (Fletes, tasas, impuestos) y restan (Descuentos, devoluciones, rebajas) al COSTO DE VENTAS",
+        "status": "No resuelto"
+      },
+      {
+        "status": "No resuelto",
+        "rowIndex": 21,
+        "id": "Doniel Acosta-21-1785349792767",
+        "project": "Soporte",
+        "description": "Pin 52684 - FORMULARIOS 43, 72 Y 94 NO MUESTRAN INFORMACION ALGUNA LUEGO DE UN AÑO DE EJERCICIO CONTABILIDAD WEB",
+        "tipo": "Avería/Falla",
+        "ticket": "0002047",
+        "notes": ""
+      }
+    ],
+    "Angel Mata": [
+      {
+        "description": "Se solicita una mejora en la opción de integrar cobros con bancos para bloquear el monto a facturar o de la venta.",
+        "ticket": "0002058",
+        "rowIndex": 1,
+        "status": "No resuelto",
+        "tipo": "Mejora/requerimiento",
+        "notes": "",
+        "id": "Angel Mata-1-1785349792766",
+        "project": "Soporte"
+      },
+      {
+        "id": "Angel Mata-2-1785349792766",
+        "status": "No resuelto",
+        "rowIndex": 2,
+        "project": "Soporte",
+        "description": "TODOS LOS PAISES DISPONIBLES EN EL ADMINISTRATIVO 9.1X",
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0002033",
+        "notes": ""
+      },
+      {
+        "status": "No resuelto",
+        "tipo": "Mejora/requerimiento",
+        "project": "Soporte",
+        "description": "En pago de honorarios al hacer la devolucion de una factura que no genere la linea de la devolucion y que de lo contrario anule la linea de la factura",
+        "id": "Angel Mata-3-1785349792766",
+        "rowIndex": 3,
+        "notes": "Abierto",
+        "ticket": "0002001"
+      },
+      {
+        "project": "Soporte",
+        "status": "En proceso",
+        "id": "Angel Mata-4-1785349792766",
+        "rowIndex": 4,
+        "tipo": "Mejora/requerimiento",
+        "description": "Cambiar descripción de “Abonos” por “Nota de crédito por pronto pago” en clínicas",
+        "notes": "Aun falta cambiar la palabra abono en una de las pantallas",
+        "ticket": "0001999"
+      },
+      {
+        "id": "Angel Mata-5-1785349792766",
+        "description": "Mejora a la ventana del centro de cobros de clínicas",
+        "ticket": "0001987",
+        "notes": "",
+        "rowIndex": 5,
+        "tipo": "Mejora/requerimiento",
+        "project": "Soporte",
+        "status": "No resuelto"
+      },
+      {
+        "project": "Soporte",
+        "notes": "",
+        "status": "No resuelto",
+        "description": "Reversión condicional de correlativos en Retenciones de IVA, ISLR e IMPUESTO MUNICIPAL.",
+        "id": "Angel Mata-6-1785349792766",
+        "ticket": "0001979",
+        "tipo": "Mejora/requerimiento",
+        "rowIndex": 6
+      },
+      {
+        "tipo": "Mejora/requerimiento",
+        "project": "Soporte",
+        "ticket": "0001956",
+        "description": "Desarrollar opción para generar relacion de compras para contribuyente formal en clinicas",
+        "notes": "",
+        "id": "Angel Mata-7-1785349792766",
+        "status": "No resuelto",
+        "rowIndex": 7
+      },
+      {
+        "id": "Angel Mata-8-1785349792766",
+        "project": "Soporte",
+        "rowIndex": 8,
+        "description": "Al generar reporte de relación de ventas para contribuyente formal se marquen los checks de nota de débito y nota de crédito",
+        "ticket": "0001955",
+        "tipo": "Mejora/requerimiento",
+        "status": "No resuelto",
+        "notes": ""
+      },
+      {
+        "rowIndex": 9,
+        "tipo": "Mejora/requerimiento",
+        "project": "Soporte",
+        "description": "El código del medico y servidor auxiliar no pueden ser el mismo código",
+        "ticket": "0001952",
+        "id": "Angel Mata-9-1785349792766",
+        "status": "No resuelto",
+        "notes": ""
+      },
+      {
+        "status": "No resuelto",
+        "description": "Mejora para buscar por cedula, historia y nombre en historias medicas",
+        "project": "Soporte",
+        "rowIndex": 10,
+        "tipo": "Mejora/requerimiento",
+        "id": "Angel Mata-10-1785349792766",
+        "notes": "",
+        "ticket": "0001951"
+      },
+      {
+        "tipo": "Mejora/requerimiento",
+        "notes": "",
+        "project": "Soporte",
+        "id": "Angel Mata-11-1785349792766",
+        "status": "No resuelto",
+        "ticket": "0001884",
+        "description": "Desarrollo adicional Registro de compras costros en divisas el articulo",
+        "rowIndex": 11
+      },
+      {
+        "rowIndex": 12,
+        "tipo": "Mejora/requerimiento",
+        "description": "Desarrollo adicional gastos operacionales",
+        "ticket": "0001883",
+        "status": "No resuelto",
+        "notes": "",
+        "id": "Angel Mata-12-1785349792766",
+        "project": "Soporte"
+      },
+      {
+        "project": "Soporte",
+        "status": "No resuelto",
+        "description": "Desarrollo adicional Modulo de bancos registro de lotes de cierres de puntos de ventas",
+        "id": "Angel Mata-13-1785349792766",
+        "ticket": "0001882",
+        "rowIndex": 13,
+        "tipo": "Mejora/requerimiento",
+        "notes": ""
+      },
+      {
+        "description": "Posibilidad de manejar numeros de control por documentos en el sistema de escritorio",
+        "notes": "",
+        "rowIndex": 14,
+        "status": "No resuelto",
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0001807",
+        "project": "Soporte",
+        "id": "Angel Mata-14-1785349792766"
+      },
+      {
+        "tipo": "Mejora/requerimiento",
+        "notes": "",
+        "project": "Soporte",
+        "status": "No resuelto",
+        "rowIndex": 15,
+        "id": "Angel Mata-15-1785349792766",
+        "ticket": "0001497",
+        "description": "Agregar consecutivo para los elementos de facturación en clinicas"
+      },
+      {
+        "status": "No resuelto",
+        "tipo": "Mejora/requerimiento",
+        "id": "Angel Mata-16-1785349792766",
+        "description": "Cambiar descripción de Nota de entrega a Orden de entrega en pestaña configurar # 1 en ventana de configuración",
+        "rowIndex": 16,
+        "notes": "",
+        "project": "Soporte",
+        "ticket": "0001419"
+      },
+      {
+        "rowIndex": 17,
+        "ticket": "0001418",
+        "id": "Angel Mata-17-1785349792766",
+        "description": "Actualización para próximo instalador del administrativo sobre lista de formatos de libro de ventas, facturación y retenciones en compras",
+        "notes": "",
+        "tipo": "Mejora/requerimiento",
+        "status": "No resuelto",
+        "project": "Soporte"
+      },
+      {
+        "id": "Angel Mata-18-1785349792766",
+        "ticket": "0001379",
+        "notes": "",
+        "description": "Reporte de honorarios luego de devolucion sigue mostrando honorarios que en efecto quedan anulados al realizar la devolucion",
+        "rowIndex": 18,
+        "tipo": "Mejora/requerimiento",
+        "project": "Soporte",
+        "status": "No resuelto"
+      },
+      {
+        "notes": "",
+        "ticket": "0001124",
+        "tipo": "Mejora/requerimiento",
+        "rowIndex": 19,
+        "project": "Soporte",
+        "description": "TIMBRADO DE DOCUMENTOS EXONERADOS/EXENTOS - FEL COSTA RICA",
+        "id": "Angel Mata-19-1785349792766",
+        "status": "No resuelto"
+      },
+      {
+        "id": "Angel Mata-20-1785349792766",
+        "ticket": "0000834",
+        "notes": "",
+        "rowIndex": 20,
+        "project": "Soporte",
+        "tipo": "Mejora/requerimiento",
+        "description": "Cambiar id de consumo pre establecido *001 a 001 en restaurantes cuando marcamos el check de id de consumo pre establecido en definicion de usuarios",
+        "status": "No resuelto"
+      },
+      {
+        "ticket": "0002227",
+        "project": "Soporte",
+        "notes": "",
+        "rowIndex": 21,
+        "tipo": "Avería/Falla",
+        "id": "Angel Mata-21-1785349792766",
+        "description": "Relación al caso 1772 Al importar un presupuesto generado el sistema no origina la orden de servicio validar los lotes y vecimientos",
+        "status": "No resuelto"
+      },
+      {
+        "id": "Angel Mata-22-1785349792766",
+        "status": "No resuelto",
+        "notes": "",
+        "description": "Al generar el reporte de lista de precios con la moneda dólar, el costo del articulo queda en bolívares",
+        "project": "Soporte",
+        "rowIndex": 22,
+        "ticket": "0002194",
+        "tipo": "Avería/Falla"
+      },
+      {
+        "ticket": "0002188",
+        "project": "Soporte",
+        "tipo": "Avería/Falla",
+        "id": "Angel Mata-23-1785349792766",
+        "description": "Falso positivo en validación de precio menor al costo al operar en divisas ($) con artículos por lotes",
+        "status": "No resuelto",
+        "notes": "",
+        "rowIndex": 23
+      },
+      {
+        "notes": "",
+        "ticket": "0002088",
+        "rowIndex": 24,
+        "description": "Falla de timbrado en Retenciones de IVA de the factory",
+        "tipo": "Avería/Falla",
+        "project": "Soporte",
+        "id": "Angel Mata-24-1785349792766",
+        "status": "No resuelto"
+      },
+      {
+        "ticket": "0002066",
+        "notes": "",
+        "rowIndex": 25,
+        "project": "Soporte",
+        "tipo": "Avería/Falla",
+        "description": "ACTUALIZAR DBF DE ESTRUCTURAS DE LAS ACTIVIDADES ECONOMICAS",
+        "id": "Angel Mata-25-1785349792766",
+        "status": "Solventado"
+      },
+      {
+        "id": "Angel Mata-26-1785349792766",
+        "status": "Solventado",
+        "notes": "Solventado",
+        "rowIndex": 26,
+        "ticket": "0001997",
+        "project": "Soporte",
+        "tipo": "Avería/Falla",
+        "description": "Le devolucion de una Fac que tenga articulo integrado y su componente son honorarios no devuelve los honorarios"
+      },
+      {
+        "project": "Soporte",
+        "notes": "Debe ser verificado por el creador del Ticket",
+        "description": "al importar un presupuesto de un articulo integrado cuyo componente tenga honorario no respeta los porcentajes configurados en la ficha",
+        "rowIndex": 27,
+        "status": "En proceso",
+        "id": "Angel Mata-27-1785349792766",
+        "tipo": "Avería/Falla",
+        "ticket": "0001996"
+      },
+      {
+        "description": "articulo integrado cuyo componente tenga honorario solo uno respecta el porcentaje de honorario que tenga en su ficha",
+        "status": "Solventado",
+        "rowIndex": 28,
+        "tipo": "Avería/Falla",
+        "project": "Soporte",
+        "id": "Angel Mata-28-1785349792766",
+        "notes": "Solventado",
+        "ticket": "0001995"
+      },
+      {
+        "tipo": "Avería/Falla",
+        "id": "Angel Mata-29-1785349792766",
+        "ticket": "0001989",
+        "project": "Soporte",
+        "description": "Error en Honorarios al usar el Radio Button en $.",
+        "notes": "Solventado",
+        "status": "Solventado",
+        "rowIndex": 29
+      },
+      {
+        "id": "Angel Mata-30-1785349792766",
+        "rowIndex": 30,
+        "description": "Cuando se deja marcado el Radio Button por defecto en $, al agregar el producto no treae el valor correcto",
+        "ticket": "0001988",
+        "tipo": "Avería/Falla",
+        "status": "Solventado",
+        "notes": "Solventado",
+        "project": "Soporte"
+      },
+      {
+        "description": "Al importar un presupuesto el sistema no valida que se indique de que lote se esta descontando la existencia",
+        "id": "Angel Mata-31-1785349792766",
+        "project": "Soporte",
+        "status": "No resuelto",
+        "notes": "",
+        "ticket": "0001970",
+        "tipo": "Avería/Falla",
+        "rowIndex": 31
+      },
+      {
+        "tipo": "Avería/Falla",
+        "ticket": "0001957",
+        "id": "Angel Mata-32-1785349792766",
+        "status": "No resuelto",
+        "notes": "No resuelto, se dejo comentario",
+        "project": "Soporte",
+        "description": "En libro de compras en clinicas muestra varios reportes que no deben aparecer en esa lista",
+        "rowIndex": 32
+      },
+      {
+        "rowIndex": 33,
+        "description": "Visor de Sucesos en \"modificar documentos\" cuando buscamos la opción en la barra de búsqueda de clinicas",
+        "notes": "Solventado",
+        "id": "Angel Mata-33-1785349792766",
+        "status": "Solventado",
+        "tipo": "Avería/Falla",
+        "project": "Soporte",
+        "ticket": "0001946"
+      },
+      {
+        "ticket": "0001940",
+        "id": "Angel Mata-34-1785349792766",
+        "notes": "Solventado",
+        "project": "Soporte",
+        "tipo": "Avería/Falla",
+        "description": "Al aplicar una retención de ISLR no alimenta el campo de base imponible de forma automática en facturas totalmente exentas",
+        "rowIndex": 34,
+        "status": "Solventado"
+      },
+      {
+        "id": "Angel Mata-35-1785349792766",
+        "ticket": "0001484",
+        "notes": "se debe hacer desde cuentas por pagar",
+        "rowIndex": 35,
+        "description": "Registrar facturas de compra con IGTF en clinicas",
+        "tipo": "Avería/Falla",
+        "status": "Solventado",
+        "project": "Soporte"
+      },
+      {
+        "ticket": "0001330",
+        "notes": "Solventado",
+        "id": "Angel Mata-36-1785349792766",
+        "project": "Soporte",
+        "rowIndex": 36,
+        "tipo": "Avería/Falla",
+        "description": "Se detecto una inconsistencia visual en el modulo de facturación de admisiones. Al procesar una admisión que no corresponde al área de hospitalización",
+        "status": "Solventado"
+      }
+    ]
+  },
+  "archives": [
+    {
+      "programmers": {
+        "Leandro Caicedo": [],
+        "Edgar Sanchez": [
+          {
+            "ticket": "0001837",
+            "description": "Al hacer traslado de habitaciones la habitación de origen se pone en negativo",
+            "notes": "No aplica porque esa es la condición para que el sistema libere la habitación",
+            "tipo": "Mejora/requerimiento",
+            "project": "Desarrollo Fox",
+            "id": "Edgar Sanchez-2-1781627157171",
+            "rowIndex": 2,
+            "status": "No Aplica"
+          },
+          {
+            "id": "Edgar Sanchez-4-1781627157171",
+            "project": "Desarrollo Fox",
+            "notes": "Solventado 30.6.2026",
+            "status": "Solventado",
+            "description": "Eliminar \"Abonos de la reserva\" en hoteles",
+            "tipo": "Mejora/requerimiento",
+            "ticket": "0001776",
+            "rowIndex": 4
+          },
+          {
+            "notes": "Solventado 30.6.2026 y Validad en Rev 2026.7.9 (Solventado)",
+            "status": "Solventado",
+            "tipo": "Mejora/requerimiento",
+            "rowIndex": 5,
+            "id": "Edgar Sanchez-5-1781627157171",
+            "ticket": "0001775",
+            "project": "Desarrollo Fox",
+            "description": "Deshabilitar Check-Out Sin factura en Hoteles"
+          },
+          {
+            "id": "Edgar Sanchez-6-1781627157171",
+            "tipo": "Mejora/requerimiento",
+            "rowIndex": 6,
+            "ticket": "0001774",
+            "project": "Desarrollo Fox",
+            "status": "Solventado",
+            "notes": "Solventado en Rev 2026.7.9",
+            "description": "Eliminar Abonos en planing de ocupación en Hoteles"
+          },
+          {
+            "id": "Edgar Sanchez-7-1781627157171",
+            "project": "Desarrollo Fox",
+            "ticket": "0001701",
+            "status": "Solventado",
+            "tipo": "Mejora/requerimiento",
+            "rowIndex": 7,
+            "description": "Agregar variable de costo promedio en Inv_valorizado",
+            "notes": "Solventado rev 16.07.2026"
+          },
+          {
+            "tipo": "Mejora/requerimiento",
+            "ticket": "0001461",
+            "project": "Desarrollo Fox",
+            "rowIndex": 13,
+            "id": "Edgar Sanchez-13-1781627157171",
+            "description": "Si esta desmarcado el check “tendrá derecho a registrar devoluciones” en el set #4 que pida clave de supervisor al entrar en devoluciones",
+            "status": "Solventado",
+            "notes": "Arreglar el mensaje de validación tiene algunos errores"
+          },
+          {
+            "id": "Edgar Sanchez-14-1781627157171",
+            "description": "MEJORA PARA DESCUENTOS PREDEFINIDOS HUESPED/CLIENTES EN EL SISTEMA DE HOTELES",
+            "project": "Desarrollo Fox",
+            "rowIndex": 14,
+            "ticket": "0001440",
+            "tipo": "Mejora/requerimiento",
+            "status": "No Aplica",
+            "notes": "Hoteles no puede realizar este requerimiento por la manera de trabajo"
+          },
+          {
+            "id": "Edgar Sanchez-20-1781627157171",
+            "description": "Adecuaciones inventario valorizado costo promedio error en el calculo del costo promedio en las entradas y salidas",
+            "ticket": "0001001",
+            "project": "Desarrollo Fox",
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado",
+            "notes": "Solventado en rev 9.7.2026 Edgar",
+            "rowIndex": 20
+          },
+          {
+            "status": "Solventado",
+            "tipo": "Mejora/requerimiento",
+            "id": "Edgar Sanchez-21-1781627157171",
+            "rowIndex": 21,
+            "notes": "Rev 10-07-2026",
+            "ticket": "0000999",
+            "description": "Adecuaciones inventario valorizado costo promedio calculo de montos en bs de las entradas y salidas",
+            "project": "Desarrollo Fox"
+          },
+          {
+            "rowIndex": 22,
+            "ticket": "0000998",
+            "project": "Desarrollo Fox",
+            "notes": "Ver con vanesa",
+            "id": "Edgar Sanchez-22-1781627157171",
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado",
+            "description": "Adecuaciones inventario valorizado costo promedio cantidades entrada y salida"
+          },
+          {
+            "rowIndex": 23,
+            "ticket": "0000742",
+            "notes": "",
+            "tipo": "Mejora/requerimiento",
+            "description": "MANEJO DE FORMAS DE PAGO - SISTEMA FOX",
+            "project": "Desarrollo Fox",
+            "id": "Edgar Sanchez-23-1781627157171",
+            "status": "No Aplica"
+          },
+          {
+            "ticket": "0000287",
+            "tipo": "Mejora/requerimiento",
+            "description": "Proveedor nacional pueda pagar en moneda extranjera y generar IGTF en compras pagadas de contado",
+            "status": "Solventado",
+            "notes": "Solventado",
+            "project": "Desarrollo Fox",
+            "id": "Edgar Sanchez-24-1781627157171",
+            "rowIndex": 24
+          },
+          {
+            "status": "Solventado",
+            "project": "Desarrollo Fox",
+            "description": "No realiza validación de capacidad de personas al agregar bebes a una reservación",
+            "rowIndex": 25,
+            "ticket": "0001839",
+            "notes": "Solventado rev 26.06.2026",
+            "tipo": "Mejora/requerimiento",
+            "id": "Edgar Sanchez-25-1781627157171"
+          },
+          {
+            "description": "Al editar nota de un huésped en recepción se ingresan estadias sin validar hora de checkout",
+            "id": "Edgar Sanchez-26-1781627157171",
+            "ticket": "0001838",
+            "notes": "",
+            "project": "Desarrollo Fox",
+            "tipo": "Avería/Falla",
+            "rowIndex": 26,
+            "status": "No Aplica"
+          },
+          {
+            "notes": "",
+            "project": "Desarrollo Fox",
+            "status": "No Aplica",
+            "tipo": "Avería/Falla",
+            "ticket": "0001835",
+            "description": "NO ACTUALIZA DIAS DE ESTADIAS EN LAS HABITACIONES AL HACER EL CHECKOUT",
+            "id": "Edgar Sanchez-27-1781627157171",
+            "rowIndex": 27
+          },
+          {
+            "notes": "Solventado rev 26.06.2026",
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado",
+            "rowIndex": 30,
+            "ticket": "0001769",
+            "id": "Edgar Sanchez-30-1781627157171",
+            "description": "Permite alargar la estadia en una recepcion cuando adelante hay una reserva garantizada permitiendo sobreventa",
+            "project": "Desarrollo Fox"
+          },
+          {
+            "id": "Edgar Sanchez-31-1781627157171",
+            "status": "No Aplica",
+            "tipo": "Avería/Falla",
+            "project": "Desarrollo Fox",
+            "description": "La cantidad de dias no se guarda correctamente en reser_cant en la tabla reservasmv",
+            "rowIndex": 31,
+            "notes": "No aplica, ya que ese campo solo muestra las habitaciones reservadas",
+            "ticket": "0001768"
+          },
+          {
+            "id": "Edgar Sanchez-32-1781627157171",
+            "ticket": "0001767",
+            "notes": "No aplica",
+            "tipo": "Avería/Falla",
+            "rowIndex": 32,
+            "description": "PERMITE DEJAR A CREDITO CLIENTES CONTADOS AL REALIZAR EL CHECK OUT",
+            "project": "Desarrollo Fox",
+            "status": "No Aplica"
+          },
+          {
+            "id": "Edgar Sanchez-33-1781627157171",
+            "notes": "No logro replicar el error",
+            "status": "No Aplica",
+            "tipo": "Avería/Falla",
+            "rowIndex": 33,
+            "project": "Desarrollo Fox",
+            "ticket": "0001761",
+            "description": "VISOR SQL AL GENERAR INFORME DE COBROS"
+          },
+          {
+            "description": "Problema con traslado de habitaciones en el sistema de hoteles con data de hotel los llanos",
+            "rowIndex": 35,
+            "project": "Desarrollo Fox",
+            "ticket": "0001749",
+            "tipo": "Avería/Falla",
+            "status": "No Aplica",
+            "notes": "No se visualizaron errores",
+            "id": "Edgar Sanchez-35-1781627157171"
+          },
+          {
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "rowIndex": 36,
+            "id": "Edgar Sanchez-36-1781627157171",
+            "description": "Al crear una nueva base de datos, el sistema emite un visor SQL",
+            "project": "Desarrollo Fox",
+            "notes": "Solventado",
+            "ticket": "0001736"
+          },
+          {
+            "description": "Cambio de habitación desde la ventana de reservas en hoteles",
+            "status": "Solventado",
+            "project": "Desarrollo Fox",
+            "tipo": "Avería/Falla",
+            "id": "Edgar Sanchez-37-1781627157171",
+            "notes": "Se debe arreglar un bug de la habitación anterior",
+            "ticket": "0001735",
+            "rowIndex": 37
+          },
+          {
+            "project": "Desarrollo Fox",
+            "description": "Al facturar la habitacion aparece un visor de sucesos",
+            "rowIndex": 38,
+            "notes": "Solventado en REv 2026.6.26",
+            "status": "Solventado",
+            "ticket": "0001733",
+            "id": "Edgar Sanchez-38-1781627157171",
+            "tipo": "Avería/Falla"
+          },
+          {
+            "rowIndex": 39,
+            "ticket": "0001732",
+            "status": "Solventado",
+            "id": "Edgar Sanchez-39-1781627157171",
+            "project": "Desarrollo Fox",
+            "notes": "Solventado en Rev 2026.6.26",
+            "description": "Se tiene el primer caso, cuando ocupamos la habitación sale un visor de sucesos",
+            "tipo": "Avería/Falla"
+          },
+          {
+            "notes": "solventado",
+            "project": "Desarrollo Fox",
+            "description": "Cuando borramos un articulo que forma parte de un integrado en emisión de facturas, arroja un mensaje de que no se pueden facturar items en 0",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "ticket": "0001720",
+            "rowIndex": 41,
+            "id": "Edgar Sanchez-41-1781627157171"
+          },
+          {
+            "status": "Solventado",
+            "rowIndex": 42,
+            "tipo": "Avería/Falla",
+            "notes": "",
+            "project": "Desarrollo Fox",
+            "ticket": "0001712",
+            "description": "Factura de venta afecta el costo promedio en el kardex y por consecuencia en el reporte de valorización de inventario",
+            "id": "Edgar Sanchez-42-1781627157171"
+          },
+          {
+            "id": "Edgar Sanchez-43-1781627157171",
+            "project": "Desarrollo Fox",
+            "status": "Solventado",
+            "rowIndex": 43,
+            "tipo": "Avería/Falla",
+            "description": "El costo promedio al realizar una devolución de compras debe ser recalculado.",
+            "notes": "Solventado",
+            "ticket": "0001699"
+          },
+          {
+            "notes": "Solventado",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "description": "Se debe arreglar el costo promedio del articulo al ser cargado por compras, esto repercute en los tickets de invetario valorizado por costo promedio",
+            "ticket": "0001622",
+            "rowIndex": 44,
+            "project": "Desarrollo Fox",
+            "id": "Edgar Sanchez-44-1781627157171"
+          },
+          {
+            "tipo": "Avería/Falla",
+            "ticket": "0001490",
+            "description": "EL SISTEMA DE HOTELES SIEMPRE TOMA COMO SIMBOLO DE MONEDA EL BOLIVAR",
+            "id": "Edgar Sanchez-46-1781627157171",
+            "rowIndex": 46,
+            "notes": "Solventado 5.7.2026",
+            "status": "Solventado",
+            "project": "Desarrollo Fox"
+          },
+          {
+            "tipo": "Avería/Falla",
+            "notes": "",
+            "project": "Desarrollo Fox",
+            "id": "Edgar Sanchez-47-1781627157171",
+            "status": "No Aplica",
+            "description": "En pven normal se genera un monto mínimo con el EFECTIVO si pagamos todo por transferencia o tarjeta o efectivo y la factura se monto en dolares",
+            "rowIndex": 47,
+            "ticket": "0001459"
+          },
+          {
+            "tipo": "Avería/Falla",
+            "ticket": "0001436",
+            "project": "Desarrollo Fox",
+            "description": "Reporte de inventario valorizado existencia final en bs no la calcula bien",
+            "id": "Edgar Sanchez-48-1781627157171",
+            "notes": "",
+            "status": "Solventado",
+            "rowIndex": 48
+          },
+          {
+            "tipo": "Avería/Falla",
+            "description": "Inventario valorizado no respeta la condición de mostrar costo promedio cuando se le indica que por costo promedio",
+            "project": "Desarrollo Fox",
+            "rowIndex": 49,
+            "ticket": "0001432",
+            "id": "Edgar Sanchez-49-1781627157171",
+            "notes": "resuelto rev 16.07.2026",
+            "status": "Solventado"
+          },
+          {
+            "description": "Inventario valorizado error en calculo de entradas y salidas cuando se manejan artículos integrados",
+            "ticket": "0001402",
+            "rowIndex": 50,
+            "id": "Edgar Sanchez-50-1781627157171",
+            "notes": "No resuelto - aun en proceso",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "project": "Desarrollo Fox"
+          },
+          {
+            "status": "Solventado",
+            "id": "Edgar Sanchez-51-1781627157171",
+            "project": "Desarrollo Fox",
+            "rowIndex": 51,
+            "ticket": "0001175",
+            "description": "no libera habitacion, después de pagar la factura  en el sistema administrativo a partir de la rev de hoteles 6.1.2026",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado - se debe validar con la rev nueva"
+          },
+          {
+            "status": "No Aplica",
+            "description": "Error en la posición de las muestras - exámenes de laboratorio",
+            "project": "Desarrollo Fox",
+            "tipo": "Avería/Falla",
+            "notes": "",
+            "rowIndex": 52,
+            "id": "Edgar Sanchez-52-1781627157171",
+            "ticket": "0000778"
+          },
+          {
+            "tipo": "Avería/Falla",
+            "ticket": "0000054",
+            "project": "Desarrollo Fox",
+            "rowIndex": 53,
+            "id": "Edgar Sanchez-53-1781627157171",
+            "status": "No Aplica",
+            "notes": "",
+            "description": "0001511: Agregar validación de desconexión cuando la impresora epsonlx300 este apagada o desconectada."
+          },
+          {
+            "ticket": "1132",
+            "notes": "Solventado en Rev 2026.7.16",
+            "tipo": "Mejora/requerimiento",
+            "id": "Edgar Sanchez-new-1784234294197",
+            "project": "Administrativo, POS y TouchScreen",
+            "description": "En el reporte de Inventario Valorizado, se requiere separar el campo unid_devoluciones.",
+            "status": "Solventado"
+          },
+          {
+            "description": "Visor SQL y de Sucesos al cambiar habitación",
+            "ticket": "2127",
+            "notes": "Solventado",
+            "id": "Edgar Sanchez-new-1784234859060",
+            "tipo": "Avería/Falla",
+            "project": "Hoteles",
+            "status": "Solventado"
+          },
+          {
+            "description": "Cambiar dias en la reserva borra la habitacion",
+            "ticket": "2124",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "id": "Edgar Sanchez-new-1784234956388",
+            "notes": "Solventado en Rev 2026.7.16",
+            "project": "Hoteles"
+          },
+          {
+            "id": "Edgar Sanchez-new-1784244468473",
+            "description": "Poder cancelar varias facturas en compras si es en bolívares en cuentas por pagar",
+            "notes": "",
+            "status": "No Aplica",
+            "tipo": "Mejora/requerimiento",
+            "project": "Administrativo, POS y TouchScreen",
+            "ticket": "723"
+          },
+          {
+            "ticket": "731",
+            "notes": "",
+            "project": "Administrativo, POS y TouchScreen",
+            "tipo": "Mejora/requerimiento",
+            "id": "Edgar Sanchez-new-1784244631856",
+            "description": "Procedimiento para Reverso de Notas de Débito/Crédito con Error de Impresora Fiscal (Correlativo Vacío)",
+            "status": "No Aplica"
+          },
+          {
+            "tipo": "Mejora/requerimiento",
+            "ticket": "1222",
+            "id": "Edgar Sanchez-new-1784244808734",
+            "status": "No Aplica",
+            "notes": "",
+            "description": "Requerimiento para Hoteles cuando inicialmente se realiza la factura en el administrativo y luego se ocupa la habitación",
+            "project": "Hoteles"
+          },
+          {
+            "notes": "",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "ticket": "1624",
+            "project": "Administrativo, POS y TouchScreen",
+            "id": "Edgar Sanchez-new-1784245023657",
+            "description": "El sistema esta dejando importar y convertir orden de entrega varias veces"
+          },
+          {
+            "ticket": "2100",
+            "notes": "",
+            "id": "Edgar Sanchez-new-1784245193429",
+            "tipo": "Avería/Falla",
+            "description": "fallo en recalculo de los montos que hay en entrada y salida de inventario, fallo en los valores en dolares para distintos precios en la columna USD",
+            "status": "Solventado",
+            "project": "Administrativo, POS y TouchScreen"
+          }
+        ],
+        "Kerby Tabares": [
+          {
+            "id": "Kerby Tabares-1-1781627157171",
+            "description": "Pin 50990 - FACTURA NO TIMBRA ERROR TIPO DE PAGO NO ES VALIDO",
+            "rowIndex": 1,
+            "notes": "Solventado",
+            "status": "Solventado",
+            "project": "Desarrollo Web",
+            "ticket": "0001924",
+            "tipo": "Avería/Falla"
+          },
+          {
+            "description": "INCIDENCIA AL IMPRIMIR COMANDA USANDO COMANDA SERVER",
+            "notes": "validar con Kerbyn",
+            "id": "Kerby Tabares-3-1781627157171",
+            "rowIndex": 3,
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "ticket": "0001692",
+            "project": "Desarrollo Web"
+          },
+          {
+            "description": "INVALIDACION DE FACTURA ELECTRONICA Y NOTAS DE CREDITO PARA CREDITO FISCAL EN EL SALVADOR",
+            "tipo": "Mejora/requerimiento",
+            "ticket": "1343",
+            "project": "Adm Business",
+            "status": "Solventado",
+            "notes": "Solventado",
+            "id": "Kerby Tabares-new-1783603224881"
+          },
+          {
+            "status": "Solventado",
+            "description": "Pin #50472- INVERSIONES RAHI S.A.- Corregir o revisar la clave generada en xml especificamente en la FECHA DE EMISION- Error en emision electronica",
+            "project": "Adm Business",
+            "tipo": "Avería/Falla",
+            "id": "Kerby Tabares-new-1783603408288",
+            "notes": "Solventado",
+            "ticket": "1588"
+          },
+          {
+            "status": "Solventado",
+            "description": "Pin #50626- Katya Araya Coto- Emision de factura en el XML no coincide con la fecha de la factura emitida en el sistema",
+            "tipo": "Avería/Falla",
+            "project": "Adm Business",
+            "notes": "Solventado",
+            "id": "Kerby Tabares-new-1783603530905",
+            "ticket": "1592"
+          },
+          {
+            "status": "Solventado",
+            "project": "Adm Business",
+            "tipo": "Avería/Falla",
+            "description": "PIN #51141 - ERROR AL TIMBRAR POR DIFERENCIA DE SALDOS LUEGO DE APLICAR UNA RETENCION",
+            "notes": "Solventado",
+            "id": "Kerby Tabares-new-1783603658280",
+            "ticket": "1791"
+          },
+          {
+            "tipo": "Mejora/requerimiento",
+            "ticket": "1808",
+            "description": "Editor de formato web (Mejora) diccionario global estático (No Reactivo) con buscador o filtros",
+            "status": "Solventado",
+            "notes": "Solventado",
+            "project": "Adm Business",
+            "id": "Kerby Tabares-new-1783603808105"
+          },
+          {
+            "ticket": "1844",
+            "notes": "Solventado",
+            "tipo": "Avería/Falla",
+            "project": "",
+            "id": "Kerby Tabares-new-1783604715914",
+            "status": "Solventado",
+            "description": "Falla en el editor de formatos web error en el llamado del JSON para el diccionario de variable (errorModelo no existe)"
+          },
+          {
+            "project": "Adm Business",
+            "ticket": "1848",
+            "description": "Pin 49755 - NC NO TIMBRO, MONEDA DIFERENTE A LA DE LA FACTURA",
+            "id": "Kerby Tabares-new-1783607292449",
+            "status": "Solventado",
+            "notes": "Solventado",
+            "tipo": "Avería/Falla"
+          },
+          {
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "project": "Adm Business",
+            "notes": "Solventado",
+            "ticket": "1889",
+            "id": "Kerby Tabares-new-1783607387473",
+            "description": "PIN 51141 - NO SE APLICO RETENCION AL 1% EN CCF"
+          },
+          {
+            "tipo": "Avería/Falla",
+            "ticket": "1906",
+            "project": "Adm Business",
+            "description": "Pin 51141 - AL APLICAR NOTA DE CREDITO FACTURA CCF NO TIMBRA",
+            "status": "Solventado",
+            "notes": "Solventado",
+            "id": "Kerby Tabares-new-1783607465145"
+          },
+          {
+            "description": "Varios pines costa rica estan reportando la misma falla al momento de timbrar- Pin 52306",
+            "project": "Adm Business",
+            "ticket": "1953",
+            "status": "Solventado",
+            "id": "Kerby Tabares-new-1783607633041",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado"
+          },
+          {
+            "status": "Solventado",
+            "project": "Adm Business",
+            "description": "49755- Revision de nota de credito electronica rechazada, aparentemente por el factor cambiario - la factura timbro- la NC no timbro",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado",
+            "ticket": "1962",
+            "id": "Kerby Tabares-new-1783607691033"
+          },
+          {
+            "id": "Kerby Tabares-new-1783607868177",
+            "project": "Adm Business",
+            "description": "50789-DISTRIBUIDORA DE CONCENTRADOS TRAMO 466- No esta cargando los xml en el modulo de compras",
+            "ticket": "1983",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "notes": "Solventado"
+          },
+          {
+            "id": "Kerby Tabares-new-1783607942177",
+            "notes": "Solventado",
+            "status": "Solventado",
+            "description": "Ticket #0001983 50789-DISTRIBUIDORA DE CONCENTRADOS TRAMO 466- Mensaje error al timbrar documento-",
+            "ticket": "1984",
+            "tipo": "Avería/Falla",
+            "project": "Adm Business"
+          }
+        ],
+        "Angel Mata": [
+          {
+            "id": "Angel Mata-1-1781627157171",
+            "ticket": "0001796",
+            "description": "Agregar consulta de histórico de cambios en la tasa de cambio en el sistema Fox",
+            "notes": "rev 6.7.2026 - es importante mencionar que también se visualiza en clínicas pero ahi si da error",
+            "rowIndex": 1,
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado",
+            "project": "Desarrollo Fox"
+          },
+          {
+            "tipo": "Mejora/requerimiento",
+            "notes": "Pasa a la siguiente efectividad",
+            "project": "Desarrollo Fox",
+            "id": "Angel Mata-2-1781627157171",
+            "status": "Información Adicional",
+            "rowIndex": 2,
+            "ticket": "0001124",
+            "description": "TIMBRADO DE DOCUMENTOS EXONERADOS/EXENTOS - FEL COSTA RICA"
+          },
+          {
+            "tipo": "Mejora/requerimiento",
+            "rowIndex": 3,
+            "ticket": "0000344",
+            "id": "Angel Mata-3-1781627157171",
+            "status": "No Aplica",
+            "notes": "Solventado por Manuel Quintero",
+            "description": "Agregar check o variable de la moneda extranjera en el reporte de de resumen de ventas (venresum).",
+            "project": "Desarrollo Fox"
+          },
+          {
+            "rowIndex": 4,
+            "status": "Información Adicional",
+            "project": "Desarrollo Fox",
+            "id": "Angel Mata-4-1781627157171",
+            "notes": "En conversación con la Ing. Erika, se debe paralizar clínicas, se va a conversar con junta directiva, en espera de respuesta",
+            "description": "Desarrollar el funcionamiento del Mantenimiento de resoluciones en Clinicas para Honduras.",
+            "tipo": "Mejora/requerimiento",
+            "ticket": "0000223"
+          },
+          {
+            "notes": "No se puede resolver por condiciones de programación",
+            "tipo": "Mejora/requerimiento",
+            "id": "Angel Mata-5-1781627157171",
+            "status": "No Aplica",
+            "description": "Pago de múltiples facturas de compras desde cuentas por pagar que tiene tasa de cambio referencial diferente Venezuela",
+            "ticket": "0000208",
+            "project": "Desarrollo Fox",
+            "rowIndex": 5
+          },
+          {
+            "rowIndex": 6,
+            "ticket": "0001501",
+            "notes": "Solventado 8.7.2026",
+            "id": "Angel Mata-6-1781627157171",
+            "description": "Cambiar descripción de “abonada” a “devuelta” en la ventana de factura que se habilita al hacer doble clic en pago de honorarios",
+            "tipo": "Mejora/requerimiento",
+            "project": "Desarrollo Fox",
+            "status": "Solventado"
+          },
+          {
+            "rowIndex": 7,
+            "notes": "Solo se emitirán ejecutables una vez al año",
+            "tipo": "Mejora/requerimiento",
+            "status": "Información Adicional",
+            "ticket": "0001418",
+            "id": "Angel Mata-7-1781627157171",
+            "project": "Desarrollo Fox",
+            "description": "Actualización para próximo instalador del administrativo sobre lista de formatos de libro de ventas, facturación y retenciones en compras"
+          },
+          {
+            "ticket": "0001379",
+            "notes": "resuelto por QA a nivel de reportes y QRY",
+            "project": "Desarrollo Fox",
+            "tipo": "Mejora/requerimiento",
+            "id": "Angel Mata-8-1781627157171",
+            "description": "Reporte de honorarios luego de devolucion sigue mostrando honorarios que en efecto quedan anulados al realizar la devolucion",
+            "rowIndex": 8,
+            "status": "No Aplica"
+          },
+          {
+            "description": "Agregar radio button para poder colocar precio en dólares en ventana de carga de ítems en clínicas",
+            "ticket": "0001540",
+            "id": "Angel Mata-9-1781627157171",
+            "project": "Desarrollo Fox",
+            "status": "Solventado",
+            "rowIndex": 9,
+            "tipo": "Mejora/requerimiento",
+            "notes": "Solventado"
+          },
+          {
+            "notes": "Solventado en Rev. 2026.7.6",
+            "tipo": "Avería/Falla",
+            "ticket": "0001788",
+            "id": "Angel Mata-10-1781627157171",
+            "description": "Error en cálculo de retención de ISLR en ventas a factura que tiene IVA en clínicas",
+            "project": "Desarrollo Fox",
+            "status": "Solventado",
+            "rowIndex": 10
+          },
+          {
+            "ticket": "0001772",
+            "notes": "Solventado en Rev 2026.7.6",
+            "project": "Desarrollo Fox",
+            "tipo": "Avería/Falla",
+            "description": "Al importar un presupuesto generado el sistema no origina la orden de servicio",
+            "rowIndex": 11,
+            "status": "Solventado",
+            "id": "Angel Mata-11-1781627157171"
+          },
+          {
+            "description": "Funcionamiento de costo en ventana de ajuste de precios por cambios de costo en compras",
+            "id": "Angel Mata-12-1781627157171",
+            "rowIndex": 12,
+            "status": "Información Adicional",
+            "tipo": "Avería/Falla",
+            "project": "Desarrollo Fox",
+            "notes": "Se valido con Manuel aun tiene Bugs - se abrió otro caso para Edgar Sanchez",
+            "ticket": "0001771"
+          },
+          {
+            "rowIndex": 13,
+            "tipo": "Avería/Falla",
+            "ticket": "0001700",
+            "description": "bloquear casilla de cliente en devoluciones, después de llamar la factura",
+            "notes": "Solventado en Rev 2026.7.6",
+            "status": "Solventado",
+            "id": "Angel Mata-13-1781627157171",
+            "project": "Desarrollo Fox"
+          },
+          {
+            "status": "Solventado",
+            "id": "Angel Mata-14-1781627157171",
+            "project": "Desarrollo Web",
+            "rowIndex": 14,
+            "description": "NO PERMITE DESCARGAR RESPALDO DE BD",
+            "tipo": "Avería/Falla",
+            "ticket": "0001686",
+            "notes": "Solventado, caso web cerrado por Alfredo"
+          },
+          {
+            "description": "Se requiere corregir la consulta interna en el módulo del Libro de Compras para Contribuyentes Formales.",
+            "id": "Angel Mata-15-1781627157171",
+            "notes": "Solventado 3.7.2026",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "project": "Desarrollo Fox",
+            "ticket": "0001634",
+            "rowIndex": 15
+          },
+          {
+            "id": "Angel Mata-16-1781627157171",
+            "project": "Desarrollo Fox",
+            "ticket": "0001503",
+            "rowIndex": 16,
+            "status": "Solventado",
+            "description": "En pago de honorarios a las devoluciones el sistema le aplica el 10% de retención de gasto administrativo y esto no se debe aplicar",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado rev 7.7.2026"
+          },
+          {
+            "description": "Notas de crédito por pronto pago deben aparecer en pago de honorarios y ajustar el saldo del honorario",
+            "notes": "Caso no aplica",
+            "status": "No Aplica",
+            "tipo": "Avería/Falla",
+            "project": "Desarrollo Fox",
+            "ticket": "0001483",
+            "id": "Angel Mata-17-1781627157171",
+            "rowIndex": 17
+          },
+          {
+            "description": "En opermv no guarda el vendedor en las notas de crédito por pronto pago",
+            "status": "Solventado",
+            "id": "Angel Mata-18-1781627157171",
+            "project": "Desarrollo Fox",
+            "rowIndex": 18,
+            "tipo": "Avería/Falla",
+            "ticket": "0001477",
+            "notes": "Resuelto en rev 3.7.2026"
+          },
+          {
+            "description": "cuando se hace el cierre del ejercicio el sistema contable no genera un asiento de cierre",
+            "ticket": "0001242",
+            "id": "Angel Mata-19-1781627157171",
+            "notes": "Se requiere ejecutable de Contabilidad",
+            "rowIndex": 19,
+            "tipo": "Avería/Falla",
+            "project": "Contabilidad FOX",
+            "status": "No resuelto"
+          },
+          {
+            "id": "Angel Mata-20-1781627157171",
+            "status": "Solventado",
+            "project": "Clinicas FOX",
+            "rowIndex": 20,
+            "tipo": "Avería/Falla",
+            "description": "En Clinicas no se puede imprimir la nota de crédito con 2 formatos diferentes en reimpresiones",
+            "ticket": "0001220",
+            "notes": "Solventado con rev 3.7.2026"
+          },
+          {
+            "project": "Adm Fox",
+            "notes": "",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "description": "Devoluciones de facturas con la condición de crédito no esta guardando el campo baseimpo1 afectando el libro de ventas",
+            "ticket": "0001577",
+            "id": "Angel Mata-new-1783455580295"
+          },
+          {
+            "project": "Clinicas y hospitales",
+            "id": "Angel Mata-new-1783455632174",
+            "notes": "solventado rev 7.7.2026",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "description": "Permitir modificar costo de artículos en compra para clinicas",
+            "ticket": "0002106"
+          },
+          {
+            "status": "Solventado",
+            "tipo": "Mejora/requerimiento",
+            "id": "Angel Mata-new-1783455676398",
+            "notes": "Solventado",
+            "project": "Clinicas y hospitales",
+            "ticket": "0002149",
+            "description": "Sistema de clinicas no valida la configuración de imprimirá recibos"
+          }
+        ],
+        "Jezer Diaz": [
+          {
+            "status": "Solventado",
+            "rowIndex": 1,
+            "description": "INCIDENCIA EN NOMINA SMALL, NO MUESTRA EL PAGO DE HORAS EXTRAS EN EL RECIBO DE PAGO NOMINA SMALL",
+            "tipo": "Avería/Falla",
+            "project": "Desarrollo Web",
+            "id": "Jezer Diaz-1-1781627157170",
+            "notes": "",
+            "ticket": "0001891"
+          },
+          {
+            "ticket": "0001857",
+            "id": "Jezer Diaz-2-1781627157170",
+            "notes": "Solventado",
+            "rowIndex": 2,
+            "tipo": "Avería/Falla",
+            "description": "NO SE GENERA NOMINA DE ELIMINACION",
+            "project": "Desarrollo Web",
+            "status": "Solventado"
+          },
+          {
+            "tipo": "Avería/Falla",
+            "ticket": "0001805",
+            "id": "Jezer Diaz-3-1781627157170",
+            "project": "Desarrollo Web",
+            "status": "Información Adicional",
+            "notes": "Jezer (Luego de analizar nuevamente el caso después de la reunión, surgieron nuevas dudas debido los registros en la data, por lo que requiero una breve sesión para aclarar los pasos a seguir)",
+            "rowIndex": 3,
+            "description": "NO APARECE NOMINA GENERADA 54"
+          },
+          {
+            "notes": "",
+            "status": "Información Adicional",
+            "tipo": "Mejora/requerimiento",
+            "ticket": "0001652",
+            "project": "Desarrollo Web",
+            "description": "FACTURACION DE CONTINGENCIA TIPO 03 - TAXXA",
+            "id": "Jezer Diaz-4-1781627157170",
+            "rowIndex": 4
+          },
+          {
+            "id": "Jezer Diaz-new-1783363321090",
+            "project": "Nomina Small",
+            "notes": "Solventado",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "description": "NO SE MUESTRAN LOS CONCEPTOS EN NOMINA SMALL",
+            "ticket": "1827"
+          },
+          {
+            "status": "Solventado",
+            "project": "Nomina Web",
+            "id": "Jezer Diaz-new-1783363416080",
+            "description": "Organización, depuración y optimización de la base de datos de Nómina. Alejandra Gonzales",
+            "tipo": "Mejora/requerimiento",
+            "ticket": "interno30",
+            "notes": ""
+          },
+          {
+            "description": "Creación de manual de usuario de despacho",
+            "ticket": "interno29",
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado",
+            "notes": "",
+            "project": "Proyecto Web",
+            "id": "Jezer Diaz-new-1783363450391"
+          },
+          {
+            "ticket": "1831",
+            "id": "Jezer Diaz-new-1783363475417",
+            "notes": "Solventado",
+            "tipo": "Avería/Falla",
+            "description": "NO SE MUESTRAN LOS CONCEPTOS EN NOMINA SMALL",
+            "status": "Solventado",
+            "project": "Nomina Small"
+          },
+          {
+            "status": "Solventado",
+            "description": "Modificación de la nota de crédito con los valores necesarios para que se muestre correctamente. Erika Molina",
+            "project": "Adm Web",
+            "id": "Jezer Diaz-new-1783363504655",
+            "ticket": "interno28",
+            "tipo": "Mejora/requerimiento",
+            "notes": ""
+          },
+          {
+            "notes": "",
+            "status": "Solventado",
+            "id": "Jezer Diaz-new-1783363528319",
+            "project": "Adm Web",
+            "ticket": "interno27",
+            "description": "Eliminación de nota de debito en el pin de la papelera. Erika Molina",
+            "tipo": "Mejora/requerimiento"
+          },
+          {
+            "id": "Jezer Diaz-new-1783363547113",
+            "ticket": "1886",
+            "description": "INCIDENCIA EN LOOK AND FEEL – NOMINA SMALL",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "notes": "Solventado",
+            "project": "Nomina Small"
+          },
+          {
+            "status": "Solventado",
+            "id": "Jezer Diaz-new-1783363555759",
+            "tipo": "Mejora/requerimiento",
+            "description": "Cambio de valor en factura para la papelera. Erika Molina",
+            "project": "Adm Web",
+            "notes": "",
+            "ticket": "interno26"
+          },
+          {
+            "description": "NOMINA FULL VE. Corrección de bug para que tome más de 1 retención y si es la misma retención entonces la sume. Erika Molina",
+            "id": "Jezer Diaz-new-1783363600512",
+            "status": "Solventado",
+            "project": "Adm Web",
+            "tipo": "Avería/Falla",
+            "notes": "",
+            "ticket": "interno25"
+          },
+          {
+            "description": "NOMINA FULL VE. Calculo de liquidaciones ya muestra tanto la planificación planeada para vacaciones como los cálculos correspondientes del trabajador",
+            "ticket": "interno23",
+            "id": "Jezer Diaz-new-1783363636263",
+            "project": "Nomina Web",
+            "status": "Solventado",
+            "notes": "Verificado por Lic Vanessa documento 14/07/2026",
+            "tipo": "Avería/Falla"
+          },
+          {
+            "id": "Jezer Diaz-new-1783363675863",
+            "project": "Nomina Web",
+            "notes": "",
+            "description": "NOMINA FULL VE. En cálculo de liquidaciones a pesar de que el tipo de liquidación tiene los conceptos asociados y se coloca al menos una fórmula para que muestre un valor el sistema no muestra ningún concepto",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "ticket": "interno24"
+          },
+          {
+            "ticket": "2009",
+            "notes": "Solventado",
+            "project": "Nomina Small",
+            "tipo": "Mejora/requerimiento",
+            "description": "PODER EXPORTAR LISTADO DE TRABAJADORES DE NOMINA SMALL",
+            "status": "Solventado",
+            "id": "Jezer Diaz-new-1783363749770"
+          },
+          {
+            "description": "NOMINA FULL V . Reimprimir liquidaciones ya muestra el formato correspondiente",
+            "project": "Nomina Web",
+            "ticket": "interno22",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "id": "Jezer Diaz-new-1783363914398",
+            "notes": ""
+          },
+          {
+            "notes": "Verificado por Lic Vanessa documento 14/07/2026",
+            "description": "NOMINA FULL VE. Reversar Liquidaciones ya hace el proceso de forma funcional",
+            "status": "Solventado",
+            "ticket": "interno21",
+            "id": "Jezer Diaz-new-1783363932790",
+            "project": "Nomina Web",
+            "tipo": "Avería/Falla"
+          },
+          {
+            "project": "Nomina Web",
+            "notes": "Verificado por Lic Vanessa documento 14/07/2026",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "id": "Jezer Diaz-new-1783363957374",
+            "ticket": "interno20",
+            "description": "NOMINA FULL VE. Planificación de vacaciones mejora en vista y cálculos"
+          },
+          {
+            "ticket": "interno19",
+            "project": "Nomina Web",
+            "description": "NOMINA FULL VE. Botón/función de CARGAR CONCEPTOS VE LIQUIDACIÓN para la carga automática de conceptos",
+            "notes": "",
+            "id": "Jezer Diaz-new-1783363996102",
+            "status": "Solventado",
+            "tipo": "Avería/Falla"
+          },
+          {
+            "notes": "Verificado por Lic Vanessa documento 14/07/2026",
+            "description": "NOMINA FULL VE. Cálculos realizados para generación del salario integral del trabajador",
+            "project": "Nomina Web",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "ticket": "interno18",
+            "id": "Jezer Diaz-new-1783364022639"
+          },
+          {
+            "description": "NOMINA FULL VE. Nueva vista para el salario integral",
+            "status": "Solventado",
+            "notes": "Verificado por Lic Vanessa documento 14/07/2026",
+            "id": "Jezer Diaz-new-1783364055798",
+            "ticket": "interno17",
+            "project": "Nomina Web",
+            "tipo": "Avería/Falla"
+          },
+          {
+            "description": "NOMINA FULL VE. Creación de Tipos De Liquidación de forma automática según el JSON",
+            "project": "Nomina Web",
+            "ticket": "interno16",
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado",
+            "id": "Jezer Diaz-new-1783364145526",
+            "notes": ""
+          },
+          {
+            "project": "Nomina Web",
+            "status": "Solventado",
+            "description": "NOMINA FULL VE. El sistema cuando muestra la fecha de retorno no está considerando los días feriados y genera de forma errónea la fecha de retorno, tomar como ejemplo un mes que tenga un día feriado y fijarse que no cuenta correctamente los días hábiles. Esto va relacionado con la opción del menú de archivos / días no laborables",
+            "tipo": "Avería/Falla",
+            "notes": "Verificado por Lic Vanessa documento 14/07/2026",
+            "id": "Jezer Diaz-new-1783364186414",
+            "ticket": "inerno15"
+          },
+          {
+            "description": "INCIDENCIA AL TRATAR DE SUBIR LA PLANTILLA DE NOMINA",
+            "ticket": "2012",
+            "project": "Nomina Small",
+            "id": "Jezer Diaz-new-1783364204378",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado"
+          },
+          {
+            "notes": "Verificado por Lic Vanessa documento 14/07/2026",
+            "status": "Solventado",
+            "description": "NOMINA FULL VE. El sistema debe mostrar en un solo concepto los feriados, sábados y domingos, para facilitar el cálculo de los días dhábiles de vacaciones",
+            "tipo": "Mejora/requerimiento",
+            "ticket": "interno14",
+            "project": "Nomina Web",
+            "id": "Jezer Diaz-new-1783364227558"
+          },
+          {
+            "ticket": "2006",
+            "description": "INCIDENCIA EN CONDICION DE PAGO - TAXXA",
+            "notes": "Solventado",
+            "project": "Nomina Small",
+            "id": "Jezer Diaz-new-1783364301849",
+            "tipo": "Avería/Falla",
+            "status": "Solventado"
+          },
+          {
+            "status": "Solventado",
+            "id": "Jezer Diaz-new-1783364434318",
+            "description": "NOMINA FULL VE. En la parte superior derecha del recibo donde aparece el detalle del salario mensual, habría que editar el valor del salario promedio, (valor unitario de los días de descanso), ya que actualmente el sistema está tomando el monto del salario mensual.",
+            "project": "Nomina Web",
+            "tipo": "Avería/Falla",
+            "notes": "",
+            "ticket": "interno13"
+          },
+          {
+            "tipo": "Avería/Falla",
+            "project": "Nomina Web",
+            "ticket": "interno12",
+            "status": "Solventado",
+            "notes": "Verificado por Lic Vanessa documento 14/07/2026",
+            "id": "Jezer Diaz-new-1783364479510",
+            "description": "NOMINA FULL VE. Para el cálculo de retenciones SSO y PIE el 4.5% el sistema está procesando el 4%"
+          },
+          {
+            "id": "Jezer Diaz-new-1783364503959",
+            "status": "Solventado",
+            "description": "NOMINA FULL VE. Ocultar Salario integral y utilidades, cuando se vaya a procesar un cálculo de vacaciones",
+            "project": "Nomina Web",
+            "tipo": "Mejora/requerimiento",
+            "ticket": "interno11",
+            "notes": "Verificado por Lic Vanessa documento 14/07/2026"
+          },
+          {
+            "status": "Solventado",
+            "id": "Jezer Diaz-new-1783364528166",
+            "project": "Nomina Web",
+            "description": "NOMINA FULL VE. El sistema debe mostrar en un solo concepto el SSO y PIE como si fuera la misma deducción para la parte de pre-nómina, actualmente el sistema muestra, por separado SSO y PIE cuando deberían estar unidos como si fuera procesar la pre-nómina. También muestra el PIE con la antigua denominación “SPF”",
+            "tipo": "Avería/Falla",
+            "ticket": "interno10",
+            "notes": "Verificado por Lic Vanessa documento 14/07/2026"
+          },
+          {
+            "ticket": "1607",
+            "id": "Jezer Diaz-new-1783365013970",
+            "description": "COMPROBANTE DE NOMINA SMALL",
+            "notes": "Listo para probar",
+            "project": "Nomina Small",
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado"
+          },
+          {
+            "status": "Solventado",
+            "tipo": "Mejora/requerimiento",
+            "id": "Jezer Diaz-new-1783365179818",
+            "notes": "",
+            "project": "Nomina Small",
+            "ticket": "2035",
+            "description": "MEJORA EN LA DESCRIPCIÓN DE NOMINA"
+          },
+          {
+            "ticket": "2036",
+            "id": "Jezer Diaz-new-1783365322002",
+            "tipo": "Avería/Falla",
+            "description": "INCIDENCIA EN EXPORTACION DE DATOS",
+            "status": "Solventado",
+            "project": "Adm Business",
+            "notes": "Solventado"
+          }
+        ],
+        "Carolina": [],
+        "Doniel Acosta": [
+          {
+            "id": "Doniel Acosta-1-1781627157171",
+            "description": "MEJORA EN MEDIOS MAGNETICOS \"INCLUIR NUEVA COLUMNA PARA EL DIGITO DE VERIFICACION DE NIT DE CLIENTES Y PROVEEDORES\"",
+            "ticket": "0001912",
+            "notes": "Solventado",
+            "rowIndex": 1,
+            "project": "Desarrollo Web",
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado"
+          },
+          {
+            "notes": "Ya se puede realizar la desincorporación por siniestro",
+            "description": "Error SQL al momento de registrar una desincorporación por siniestro",
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado",
+            "ticket": "0001900",
+            "rowIndex": 2,
+            "id": "Doniel Acosta-2-1781627157171",
+            "project": "Desarrollo Web"
+          },
+          {
+            "ticket": "0001899",
+            "description": "Desincorporación de activos Creación de tipos de comprobantes",
+            "notes": "Solventado",
+            "rowIndex": 3,
+            "id": "Doniel Acosta-3-1781627157171",
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado",
+            "project": "Desarrollo Web"
+          },
+          {
+            "rowIndex": 4,
+            "project": "Desarrollo Web",
+            "ticket": "0001885",
+            "description": "MEJORA EN EL REPORTE \"AUXILIAR DE ACTIVOS FIJOS\" DE TODOS LOS PINES DE COLOMBIA",
+            "status": "Solventado",
+            "notes": "Solventado",
+            "id": "Doniel Acosta-4-1781627157171",
+            "tipo": "Mejora/requerimiento"
+          },
+          {
+            "status": "Solventado",
+            "project": "Desarrollo Web",
+            "tipo": "Avería/Falla",
+            "id": "Doniel Acosta-5-1781627157171",
+            "notes": "Solventado",
+            "description": "Mayor analitico Probando el mes de abril si al verificar los movimientos de marzo, las cuentas que deben tener saldo inicial",
+            "ticket": "0001871",
+            "rowIndex": 5
+          },
+          {
+            "description": "Mayor analítico Si se solicita el mes de marzo, no se muestra en la columna del saldo anterior los saldos finales de febrero",
+            "status": "Solventado",
+            "project": "Desarrollo Web",
+            "tipo": "Avería/Falla",
+            "id": "Doniel Acosta-6-1781627157171",
+            "notes": "Solventado - Se debe tener presente que las cuentas no van aparecer hasta que se tenga un movimiento durante el mes siguiente",
+            "ticket": "0001869",
+            "rowIndex": 6
+          },
+          {
+            "notes": "Solventado, en espera de verificación de Alfredo",
+            "project": "Desarrollo Web",
+            "status": "Solventado",
+            "description": "INCLUIR FILTRO DE CENTRO DE COSTOS EN INFORMES CONTABLES",
+            "tipo": "Mejora/requerimiento",
+            "rowIndex": 7,
+            "id": "Doniel Acosta-7-1781627157171",
+            "ticket": "0001864"
+          },
+          {
+            "project": "Desarrollo Web",
+            "rowIndex": 8,
+            "id": "Doniel Acosta-8-1781627157171",
+            "ticket": "0001261",
+            "status": "En proceso",
+            "description": "INCIDENCIA CON MANEJO DE CUENTAS CONTABLES POR SUCURSAL",
+            "tipo": "Avería/Falla",
+            "notes": "En espera de información de parte del creador del ticket"
+          },
+          {
+            "project": "Contabilidad Web",
+            "status": "Solventado",
+            "id": "Doniel Acosta-new-1783428420872",
+            "tipo": "Mejora/requerimiento",
+            "description": "Reclasificación de cuentas de forma masiva",
+            "notes": "Solventado",
+            "ticket": "0001604"
+          },
+          {
+            "ticket": "0001742",
+            "notes": "Solventado",
+            "id": "Doniel Acosta-new-1783428518865",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "project": "Contabilidad Web",
+            "description": "No esta permitiendo crear cuentas contables, muestra error de No coincide con formato configurado"
+          },
+          {
+            "description": "MEJORA EN PRESENTACION REPORTES EN EXCEL",
+            "notes": "Solventado",
+            "status": "Solventado",
+            "project": "Contabilidad Web",
+            "ticket": "0001745",
+            "tipo": "Mejora/requerimiento",
+            "id": "Doniel Acosta-new-1783428692528"
+          },
+          {
+            "ticket": "0001746",
+            "project": "Contabilidad Web",
+            "status": "Solventado",
+            "description": "MEJORA EN REPORTE DE ESTADO DE RESULTADOS - FILTRO - REPORTE GERENCIAL",
+            "id": "Doniel Acosta-new-1783428807200",
+            "tipo": "Mejora/requerimiento",
+            "notes": "Solventado"
+          },
+          {
+            "status": "Solventado",
+            "project": "Contabilidad Web",
+            "description": "INCIDENCIA AL COBRAR O PAGAR FACTURAS NO TOMA LA CUENTA DE LA FORMA DE PAGO",
+            "id": "Doniel Acosta-new-1783429054271",
+            "tipo": "Mejora/requerimiento",
+            "notes": "Solventado",
+            "ticket": "0001778"
+          },
+          {
+            "notes": "Solventado",
+            "ticket": "0001790",
+            "tipo": "Avería/Falla",
+            "id": "Doniel Acosta-new-1783429116705",
+            "project": "Contabilidad Web",
+            "description": "PIN #52466 - SALDOS ANTERIORES EN CERO BALANCE DE COMPROBACION",
+            "status": "Solventado"
+          },
+          {
+            "notes": "Solventado",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "id": "Doniel Acosta-new-1783429201047",
+            "ticket": "0001792",
+            "description": "INCIDENCIA EN REPORTE 1001 MEDIOS MAGNETICOS DUPLICIDAD DE INFORMACION",
+            "project": "Contabilidad Web"
+          },
+          {
+            "description": "Depreciacion de activo el sistema toma por defecto el mensaje de depreciación acumulada y no la descripción de que se le da al comprobante",
+            "ticket": "0001813",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado",
+            "project": "Contabilidad Web",
+            "id": "Doniel Acosta-new-1783429298799"
+          },
+          {
+            "id": "Doniel Acosta-new-1783429469839",
+            "ticket": "0001814",
+            "notes": "Solventado",
+            "description": "Reversar una depreciación no actualiza la ficha del activo",
+            "tipo": "Avería/Falla",
+            "project": "Contabilidad Web",
+            "status": "Solventado"
+          },
+          {
+            "ticket": "0001815",
+            "description": "Reversar una depreciación no actualiza la ficha del activo",
+            "notes": "Solventado",
+            "id": "Doniel Acosta-new-1783429592943",
+            "project": "Contabilidad Web",
+            "status": "Solventado",
+            "tipo": "Avería/Falla"
+          },
+          {
+            "tipo": "Avería/Falla",
+            "notes": "Solventado",
+            "ticket": "0001816",
+            "description": "Amortizacion de activo el sistema toma por defecto el mensaje de depreciación acumulada y no la descripción de que se le da al comprobante",
+            "id": "Doniel Acosta-new-1783429726143",
+            "project": "Contabilidad Web",
+            "status": "Solventado"
+          },
+          {
+            "status": "Solventado",
+            "id": "Doniel Acosta-new-1783429883014",
+            "project": "Contabilidad Web",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado",
+            "ticket": "0001817",
+            "description": "El sistema no permite reversar una amortización realizada"
+          },
+          {
+            "id": "Doniel Acosta-new-1783429960334",
+            "description": "Que los asientos de amortización y depreciación no se contabilicen de forma automática",
+            "ticket": "0001820",
+            "status": "Solventado",
+            "project": "Contabilidad Web",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado"
+          },
+          {
+            "tipo": "Avería/Falla",
+            "ticket": "0001822",
+            "description": "Detalle al momento de contabilizar comprobantes desde la ventana de procesar comprobantes",
+            "status": "Solventado",
+            "notes": "Solventado",
+            "project": "Contabilidad Web",
+            "id": "Doniel Acosta-new-1783430067766"
+          },
+          {
+            "ticket": "0001824",
+            "project": "Contabilidad Web",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "id": "Doniel Acosta-new-1783430156126",
+            "notes": "Solventado",
+            "description": "código del asiento de amortización toma el mismo código de la depreciación"
+          },
+          {
+            "id": "Doniel Acosta-new-1783430583598",
+            "tipo": "Avería/Falla",
+            "ticket": "0001833",
+            "project": "Contabilidad Web",
+            "status": "Solventado",
+            "notes": "Solventado",
+            "description": "INCIDENCIA AL EMITIR REPORTE \"ESTADO DE SITUACION FINANCIERA\" PIN 39879"
+          },
+          {
+            "description": "INCIDENCIA AL EMITIR REPORTE AUXILIAR DE CUENTAS EN EL PIN 39879",
+            "status": "Solventado",
+            "id": "Doniel Acosta-new-1783430774918",
+            "project": "Contabilidad Web",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado",
+            "ticket": "0001834"
+          },
+          {
+            "description": "INCIDENCIA EN FORMATOS DE MEDIOS MAGNETICOS",
+            "project": "Contabilidad Web",
+            "ticket": "0001842",
+            "id": "Doniel Acosta-new-1783431436367",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado"
+          },
+          {
+            "notes": "Solventado",
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado",
+            "description": "INCLUIR FILTRO DE CENTRO DE COSTOS EN INFORMES CONTABLES",
+            "ticket": "0001864",
+            "id": "Doniel Acosta-new-1783431823701",
+            "project": "Contabilidad Web"
+          },
+          {
+            "ticket": "0001867",
+            "description": "Mayor analítico El sistema le asigna valores por defecto a la columna de saldo anterior cuando no corresponde",
+            "project": "Contabilidad Web",
+            "notes": "Solventado",
+            "id": "Doniel Acosta-new-1783432658691",
+            "tipo": "Avería/Falla",
+            "status": "Solventado"
+          },
+          {
+            "status": "Solventado",
+            "description": "Mayor analítico Si se consulta el flitro de manera mensual no funciona, solo puede verse el período más amplios",
+            "tipo": "Avería/Falla",
+            "project": "Contabilidad Web",
+            "notes": "Solventado",
+            "id": "Doniel Acosta-new-1783433481163",
+            "ticket": "0001868"
+          },
+          {
+            "id": "Doniel Acosta-new-1783433563587",
+            "project": "Contabilidad Web",
+            "ticket": "0001870",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado",
+            "description": "Mayor analítico incluye los movimientos en cada cuenta involucrada en el asiento de apertura, de forma desordenada"
+          },
+          {
+            "description": "INCIDENCIA AL REGISTRAR NUEVA CUENTA CONTABLE",
+            "ticket": "0001875",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "id": "Doniel Acosta-new-1783434146298",
+            "project": "Contabilidad Web",
+            "notes": "Solventado"
+          },
+          {
+            "status": "Solventado",
+            "id": "Doniel Acosta-new-1783434193489",
+            "tipo": "Mejora/requerimiento",
+            "description": "MEJORA EN EL REPORTE \"AUXILIAR DE ACTIVOS FIJOS\" DE TODOS LOS PINES DE COLOMBIA",
+            "project": "Contabilidad Web",
+            "notes": "Solventado",
+            "ticket": "0001885"
+          },
+          {
+            "tipo": "Avería/Falla",
+            "notes": "Solventado",
+            "ticket": "0001893",
+            "description": "INCIDENCIA AL EMITIR EL FORMATO 1001 MEDIOS MAGNETICOS PIN 49979",
+            "id": "Doniel Acosta-new-1783434325849",
+            "status": "Solventado",
+            "project": "Contabilidad Web"
+          },
+          {
+            "ticket": "0001894",
+            "notes": "Solventado",
+            "id": "Doniel Acosta-new-1783434381355",
+            "tipo": "Avería/Falla",
+            "description": "INCIDENCIA AL EMITIR UN AUXILIAR DE CUENTA EN EL PIN 47338",
+            "status": "Solventado",
+            "project": "Contabilidad Web"
+          },
+          {
+            "project": "Contabilidad Web",
+            "notes": "Solventado",
+            "status": "Solventado",
+            "id": "Doniel Acosta-new-1783434442641",
+            "ticket": "0001929",
+            "tipo": "Avería/Falla",
+            "description": "INCIDENCIA NO CUADRA EL BALANCE DE PRUEBAS PIN 50340"
+          },
+          {
+            "id": "Doniel Acosta-new-1783434519865",
+            "status": "Solventado",
+            "project": "Contabilidad Web",
+            "description": "INCIDENCIA EN EL MODULO DE ACTIVOS FIJOS PIN 47338",
+            "tipo": "Avería/Falla",
+            "ticket": "0001950",
+            "notes": "Solventado"
+          },
+          {
+            "project": "Contabilidad Web",
+            "id": "Doniel Acosta-new-1783434582225",
+            "ticket": "0001971",
+            "tipo": "Avería/Falla",
+            "description": "OBSERVACIONES EN EL MAYOR El saldo final de la cuenta para un píodo anterior se conviierte en el saldo anterior de la cuenta para el siguiente mes",
+            "status": "Solventado",
+            "notes": "Solventado"
+          },
+          {
+            "ticket": "0001972",
+            "project": "Contabilidad Web",
+            "notes": "Solventado",
+            "description": "Balance de comprobación El sistema no muestra información cuando se solicita el Balance de comprobación, así se marquen o no alguno de los filtros",
+            "id": "Doniel Acosta-new-1783434659546",
+            "status": "Solventado",
+            "tipo": "Avería/Falla"
+          },
+          {
+            "notes": "Solventado",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "ticket": "0001973",
+            "description": "Balance de comprobacion El filtro de la fecha debería ser solo una fecha de corte",
+            "project": "Contabilidad Web",
+            "id": "Doniel Acosta-new-1783434732417"
+          },
+          {
+            "ticket": "0001974",
+            "notes": "Solventado",
+            "tipo": "Avería/Falla",
+            "description": "Balance de comprobación el sistema no refleja la misma fecha del filtro que se seleccionó para emitir el reporte",
+            "id": "Doniel Acosta-new-1783434801201",
+            "status": "Solventado",
+            "project": "Contabilidad Web"
+          },
+          {
+            "status": "Solventado",
+            "id": "Doniel Acosta-new-1783434863809",
+            "tipo": "Mejora/requerimiento",
+            "project": "Contabilidad Web",
+            "notes": "Solventado",
+            "ticket": "0001975",
+            "description": "Estado situación de financiera El filtro de la fecha debería ser solo una fecha de corte y no un período"
+          },
+          {
+            "description": "“ESTADO DE SITUACIÓN FINANCIERA\" En el encabezado, el nombre del reporte está abreviado y debe visualizarse el nombre completo",
+            "ticket": "0001976",
+            "notes": "Solventado",
+            "tipo": "Mejora/requerimiento",
+            "project": "Contabilidad Web",
+            "status": "Solventado",
+            "id": "Doniel Acosta-new-1783434935056"
+          }
+        ],
+        "Nodgar Armando": [
+          {
+            "description": "ERROR SQL AL IMPORTAR DOCUMENTO EN DEVOLUCIONES COMPRAS",
+            "project": "Desarrollo Web",
+            "rowIndex": 1,
+            "ticket": "0001939",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "notes": "Cerrado en estatus solventado (Alfredo)",
+            "id": "Nodgar Armando-1-1781627157170"
+          },
+          {
+            "id": "Nodgar Armando-2-1781627157170",
+            "project": "Desarrollo Web",
+            "notes": "El desarrollador indica (Esto se podría manejar como una oferta o promoción pero seria para la nueva versión del adm web el cual se encuentra en desarrollo, para la versión actual ya a esta altura es difícil implementarlo)",
+            "rowIndex": 2,
+            "status": "No Aplica",
+            "tipo": "Mejora/requerimiento",
+            "ticket": "0001937",
+            "description": "Descuento por cantidades - mejora de precio por cantidades"
+          },
+          {
+            "status": "Solventado",
+            "description": "AGREGAR EN LA AUDITORIA CUANDO EL DOCUMENTO SE GENERA DESDE LA APP",
+            "rowIndex": 3,
+            "project": "Desarrollo Web",
+            "id": "Nodgar Armando-3-1781627157170",
+            "tipo": "Mejora/requerimiento",
+            "notes": "Solventado",
+            "ticket": "0001936"
+          },
+          {
+            "project": "Desarrollo Web",
+            "status": "Solventado",
+            "description": "Pin 47259 - ORDEN DE SERVICIO ESTABLECE ESTATUS FACTURADO DESDE LA SUCURSAL CELLSHOPPING 88",
+            "tipo": "Avería/Falla",
+            "id": "Nodgar Armando-4-1781627157170",
+            "notes": "Solventado",
+            "ticket": "0001934",
+            "rowIndex": 4
+          },
+          {
+            "description": "MOSTRAR ALERTA DE EXISTENCIAS CON CODIGO DEL ARTICULO",
+            "status": "Solventado",
+            "tipo": "Mejora/requerimiento",
+            "id": "Nodgar Armando-5-1781627157170",
+            "project": "Desarrollo Web",
+            "notes": "Solventado",
+            "rowIndex": 5,
+            "ticket": "0001933"
+          },
+          {
+            "project": "Desarrollo Web",
+            "description": "SISTEMA ENVIA PROPINA COMO INGRESOS EN FACTURACION ELECTRONICA",
+            "id": "Nodgar Armando-6-1781627157170",
+            "ticket": "0001932",
+            "status": "Solventado",
+            "tipo": "Avería/Falla",
+            "rowIndex": 6,
+            "notes": "Solventado - Se valido el correcto funcionamiento para The factory y factura Facil."
+          },
+          {
+            "rowIndex": 7,
+            "id": "Nodgar Armando-7-1781627157170",
+            "description": "En el libro de ventas de PIN 52534 el valor total de venta incluyendo IVA no trae monto total de la factura",
+            "ticket": "0001931",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "project": "Desarrollo Web",
+            "notes": "Solventado -\nNota de Nodgard (Resuelto, gracias por la explicación Carlos) en espera de revisión del soportista"
+          },
+          {
+            "ticket": "0001930",
+            "rowIndex": 8,
+            "notes": "Caso en espera de confirmación por el cliente",
+            "project": "Desarrollo Web",
+            "description": "En el PIN 50171 se detectaron varios documentos que carecen del sello de recepción.",
+            "id": "Nodgar Armando-8-1781627157170",
+            "status": "Solventado",
+            "tipo": "Avería/Falla"
+          },
+          {
+            "tipo": "Mejora/requerimiento",
+            "ticket": "0001928",
+            "description": "TIMBRADO GUIAS DE REMISION EN ECUADOR",
+            "rowIndex": 9,
+            "id": "Nodgar Armando-9-1781627157170",
+            "notes": "información adicional  - Nota del desarrollador: Revisé la Guía de remisión y en efecto tiene 13 caracteres el RUC, no entiendo el error, adjunto el request.json para que puedan enviárselo a The Factory Ecuador y hacer la consulta, aprovechar de consultar porque los documentos demoran tanto en enviarse al SRI ya que debemos esperar varios minutos para reintentar, consultar si tienen alguna alternativa.",
+            "project": "Desarrollo Web",
+            "status": "Información Adicional"
+          },
+          {
+            "rowIndex": 10,
+            "status": "Solventado",
+            "project": "Desarrollo Web",
+            "tipo": "Avería/Falla",
+            "id": "Nodgar Armando-10-1781627157170",
+            "notes": "Caso solventado - Sin embargo se espera confirmación del cliente",
+            "ticket": "0001927",
+            "description": "INCIDENCIA AL GENERAR NOTA CREDITO POR ANTICIPO"
+          },
+          {
+            "project": "Desarrollo Web",
+            "ticket": "0001926",
+            "tipo": "Avería/Falla",
+            "rowIndex": 11,
+            "status": "Solventado",
+            "notes": "Solventado 19-06-2026",
+            "description": "PIN 50887 - ARQUEO DE CAJA DUPLICA EL SALDO AL IMPORTAR UNA RESERVA A FACTURA",
+            "id": "Nodgar Armando-11-1781627157170"
+          },
+          {
+            "id": "Nodgar Armando-12-1781627157170",
+            "ticket": "0001925",
+            "rowIndex": 12,
+            "tipo": "Mejora/requerimiento",
+            "status": "Solventado",
+            "notes": "Solventado revisado 18-06-2026",
+            "project": "Desarrollo Web",
+            "description": "Se solicita añadir un nuevo parámetro en el reporte de Movimientos Bancarios que permita filtrar la consulta basándose en la fecha de la conciliación."
+          },
+          {
+            "tipo": "Mejora/requerimiento",
+            "id": "Nodgar Armando-13-1781627157170",
+            "ticket": "0001923",
+            "description": "PIN 50748 - Reporte de Articulos vendidos no se ajusta a los margenes",
+            "rowIndex": 13,
+            "project": "Desarrollo Web",
+            "notes": "Solventado Márgenes ajustados",
+            "status": "Solventado"
+          },
+          {
+            "ticket": "0001922",
+            "notes": "No aplica",
+            "description": "CARGA DE MANIFIESTOS - SISTEMA WEB",
+            "rowIndex": 14,
+            "id": "Nodgar Armando-14-1781627157170",
+            "project": "Desarrollo Web",
+            "status": "No Aplica",
+            "tipo": "Mejora/requerimiento"
+          },
+          {
+            "project": "Desarrollo Web",
+            "description": "VALIDACION DE EXISTENCIAS EN DOCUMENTOS DE VENTA",
+            "rowIndex": 15,
+            "status": "Información Adicional",
+            "id": "Nodgar Armando-15-1781627157170",
+            "notes": "En espera de cliente\nNodgard A Seguias publicado 9/6/26 21:46 Enviar cotizacion\nEsta modificación seria configurable y tendría un costo, contactarme para dar el precio del desarrollo.",
+            "ticket": "0001921",
+            "tipo": "Mejora/requerimiento"
+          },
+          {
+            "description": "PROCESO PARA CAMBIO DE PRECIO AL SELECCIONAR \"TALLA Y COLOR\"",
+            "notes": "No aplica",
+            "rowIndex": 16,
+            "project": "Desarrollo Web",
+            "status": "No Aplica",
+            "tipo": "Mejora/requerimiento",
+            "ticket": "0001919",
+            "id": "Nodgar Armando-16-1781627157170"
+          },
+          {
+            "status": "No Aplica",
+            "project": "Desarrollo Web",
+            "tipo": "Mejora/requerimiento",
+            "rowIndex": 17,
+            "id": "Nodgar Armando-17-1781627157170",
+            "notes": "No aplica, ese caso no fue asignado ! de cualquier manera no es factible",
+            "description": "AGREGAR OPCION DE IMAGEN EN \"COLORES\"",
+            "ticket": "0001918"
+          },
+          {
+            "id": "Nodgar Armando-18-1781627157170",
+            "status": "Solventado",
+            "description": "INCLUIR OPCIONES DEL MENU EN CONFIGURACION DE DENOMINACIONES",
+            "project": "Desarrollo Web",
+            "tipo": "Mejora/requerimiento",
+            "rowIndex": 18,
+            "notes": "Solventado 18-06-2026",
+            "ticket": "0001917"
+          },
+          {
+            "ticket": "0001916",
+            "notes": "Solventado",
+            "tipo": "Mejora/requerimiento",
+            "project": "Desarrollo Web",
+            "id": "Nodgar Armando-19-1781627157170",
+            "description": "PIN 50748 - FORMATO FAC MEDIA CARTA NO MUESTRA EL LOGO DE LA AGENCIA",
+            "rowIndex": 19,
+            "status": "Solventado"
+          },
+          {
+            "status": "Solventado",
+            "notes": "Solventado \nCarlos Obando publicado 15/6/26 8:13 prueba de modulo\nSe realizo las pruebas pertinentes por parte de parte de soporte técnico desde la coordinación y los técnico y el modulo esta operativo.",
+            "rowIndex": 20,
+            "ticket": "0001915",
+            "id": "Nodgar Armando-20-1781627157170",
+            "project": "Desarrollo Web",
+            "description": "Mejora: Módulo de Seguimiento y Notas Internas para Evaluación",
+            "tipo": "Mejora/requerimiento"
+          },
+          {
+            "ticket": "0001910",
+            "rowIndex": 21,
+            "id": "Nodgar Armando-21-1781627157170",
+            "status": "No Aplica",
+            "project": "Desarrollo Web",
+            "tipo": "Mejora/requerimiento",
+            "notes": "No aplica\nCerrado por Gianina Chacon con el estado de No Aplica 12/6/26 16:13",
+            "description": "Reclasificación Comercial y Operativa de los CATs  para categorizar, están las opciones de Garantía, y remoto, pero son términos mezclados."
+          },
+          {
+            "id": "Nodgar Armando-22-1781627157170",
+            "description": "Cambiar diseño de subtotales y totales en formato de factura página completa de Honduras",
+            "project": "Desarrollo Web",
+            "rowIndex": 22,
+            "notes": "información adicional - Pendiente por cliente",
+            "status": "Solventado",
+            "ticket": "0001905",
+            "tipo": "Mejora/requerimiento"
+          },
+          {
+            "project": "Desarrollo Web",
+            "ticket": "0001904",
+            "description": "Inconsistencia de existencia de un ítem que usa talla y colores en PIN 50075",
+            "status": "Solventado",
+            "notes": "Solventado, ya se visualizan las existencias",
+            "tipo": "Avería/Falla",
+            "rowIndex": 23,
+            "id": "Nodgar Armando-23-1781627157170"
+          },
+          {
+            "id": "Nodgar Armando-24-1781627157170",
+            "status": "Solventado",
+            "project": "Desarrollo Web",
+            "tipo": "Mejora/requerimiento",
+            "rowIndex": 24,
+            "notes": "Solventado - Pendiente por cliente",
+            "description": "Cambio de diseño de total en letras al formato de factura página completa de Honduras",
+            "ticket": "0001903"
+          },
+          {
+            "rowIndex": 25,
+            "id": "Nodgar Armando-25-1781627157170",
+            "ticket": "0001902",
+            "notes": "Información Adicional - Pendiente por cliente",
+            "description": "Cambiar diseño de tabla de detalle de los productos en formato de factura completa para Honduras",
+            "tipo": "Mejora/requerimiento",
+            "project": "Desarrollo Web",
+            "status": "Solventado"
+          },
+          {
+            "description": "Cambiar descripción de “Emisión” a “Fecha de emisión” en formato de factura página completa de Honduras",
+            "ticket": "0001901",
+            "rowIndex": 26,
+            "id": "Nodgar Armando-26-1781627157170",
+            "status": "Solventado",
+            "project": "Desarrollo Web",
+            "notes": "Resuelto, en espera de confirmación de Carlos Acevedo",
+            "tipo": "Mejora/requerimiento"
+          },
+          {
+            "description": "Pin 44665 - IMAGENES APARECEN INACCESIBLES EN LOS ARTICULOS EN EL SISTEMA ADM WEB / ESHOP",
+            "id": "Nodgar Armando-27-1781627157170",
+            "project": "Desarrollo Web",
+            "rowIndex": 27,
+            "ticket": "0001895",
+            "tipo": "Avería/Falla",
+            "status": "No Aplica",
+            "notes": "Esto Indica el desarrollador 8Pero en el servidor no se encuentran esas imágenes, no tengo forma de obtenerlas o recuperarlas)"
+          },
+          {
+            "project": "Desarrollo Web",
+            "ticket": "0001890",
+            "description": "PIN 43190 - ERROR MONTOS/UTILIDAD ARTICULOS VENDIDOS INFORMES GERENCIALES",
+            "tipo": "Avería/Falla",
+            "status": "Solventado",
+            "id": "Nodgar Armando-28-1781627157170",
+            "rowIndex": 28,
+            "notes": "Solventado ! en espera de confirmación de Richard Delgado"
+          },
+          {
+            "ticket": "0001888",
+            "id": "Nodgar Armando-29-1781627157170",
+            "notes": "Informacion adicional\nNodgard A Seguias publicado 6/6/26 7:52 .\nNecesitaría un modelo del reporte, incluso puede ser un excel, para dar el precio de este desarrollo.\n\nNota: El desarrollo será solo para este cliente.\n\nQuedo a la espera de la info.",
+            "description": "DESARROLLO DE INFORME PARA MANEJO DE EFECTIVO.",
+            "project": "Desarrollo Web",
+            "tipo": "Mejora/requerimiento",
+            "rowIndex": 29,
+            "status": "Información Adicional"
+          },
+          {
+            "description": "LENTITUD EN IMPRESION DE FACTURAS",
+            "ticket": "0001887",
+            "notes": "No aplica - Error del equipo del cliente",
+            "rowIndex": 30,
+            "project": "Desarrollo Web",
+            "tipo": "Avería/Falla",
+            "id": "Nodgar Armando-30-1781627157170",
+            "status": "No Aplica"
+          },
+          {
+            "id": "Nodgar Armando-31-1781627157170",
+            "rowIndex": 31,
+            "description": "ERROR AL MOSTRAR EL ESPACIO DE BD",
+            "ticket": "0001879",
+            "status": "Solventado",
+            "project": "Desarrollo Web",
+            "tipo": "Avería/Falla",
+            "notes": "Solventado"
+          },
+          {
+            "ticket": "0001845",
+            "notes": "Richard Puche publicado 1/6/26 16:46 \nNodgard, no hagas nada hasta que hablemos contigo Erika y mi persona.\n\nEl ticket aun se encuentra con información adicional !",
+            "project": "Desarrollo Web",
+            "id": "Nodgar Armando-32-1781627157170",
+            "tipo": "Mejora/requerimiento",
+            "description": "MEJORA EN LA FICHA DE LOS CLIENTES (TODOS LOS PINES)",
+            "status": "Información Adicional",
+            "rowIndex": 32
+          }
+        ],
+        "Erika": []
+      },
+      "loadedAt": "2026-06-16T16:25:57.171Z",
+      "periodName": "(sin nombre)",
+      "profiles": {
+        "Erika": "lider",
+        "Carolina": "evaluacion",
+        "Leandro Caicedo": "evaluacion"
+      }
+    }
+  ],
+  "loadedAt": "2026-07-29T18:29:52.767Z",
+  "profiles": {
+    "Leandro Caicedo": "evaluacion",
+    "Erika Molina": "lider",
+    "Carolina Rivera": "evaluacion"
+  },
+  "periodName": "Julio 2026",
+  "backedUpAt": "2026-08-03T22:48:16.306Z"
+}
