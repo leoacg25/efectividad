@@ -167,10 +167,24 @@ const App = (() => {
 
   // Estado de la aplicación
   let appData = null; // { programmers: {...}, loadedAt: string }
-  let lastSnapshotJson = null;
   let sharedViewName = null; // Nombre del programador en vista compartida
   let _viewingPlanification = null; // ID de planificación en vista (read-only), null si modo normal
   let _viewingArchiveIndex = null;   // índice en appData.archives, null si modo normal
+  let _firebaseErrorToastTimer = null;
+
+  /**
+   * Notifica una vez (debounced) cuando una escritura a Firebase falla,
+   * para que el usuario sepa que el cambio no se sincronizará.
+   * @param {Error} err
+   */
+  function notifyFirebaseSaveError(err) {
+    console.error('[App] Error sincronizando con Firebase:', err);
+    if (_firebaseErrorToastTimer) return;
+    _firebaseErrorToastTimer = setTimeout(() => {
+      _firebaseErrorToastTimer = null;
+      UI.showToast('Sin conexión con Firebase: los cambios no se sincronizarán', 'error', 4000);
+    }, 300);
+  }
 
   // ----------------------------------------------------------------
   // INICIALIZACIÓN
@@ -211,15 +225,16 @@ const App = (() => {
       FirebaseDB.init();
 
       Storage.setOnSaveCallback((data) => {
-        FirebaseDB.saveData(data);
+        // El eco de onSnapshot de escrituras propias lo filtra FirebaseDB
+        FirebaseDB.saveData(data)
+          .then(ok => { if (!ok) notifyFirebaseSaveError(new Error('saveData devolvió false')); })
+          .catch(notifyFirebaseSaveError);
       });
 
       FirebaseDB.onRemoteChange((remoteData) => {
-        const remoteJson = JSON.stringify(remoteData);
-        if (remoteJson === lastSnapshotJson) return;
-        lastSnapshotJson = remoteJson;
-
-        Storage.saveData(remoteData);
+        // Guardado silencioso: NO reenviar los datos recibidos a Firebase,
+        // evita el bucle set() → onSnapshot → set().
+        Storage.saveData(remoteData, true);
         appData = remoteData;
 
         if (window.__localTipoChange) return;
@@ -239,15 +254,28 @@ const App = (() => {
           }
         }
 
+        _posWebState = null;
         renderPosWebView();
         UI.showToast('Datos actualizados por otro usuario', 'info', 2000);
       });
 
       const remoteData = await FirebaseDB.loadData();
       if (remoteData && remoteData.programmers) {
-        Storage.saveData(remoteData);
+        Storage.saveData(remoteData, true);
         appData = remoteData;
-        lastSnapshotJson = JSON.stringify(remoteData);
+        _posWebState = null;
+
+        // Migración única: si el cloud no tiene casos Pos Web pero el equipo
+        // local sí, se suben para que otros equipos puedan verlos.
+        if (!posWebHasCases(remoteData.posweb)) {
+          const localPos = Storage.loadPosWebData();
+          if (posWebHasCases(localPos)) {
+            appData.posweb = { programmer: localPos.programmer || '', cases: localPos.cases };
+            Storage.saveData(appData);
+            _posWebState = null;
+          }
+        }
+
         renderPosWebView();
         if (sharedViewName) {
           enterSharedView(sharedViewName);
@@ -331,6 +359,7 @@ const App = (() => {
       if (saved && saved.programmers) {
         if (!saved.profiles) saved.profiles = {};
         appData = saved;
+        _posWebState = null;
         renderPosWebView();
         if (sharedViewName) {
           enterSharedView(sharedViewName);
@@ -1253,11 +1282,17 @@ const App = (() => {
     renderPosWebView();
   }
 
+  function posWebHasCases(posweb) {
+    return !!posweb && Array.isArray(posweb.cases) && posweb.cases.length > 0;
+  }
+
   function getPosWebState() {
     if (_posWebState) return _posWebState;
+    const remote = appData && appData.posweb && typeof appData.posweb === 'object' ? appData.posweb : null;
     const saved = Storage.loadPosWebData();
-    _posWebState = saved && typeof saved === 'object'
-      ? { programmer: saved.programmer || '', cases: Array.isArray(saved.cases) ? saved.cases : [] }
+    const source = remote || (saved && typeof saved === 'object' ? saved : null);
+    _posWebState = source
+      ? { programmer: source.programmer || '', cases: Array.isArray(source.cases) ? source.cases : [] }
       : { programmer: '', cases: [] };
     return _posWebState;
   }
@@ -1268,6 +1303,15 @@ const App = (() => {
       cases: Array.isArray(state?.cases) ? state.cases : [],
     };
     Storage.savePosWebData(_posWebState);
+    if (appData && typeof appData === 'object') {
+      appData.posweb = {
+        programmer: _posWebState.programmer,
+        cases: _posWebState.cases,
+      };
+      // Persistir en localStorage y sincronizar con Firebase (FirebaseDB solo
+      // escribe el doc de posweb, ya que es lo único que cambió).
+      Storage.saveData(appData);
+    }
     renderPosWebView();
   }
 

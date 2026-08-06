@@ -13,13 +13,54 @@ const serviceAccount = JSON.parse(FIREBASE_SERVICE_ACCOUNT);
 initializeApp({ credential: cert(serviceAccount) });
 const db = getFirestore();
 
-const doc = await db.collection('dashboard').doc('data').get();
-if (!doc.exists) {
-  console.error('Firestore document dashboard/data does not exist');
-  process.exit(1);
+function decodeName(id) {
+  try {
+    return decodeURIComponent(id);
+  } catch (e) {
+    return id;
+  }
 }
 
-const data = { ...doc.data(), backedUpAt: new Date().toISOString() };
+// Esquema v2: colección "programmers" + documento "dashboard/meta" + "dashboard/posweb"
+const progSnap = await db.collection('programmers').get();
+const metaSnap = await db.collection('dashboard').doc('meta').get();
+const poswebSnap = await db.collection('dashboard').doc('posweb').get();
+
+let data;
+if (progSnap.size > 0 || metaSnap.exists || poswebSnap.exists) {
+  const programmers = {};
+  const profiles = {};
+  progSnap.forEach(doc => {
+    const name = decodeName(doc.id);
+    const docData = doc.data();
+    programmers[name] = Array.isArray(docData.tickets) ? docData.tickets : [];
+    profiles[name] = docData.profile || 'desarrollador';
+  });
+  const meta = metaSnap.exists ? metaSnap.data() : {};
+  const posweb = poswebSnap.exists ? poswebSnap.data() : null;
+  data = {
+    programmers,
+    profiles,
+    periodName: meta.periodName || '',
+    loadedAt: meta.loadedAt || null,
+    archives: Array.isArray(meta.archives) ? meta.archives : [],
+    planifications: Array.isArray(meta.planifications) ? meta.planifications : [],
+    posweb: posweb && typeof posweb === 'object' ? {
+      programmer: posweb.programmer || '',
+      cases: Array.isArray(posweb.cases) ? posweb.cases : [],
+    } : null,
+  };
+} else {
+  // Esquema v1 (documento único dashboard/data) — compatibilidad
+  const doc = await db.collection('dashboard').doc('data').get();
+  if (!doc.exists) {
+    console.error('No se encontraron datos en Firestore (ni v2 ni v1)');
+    process.exit(1);
+  }
+  data = { ...doc.data() };
+}
+
+data.backedUpAt = new Date().toISOString();
 
 const backupDir = resolve(process.env.BACKUP_DIR || 'backups');
 if (!existsSync(backupDir)) {

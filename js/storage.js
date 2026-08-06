@@ -22,11 +22,13 @@ const Storage = (() => {
   /**
    * Guarda el objeto completo de datos en localStorage.
    * @param {Object} data - Estructura: { programmers: { [nombre]: [tickets] } }
+   * @param {boolean} silent - Si es true, NO dispara el callback de guardado
+   *   (se usa al aplicar datos remotos para evitar reenviarlos a Firebase).
    */
-  function saveData(data) {
+  function saveData(data, silent = false) {
     try {
       localStorage.setItem(KEY, JSON.stringify(data));
-      if (onSaveCallback) onSaveCallback(data);
+      if (!silent && onSaveCallback) onSaveCallback(data);
     } catch (err) {
       console.error('[Storage] Error al guardar datos:', err);
       // localStorage lleno (QuotaExceededError) u otro problema

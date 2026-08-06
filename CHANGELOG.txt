@@ -2,4 +2,6 @@ Registro de cambios del proyecto
 ===========================
 
 
+- 2026-08-06 - Sincronizar la vista Pos Web entre equipos (doc dashboard/posweb) y corregir el primer guardado perdido de notas/estados (el cache de Firebase ya no comparte referencias con la UI)
+- 2026-08-05 - Sincronización Firebase v2: un documento por programador + doc meta (evita sobrescritura entre equipos), migración automática del esquema antiguo, eliminación del bucle de escritura y aviso al usuario si la sincronización falla
 - 2026-07-28 - Agregar vista Pos Web
