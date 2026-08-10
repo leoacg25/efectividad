@@ -1305,524 +1305,524 @@
     "Leandro Caicedo": [],
     "Nodgard Armando": [
       {
-        "rowIndex": 1,
-        "tipo": "Mejora/requerimiento",
-        "status": "Solventado",
-        "notes": "Solventado",
         "id": "Nodgard Armando-1-1785349792766",
-        "project": "Soporte",
-        "ticket": "0002087",
-        "description": "Ajuste en el Libro de Compras"
-      },
-      {
         "status": "Solventado",
+        "rowIndex": 1,
+        "description": "Ajuste en el Libro de Compras",
         "tipo": "Mejora/requerimiento",
-        "rowIndex": 2,
-        "id": "Nodgard Armando-2-1785349792766",
-        "description": "Agregar al Reporte de Licencias Vencidas el Campo de identificacion fiscal que viene de la ficha de la licencia ( RUT, RIF otros)",
-        "ticket": "0002054",
         "project": "Soporte",
-        "notes": "En espera de validacion por Franklin"
+        "notes": "Solventado",
+        "ticket": "0002087"
       },
       {
+        "rowIndex": 2,
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0002054",
+        "status": "Solventado",
+        "project": "Soporte",
+        "notes": "En espera de validacion por Franklin",
+        "id": "Nodgard Armando-2-1785349792766",
+        "description": "Agregar al Reporte de Licencias Vencidas el Campo de identificacion fiscal que viene de la ficha de la licencia ( RUT, RIF otros)"
+      },
+      {
+        "status": "No Aplica",
         "description": "PIN 52544 - REPORTES ADICIONALES PARA VENDEDORES/RUTAS",
         "id": "Nodgard Armando-3-1785349792766",
-        "ticket": "0002052",
-        "tipo": "Mejora/requerimiento",
-        "status": "No Aplica",
         "project": "Soporte",
-        "notes": "Luego de revisar el requerimiento y la información recopilada durante la reunión, hemos decidido no continuar con la cotización de este desarrollo.\n\nLa razón principal es que el alcance funcional aún no está claramente definido. Durante la reunión surgieron nuevos requerimientos y procesos que no habían sido contemplados en la solicitud inicial ni en la documentación proporcionada. Esto evidencia que las necesidades del proyecto todavía están en proceso de definición, lo que dificulta estimar el esfuerzo, los tiempos y los costos con un nivel de certeza adecuado.\n\nEn estas condiciones existe un alto riesgo de que el alcance cambie durante el desarrollo, generando retrabajos y afectando tanto la planificación como las expectativas de ambas partes.\n\nPor este motivo, en esta ocasión preferimos abstenernos de asumir este desarrollo.",
-        "rowIndex": 3
+        "rowIndex": 3,
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0002052",
+        "notes": "Luego de revisar el requerimiento y la información recopilada durante la reunión, hemos decidido no continuar con la cotización de este desarrollo.\n\nLa razón principal es que el alcance funcional aún no está claramente definido. Durante la reunión surgieron nuevos requerimientos y procesos que no habían sido contemplados en la solicitud inicial ni en la documentación proporcionada. Esto evidencia que las necesidades del proyecto todavía están en proceso de definición, lo que dificulta estimar el esfuerzo, los tiempos y los costos con un nivel de certeza adecuado.\n\nEn estas condiciones existe un alto riesgo de que el alcance cambie durante el desarrollo, generando retrabajos y afectando tanto la planificación como las expectativas de ambas partes.\n\nPor este motivo, en esta ocasión preferimos abstenernos de asumir este desarrollo."
       },
       {
-        "ticket": "0001986",
-        "description": "PIN 50887 - CAMBIOS EN TITULOS/DESCRIPCION DE CAMPO EN EL REPORTE DEL MODULO DE OPTICA",
-        "rowIndex": 4,
         "id": "Nodgard Armando-4-1785349792766",
-        "tipo": "Mejora/requerimiento",
-        "notes": "Pendiente  por cliente",
+        "rowIndex": 4,
+        "ticket": "0001986",
+        "project": "Soporte",
+        "description": "PIN 50887 - CAMBIOS EN TITULOS/DESCRIPCION DE CAMPO EN EL REPORTE DEL MODULO DE OPTICA",
         "status": "Información Adicional",
+        "notes": "Pendiente  por cliente",
+        "tipo": "Mejora/requerimiento"
+      },
+      {
+        "ticket": "0001948",
+        "id": "Nodgard Armando-5-1785349792766",
+        "rowIndex": 5,
+        "project": "Soporte",
+        "notes": "Pendiente por cliente",
+        "description": "Pin 52517 - DETALLAR SERVICIOS O PRODUCTOS EN EL REPORTE DE COMISIONES EN VENTAS",
+        "tipo": "Mejora/requerimiento",
+        "status": "Información Adicional"
+      },
+      {
+        "notes": "",
+        "project": "Soporte",
+        "status": "Solventado",
+        "tipo": "Avería/Falla",
+        "id": "Nodgard Armando-6-1785349792766",
+        "ticket": "0002163",
+        "description": "Pin 50748 - CLIENTE FACTURO EN CERO Y REQUIERE ANULAR EL DOCUMENTO",
+        "rowIndex": 6
+      },
+      {
+        "tipo": "Avería/Falla",
+        "status": "No Aplica",
+        "rowIndex": 7,
+        "notes": "Sugerencia del programador revisar en la auditoria de usuario",
+        "description": "PIN: 47817- QCHEM- Factura de ventas #FACTURA DE OPERACION INTERNA 0000007470 no se encuentra",
+        "id": "Nodgard Armando-7-1785349792766",
+        "project": "Soporte",
+        "ticket": "0002159"
+      },
+      {
+        "notes": "Solventado",
+        "rowIndex": 8,
+        "tipo": "Avería/Falla",
+        "id": "Nodgard Armando-8-1785349792766",
+        "status": "Solventado",
+        "ticket": "0002150",
+        "project": "Soporte",
+        "description": "INCIDENCIA AL EMITIR LIBRO DE COMPRA MAS DE UN MES"
+      },
+      {
+        "status": "No Aplica",
+        "tipo": "Avería/Falla",
+        "project": "Soporte",
+        "description": "PIN: 47817- QUALITY CHEMICAL S.A- CORREGIR LA EXISTENCIA DE ESTE ARTICULO Codigo: CPI-130",
+        "rowIndex": 9,
+        "notes": "",
+        "id": "Nodgard Armando-9-1785349792766",
+        "ticket": "0002129"
+      },
+      {
+        "status": "No Aplica",
+        "project": "Soporte",
+        "description": "PIN: 47817- QUALITY CHEMICAL S.A- CORREGIR LA EXISTENCIA DE ESTE ARTICULO Codigo: CPI-039",
+        "rowIndex": 10,
+        "tipo": "Avería/Falla",
+        "id": "Nodgard Armando-10-1785349792766",
+        "ticket": "0002128",
+        "notes": ""
+      },
+      {
+        "rowIndex": 11,
+        "description": "Pin 48953 - CANTIDAD ERRADA EN EXISTENCIAS Y LO QUE SE MUESTRA EN KARDEX",
+        "tipo": "Avería/Falla",
+        "id": "Nodgard Armando-11-1785349792766",
+        "ticket": "0002109",
+        "status": "Solventado",
+        "notes": "Solventado",
         "project": "Soporte"
       },
       {
         "project": "Soporte",
-        "tipo": "Mejora/requerimiento",
-        "notes": "Pendiente por cliente",
-        "status": "Información Adicional",
-        "description": "Pin 52517 - DETALLAR SERVICIOS O PRODUCTOS EN EL REPORTE DE COMISIONES EN VENTAS",
-        "id": "Nodgard Armando-5-1785349792766",
-        "rowIndex": 5,
-        "ticket": "0001948"
-      },
-      {
-        "notes": "",
-        "rowIndex": 6,
-        "ticket": "0002163",
-        "id": "Nodgard Armando-6-1785349792766",
-        "tipo": "Avería/Falla",
-        "description": "Pin 50748 - CLIENTE FACTURO EN CERO Y REQUIERE ANULAR EL DOCUMENTO",
-        "project": "Soporte",
-        "status": "Solventado"
-      },
-      {
-        "rowIndex": 7,
-        "ticket": "0002159",
-        "description": "PIN: 47817- QCHEM- Factura de ventas #FACTURA DE OPERACION INTERNA 0000007470 no se encuentra",
-        "tipo": "Avería/Falla",
-        "status": "No Aplica",
-        "id": "Nodgard Armando-7-1785349792766",
-        "project": "Soporte",
-        "notes": "Sugerencia del programador revisar en la auditoria de usuario"
-      },
-      {
         "status": "Solventado",
-        "project": "Soporte",
-        "rowIndex": 8,
-        "description": "INCIDENCIA AL EMITIR LIBRO DE COMPRA MAS DE UN MES",
-        "ticket": "0002150",
-        "notes": "Solventado",
-        "id": "Nodgard Armando-8-1785349792766",
-        "tipo": "Avería/Falla"
-      },
-      {
-        "status": "No Aplica",
-        "project": "Soporte",
-        "description": "PIN: 47817- QUALITY CHEMICAL S.A- CORREGIR LA EXISTENCIA DE ESTE ARTICULO Codigo: CPI-130",
-        "id": "Nodgard Armando-9-1785349792766",
-        "notes": "",
-        "ticket": "0002129",
-        "tipo": "Avería/Falla",
-        "rowIndex": 9
-      },
-      {
-        "status": "No Aplica",
-        "tipo": "Avería/Falla",
-        "id": "Nodgard Armando-10-1785349792766",
-        "project": "Soporte",
-        "ticket": "0002128",
-        "description": "PIN: 47817- QUALITY CHEMICAL S.A- CORREGIR LA EXISTENCIA DE ESTE ARTICULO Codigo: CPI-039",
-        "rowIndex": 10,
-        "notes": ""
-      },
-      {
-        "description": "Pin 48953 - CANTIDAD ERRADA EN EXISTENCIAS Y LO QUE SE MUESTRA EN KARDEX",
-        "tipo": "Avería/Falla",
-        "ticket": "0002109",
-        "id": "Nodgard Armando-11-1785349792766",
-        "project": "Soporte",
-        "status": "Solventado",
-        "notes": "Solventado",
-        "rowIndex": 11
-      },
-      {
         "id": "Nodgard Armando-12-1785349792766",
-        "status": "Solventado",
-        "project": "Soporte",
+        "tipo": "Avería/Falla",
         "description": "El sistema esta calculando valores de comisiones que estan suspendidas",
-        "tipo": "Avería/Falla",
-        "rowIndex": 12,
-        "ticket": "0002107",
-        "notes": "Solventado"
-      },
-      {
-        "status": "Solventado",
-        "id": "Nodgard Armando-13-1785349792766",
-        "description": "Los Documentos de \"Comprobante de Retención\", no están siendo timbrados electronicamente.",
-        "project": "Soporte",
-        "rowIndex": 13,
-        "tipo": "Avería/Falla",
         "notes": "Solventado",
-        "ticket": "0002070"
+        "rowIndex": 12,
+        "ticket": "0002107"
       },
       {
-        "notes": "",
-        "id": "Nodgard Armando-14-1785349792766",
-        "status": "No Aplica",
-        "rowIndex": 14,
-        "tipo": "Avería/Falla",
+        "ticket": "0002070",
+        "rowIndex": 13,
+        "notes": "Solventado",
+        "id": "Nodgard Armando-13-1785349792766",
         "project": "Soporte",
-        "description": "ERROR EN LOS PERFILES",
-        "ticket": "0002056"
+        "tipo": "Avería/Falla",
+        "status": "Solventado",
+        "description": "Los Documentos de \"Comprobante de Retención\", no están siendo timbrados electronicamente."
       },
       {
-        "notes": "Listo para probar de Miguel Seguias",
+        "id": "Nodgard Armando-14-1785349792766",
+        "rowIndex": 14,
+        "ticket": "0002056",
+        "notes": "",
+        "description": "ERROR EN LOS PERFILES",
+        "project": "Soporte",
+        "tipo": "Avería/Falla",
+        "status": "No Aplica"
+      },
+      {
         "ticket": "0002032",
+        "notes": "Listo para probar de Miguel Seguias",
         "rowIndex": 15,
         "tipo": "Avería/Falla",
         "project": "Soporte",
-        "status": "Solventado",
+        "id": "Nodgard Armando-15-1785349792766",
         "description": "el proceso de cargo y descargo se cierra si por al crear nuevo articulo le doy a cerrar",
-        "id": "Nodgard Armando-15-1785349792766"
+        "status": "Solventado"
       },
       {
+        "id": "Nodgard Armando-16-1785349792766",
         "ticket": "0002015",
         "description": "PIN 44079- este pin es demostrativo y no esta timbrado los documentos es improtante para nuestras demos",
-        "notes": "En espera de respuesta de Digifact, ya se les notificó del caso.",
-        "id": "Nodgard Armando-16-1785349792766",
-        "project": "Soporte",
-        "tipo": "Avería/Falla",
+        "rowIndex": 16,
         "status": "Información Adicional",
-        "rowIndex": 16
-      },
-      {
-        "notes": "Solventado",
-        "rowIndex": 17,
-        "project": "Soporte",
-        "status": "Solventado",
         "tipo": "Avería/Falla",
+        "notes": "En espera de respuesta de Digifact, ya se les notificó del caso.",
+        "project": "Soporte"
+      },
+      {
+        "id": "Nodgard Armando-17-1785349792766",
+        "notes": "Solventado",
         "description": "Falla al momento de cargar el primer artículo que compone un integrado",
+        "status": "Solventado",
         "ticket": "0001829",
-        "id": "Nodgard Armando-17-1785349792766"
+        "rowIndex": 17,
+        "tipo": "Avería/Falla",
+        "project": "Soporte"
       },
       {
+        "notes": "Solventado",
         "status": "Solventado",
-        "id": "Nodgard Armando-new-1785933194724",
+        "tipo": "Mejora/requerimiento",
+        "description": "Cualquier pin, solicitar clave de supervisor para poder usa el boton ELIMINAR",
         "ticket": "0002103",
-        "notes": "Solventado",
         "project": "Adm Business",
-        "tipo": "Mejora/requerimiento",
-        "description": "Cualquier pin, solicitar clave de supervisor para poder usa el boton ELIMINAR"
+        "id": "Nodgard Armando-new-1785933194724"
       },
       {
+        "id": "Nodgard Armando-new-1785933472389",
         "status": "Solventado",
-        "project": "Adm Business",
-        "ticket": "0002135",
-        "notes": "Solventado",
-        "tipo": "Mejora/requerimiento",
         "description": "Cualquier pin panama- agregar al punto de venta el filtro de SUB- GRUPO de inventario para que sea mas precisa la busqueda",
-        "id": "Nodgard Armando-new-1785933472389"
+        "tipo": "Mejora/requerimiento",
+        "notes": "Solventado",
+        "ticket": "0002135",
+        "project": "Adm Business"
       },
       {
-        "project": "Adm Business",
-        "status": "Solventado",
         "ticket": "0002131",
-        "notes": "Solventado",
-        "description": "PIN: 47817- QCHEM - agregar al reporte de produccion basica el costo actual de cada ingrediente + el costo total de cada produccion",
         "id": "Nodgard Armando-new-1785933934872",
+        "status": "Solventado",
+        "description": "PIN: 47817- QCHEM - agregar al reporte de produccion basica el costo actual de cada ingrediente + el costo total de cada produccion",
+        "project": "Adm Business",
+        "notes": "Solventado",
         "tipo": "Mejora/requerimiento"
       },
       {
-        "notes": "Preguntar a Luis el caso no es especifico",
-        "ticket": "0002140",
-        "id": "Nodgard Armando-new-1785935061919",
+        "tipo": "Mejora/requerimiento",
+        "status": "Solventado",
         "project": "Adm Business",
-        "status": "En proceso",
+        "notes": "Solventado",
         "description": "Cualquier pin Costa rica- Mejora en el proceso de cargo/descargo de inventario - Halar ubicacion del item por bodega",
-        "tipo": "Mejora/requerimiento"
+        "ticket": "0002140",
+        "id": "Nodgard Armando-new-1785935061919"
       },
       {
-        "ticket": "0002168",
         "description": "Pin 38457 - FORMATO DE PAGO DE COMISIONES ES IDENTICO SEA DETALLADO O RESUMIDO",
-        "project": "Adm Business",
-        "notes": "Solventado",
         "id": "Nodgard Armando-new-1785935512547",
+        "status": "Solventado",
+        "ticket": "0002168",
         "tipo": "Mejora/requerimiento",
-        "status": "Solventado"
+        "notes": "Solventado",
+        "project": "Adm Business"
       },
       {
-        "status": "Solventado",
-        "project": "Adm Business",
-        "id": "Nodgard Armando-new-1785936368112",
+        "tipo": "Mejora/requerimiento",
         "ticket": "0002176",
+        "description": "REQUERIMIENTO PARA FUNCIONALIDAD DE OPERACION EN TRANSITO",
         "notes": "Solventado",
-        "tipo": "Mejora/requerimiento",
-        "description": "REQUERIMIENTO PARA FUNCIONALIDAD DE OPERACION EN TRANSITO"
+        "id": "Nodgard Armando-new-1785936368112",
+        "status": "Solventado",
+        "project": "Adm Business"
       },
       {
-        "project": "Adm Business",
-        "ticket": "0002171",
-        "tipo": "Mejora/requerimiento",
-        "notes": "Solventado",
-        "id": "Nodgard Armando-new-1785936588077",
         "description": "Cualquier pin- Agregar un check list para OCULTAR esta opcion- esta generando confusion y conflictos con los clientes",
+        "ticket": "0002171",
+        "notes": "Solventado",
+        "tipo": "Mejora/requerimiento",
+        "project": "Adm Business",
+        "id": "Nodgard Armando-new-1785936588077",
+        "status": "Solventado"
+      },
+      {
+        "description": "AGREGAR NOTA AL ELIMINAR ARTICULO COMANDAS",
+        "ticket": "0002174",
+        "notes": "Solventado",
+        "id": "Nodgard Armando-new-1785936684299",
+        "project": "Adm Business",
+        "tipo": "Mejora/requerimiento",
         "status": "Solventado"
       },
       {
         "status": "Solventado",
-        "project": "Adm Business",
-        "id": "Nodgard Armando-new-1785936684299",
-        "notes": "Solventado",
-        "tipo": "Mejora/requerimiento",
-        "ticket": "0002174",
-        "description": "AGREGAR NOTA AL ELIMINAR ARTICULO COMANDAS"
-      },
-      {
         "description": "CUANDO NO HAY MESAS DISPONIBLES UTILIZAR MESAS FLOTANTES",
-        "notes": "Solventado",
-        "ticket": "0002182",
-        "project": "Adm Business",
+        "tipo": "Mejora/requerimiento",
         "id": "Nodgard Armando-new-1785936854287",
-        "status": "Solventado",
-        "tipo": "Mejora/requerimiento"
+        "notes": "Solventado",
+        "project": "Adm Business",
+        "ticket": "0002182"
       },
       {
         "ticket": "0002175",
         "id": "Nodgard Armando-new-1785936996013",
-        "tipo": "Mejora/requerimiento",
-        "description": "AL SELECCIONAR MESA OBLIGATORIA ESTA PUEDA MANEJAR MESAS FLOTANTES",
-        "status": "Solventado",
         "notes": "Solventado",
-        "project": "Adm Business"
+        "project": "Adm Business",
+        "status": "Solventado",
+        "description": "AL SELECCIONAR MESA OBLIGATORIA ESTA PUEDA MANEJAR MESAS FLOTANTES",
+        "tipo": "Mejora/requerimiento"
       },
       {
         "ticket": "0002197",
-        "description": "Implementación de evento para pérdida de foco (LostFocus) o refresco en edición de renglones",
-        "tipo": "Avería/Falla",
-        "id": "Nodgard Armando-new-1785937621773",
+        "notes": "Solventado",
         "project": "Adm Business",
-        "status": "Solventado",
-        "notes": "Solventado"
+        "id": "Nodgard Armando-new-1785937621773",
+        "tipo": "Avería/Falla",
+        "description": "Implementación de evento para pérdida de foco (LostFocus) o refresco en edición de renglones",
+        "status": "Solventado"
       },
       {
-        "ticket": "0002202",
-        "project": "Comunidad de Soporte",
         "id": "Nodgard Armando-new-1785938514995",
         "notes": "Solventado",
-        "tipo": "Avería/Falla",
         "status": "Solventado",
+        "project": "Comunidad de Soporte",
+        "tipo": "Avería/Falla",
+        "ticket": "0002202",
         "description": "Vulnerabilidad de Exposición de Datos del Cliente en index.php, de la pagina de la comunidad de soporte"
       },
       {
+        "notes": "Solventado",
+        "description": "Fallas en la pagina de la comunidad de soporte, enrutamiento de Links rotos",
         "status": "Solventado",
+        "tipo": "Avería/Falla",
         "project": "Comunidad de Soporte",
         "id": "Nodgard Armando-new-1785938583948",
-        "description": "Fallas en la pagina de la comunidad de soporte, enrutamiento de Links rotos",
-        "ticket": "0002200",
-        "notes": "Solventado",
-        "tipo": "Avería/Falla"
+        "ticket": "0002200"
       },
       {
-        "notes": "Solventado",
-        "project": "Comunidad de Soporte",
-        "ticket": "0002222",
-        "description": "Fallo de Reactividad en Filtros Laterales en todos los Directorio de cada Usuario, en la pagina de la comunidad de soporte técnico",
+        "status": "Solventado",
         "id": "Nodgard Armando-new-1785942539912",
         "tipo": "Mejora/requerimiento",
-        "status": "Solventado"
+        "ticket": "0002222",
+        "notes": "Solventado",
+        "project": "Comunidad de Soporte",
+        "description": "Fallo de Reactividad en Filtros Laterales en todos los Directorio de cada Usuario, en la pagina de la comunidad de soporte técnico"
       },
       {
-        "tipo": "Mejora/requerimiento",
-        "id": "Nodgard Armando-new-1785943282567",
-        "notes": "Solventado",
         "ticket": "0001909",
+        "project": "Personalizador",
+        "status": "Solventado",
         "description": "Añadir el Consultor de Negocios como un (Filtro y un campo de solo lectura)",
-        "status": "Solventado",
-        "project": "Personalizador"
+        "id": "Nodgard Armando-new-1785943282567",
+        "tipo": "Mejora/requerimiento",
+        "notes": "Solventado"
       },
       {
-        "status": "Solventado",
-        "project": "Adm Business",
-        "description": "Agregar los departamentos y cabeceras faltantes para honduras para todos los pines de HONDURAS",
-        "ticket": "0002229",
-        "notes": "Solventado",
         "id": "Nodgard Armando-new-1785943655358",
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "id": "Nodgard Armando-new-1785943713350",
-        "description": "El cliente del pin 52341, esta solicitando una edicion leve en los formatos de venta y compras",
         "status": "Solventado",
-        "ticket": "0002241",
-        "project": "Adm Business",
-        "notes": "Solventado",
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "id": "Nodgard Armando-new-1785943778837",
+        "description": "Agregar los departamentos y cabeceras faltantes para honduras para todos los pines de HONDURAS",
         "tipo": "Mejora/requerimiento",
-        "project": "Adm Business",
-        "notes": "Solventado",
-        "ticket": "0002248",
-        "description": "AGREGAR EN PROCESO DE ELIMINAR DATA TALLAS Y COLORES",
-        "status": "Solventado"
-      },
-      {
-        "id": "Nodgard Armando-new-1785944124181",
-        "tipo": "Mejora/requerimiento",
-        "notes": "Solventado",
-        "ticket": "0002247",
-        "project": "Adm Business",
-        "status": "Solventado",
-        "description": "PROCESO DE EXPORTACION TALLAS Y COLORES"
-      },
-      {
-        "id": "Nodgard Armando-new-1785944247830",
-        "tipo": "Mejora/requerimiento",
-        "status": "Solventado",
-        "description": "Pin: 48475 - Ocultar los grupos en el punto de ventas cuando estos sean de uso interno",
-        "ticket": "0002249",
-        "project": "POS",
-        "notes": "Solventado"
-      },
-      {
-        "notes": "Solventado",
-        "status": "Solventado",
-        "project": "Adm Business",
-        "ticket": "0002254",
-        "description": "En el libro de compras, en la parte compras \"importadas\" no es necesario que salga la columna de sin derecho a credito fiscal",
-        "id": "Nodgard Armando-new-1785944470533",
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "status": "Solventado",
-        "tipo": "Mejora/requerimiento",
-        "project": "Adm Business",
-        "id": "Nodgard Armando-new-1785944556181",
-        "ticket": "0002262",
-        "description": "47817- Qchem- Agregar columna N de control al reporte articulos vendidos (detallado)",
-        "notes": "Solventado"
-      },
-      {
-        "ticket": "0002275",
-        "tipo": "Mejora/requerimiento",
-        "description": "caso de la comunidad de soporte: crear o habilitar Botón para el usuario administración para poder eliminar publicaciones",
-        "notes": "Solventado",
-        "status": "Solventado",
-        "id": "Nodgard Armando-new-1785944880236",
-        "project": "Comunidad de Soporte"
-      },
-      {
-        "tipo": "Mejora/requerimiento",
-        "status": "Solventado",
-        "id": "Nodgard Armando-new-1785944992732",
-        "ticket": "0002289",
-        "project": "Adm Business",
-        "description": "En el Dashboard los saldos que aparecen de ventas colocarlos sin el valor de impuestos",
-        "notes": "Listo para probar por Richard Puche"
-      },
-      {
-        "notes": "La Mejora no aplica por la forma como el sistema usa los descuentos (se explico de una manera alternativa)",
-        "id": "Nodgard Armando-new-1785945553725",
-        "description": "Cliente escribe por una mejora con los procesos de ofertas en el administrativo web",
-        "project": "Adm Business",
-        "status": "Solventado",
-        "tipo": "Mejora/requerimiento",
-        "ticket": "0002260"
-      },
-      {
-        "status": "Solventado",
-        "id": "Nodgard Armando-new-1785945852965",
-        "tipo": "Mejora/requerimiento",
-        "description": "El campo de importe Exonerado debe reflejar la base imponible sobre la cual no se cobrará el tributo (Max Duron)",
-        "ticket": "0002300",
-        "project": "Adm Business",
-        "notes": "Solventado"
-      },
-      {
-        "notes": "Solventado",
-        "ticket": "0002314",
-        "description": "Agregar Fecha de Vencimiento en la Factura Digital",
-        "project": "CFE - Integrado con FOX",
-        "status": "Solventado",
-        "id": "Nodgard Armando-new-1785946232292",
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "ticket": "0002318",
-        "tipo": "Mejora/requerimiento",
-        "project": "Adm Business",
-        "status": "Solventado",
-        "description": "Habilitación de edición de costo por lote en Ficha de Artículo",
-        "id": "Nodgard Armando-new-1785946306187",
-        "notes": "Solventado"
-      },
-      {
-        "notes": "Solventado",
-        "project": "Adm Business",
-        "status": "Solventado",
-        "description": "Crear reporte de movimientos por cuenta clasificadora para adm web",
-        "id": "Nodgard Armando-new-1785946484836",
-        "tipo": "Mejora/requerimiento",
-        "ticket": "0002324"
-      },
-      {
-        "ticket": "0002329",
-        "tipo": "Mejora/requerimiento",
-        "status": "Solventado",
-        "project": "App PSKLOUD",
-        "description": "Requerimiento para importar Json emitido desde la appkloud hacia el sistema web",
-        "notes": "Solventado",
-        "id": "Nodgard Armando-new-1785946603723"
-      },
-      {
-        "notes": "Pendiente por cliente",
-        "id": "Nodgard Armando-new-1785947007908",
-        "description": "AJUSTE EN FORMATO IMPRESO DE CODIGO DE BARRAS",
-        "ticket": "0002332",
-        "project": "Adm Business",
-        "tipo": "Mejora/requerimiento",
-        "status": "Solventado"
-      },
-      {
-        "project": "Adm Business",
-        "id": "Nodgard Armando-new-1785947191467",
-        "tipo": "Mejora/requerimiento",
-        "ticket": "0002339",
-        "notes": "Desarrollo adicional (Solventado)",
-        "status": "Solventado",
-        "description": "union de inventario entre pines 53017 y 52993 ( traslado, creacion de inventario, revision de existencia"
-      },
-      {
-        "tipo": "Avería/Falla",
-        "ticket": "0002359",
-        "description": "46403-GRUPO SOLRED, S.A.- Agregar validacion de contraseña de supervisor para poder cambiar medios de pagos",
-        "id": "Nodgard Armando-new-1785947280836",
-        "status": "Solventado",
+        "ticket": "0002229",
         "notes": "Solventado",
         "project": "Adm Business"
       },
       {
+        "ticket": "0002241",
+        "description": "El cliente del pin 52341, esta solicitando una edicion leve en los formatos de venta y compras",
         "notes": "Solventado",
-        "status": "Solventado",
         "project": "Adm Business",
+        "tipo": "Mejora/requerimiento",
+        "id": "Nodgard Armando-new-1785943713350",
+        "status": "Solventado"
+      },
+      {
+        "status": "Solventado",
+        "id": "Nodgard Armando-new-1785943778837",
+        "notes": "Solventado",
+        "project": "Adm Business",
+        "ticket": "0002248",
+        "description": "AGREGAR EN PROCESO DE ELIMINAR DATA TALLAS Y COLORES",
+        "tipo": "Mejora/requerimiento"
+      },
+      {
+        "notes": "Solventado",
+        "tipo": "Mejora/requerimiento",
+        "status": "Solventado",
+        "id": "Nodgard Armando-new-1785944124181",
+        "ticket": "0002247",
+        "project": "Adm Business",
+        "description": "PROCESO DE EXPORTACION TALLAS Y COLORES"
+      },
+      {
+        "ticket": "0002249",
+        "project": "POS",
+        "id": "Nodgard Armando-new-1785944247830",
+        "notes": "Solventado",
+        "description": "Pin: 48475 - Ocultar los grupos en el punto de ventas cuando estos sean de uso interno",
+        "status": "Solventado",
+        "tipo": "Mejora/requerimiento"
+      },
+      {
+        "project": "Adm Business",
+        "id": "Nodgard Armando-new-1785944470533",
+        "ticket": "0002254",
+        "notes": "Solventado",
+        "description": "En el libro de compras, en la parte compras \"importadas\" no es necesario que salga la columna de sin derecho a credito fiscal",
+        "tipo": "Mejora/requerimiento",
+        "status": "Solventado"
+      },
+      {
+        "project": "Adm Business",
+        "ticket": "0002262",
+        "description": "47817- Qchem- Agregar columna N de control al reporte articulos vendidos (detallado)",
+        "status": "Solventado",
+        "tipo": "Mejora/requerimiento",
+        "notes": "Solventado",
+        "id": "Nodgard Armando-new-1785944556181"
+      },
+      {
+        "ticket": "0002275",
+        "id": "Nodgard Armando-new-1785944880236",
+        "tipo": "Mejora/requerimiento",
+        "status": "Solventado",
+        "notes": "Solventado",
+        "project": "Comunidad de Soporte",
+        "description": "caso de la comunidad de soporte: crear o habilitar Botón para el usuario administración para poder eliminar publicaciones"
+      },
+      {
+        "id": "Nodgard Armando-new-1785944992732",
+        "project": "Adm Business",
+        "notes": "Listo para probar por Richard Puche",
+        "status": "Solventado",
+        "tipo": "Mejora/requerimiento",
+        "description": "En el Dashboard los saldos que aparecen de ventas colocarlos sin el valor de impuestos",
+        "ticket": "0002289"
+      },
+      {
+        "status": "Solventado",
+        "tipo": "Mejora/requerimiento",
+        "description": "Cliente escribe por una mejora con los procesos de ofertas en el administrativo web",
+        "project": "Adm Business",
+        "id": "Nodgard Armando-new-1785945553725",
+        "notes": "La Mejora no aplica por la forma como el sistema usa los descuentos (se explico de una manera alternativa)",
+        "ticket": "0002260"
+      },
+      {
+        "notes": "Solventado",
+        "tipo": "Mejora/requerimiento",
+        "project": "Adm Business",
+        "ticket": "0002300",
+        "description": "El campo de importe Exonerado debe reflejar la base imponible sobre la cual no se cobrará el tributo (Max Duron)",
+        "status": "Solventado",
+        "id": "Nodgard Armando-new-1785945852965"
+      },
+      {
+        "tipo": "Mejora/requerimiento",
+        "notes": "Solventado",
+        "project": "CFE - Integrado con FOX",
+        "ticket": "0002314",
+        "description": "Agregar Fecha de Vencimiento en la Factura Digital",
+        "id": "Nodgard Armando-new-1785946232292",
+        "status": "Solventado"
+      },
+      {
+        "description": "Habilitación de edición de costo por lote en Ficha de Artículo",
+        "project": "Adm Business",
+        "ticket": "0002318",
+        "id": "Nodgard Armando-new-1785946306187",
+        "tipo": "Mejora/requerimiento",
+        "status": "Solventado",
+        "notes": "Solventado"
+      },
+      {
+        "project": "Adm Business",
+        "description": "Crear reporte de movimientos por cuenta clasificadora para adm web",
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0002324",
+        "status": "Solventado",
+        "id": "Nodgard Armando-new-1785946484836",
+        "notes": "Solventado"
+      },
+      {
+        "tipo": "Mejora/requerimiento",
+        "project": "App PSKLOUD",
+        "notes": "Solventado",
+        "ticket": "0002329",
+        "description": "Requerimiento para importar Json emitido desde la appkloud hacia el sistema web",
+        "id": "Nodgard Armando-new-1785946603723",
+        "status": "Solventado"
+      },
+      {
+        "project": "Adm Business",
+        "id": "Nodgard Armando-new-1785947007908",
+        "description": "AJUSTE EN FORMATO IMPRESO DE CODIGO DE BARRAS",
+        "notes": "Pendiente por cliente",
+        "status": "Solventado",
+        "ticket": "0002332",
+        "tipo": "Mejora/requerimiento"
+      },
+      {
+        "id": "Nodgard Armando-new-1785947191467",
+        "ticket": "0002339",
+        "project": "Adm Business",
+        "description": "union de inventario entre pines 53017 y 52993 ( traslado, creacion de inventario, revision de existencia",
+        "notes": "Desarrollo adicional (Solventado)",
+        "tipo": "Mejora/requerimiento",
+        "status": "Solventado"
+      },
+      {
+        "id": "Nodgard Armando-new-1785947280836",
+        "status": "Solventado",
+        "ticket": "0002359",
+        "notes": "Solventado",
+        "description": "46403-GRUPO SOLRED, S.A.- Agregar validacion de contraseña de supervisor para poder cambiar medios de pagos",
+        "project": "Adm Business",
+        "tipo": "Avería/Falla"
+      },
+      {
         "id": "Nodgard Armando-new-1785947863972",
-        "ticket": "0002361",
-        "description": "Agregar el filtro de USUARIO del sistema a los siguientes informes pines para panama - Solicitado por Guillermo Rodriguez",
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "ticket": "0002383",
-        "project": "POS",
-        "notes": "Solventado",
-        "status": "Solventado",
-        "tipo": "Mejora/requerimiento",
-        "id": "Nodgard Armando-new-1785947923412",
-        "description": "Agregar Check Box \"Consecutivo Automático\" en registro detallado de clientes"
-      },
-      {
-        "id": "Nodgard Armando-new-1785948018636",
-        "description": "En el registro rápido de clientes, agregar el * para que sea campo obligatorio y el check box de \"Consecutivo Automatico\"",
-        "status": "Solventado",
-        "tipo": "Mejora/requerimiento",
-        "notes": "Solventado",
-        "project": "POS",
-        "ticket": "0002382"
-      },
-      {
-        "notes": "Solventado",
-        "ticket": "0002373",
-        "id": "Nodgard Armando-new-1785948197780",
         "project": "Adm Business",
-        "description": "Restringir la modificación de la contraseña del usuario SoportePSK, de modo que solo pueda ser editada por él mismo usuario",
         "status": "Solventado",
+        "notes": "Solventado",
+        "ticket": "0002361",
+        "tipo": "Mejora/requerimiento",
+        "description": "Agregar el filtro de USUARIO del sistema a los siguientes informes pines para panama - Solicitado por Guillermo Rodriguez"
+      },
+      {
+        "status": "Solventado",
+        "tipo": "Mejora/requerimiento",
+        "description": "Agregar Check Box \"Consecutivo Automático\" en registro detallado de clientes",
+        "id": "Nodgard Armando-new-1785947923412",
+        "notes": "Solventado",
+        "project": "POS",
+        "ticket": "0002383"
+      },
+      {
+        "description": "En el registro rápido de clientes, agregar el * para que sea campo obligatorio y el check box de \"Consecutivo Automatico\"",
+        "project": "POS",
+        "status": "Solventado",
+        "id": "Nodgard Armando-new-1785948018636",
+        "ticket": "0002382",
+        "notes": "Solventado",
         "tipo": "Mejora/requerimiento"
       },
       {
+        "project": "Adm Business",
+        "notes": "Solventado",
+        "id": "Nodgard Armando-new-1785948197780",
+        "status": "Solventado",
+        "ticket": "0002373",
+        "tipo": "Mejora/requerimiento",
+        "description": "Restringir la modificación de la contraseña del usuario SoportePSK, de modo que solo pueda ser editada por él mismo usuario"
+      },
+      {
+        "tipo": "Mejora/requerimiento",
+        "notes": "Solventado",
+        "status": "Solventado",
         "ticket": "0002281",
         "project": "Adm Business",
-        "id": "Nodgard Armando-new-1785948281604",
         "description": "Poder subir imagen de sello y firma para que aparezca en el formato de retencion de IVA e ISLR",
-        "notes": "Listo para probar",
-        "status": "En proceso",
-        "tipo": "Mejora/requerimiento"
+        "id": "Nodgard Armando-new-1785948281604"
       },
       {
-        "ticket": "0002393",
-        "project": "Personalizador",
-        "tipo": "Mejora/requerimiento",
         "id": "Nodgard Armando-new-1785948399556",
-        "status": "En proceso",
+        "project": "Personalizador",
         "description": "Mejora del personalizador",
+        "tipo": "Mejora/requerimiento",
+        "ticket": "0002393",
+        "status": "Solventado",
         "notes": "Listo para probar (Validar con Lic Douglas)"
       }
     ]
@@ -3686,140 +3686,158 @@
     "cases": [
       {
         "ticket": "2374",
-        "description": "Validación de los campos requeridos",
-        "notes": "Solventado-\nAl hacer el registro de manera detalla de un cliente no esta validando campos que deberían ser requeridos al igual que al darle guardar esta mostrando un error SQL\n\n1) Código aunque no deja guardar sale un error SQL (Mensajes de Validación) \n\n2) Tipo Doc Identificación (Debe ser un campo requerido)\n\n3) Numero de documento de Identificación  (Debe ser un campo requerido )",
-        "id": "case_1785266283619",
         "status": "Solventado",
+        "type": "Falla",
+        "description": "Validación de los campos requeridos",
+        "id": "case_1785266283619",
         "programmer": "Nodgar Armando",
-        "type": "Falla"
+        "notes": "Solventado-\nAl hacer el registro de manera detalla de un cliente no esta validando campos que deberían ser requeridos al igual que al darle guardar esta mostrando un error SQL\n\n1) Código aunque no deja guardar sale un error SQL (Mensajes de Validación) \n\n2) Tipo Doc Identificación (Debe ser un campo requerido)\n\n3) Numero de documento de Identificación  (Debe ser un campo requerido )"
       },
       {
-        "status": "Solventado",
-        "description": "Lentitud en el inicio y ya previamente se había iniciado sesión ﻿- Validado con el pin 46362",
         "type": "Falla",
+        "programmer": "Nodgar Armando",
+        "ticket": "2377",
+        "status": "Solventado",
         "id": "case_1785271745284",
         "notes": "Solventado",
-        "ticket": "2377",
-        "programmer": "Nodgar Armando"
+        "description": "Lentitud en el inicio y ya previamente se había iniciado sesión ﻿- Validado con el pin 46362"
       },
       {
+        "notes": "Solventado - Mejorar el box panel d-flex flex-column",
         "status": "Solventado",
-        "type": "Falla",
-        "programmer": "Nodgar Armando",
-        "description": "Arreglar el responsive, la lista de productos se sale del box panel",
-        "id": "case_1785272153646",
         "ticket": "2379",
-        "notes": "Solventado - Mejorar el box panel d-flex flex-column"
+        "programmer": "Nodgar Armando",
+        "id": "case_1785272153646",
+        "description": "Arreglar el responsive, la lista de productos se sale del box panel",
+        "type": "Falla"
       },
       {
         "description": "Al facturar de forma consecutiva, da error SQL duplicate entry",
-        "notes": "Se adjunta el Error\n\n\n\nOperti/ProcesarDoc — respuesta del servidor: errorSQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2991-0000000963-0' for key 'codigo_unico'\n\nsuccess @ clases.js?v=1784143387:288\n\nVM474:155 Operti/ProcesarDoc — respuesta del servidor: errorSQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2991-000\n\n0000963-0' for key 'codigo_unico'",
-        "status": "No resuelto",
         "type": "Falla",
         "ticket": "2381",
-        "id": "case_1785272415851",
-        "programmer": "Nodgar Armando"
+        "status": "No resuelto",
+        "programmer": "Nodgar Armando",
+        "notes": "ya no da el error pero no deja facturar al mismo tiempo",
+        "id": "case_1785272415851"
       },
       {
-        "id": "case_1785272755956",
+        "description": "En el registro rápido de clientes, agregar el * para que sea campo obligatorio y el check box de \"Consecutivo Automatico\"",
         "status": "Solventado",
+        "ticket": "2382",
+        "id": "case_1785272755956",
         "type": "Mejora",
         "notes": "Solventado",
-        "ticket": "2382",
-        "description": "En el registro rápido de clientes, agregar el * para que sea campo obligatorio y el check box de \"Consecutivo Automatico\"",
         "programmer": "Nodgar Armando"
       },
       {
-        "programmer": "Nodgar Armando",
         "ticket": "2383",
         "status": "Solventado",
-        "type": "Mejora",
-        "notes": "Solventado",
+        "programmer": "Nodgar Armando",
         "id": "case_1785273254279",
-        "description": "Agregar Check Box \"Consecutivo Automático\" en registro detallado de clientes"
+        "description": "Agregar Check Box \"Consecutivo Automático\" en registro detallado de clientes",
+        "type": "Mejora",
+        "notes": "Solventado"
       },
       {
+        "type": "Falla",
+        "notes": "Solventado",
         "description": "No inicia sesión en modo Off-line",
-        "status": "Solventado",
-        "notes": "Solventado",
         "programmer": "Nodgar Armando",
-        "type": "Falla",
-        "id": "case_1786023038019",
-        "ticket": "2463"
+        "ticket": "2463",
+        "status": "Solventado",
+        "id": "case_1786023038019"
       },
       {
-        "ticket": "2464",
         "type": "Falla",
+        "programmer": "Nodgar Armando",
         "id": "case_1786025208141",
-        "programmer": "Nodgar Armando",
-        "notes": "Soloventado",
+        "ticket": "2464",
         "status": "Solventado",
-        "description": "Falla de inicio de sesión POS - Trae un usuario erróneo"
+        "description": "Falla de inicio de sesión POS - Trae un usuario erróneo",
+        "notes": "Soloventado"
       },
       {
-        "programmer": "Nodgar Armando",
-        "type": "Falla",
-        "id": "case_1786025821155",
         "status": "Solventado",
-        "notes": "Solventado",
+        "type": "Falla",
         "ticket": "2465",
-        "description": "Validación para documentos permitidos según perfil de usuario - Nuevo POS"
+        "programmer": "Nodgar Armando",
+        "id": "case_1786025821155",
+        "description": "Validación para documentos permitidos según perfil de usuario - Nuevo POS",
+        "notes": "Solventado"
       },
       {
+        "programmer": "Nodgar Armando",
         "notes": "Solventado",
-        "status": "Solventado",
-        "ticket": "2466",
-        "type": "Falla",
         "description": "Validación de Acceso a los almacenes según configuración de usuario - Nuevo POS",
         "id": "case_1786026052257",
-        "programmer": "Nodgar Armando"
+        "type": "Falla",
+        "status": "Solventado",
+        "ticket": "2466"
       },
       {
-        "status": "No resuelto",
-        "description": "Agregar opción de Descuento Global - Nuevo POS - pin 44079 - usuario: Leandro - Perfil: RESTAURANTE 2",
+        "ticket": "2469",
+        "status": "Solventado",
+        "programmer": "Nodgar Armando",
         "id": "case_1786027239085",
         "type": "Mejora",
-        "programmer": "Nodgar Armando",
-        "ticket": "2469",
-        "notes": ""
+        "description": "Agregar opción de Descuento Global - Nuevo POS - pin 44079 - usuario: Leandro - Perfil: RESTAURANTE 2",
+        "notes": "Solventado"
       },
       {
-        "description": "No se puede emitir una comanda Error SQL - Nuevo POS",
-        "ticket": "2474",
         "id": "case_1786028258092",
-        "notes": "",
-        "status": "No resuelto",
+        "type": "Falla",
+        "description": "No se puede emitir una comanda Error SQL - Nuevo POS",
         "programmer": "Nodgar Armando",
-        "type": "Falla"
-      },
-      {
-        "notes": "Solventado",
+        "ticket": "2474",
         "status": "Solventado",
-        "description": "Actualmente el nuevo POS permite ingresar a agencias o sucursales que se encuentran en estado suspendido en el Administrativo. (cuando no debería permitir el ingreso)",
-        "type": "Mejora",
-        "ticket": "2476",
-        "programmer": "Nodgar Armando",
-        "id": "case_1786050289041"
+        "notes": "Solventado"
       },
       {
-        "id": "case_1786130495635",
-        "ticket": "2490",
+        "type": "Mejora",
+        "status": "Solventado",
+        "ticket": "2476",
+        "description": "Actualmente el nuevo POS permite ingresar a agencias o sucursales que se encuentran en estado suspendido en el Administrativo. (cuando no debería permitir el ingreso)",
+        "id": "case_1786050289041",
+        "programmer": "Nodgar Armando",
+        "notes": "Solventado"
+      },
+      {
+        "programmer": "Nodgar Armando",
+        "notes": "No aplica",
         "description": "Agregar botón de búsqueda de clientes en la parrilla de posteo - Nuevo POS",
         "type": "Mejora",
+        "id": "case_1786130495635",
+        "ticket": "2490",
+        "status": "No Aplica"
+      },
+      {
+        "programmer": "Nodgar Armando",
+        "id": "case_1786131440971",
+        "type": "Mejora",
+        "ticket": "2491",
+        "notes": "No aplica",
+        "status": "No Aplica",
+        "description": "agregar botón de búsqueda de clientes en registro rápido de clientes - Nuevo POS"
+      },
+      {
+        "id": "case_1786391790831",
+        "ticket": "2500",
+        "description": "si no se tiene activa la opcion de devoluciones, que desaparezca del de Nuevo POS",
+        "type": "Mejora",
         "status": "No resuelto",
         "programmer": "Nodgar Armando",
         "notes": ""
       },
       {
-        "id": "case_1786131440971",
-        "ticket": "2491",
-        "description": "agregar botón de búsqueda de clientes en registro rápido de clientes - Nuevo POS",
-        "type": "Mejora",
+        "id": "case_1786392944859",
+        "ticket": "2501",
+        "description": "En el modo Touch no funciona el lector de códigos de barra - Nuevo Pos",
+        "type": "Falla",
         "status": "No resuelto",
         "programmer": "Nodgar Armando",
         "notes": ""
       }
     ]
   },
-  "backedUpAt": "2026-08-07T22:22:37.752Z"
+  "backedUpAt": "2026-08-10T22:23:45.738Z"
 }
