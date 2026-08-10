@@ -1535,12 +1535,11 @@ const App = (() => {
   window._posWebNotesCleanup = function () {
     _posWebNotesCaseId = null;
     window._posWebNotesCaseId = null;
-    delete window._posWebNotesSave;
   };
 
   window._posWebNotesSave = function () {
     const caseId = _posWebNotesCaseId;
-    if (!caseId) { window._posWebNotesCleanup(); Tickets.closeNotesModal(); return; }
+    if (!caseId) return false;
     const textarea = document.getElementById('notes-textarea');
     const newVal = textarea.value.trim();
     const state = getPosWebState();
@@ -1552,6 +1551,7 @@ const App = (() => {
     }
     window._posWebNotesCleanup();
     Tickets.closeNotesModal();
+    return true;
   };
 
   function openPosWebView() {
