@@ -3972,10 +3972,10 @@
       },
       {
         "programmer": "Nodgar Armando",
-        "status": "No resuelto",
+        "status": "Solventado",
         "ticket": "2637",
         "description": "Al comandar en el nuevo POS, se convierte a factura a credito en el ADM",
-        "notes": "",
+        "notes": "Solventado",
         "type": "Falla",
         "id": "case_1787597221008"
       },
@@ -4014,8 +4014,26 @@
         "status": "No resuelto",
         "programmer": "Nodgar Armando",
         "notes": ""
+      },
+      {
+        "id": "case_1787921848777",
+        "ticket": "2677",
+        "description": "Se requiere la opcion que al tener marcado por defecto que inicie en \"Documento de ventas\" el Nuevo POS también tome la configuración",
+        "type": "Mejora",
+        "status": "No resuelto",
+        "programmer": "Nodgar Armando",
+        "notes": ""
+      },
+      {
+        "id": "case_1787923425010",
+        "ticket": "2677",
+        "description": "Limpiar pos después de comandar",
+        "type": "Falla",
+        "status": "No Aplica",
+        "programmer": "Nodgar Armando",
+        "notes": "No aplica"
       }
     ]
   },
-  "backedUpAt": "2026-08-28T05:51:05.821Z"
+  "backedUpAt": "2026-08-29T03:24:10.869Z"
 }
