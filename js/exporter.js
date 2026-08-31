@@ -673,11 +673,43 @@ const Exporter = (() => {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
+  // ----------------------------------------------------------------
+  // EXCEL INDIVIDUAL (planilla reimportable por programador)
+  // ----------------------------------------------------------------
+
+  /**
+   * Exporta los tickets de un programador a un Excel con una sola hoja,
+   * reutilizando las mismas columnas que acepta la importación para que
+   * el archivo sea directamente reimportable.
+   * @param {string} programmerName
+   * @param {Array} tickets
+   */
+  function exportExcelIndividual(programmerName, tickets) {
+    const { file: dateStr } = formatDate();
+    const headers = ['N° Ticket', 'Descripción', 'Proyecto', 'Tipo', 'Notas', 'Estado'];
+    const rows = tickets.map(t => [
+      t.ticket,
+      t.description,
+      t.project,
+      t.tipo || '',
+      t.notes,
+      t.status,
+    ]);
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+    ws['!cols'] = [{ wch: 12 }, { wch: 40 }, { wch: 20 }, { wch: 18 }, { wch: 30 }, { wch: 20 }];
+    const sheetName = (programmerName || 'Programador').slice(0, 31);
+    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+    XLSX.writeFile(wb, `planilla_${programmerName.replace(/\s+/g, '_')}_${dateStr}.xlsx`);
+  }
+
   // API pública del módulo
   return {
     exportCSVIndividual,
     exportCSVConsolidated,
     exportCSVPruebas,
+    exportExcelIndividual,
     exportPDFIndividual,
     exportPDFConsolidated,
   };

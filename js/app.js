@@ -156,7 +156,50 @@ const UI = (() => {
     });
   }
 
-  return { setLoading, showScreen, showView, showUploadError, hideUploadError, showToast, confirm };
+  /**
+   * Modal de decisión de 3 opciones para importar planilla.
+   * @param {string} title
+   * @param {string} message
+   * @returns {Promise<'replace'|'add'|null>} 'replace', 'add' o null si canceló
+   */
+  function confirmImportPlan(title, message) {
+    return new Promise((resolve) => {
+      const modal = document.getElementById('import-plan-modal');
+      if (!modal) { resolve(null); return; }
+
+      document.getElementById('import-plan-title').textContent = title;
+      document.getElementById('import-plan-message').textContent = message;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('active');
+
+      function cleanup(result) {
+        modal.classList.add('hidden');
+        modal.classList.remove('active');
+        replaceBtn.removeEventListener('click', onReplace);
+        addBtn.removeEventListener('click', onAdd);
+        cancelBtn.removeEventListener('click', onCancel);
+        document.removeEventListener('keydown', onKeydown);
+        resolve(result);
+      }
+
+      const replaceBtn = document.getElementById('import-plan-replace');
+      const addBtn = document.getElementById('import-plan-add');
+      const cancelBtn = document.getElementById('import-plan-cancel');
+
+      const onReplace = () => cleanup('replace');
+      const onAdd = () => cleanup('add');
+      const onCancel = () => cleanup(null);
+      const onKeydown = (e) => { if (e.key === 'Escape') cleanup(null); };
+
+      replaceBtn.addEventListener('click', onReplace);
+      addBtn.addEventListener('click', onAdd);
+      cancelBtn.addEventListener('click', onCancel);
+      document.addEventListener('keydown', onKeydown);
+    });
+  }
+
+  return { setLoading, showScreen, showView, showUploadError, hideUploadError, showToast, confirm, confirmImportPlan };
 
 })();
 
@@ -875,6 +918,90 @@ const App = (() => {
       } catch (err) {
         console.error(err);
         UI.showToast('Error al generar el PDF: ' + err.message, 'error');
+      }
+    });
+
+    // --- Programador: Exportar Excel Individual ---
+    document.getElementById('btn-export-excel-prog')?.addEventListener('click', () => {
+      const { name, tickets } = Tickets.getCurrentData();
+      if (!name) return;
+      try {
+        Exporter.exportExcelIndividual(name, tickets);
+        UI.showToast(`Planilla de ${name} descargada`, 'success');
+      } catch (err) {
+        console.error(err);
+        UI.showToast('Error al exportar Excel: ' + err.message, 'error');
+      }
+    });
+
+    // --- Programador: Importar Excel Individual ---
+    const progExcelInput = document.getElementById('file-excel-input-prog');
+    document.getElementById('btn-import-excel-prog')?.addEventListener('click', () => {
+      progExcelInput?.click();
+    });
+    progExcelInput?.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) { e.target.value = ''; return; }
+
+      const { name: programmerName } = Tickets.getCurrentData();
+      if (!programmerName || !appData) {
+        UI.showToast('Debes estar dentro de la vista de un programador', 'error');
+        e.target.value = '';
+        return;
+      }
+
+      try {
+        const valid = Parser.validateFile(file);
+        if (!valid.valid) { UI.showToast(valid.error, 'error'); e.target.value = ''; return; }
+
+        UI.setLoading(true);
+        const result = await Parser.parseExcel(file);
+        if (!result.data) { UI.showToast('Error al procesar el archivo', 'error'); return; }
+
+        const importedTickets = result.data.programmers[programmerName];
+        if (!Array.isArray(importedTickets)) {
+          UI.showToast(`El archivo no contiene tickets para "${programmerName}". Nombra la hoja igual que el programador.`, 'error');
+          return;
+        }
+
+        UI.setLoading(false);
+
+        const currentCount = (appData.programmers[programmerName] || []).length;
+        const mode = await UI.confirmImportPlan(
+          'Importar planilla',
+          `El archivo tiene ${importedTickets.length} tickets para "${programmerName}", que actualmente tiene ${currentCount}. ¿Cómo deseas aplicarlos?`
+        );
+        if (!mode) return;
+
+        UI.setLoading(true);
+        const currentTickets = appData.programmers[programmerName] || [];
+        const newTickets = importedTickets.map(t => ({
+          ...t,
+          id: t.id || `${programmerName}-imp-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        }));
+
+        if (mode === 'add') {
+          appData.programmers[programmerName] = [...currentTickets, ...newTickets];
+        } else {
+          appData.programmers[programmerName] = newTickets;
+        }
+        appData.loadedAt = result.data.loadedAt || appData.loadedAt || new Date().toISOString();
+        if (!appData.profiles) appData.profiles = {};
+        Storage.saveData(appData);
+
+        UI.showToast(mode === 'add'
+          ? `Tickets añadidos a ${programmerName} (${newTickets.length})`
+          : `Planilla de ${programmerName} reemplazada (${newTickets.length} tickets)`, 'success');
+
+        // Re-renderizar la vista del programador con los nuevos datos
+        const isReadOnly = !!_viewingPlanification || _viewingArchiveIndex !== null;
+        Tickets.render(programmerName, appData.programmers[programmerName], isReadOnly);
+      } catch (err) {
+        console.error(err);
+        UI.showToast('Error al importar planilla: ' + (err.message || 'error inesperado'), 'error');
+      } finally {
+        UI.setLoading(false);
+        e.target.value = '';
       }
     });
 

@@ -492,6 +492,18 @@
             </svg>
             Nuevo Ticket
           </button>
+          <button class="btn btn--outline btn--sm" id="btn-import-excel-prog">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M16 12l-4 4-4-4M12 3v13"/>
+            </svg>
+            Importar Excel
+          </button>
+          <button class="btn btn--outline btn--sm" id="btn-export-excel-prog">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M16 12l-4 4-4-4M12 3v13"/>
+            </svg>
+            Exportar Excel
+          </button>
           <button class="btn btn--outline btn--sm" id="btn-export-csv-prog">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M16 12l-4 4-4-4M12 3v13"/>
@@ -505,6 +517,7 @@
             </svg>
             Exportar PDF
           </button>
+          <input type="file" id="file-excel-input-prog" accept=".xlsx,.xls" style="display:none" />
         </div>
 
         <!-- Filtros -->
@@ -728,6 +741,21 @@
       <div class="modal__actions">
         <button class="btn btn--ghost" id="modal-cancel">Cancelar</button>
         <button class="btn btn--danger" id="modal-confirm">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL IMPORTAR PLANILLA DE PROGRAMADOR
+   ============================================================ -->
+  <div id="import-plan-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="import-plan-title">
+    <div class="modal">
+      <h3 id="import-plan-title">Importar planilla</h3>
+      <p id="import-plan-message">Selecciona cómo aplicar los tickets del archivo.</p>
+      <div class="modal__actions modal__actions--3">
+        <button class="btn btn--ghost" id="import-plan-cancel">Cancelar</button>
+        <button class="btn btn--outline" id="import-plan-add">Añadir</button>
+        <button class="btn btn--primary" id="import-plan-replace">Reemplazar</button>
       </div>
     </div>
   </div>
