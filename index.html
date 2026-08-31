@@ -292,6 +292,12 @@
           <div class="table-card__header">
             <h2>Ranking de Efectividad</h2>
             <div class="table-card__actions">
+              <button class="btn btn--primary btn--sm" id="btn-add-programmer-dashboard">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM19 8v6M22 11h-6"/>
+                </svg>
+                Nuevo Programador
+              </button>
               <button class="btn btn--outline btn--sm" id="btn-export-csv-global">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M16 12l-4 4-4-4M12 3v13"/>
@@ -756,6 +762,43 @@
         <button class="btn btn--ghost" id="import-plan-cancel">Cancelar</button>
         <button class="btn btn--outline" id="import-plan-add">Añadir</button>
         <button class="btn btn--primary" id="import-plan-replace">Reemplazar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL NUEVO PROGRAMADOR
+   ============================================================ -->
+  <div id="add-programmer-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="add-programmer-title">
+    <div class="form-modal">
+      <div class="form-modal__header">
+        <div class="form-modal__header-left">
+          <div class="form-modal__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20">
+              <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM19 8v6M22 11h-6"/>
+            </svg>
+          </div>
+          <div>
+            <h3 id="add-programmer-title">Nuevo programador</h3>
+            <p id="add-programmer-subtitle" class="form-modal__subtitle">Ingresa el nombre del programador para crear su planilla</p>
+          </div>
+        </div>
+        <button class="form-modal__close" id="add-programmer-close" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="form-modal__body">
+        <div class="form-group">
+          <label class="form-label" for="add-programmer-name">Nombre del programador</label>
+          <input type="text" class="form-input" id="add-programmer-name" placeholder="Ej: Juan Pérez" />
+          <small class="form-hint" id="add-programmer-hint"></small>
+        </div>
+      </div>
+      <div class="form-modal__footer">
+        <button class="btn btn--ghost btn--sm" id="add-programmer-cancel">Cancelar</button>
+        <button class="btn btn--primary btn--sm" id="add-programmer-confirm">Crear programador</button>
       </div>
     </div>
   </div>

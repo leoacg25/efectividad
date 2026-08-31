@@ -2278,6 +2278,16 @@ img { display: block; max-width: 100%; }
   letter-spacing: .07em;
 }
 
+.form-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.form-hint--error {
+  color: var(--danger, #ef4444);
+}
+
 .form-input {
   background: var(--bg-input);
   border: 1.5px solid var(--border-color);

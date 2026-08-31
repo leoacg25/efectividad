@@ -634,6 +634,7 @@ const App = (() => {
     renderSavedPlanifications();
     renderArchives();
     document.getElementById('btn-add-programmer')?.classList.toggle('hidden', _viewingArchiveIndex !== null);
+    document.getElementById('btn-add-programmer-dashboard')?.classList.toggle('hidden', _viewingArchiveIndex !== null);
   }
 
   /**
@@ -1234,21 +1235,80 @@ const App = (() => {
     `;
     addBtn.addEventListener('click', () => {
       if (!appData) { UI.showToast('Carga datos primero', 'error'); return; }
-      const name = prompt('Nombre del nuevo programador:');
-      if (!name || !name.trim()) return;
-      const trimmed = name.trim();
+      openAddProgrammerModal();
+    });
+    navProg.appendChild(addBtn);
+
+    // Botón destacado en el dashboard (cabecera del ranking)
+    document.getElementById('btn-add-programmer-dashboard')?.addEventListener('click', () => {
+      if (!appData) { UI.showToast('Carga datos primero', 'error'); return; }
+      openAddProgrammerModal();
+    });
+  }
+
+  /**
+   * Abre el modal para crear un nuevo programador.
+   */
+  function openAddProgrammerModal() {
+    const modal = document.getElementById('add-programmer-modal');
+    if (!modal) return;
+
+    const nameInput = document.getElementById('add-programmer-name');
+    const hint = document.getElementById('add-programmer-hint');
+    nameInput.value = '';
+    hint.textContent = '';
+    hint.classList.remove('form-hint--error');
+
+    modal.classList.remove('hidden');
+    modal.classList.add('active');
+    setTimeout(() => nameInput?.focus(), 100);
+
+    const cancelBtn = document.getElementById('add-programmer-cancel');
+    const closeBtn = document.getElementById('add-programmer-close');
+    const confirmBtn = document.getElementById('add-programmer-confirm');
+
+    function cleanup() {
+      modal.classList.add('hidden');
+      modal.classList.remove('active');
+      cancelBtn.removeEventListener('click', onCancel);
+      closeBtn.removeEventListener('click', onCancel);
+      confirmBtn.removeEventListener('click', onConfirm);
+      nameInput.removeEventListener('keydown', onKeydown);
+      document.removeEventListener('keydown', onKeydown);
+    }
+    function onConfirm() {
+      const trimmed = nameInput.value.trim();
+      if (!trimmed) {
+        hint.textContent = 'Ingresa un nombre para el programador.';
+        hint.classList.add('form-hint--error');
+        nameInput.focus();
+        return;
+      }
       if (appData.programmers[trimmed]) {
-        UI.showToast(`"${trimmed}" ya existe`, 'error');
+        hint.textContent = `"${trimmed}" ya existe.`;
+        hint.classList.add('form-hint--error');
+        nameInput.focus();
         return;
       }
       appData.programmers[trimmed] = [];
       if (!appData.profiles) appData.profiles = {};
       appData.profiles[trimmed] = 'desarrollador';
       Storage.saveData(appData);
+      cleanup();
       UI.showToast(`"${trimmed}" agregado`, 'success');
       goToDashboard();
-    });
-    navProg.appendChild(addBtn);
+    }
+    const onCancel = () => cleanup();
+    const onKeydown = (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); onConfirm(); }
+      if (e.key === 'Escape') cleanup();
+    };
+
+    cancelBtn.addEventListener('click', onCancel);
+    closeBtn.addEventListener('click', onCancel);
+    confirmBtn.addEventListener('click', onConfirm);
+    nameInput.addEventListener('keydown', onKeydown);
+    document.addEventListener('keydown', onKeydown);
   }
 
   // ----------------------------------------------------------------
@@ -2016,6 +2076,7 @@ const App = (() => {
   function exitArchive() {
     _viewingArchiveIndex = null;
     document.getElementById('btn-add-programmer')?.classList.remove('hidden');
+    document.getElementById('btn-add-programmer-dashboard')?.classList.remove('hidden');
   }
 
   // --- Ver planificación guardada (read-only) ---
