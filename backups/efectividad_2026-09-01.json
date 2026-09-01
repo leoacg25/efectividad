@@ -4319,7 +4319,7 @@
       {
         "notes": "",
         "id": "case_1787688131800",
-        "status": "No resuelto",
+        "status": "Solventado",
         "programmer": "Nodgar Armando",
         "ticket": "2647",
         "description": "Arreglar manejo de artículos integrados en el Nuevo POS",
@@ -4354,5 +4354,5 @@
       }
     ]
   },
-  "backedUpAt": "2026-09-01T00:50:50.738Z"
+  "backedUpAt": "2026-09-01T23:37:09.324Z"
 }
