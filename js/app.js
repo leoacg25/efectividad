@@ -936,74 +936,77 @@ const App = (() => {
     });
 
     // --- Programador: Importar Excel Individual ---
-    const progExcelInput = document.getElementById('file-excel-input-prog');
     document.getElementById('btn-import-excel-prog')?.addEventListener('click', () => {
-      progExcelInput?.click();
-    });
-    progExcelInput?.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (!file) { e.target.value = ''; return; }
+      const progExcelInput = document.createElement('input');
+      progExcelInput.type = 'file';
+      progExcelInput.accept = '.xlsx,.xls';
+      progExcelInput.style.display = 'none';
+      document.body.appendChild(progExcelInput);
+      progExcelInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) { progExcelInput.remove(); return; }
 
-      const { name: programmerName } = Tickets.getCurrentData();
-      if (!programmerName || !appData) {
-        UI.showToast('Debes estar dentro de la vista de un programador', 'error');
-        e.target.value = '';
-        return;
-      }
-
-      try {
-        const valid = Parser.validateFile(file);
-        if (!valid.valid) { UI.showToast(valid.error, 'error'); e.target.value = ''; return; }
-
-        UI.setLoading(true);
-        const result = await Parser.parseExcel(file);
-        if (!result.data) { UI.showToast('Error al procesar el archivo', 'error'); return; }
-
-        const importedTickets = result.data.programmers[programmerName];
-        if (!Array.isArray(importedTickets)) {
-          UI.showToast(`El archivo no contiene tickets para "${programmerName}". Nombra la hoja igual que el programador.`, 'error');
+        const { name: programmerName } = Tickets.getCurrentData();
+        if (!programmerName || !appData) {
+          UI.showToast('Debes estar dentro de la vista de un programador', 'error');
+          progExcelInput.remove();
           return;
         }
 
-        UI.setLoading(false);
+        try {
+          const valid = Parser.validateFile(file);
+          if (!valid.valid) { UI.showToast(valid.error, 'error'); progExcelInput.remove(); return; }
 
-        const currentCount = (appData.programmers[programmerName] || []).length;
-        const mode = await UI.confirmImportPlan(
-          'Importar planilla',
-          `El archivo tiene ${importedTickets.length} tickets para "${programmerName}", que actualmente tiene ${currentCount}. ¿Cómo deseas aplicarlos?`
-        );
-        if (!mode) return;
+          UI.setLoading(true);
+          const result = await Parser.parseExcel(file);
+          if (!result.data) { UI.showToast('Error al procesar el archivo', 'error'); return; }
 
-        UI.setLoading(true);
-        const currentTickets = appData.programmers[programmerName] || [];
-        const newTickets = importedTickets.map(t => ({
-          ...t,
-          id: t.id || `${programmerName}-imp-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-        }));
+          const importedTickets = result.data.programmers[programmerName];
+          if (!Array.isArray(importedTickets)) {
+            UI.showToast(`El archivo no contiene tickets para "${programmerName}". Nombra la hoja igual que el programador.`, 'error');
+            return;
+          }
 
-        if (mode === 'add') {
-          appData.programmers[programmerName] = [...currentTickets, ...newTickets];
-        } else {
-          appData.programmers[programmerName] = newTickets;
+          UI.setLoading(false);
+
+          const currentCount = (appData.programmers[programmerName] || []).length;
+          const mode = await UI.confirmImportPlan(
+            'Importar planilla',
+            `El archivo tiene ${importedTickets.length} tickets para "${programmerName}", que actualmente tiene ${currentCount}. ¿Cómo deseas aplicarlos?`
+          );
+          if (!mode) { progExcelInput.remove(); return; }
+
+          UI.setLoading(true);
+          const currentTickets = appData.programmers[programmerName] || [];
+          const newTickets = importedTickets.map(t => ({
+            ...t,
+            id: t.id || `${programmerName}-imp-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+          }));
+
+          if (mode === 'add') {
+            appData.programmers[programmerName] = [...currentTickets, ...newTickets];
+          } else {
+            appData.programmers[programmerName] = newTickets;
+          }
+          appData.loadedAt = result.data.loadedAt || appData.loadedAt || new Date().toISOString();
+          if (!appData.profiles) appData.profiles = {};
+          Storage.saveData(appData);
+
+          UI.showToast(mode === 'add'
+            ? `Tickets añadidos a ${programmerName} (${newTickets.length})`
+            : `Planilla de ${programmerName} reemplazada (${newTickets.length} tickets)`, 'success');
+
+          const isReadOnly = !!_viewingPlanification || _viewingArchiveIndex !== null;
+          Tickets.render(programmerName, appData.programmers[programmerName], isReadOnly);
+        } catch (err) {
+          console.error(err);
+          UI.showToast('Error al importar planilla: ' + (err.message || 'error inesperado'), 'error');
+        } finally {
+          UI.setLoading(false);
+          progExcelInput.remove();
         }
-        appData.loadedAt = result.data.loadedAt || appData.loadedAt || new Date().toISOString();
-        if (!appData.profiles) appData.profiles = {};
-        Storage.saveData(appData);
-
-        UI.showToast(mode === 'add'
-          ? `Tickets añadidos a ${programmerName} (${newTickets.length})`
-          : `Planilla de ${programmerName} reemplazada (${newTickets.length} tickets)`, 'success');
-
-        // Re-renderizar la vista del programador con los nuevos datos
-        const isReadOnly = !!_viewingPlanification || _viewingArchiveIndex !== null;
-        Tickets.render(programmerName, appData.programmers[programmerName], isReadOnly);
-      } catch (err) {
-        console.error(err);
-        UI.showToast('Error al importar planilla: ' + (err.message || 'error inesperado'), 'error');
-      } finally {
-        UI.setLoading(false);
-        e.target.value = '';
-      }
+      });
+      progExcelInput.click();
     });
 
     // --- Exportar BD como JSON ---
