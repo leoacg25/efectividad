@@ -737,8 +737,20 @@ const Tickets = (() => {
     if (allBtn) allBtn.classList.add('active');
 
     // Mostrar/ocultar elementos según modo
-    const progActions = document.querySelector('.prog-actions');
-    if (progActions) progActions.style.display = readOnly ? 'none' : '';
+    const progActions = document.querySelector('#view-programmer .prog-actions');
+    if (progActions) {
+      if (readOnly) {
+        progActions.style.display = '';
+        progActions.querySelectorAll('button, input[type="file"]').forEach(el => {
+          el.style.display = el.id === 'btn-export-pdf-prog' ? '' : 'none';
+        });
+      } else {
+        progActions.style.display = '';
+        progActions.querySelectorAll('button, input[type="file"]').forEach(el => {
+          el.style.display = '';
+        });
+      }
+    }
 
     const filtersBar = document.querySelector('.filters-bar');
     if (filtersBar) filtersBar.style.display = readOnly ? 'none' : '';
