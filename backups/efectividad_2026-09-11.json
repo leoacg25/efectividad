@@ -3,1000 +3,577 @@
     "Ángel Mata": [
       {
         "id": "Ángel Mata-1-1788459039052",
-        "rowIndex": 1,
         "ticket": "1124",
         "description": "TIMBRADO DE DOCUMENTOS EXONERADOS/EXENTOS - FEL COSTA RICA",
-        "project": "ADM",
+        "status": "Información Adicional",
+        "rowIndex": 1,
         "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "notes": "Se requieren credenciales",
+        "project": "ADM"
       },
       {
-        "id": "Ángel Mata-2-1788459039052",
+        "status": "En proceso",
         "rowIndex": 2,
+        "notes": "En espera de instalador",
         "ticket": "1418",
         "description": "Actualización para próximo instalador del administrativo sobre lista de formatos de libro de ventas, facturación y retenciones en compras",
-        "project": "ADM",
         "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "id": "Ángel Mata-2-1788459039052",
+        "project": "ADM"
       },
       {
-        "id": "Ángel Mata-3-1788459039052",
-        "rowIndex": 3,
-        "ticket": "2058",
+        "status": "No Aplica",
+        "project": "ADM",
+        "notes": "El desarrollador indica que no aplica",
         "description": "Se solicita una mejora en la opción de integrar cobros con bancos para bloquear el monto a facturar o de la venta.",
-        "project": "ADM",
+        "ticket": "2058",
+        "rowIndex": 3,
         "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "id": "Ángel Mata-3-1788459039052"
       },
       {
+        "status": "Solventado",
         "id": "Ángel Mata-4-1788459039052",
-        "rowIndex": 4,
+        "notes": "Solventado",
         "ticket": "2240",
-        "description": "Agregar en el envió del XML de Imprenta Digital, el campo de \"Porcentaje de Descuento Lineal\" para los productos",
-        "project": "ADM",
         "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "description": "Agregar en el envió del XML de Imprenta Digital, el campo de \"Porcentaje de Descuento Lineal\" para los productos",
+        "rowIndex": 4,
+        "project": "ADM"
       },
       {
-        "id": "Ángel Mata-5-1788459039052",
-        "rowIndex": 5,
-        "ticket": "2342",
         "description": "EMITIR RETENCION A CLIENTES AL MOMENTO DE FACTURAR",
+        "rowIndex": 5,
         "project": "ADM",
         "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "id": "Ángel Mata-5-1788459039052",
+        "ticket": "2342",
+        "notes": "En curso",
+        "status": "En proceso"
       },
       {
         "id": "Ángel Mata-6-1788459039052",
+        "tipo": "Mejora/requerimiento",
         "rowIndex": 6,
+        "project": "ADM",
+        "notes": "Solventado, cliente particular cerrado por Carlos",
         "ticket": "2533",
         "description": "Agregar información de campos adicionales en variable de observación para factura de imprenta digital con SMART",
-        "project": "ADM",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "status": "Solventado"
       },
       {
-        "id": "Ángel Mata-7-1788459039052",
-        "rowIndex": 7,
         "ticket": "223",
-        "description": "Desarrollar el funcionamiento del Mantenimiento de resoluciones en Clinicas para Honduras.",
-        "project": "CLINICAS",
         "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "description": "Desarrollar el funcionamiento del Mantenimiento de resoluciones en Clinicas para Honduras.",
+        "status": "En proceso",
+        "id": "Ángel Mata-7-1788459039052",
+        "notes": "En curso",
+        "rowIndex": 7,
+        "project": "CLINICAS"
       },
       {
         "id": "Ángel Mata-8-1788459039052",
-        "rowIndex": 8,
         "ticket": "1882",
         "description": "Desarrollo adicional Modulo de bancos registro de lotes de cierres de puntos de ventas",
-        "project": "CLINICAS",
+        "rowIndex": 8,
+        "status": "En proceso",
         "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "notes": "En curso",
+        "project": "CLINICAS"
       },
       {
+        "project": "CLINICAS",
         "id": "Ángel Mata-9-1788459039052",
-        "rowIndex": 9,
-        "ticket": "1884",
+        "tipo": "Mejora/requerimiento",
         "description": "Desarrollo adicional Registro de compras costros en divisas el articulo",
-        "project": "CLINICAS",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "ticket": "1884",
+        "rowIndex": 9,
+        "notes": "En curso",
+        "status": "En proceso"
       },
       {
-        "id": "Ángel Mata-10-1788459039052",
-        "rowIndex": 10,
+        "tipo": "Mejora/requerimiento",
         "ticket": "1956",
-        "description": "Desarrollar opción para generar relacion de compras para contribuyente formal en clinicas",
         "project": "CLINICAS",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "description": "Desarrollar opción para generar relacion de compras para contribuyente formal en clinicas",
+        "status": "En proceso",
+        "notes": "En curso",
+        "id": "Ángel Mata-10-1788459039052",
+        "rowIndex": 10
       },
       {
-        "id": "Ángel Mata-11-1788459039052",
-        "rowIndex": 11,
-        "ticket": "1987",
-        "description": "Mejora a la ventana del centro de cobros de clínicas",
         "project": "CLINICAS",
+        "notes": "En curso",
+        "rowIndex": 11,
         "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "id": "Ángel Mata-11-1788459039052",
+        "status": "En proceso",
+        "ticket": "1987",
+        "description": "Mejora a la ventana del centro de cobros de clínicas"
       },
       {
         "id": "Ángel Mata-12-1788459039052",
+        "notes": "Solventado validado con la rev 7.9.2026",
         "rowIndex": 12,
+        "status": "Solventado",
+        "project": "CLINICAS",
+        "tipo": "Mejora/requerimiento",
         "ticket": "2298",
-        "description": "Mejora: que el usuario solamente pueda hacer devoluciones a las ordenes de servicio",
-        "project": "CLINICAS",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "description": "Mejora: que el usuario solamente pueda hacer devoluciones a las ordenes de servicio"
       },
       {
-        "id": "Ángel Mata-13-1788459039052",
+        "project": "CLINICAS",
         "rowIndex": 13,
-        "ticket": "2299",
+        "notes": "Solventado, sin embargo Carlos acevedo conversara con Angel sobre el comportamiento pos facturación de una orden de entrega",
+        "status": "Solventado",
         "description": "Requerimiento: mostrar las ordenes de servicio activas",
-        "project": "CLINICAS",
         "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "ticket": "2299",
+        "id": "Ángel Mata-13-1788459039052"
       },
       {
-        "id": "Ángel Mata-14-1788459039052",
-        "rowIndex": 14,
         "ticket": "2369",
-        "description": "Relación al caso 1772 orden de servicio",
-        "project": "CLINICAS",
         "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "status": "No resuelto",
+        "notes": "aun sigue fallando, validado con la rev 7.9.2026",
+        "rowIndex": 14,
+        "id": "Ángel Mata-14-1788459039052",
+        "project": "CLINICAS",
+        "description": "Relación al caso 1772 orden de servicio"
       },
       {
-        "id": "Ángel Mata-15-1788459039052",
-        "rowIndex": 15,
         "ticket": "2460",
-        "description": "Se solicita agregar la opción de generar Notas de Crédito y Débito por Contingencia en el sistema de clínicas.",
-        "project": "CLINICAS",
+        "rowIndex": 15,
         "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "id": "Ángel Mata-15-1788459039052",
+        "status": "Solventado",
+        "project": "CLINICAS",
+        "notes": "Solventado",
+        "description": "Se solicita agregar la opción de generar Notas de Crédito y Débito por Contingencia en el sistema de clínicas."
       },
       {
         "id": "Ángel Mata-16-1788459039052",
         "rowIndex": 16,
+        "notes": "Solventado",
+        "status": "Solventado",
+        "project": "CLINICAS",
         "ticket": "2494",
         "description": "No respeta porcentaje de honorario cuando el item es un honorario simple",
-        "project": "CLINICAS",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "tipo": "Mejora/requerimiento"
       },
       {
+        "status": "Solventado",
+        "notes": "Solventado, validado con ejecutable 7.9.2026",
         "id": "Ángel Mata-17-1788459039052",
         "rowIndex": 17,
         "ticket": "2514",
         "description": "Poder registrar series de factura con los mismos números de control en clínicas",
         "project": "CLINICAS",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
+        "tipo": "Mejora/requerimiento"
       },
       {
-        "id": "Ángel Mata-18-1788459039052",
         "rowIndex": 18,
+        "notes": "No aplica - Carolina Rivera publicado 20/8/26 12:04 QA\nEn conversaciones con la Licencia Vanessa Diaz este ticket no aplica por lo siguiente:\n\nEl caso no está claro, el problema es que se está mezclando retenciones de Iva con retenciones de Islr y por otro lado, también de valores exentos... de IVA? eso no lleva retención. En lo que se refiere a retenciones de ISRL hay montos exentos de IVA que si deben llevar retención de ISLR. Se debe aclarar cuál es el problema y respecto de qué impuesto es. \n\nSe sugiere crear un nuevo ticket con el caso especifico.",
+        "tipo": "Avería/Falla",
+        "status": "No Aplica",
         "ticket": "2088",
         "description": "Falla de timbrado en Retenciones de IVA de the factory",
         "project": "ADM",
-        "tipo": "Avería/Falla",
-        "notes": "",
-        "status": "No resuelto"
+        "id": "Ángel Mata-18-1788459039052"
       },
       {
         "id": "Ángel Mata-19-1788459039052",
-        "rowIndex": 19,
-        "ticket": "2268",
         "description": "El sistema administrativo FOX Muestra días de crédito errados en FE y no imprime documento electrónico sino la factura interna",
-        "project": "ADM",
+        "status": "Información Adicional",
+        "notes": "El desarrollador lo marco como información Adicional",
+        "ticket": "2268",
         "tipo": "Avería/Falla",
-        "notes": "",
-        "status": "No resuelto"
+        "project": "ADM",
+        "rowIndex": 19
       },
       {
-        "id": "Ángel Mata-20-1788459039052",
-        "rowIndex": 20,
         "ticket": "2286",
-        "description": "Cuando se registra un abono en cuentas por pagar y se paga por transferencia en la ventana para generar el asiento contable no trae el monto",
+        "id": "Ángel Mata-20-1788459039052",
+        "status": "Solventado",
         "project": "ADM",
+        "rowIndex": 20,
+        "notes": "Validar con el siguiente ejecutable",
         "tipo": "Avería/Falla",
-        "notes": "",
-        "status": "No resuelto"
+        "description": "Cuando se registra un abono en cuentas por pagar y se paga por transferencia en la ventana para generar el asiento contable no trae el monto"
       },
       {
-        "id": "Ángel Mata-21-1788459039052",
-        "rowIndex": 21,
-        "ticket": "2368",
-        "description": "Al consumir un Lote por factura, cuando emitimos un presupuesto esta trayendo el Lote ya consumido, se valida por fecha de vencimiento",
+        "status": "Solventado",
+        "notes": "Solventado en producción",
         "project": "ADM",
+        "ticket": "2368",
+        "rowIndex": 21,
         "tipo": "Avería/Falla",
-        "notes": "",
-        "status": "No resuelto"
+        "id": "Ángel Mata-21-1788459039052",
+        "description": "Al consumir un Lote por factura, cuando emitimos un presupuesto esta trayendo el Lote ya consumido, se valida por fecha de vencimiento"
       },
       {
         "id": "Ángel Mata-22-1788459039052",
-        "rowIndex": 22,
+        "tipo": "Avería/Falla",
         "ticket": "2227",
         "description": "Relación al caso 1772 Al importar un presupuesto generado el sistema no origina la orden de servicio validar los lotes y vecimientos",
+        "rowIndex": 22,
+        "notes": "El programador solicita mas información",
         "project": "CLINICAS",
-        "tipo": "Avería/Falla",
-        "notes": "",
         "status": "Información Adicional"
       },
       {
-        "id": "Ángel Mata-23-1788459039052",
-        "rowIndex": 23,
-        "ticket": "2480",
         "description": "Se detectó un error ﻿en la cuentas por pagar al cancelar la operación por transferencia",
+        "id": "Ángel Mata-23-1788459039052",
+        "ticket": "2480",
         "project": "CLINICAS",
+        "status": "Solventado",
+        "notes": "validar con el siguiente ejecutable",
         "tipo": "Avería/Falla",
-        "notes": "",
-        "status": "No resuelto"
+        "rowIndex": 23
       },
       {
         "id": "Ángel Mata-24-1788459039052",
-        "rowIndex": 24,
+        "project": "CLINICAS",
+        "tipo": "Avería/Falla",
         "ticket": "2564",
+        "rowIndex": 24,
+        "notes": "Solventado con un QRY",
         "description": "Reporte de master de ventas no contempla las notas de créditos cuando se selecciona un medico en especifico",
-        "project": "CLINICAS",
-        "tipo": "Avería/Falla",
-        "notes": "",
-        "status": "No resuelto"
+        "status": "Solventado"
       },
       {
-        "id": "Ángel Mata-25-1788459039052",
-        "rowIndex": 25,
+        "project": "CLINICAS",
         "ticket": "2565",
-        "description": "Reporte ventas por departamento no considera las devoluciones",
-        "project": "CLINICAS",
+        "rowIndex": 25,
+        "id": "Ángel Mata-25-1788459039052",
         "tipo": "Avería/Falla",
-        "notes": "",
-        "status": "No resuelto"
+        "status": "Solventado",
+        "notes": "Solventado - soporte debe realizar la edición del formato",
+        "description": "Reporte ventas por departamento no considera las devoluciones"
       },
       {
-        "id": "Ángel Mata-26-1788459039052",
-        "rowIndex": 26,
-        "ticket": "2284",
-        "description": "Validación de solicitar cedula al guardar paciente en historias medicas",
+        "status": "Solventado",
         "project": "MEDICO",
-        "tipo": "Avería/Falla",
-        "notes": "",
-        "status": "No resuelto"
+        "rowIndex": 26,
+        "description": "Validación de solicitar cedula al guardar paciente en historias medicas",
+        "notes": "Solventado",
+        "ticket": "2284",
+        "id": "Ángel Mata-26-1788459039052",
+        "tipo": "Avería/Falla"
       }
     ],
     "Carolina Rivera": [],
     "Edgar Sanchez": [
       {
-        "id": "Edgar Sanchez-1-1788186137425",
         "rowIndex": 1,
-        "project": "ADM FOX",
+        "notes": "Andina de Pinturas - Se visualizan los cambios en la ventana, probar a partir de la rev 1.9.2026",
+        "ticket": "0002442",
         "description": "Incorporación de columnas en moneda extranjera en Pagos y Abonos de Clientes (SOLO VENEZUELA)",
+        "project": "ADM FOX",
         "status": "Solventado",
         "tipo": "Mejora/requerimiento",
-        "ticket": "0002442",
-        "notes": "Andina de Pinturas - Se visualizan los cambios en la ventana, probar a partir de la rev 1.9.2026"
+        "id": "Edgar Sanchez-1-1788186137425"
       },
       {
-        "rowIndex": 2,
-        "project": "ADM FOX",
-        "ticket": "0002301",
-        "id": "Edgar Sanchez-2-1788186137425",
-        "tipo": "Mejora/requerimiento",
-        "notes": "Solventado, validar a partir de la rev 3.9.2026 - Carlos Eduardo Acevedo Gonzáles",
         "description": "Poder editar la fecha de recibo de caja en ventas por la opcion de modificar documentos",
-        "status": "Solventado"
-      },
-      {
-        "rowIndex": 3,
-        "project": "ADM FOX",
-        "ticket": "0002272",
-        "notes": "Aun se presentan incidencias con los decimales  - Soporte Premium",
-        "id": "Edgar Sanchez-3-1788186137425",
-        "status": "En proceso",
+        "id": "Edgar Sanchez-2-1788186137425",
+        "status": "Solventado",
         "tipo": "Mejora/requerimiento",
-        "description": "Modificación manual de montos totales en compras."
+        "ticket": "0002301",
+        "notes": "Solventado, validar a partir de la rev 3.9.2026 - Carlos Eduardo Acevedo Gonzáles",
+        "rowIndex": 2,
+        "project": "ADM FOX"
       },
       {
+        "project": "ADM FOX",
+        "description": "Modificación manual de montos totales en compras.",
+        "rowIndex": 3,
+        "status": "Solventado",
+        "ticket": "0002272",
+        "tipo": "Mejora/requerimiento",
+        "notes": "Aun se presentan incidencias con los decimales  - Soporte Premium",
+        "id": "Edgar Sanchez-3-1788186137425"
+      },
+      {
+        "status": "Solventado",
+        "notes": "Solventado - José Vivas",
         "tipo": "Mejora/requerimiento",
         "description": "Detalle visual - Consulta de inventario - Referencia cambiaria - Articulo importado",
-        "status": "Solventado",
         "project": "ADM FOX",
         "id": "Edgar Sanchez-4-1788186137425",
         "rowIndex": 4,
-        "notes": "Solventado - José Vivas",
         "ticket": "0002257"
       },
       {
-        "id": "Edgar Sanchez-5-1788186137425",
-        "rowIndex": 5,
-        "status": "En proceso",
-        "project": "Talleres Fox",
         "notes": "RESPONDIDO EN SISTEMA DE TICKETS \n\nHAY EN ESENCIA DOS PROBLEMAS AQUI:\n\n1.- EL PLANTEADO QUE SE DEBE AÑADIR EL BOTON DE OTRAS MONEDAS... Y\n\n2.- EL IMPORTAR EN EMISION DE ORDEN DE REPARACION NO LO HACE A LA MONEDA SELECCIONADA LO CUAL TAMBIEN ES UNA FALLA.\n\nSIN RESOLVER ESTA ULTIMA ES IMPOSIBLE PROCEDER CON EL REQUERIMIENTO.\n\nPROCEDO A ABORGARLA",
+        "id": "Edgar Sanchez-5-1788186137425",
+        "tipo": "Mejora/requerimiento",
         "ticket": "0002253",
-        "description": "Poder realizar los presupuestos en el sistema de talleres con la moneda extranjera.",
-        "tipo": "Mejora/requerimiento"
+        "project": "Talleres Fox",
+        "rowIndex": 5,
+        "status": "Información Adicional",
+        "description": "Poder realizar los presupuestos en el sistema de talleres con la moneda extranjera."
       },
       {
         "project": "ADM FOX",
-        "id": "Edgar Sanchez-6-1788186137425",
-        "ticket": "0002243",
-        "notes": "Solventado a partir de la rev 3.9.2026 - José Vivas",
-        "description": "Solicitud de clave en la consulta de precio desde el punto de ventas normal",
-        "rowIndex": 6,
         "status": "Solventado",
-        "tipo": "Mejora/requerimiento"
+        "ticket": "0002243",
+        "id": "Edgar Sanchez-6-1788186137425",
+        "rowIndex": 6,
+        "notes": "Solventado a partir de la rev 3.9.2026 - José Vivas",
+        "tipo": "Mejora/requerimiento",
+        "description": "Solicitud de clave en la consulta de precio desde el punto de ventas normal"
       },
       {
-        "status": "No resuelto",
-        "notes": "aun no esta resuelto 04/09/2026 José Vivas",
-        "project": "ADM FOX",
-        "id": "Edgar Sanchez-7-1788186137425",
-        "tipo": "Mejora/requerimiento",
         "description": "Agregar una variable donde guarde los recibos de cobranza para el reporte de Resumen de ventas",
+        "project": "ADM FOX",
+        "status": "Solventado",
+        "ticket": "0001898",
+        "tipo": "Mejora/requerimiento",
+        "notes": "Solventado -  José Vivas",
         "rowIndex": 7,
-        "ticket": "0001898"
+        "id": "Edgar Sanchez-7-1788186137425"
       },
       {
-        "notes": "Fernando Morales",
-        "status": "No resuelto",
-        "tipo": "Mejora/requerimiento",
+        "rowIndex": 8,
+        "status": "Solventado",
         "project": "Hoteles Fox",
         "ticket": "0001840",
-        "rowIndex": 8,
+        "tipo": "Mejora/requerimiento",
         "id": "Edgar Sanchez-8-1788186137425",
+        "notes": "En curso - Fernando Morales",
         "description": "Establecer el precio de la habitación sencilla aunque la habitación sea habitación deluxe"
       },
       {
-        "id": "Edgar Sanchez-9-1788186137425",
-        "status": "No resuelto",
+        "status": "Información Adicional",
+        "project": "ADM FOX",
+        "notes": "El programador no dispone de la impresora - carlos Obando",
         "description": "Generar notas de credito Con la Impresora.",
-        "notes": "carlos Obando",
-        "ticket": "0001387",
-        "rowIndex": 9,
-        "project": "ADM FOX",
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "rowIndex": 10,
         "tipo": "Mejora/requerimiento",
-        "status": "No resuelto",
+        "rowIndex": 9,
+        "id": "Edgar Sanchez-9-1788186137425",
+        "ticket": "0001387"
+      },
+      {
         "id": "Edgar Sanchez-10-1788186137425",
-        "project": "ADM FOX",
-        "notes": "Soporte Premium",
         "description": "0001624: Desarrollar que los nro. de control puedan establecerse por tipo de documento por separado (FAC, ND, NC).",
-        "ticket": "0000096"
+        "notes": "validar a partir de la rev 8.9.2026",
+        "ticket": "0000096",
+        "tipo": "Mejora/requerimiento",
+        "status": "Solventado",
+        "rowIndex": 10,
+        "project": "ADM FOX"
+      },
+      {
+        "ticket": "0002462",
+        "tipo": "Avería/Falla",
+        "rowIndex": 11,
+        "project": "ADM FOX",
+        "notes": "Solventado",
+        "status": "Solventado",
+        "id": "Edgar Sanchez-11-1788186137425",
+        "description": "Deshabilitar solo para venezuela el campo \"Sin Seguridad \" en la ventana de grupos"
+      },
+      {
+        "id": "Edgar Sanchez-12-1788186137425",
+        "description": "Visor de sucesos al ingresar en planes de tarifa - solo con data de colombia",
+        "status": "Solventado",
+        "notes": "Solventado",
+        "project": "Hoteles Fox",
+        "rowIndex": 12,
+        "tipo": "Avería/Falla",
+        "ticket": "0002457"
       },
       {
         "project": "ADM FOX",
-        "description": "Deshabilitar solo para venezuela el campo \"Sin Seguridad \" en la ventana de grupos",
-        "ticket": "0002462",
-        "notes": "Solventado",
-        "rowIndex": 11,
+        "notes": "Probar en la siguiente rev, ejecutable de edgar Daniel Fernandez",
         "tipo": "Avería/Falla",
-        "id": "Edgar Sanchez-11-1788186137425",
+        "ticket": "0002455",
+        "description": "Incidencia al usar el boton de (\"...\") en ordenes de compra",
+        "id": "Edgar Sanchez-13-1788186137425",
+        "status": "Solventado",
+        "rowIndex": 13
+      },
+      {
+        "ticket": "0002453",
+        "rowIndex": 14,
+        "description": "Al comandar un integrado en la tabla comandasmv se guarda mal el registro de los componentes",
+        "id": "Edgar Sanchez-14-1788186137425",
+        "tipo": "Avería/Falla",
+        "notes": "Solventado - Carlos Alcocer",
+        "project": "ADM FOX",
         "status": "Solventado"
       },
       {
-        "ticket": "0002457",
-        "tipo": "Avería/Falla",
-        "notes": "Solventado",
-        "id": "Edgar Sanchez-12-1788186137425",
-        "rowIndex": 12,
-        "description": "Visor de sucesos al ingresar en planes de tarifa - solo con data de colombia",
-        "status": "Solventado",
-        "project": "Hoteles Fox"
-      },
-      {
-        "rowIndex": 13,
-        "project": "ADM FOX",
-        "ticket": "0002455",
-        "tipo": "Avería/Falla",
-        "description": "Incidencia al usar el boton de (\"...\") en ordenes de compra",
-        "notes": "Daniel Fernandez",
-        "id": "Edgar Sanchez-13-1788186137425",
-        "status": "No resuelto"
-      },
-      {
-        "status": "No resuelto",
-        "project": "ADM FOX",
-        "notes": "Carlos Alcocer",
-        "id": "Edgar Sanchez-14-1788186137425",
-        "tipo": "Avería/Falla",
-        "rowIndex": 14,
-        "ticket": "0002453",
-        "description": "Al comandar un integrado en la tabla comandasmv se guarda mal el registro de los componentes"
-      },
-      {
-        "description": "Error de base de datos \"Duplicate entry\" al navegar rápidamente entre meses o al intentar agregar fechas duplicadas.",
-        "status": "No resuelto",
-        "tipo": "Avería/Falla",
-        "rowIndex": 15,
-        "id": "Edgar Sanchez-15-1788186137425",
-        "notes": "C.A. Maytech",
         "ticket": "0002440",
-        "project": "ADM FOX"
-      },
-      {
-        "notes": "Soporte Premium",
+        "description": "Error de base de datos \"Duplicate entry\" al navegar rápidamente entre meses o al intentar agregar fechas duplicadas.",
         "project": "ADM FOX",
-        "ticket": "0002396",
+        "rowIndex": 15,
         "tipo": "Avería/Falla",
-        "rowIndex": 16,
-        "status": "No resuelto",
-        "id": "Edgar Sanchez-16-1788186137425",
-        "description": "El sistema arroja un mensaje de error en expresión, al darle al botón de \"resumen del movimiento en divisas\" y luego al check de \"Tablero\""
+        "notes": "Nomina - C.A. Maytech",
+        "id": "Edgar Sanchez-15-1788186137425",
+        "status": "Solventado"
       },
       {
+        "ticket": "0002396",
+        "rowIndex": 16,
+        "tipo": "Avería/Falla",
+        "description": "El sistema arroja un mensaje de error en expresión, al darle al botón de \"resumen del movimiento en divisas\" y luego al check de \"Tablero\"",
         "project": "ADM FOX",
-        "ticket": "0002386",
-        "notes": "Leandro Caicedo",
+        "notes": "Solventado cerrado por manuel Soporte Premium",
+        "status": "Solventado",
+        "id": "Edgar Sanchez-16-1788186137425"
+      },
+      {
         "rowIndex": 17,
+        "ticket": "0002386",
         "description": "En restaurantes, después de comandar, este borra el primer carácter de la estación F7 - Cuenta",
         "id": "Edgar Sanchez-17-1788186137425",
-        "status": "No resuelto",
-        "tipo": "Avería/Falla"
-      },
-      {
-        "rowIndex": 18,
-        "id": "Edgar Sanchez-18-1788186137425",
         "tipo": "Avería/Falla",
-        "status": "No resuelto",
-        "project": "ADM FOX",
-        "notes": "LA CONFIGURACION NUEVA QUE SE AGREGO PARA EL CALCULO CON HISTORICO, AUNQUE SE DETERMINO QUE LO QUE DESCRIBES ES EL COMPORTAMIENTO ADECUADO MINIMO DEL SISTEMA",
-        "description": "Al realizar cierto proceso con Compras y Devoluciones puede generarse un costo promedio erróneo",
-        "ticket": "0002366"
-      },
-      {
-        "id": "Edgar Sanchez-19-1788186137425",
-        "rowIndex": 19,
-        "description": "En la ventana de comisiones si presionamos F3 sobre un recibo, debe traer la ventana de información del documento",
-        "status": "No resuelto",
-        "notes": "Antonio Medina Soporte Premium Margarita",
-        "ticket": "0002327",
-        "tipo": "Avería/Falla",
+        "notes": "Solventado, prestablecer id consumo - Leandro Caicedo",
+        "status": "Solventado",
         "project": "ADM FOX"
       },
       {
-        "id": "Edgar Sanchez-20-1788186137425",
-        "description": "Cuando creamos una nueva empresa en una nueva instalación aparece un visor SQL en la creación de empresa",
-        "status": "No resuelto",
-        "rowIndex": 20,
-        "tipo": "Avería/Falla",
+        "notes": "Solventado en una rev de Edgar",
         "project": "ADM FOX",
-        "notes": "Manuel Quintero",
-        "ticket": "0002309"
+        "ticket": "0002366",
+        "description": "Al realizar cierto proceso con Compras y Devoluciones puede generarse un costo promedio erróneo",
+        "tipo": "Avería/Falla",
+        "status": "Solventado",
+        "rowIndex": 18,
+        "id": "Edgar Sanchez-18-1788186137425"
       },
       {
-        "tipo": "Avería/Falla",
-        "rowIndex": 21,
-        "id": "Edgar Sanchez-21-1788186137425",
-        "status": "No resuelto",
         "project": "ADM FOX",
-        "description": "En ventana de busqueda de documentos de factura coloca otra fecha cuando la factura queda a credito y se modifica los días a credito",
-        "notes": "Carlos Eduardo Acevedo Gonzalez",
-        "ticket": "0002304"
-      },
-      {
-        "id": "Edgar Sanchez-22-1788186137425",
-        "description": "En la ventana de información detallada del recibo de caja el monto pagado es incorrecto",
-        "ticket": "0002293",
-        "project": "ADM FOX",
-        "rowIndex": 22,
-        "notes": "Antonio Medina Soporte Premium Margarita",
-        "status": "No resuelto",
+        "notes": "Solventado en la rev 3.9.2026Antonio Medina Soporte Premium Margarita",
+        "rowIndex": 19,
+        "ticket": "0002327",
+        "id": "Edgar Sanchez-19-1788186137425",
+        "status": "Solventado",
+        "description": "En la ventana de comisiones si presionamos F3 sobre un recibo, debe traer la ventana de información del documento",
         "tipo": "Avería/Falla"
       },
       {
-        "id": "Edgar Sanchez-23-1788186137425",
-        "ticket": "0002285",
-        "description": "Agregar condición cuando se vende un item integrado escribe el coso padre en los hijos",
-        "tipo": "Avería/Falla",
+        "description": "Cuando creamos una nueva empresa en una nueva instalación aparece un visor SQL en la creación de empresa",
         "project": "ADM FOX",
-        "notes": "Carolina Rivera",
+        "status": "Solventado",
+        "notes": "Se subirá otro ticket",
+        "tipo": "Avería/Falla",
+        "ticket": "0002309",
+        "rowIndex": 20,
+        "id": "Edgar Sanchez-20-1788186137425"
+      },
+      {
+        "ticket": "0002304",
+        "project": "ADM FOX",
+        "rowIndex": 21,
+        "id": "Edgar Sanchez-21-1788186137425",
+        "description": "En ventana de busqueda de documentos de factura coloca otra fecha cuando la factura queda a credito y se modifica los días a credito",
+        "notes": "Solventado - Carlos Eduardo Acevedo Gonzalez",
+        "status": "Solventado",
+        "tipo": "Avería/Falla"
+      },
+      {
+        "status": "Solventado",
+        "notes": "Se agrego una nueva columna - Antonio Medina Soporte Premium Margarita",
+        "project": "ADM FOX",
+        "tipo": "Avería/Falla",
+        "rowIndex": 22,
+        "description": "En la ventana de información detallada del recibo de caja el monto pagado es incorrecto",
+        "id": "Edgar Sanchez-22-1788186137425",
+        "ticket": "0002293"
+      },
+      {
+        "status": "Solventado",
         "rowIndex": 23,
-        "status": "No resuelto"
+        "notes": "Solventado con ejecutable de Edgar",
+        "project": "ADM FOX",
+        "description": "Agregar condición cuando se vende un item integrado escribe el coso padre en los hijos",
+        "id": "Edgar Sanchez-23-1788186137425",
+        "tipo": "Avería/Falla",
+        "ticket": "0002285"
       },
       {
         "rowIndex": 24,
         "description": "Arreglar Bug en recalculo de costo en compras",
-        "status": "No resuelto",
-        "id": "Edgar Sanchez-24-1788186137425",
-        "project": "ADM FOX",
         "tipo": "Avería/Falla",
-        "notes": "no aplica, porque no es justo, cuando el factor es hacia arriba, el empresario quiere que lo revalue, pero como el factor es hacia abajo, quiere mantener el precio de costo. ESA LOGICA es leonina. si era mas barato, el costo debe ser ese en el recalculo o definitivamente no ajustar el costo asi tenga mas factor.",
-        "ticket": "0002212"
-      },
-      {
-        "ticket": "0002158",
-        "tipo": "Avería/Falla",
-        "rowIndex": 25,
-        "notes": "Libery Franco (Alphatech Corporación y Servicios)",
-        "status": "No resuelto",
-        "id": "Edgar Sanchez-25-1788186137425",
-        "project": "ADM FOX",
-        "description": "Con la impresora Bematech MP-4000 no aparecen los descuentos en la factura"
-      },
-      {
-        "id": "Edgar Sanchez-26-1788186137425",
         "status": "Solventado",
+        "id": "Edgar Sanchez-24-1788186137425",
+        "notes": "Solventado - probar a partir de la rev 3.9.2026",
+        "ticket": "0002212",
+        "project": "ADM FOX"
+      },
+      {
+        "description": "Con la impresora Bematech MP-4000 no aparecen los descuentos en la factura",
+        "project": "ADM FOX",
+        "status": "Información Adicional",
+        "notes": "se le debe proporcionar la impresora o en su defecto un emulador",
+        "tipo": "Avería/Falla",
+        "ticket": "0002158",
+        "rowIndex": 25,
+        "id": "Edgar Sanchez-25-1788186137425"
+      },
+      {
         "project": "ADM FOX",
         "rowIndex": 26,
-        "notes": "Carolina Rivera",
-        "description": "En la reserva no se muestra tipo unidades y cantidad de la habitacion",
+        "status": "Solventado",
+        "id": "Edgar Sanchez-26-1788186137425",
+        "tipo": "Avería/Falla",
         "ticket": "0002125",
-        "tipo": "Avería/Falla"
+        "notes": "Carolina Rivera",
+        "description": "En la reserva no se muestra tipo unidades y cantidad de la habitacion"
       },
       {
-        "status": "No resuelto",
-        "tipo": "Avería/Falla",
-        "notes": "carlos Obando",
+        "project": "ADM FOX",
+        "status": "Solventado",
         "description": "fallo en recalculo de los montos que hay en entrada y salida de inventarios, fallo en los valores en dólares para distintos precios en la columna USD",
-        "project": "ADM FOX",
+        "notes": "Solventado cerrado por  - carlos Obando",
         "id": "Edgar Sanchez-27-1788186137425",
-        "ticket": "0002100",
-        "rowIndex": 27
+        "tipo": "Avería/Falla",
+        "rowIndex": 27,
+        "ticket": "0002100"
       },
       {
-        "status": "No resuelto",
-        "notes": "Linda Perez",
-        "tipo": "Avería/Falla",
         "ticket": "0002089",
-        "id": "Edgar Sanchez-28-1788186137425",
-        "project": "ADM FOX",
+        "tipo": "Avería/Falla",
         "description": "Error en facturas de impresora fiscal cuando se aplica descuento por monto",
-        "rowIndex": 28
+        "notes": "Después de validar directamente con el programador, se determino que el caso no aplica ya que el monto que se esta colocando en la imagen es inferior al tolerado por la cantidad de decimales de la impresora \n﻿total: 74.763,60 Bs\n﻿descuento por monto de 1,20 Bs\nNota: Aunque se coloque el descuento por monto, internamente premium siempre llevara a modo porcentual \n﻿\n﻿la regla de tres aplicada para el porcentaje es:\n\n1,20 / 74.763,60 = ﻿0,0000160505\n﻿\nporcentaje de descuento ﻿0,0000160505 * 100 = ﻿0,001605%\n﻿\n﻿la impresora fiscal no tolera esa cantidad de decimales y ocurre el bug reportado  -Linda Perez",
+        "rowIndex": 28,
+        "status": "No Aplica",
+        "id": "Edgar Sanchez-28-1788186137425",
+        "project": "ADM FOX"
       },
       {
-        "id": "Edgar Sanchez-29-1788186137425",
-        "description": "Las revisiones actuales estan viniendo con problemas en los separadores de miles de los montos en reportes",
-        "status": "No resuelto",
-        "rowIndex": 29,
-        "notes": "Luis Salazar",
-        "project": "ADM FOX",
         "tipo": "Avería/Falla",
+        "status": "Solventado",
+        "project": "ADM FOX",
+        "notes": "Solventado - Luis Salazar",
+        "id": "Edgar Sanchez-29-1788186137425",
+        "rowIndex": 29,
+        "description": "Las revisiones actuales estan viniendo con problemas en los separadores de miles de los montos en reportes",
         "ticket": "0002074"
       },
       {
-        "rowIndex": 30,
-        "status": "No resuelto",
-        "description": "INCIDENCIA AL GENERAR DESCUENTO TOTAL",
-        "notes": "WENCHI GRUPO SRL",
-        "tipo": "Avería/Falla",
-        "project": "",
         "ticket": "0002024",
-        "id": "Edgar Sanchez-30-1788186137425"
+        "tipo": "Avería/Falla",
+        "rowIndex": 30,
+        "id": "Edgar Sanchez-30-1788186137425",
+        "project": "",
+        "notes": "WENCHI GRUPO SRL",
+        "description": "INCIDENCIA AL GENERAR DESCUENTO TOTAL",
+        "status": "Solventado"
       }
     ],
     "Erika Molina": [],
-    "Leandro caicedo": [],
-    "Nodgar Armando": [
-      {
-        "id": "Nodgar Armando-1-1788362863177",
-        "notes": "",
-        "project": "Web ADM",
-        "ticket": "2441",
-        "rowIndex": 1,
-        "status": "Solventado",
-        "tipo": "Mejora/requerimiento",
-        "description": "Validación para retenciones de ventas"
-      },
-      {
-        "tipo": "Mejora/requerimiento",
-        "status": "Solventado",
-        "ticket": "2446",
-        "project": "Web ADM",
-        "notes": "",
-        "description": "Agregar campo de estado en la ventana de reconduccion de cartera",
-        "rowIndex": 2,
-        "id": "Nodgar Armando-2-1788362863177"
-      },
-      {
-        "ticket": "2447",
-        "description": "Agregar check que diga “Distribuidores y cartera del distribuidor” en reconduccion de cartera",
-        "rowIndex": 3,
-        "tipo": "Mejora/requerimiento",
-        "project": "Web ADM",
-        "status": "Solventado",
-        "id": "Nodgar Armando-3-1788362863177",
-        "notes": ""
-      },
-      {
-        "project": "Web ADM",
-        "tipo": "Mejora/requerimiento",
-        "description": "Agregar boton de consulta para que muestre la lista de clientes y distribuidores en el proceso de reconducción de cartera",
-        "ticket": "2449",
-        "rowIndex": 4,
-        "notes": "",
-        "id": "Nodgar Armando-4-1788362863177",
-        "status": "Solventado"
-      },
-      {
-        "description": "Adjuntar documentos del vehículo",
-        "notes": "",
-        "project": "Web ADM",
-        "ticket": "2436",
-        "rowIndex": 5,
-        "tipo": "Mejora/requerimiento",
-        "status": "No resuelto",
-        "id": "Nodgar Armando-5-1788362863177"
-      },
-      {
-        "description": "Datos mínimos obligatorios del vehículo",
-        "rowIndex": 6,
-        "notes": "",
-        "project": "Web ADM",
-        "ticket": "2429",
-        "id": "Nodgar Armando-6-1788362863177",
-        "status": "No resuelto",
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "rowIndex": 7,
-        "project": "Web ADM",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "ticket": "2425",
-        "status": "No resuelto",
-        "id": "Nodgar Armando-7-1788362863177",
-        "description": "Firma digital del cliente"
-      },
-      {
-        "notes": "",
-        "status": "No resuelto",
-        "project": "Web ADM",
-        "description": "Gestión de múltiples fotografías por orden",
-        "rowIndex": 8,
-        "tipo": "Mejora/requerimiento",
-        "ticket": "2422",
-        "id": "Nodgar Armando-8-1788362863177"
-      },
-      {
-        "ticket": "2432",
-        "tipo": "Mejora/requerimiento",
-        "description": "Historial consolidado",
-        "id": "Nodgar Armando-9-1788362863177",
-        "project": "Web ADM",
-        "rowIndex": 9,
-        "status": "No resuelto",
-        "notes": ""
-      },
-      {
-        "tipo": "Mejora/requerimiento",
-        "rowIndex": 10,
-        "notes": "",
-        "ticket": "2424",
-        "status": "No resuelto",
-        "project": "Web ADM",
-        "id": "Nodgar Armando-10-1788362863177",
-        "description": "Configuración \"Modo Taller\""
-      },
-      {
-        "id": "Nodgar Armando-11-1788362863177",
-        "ticket": "2467",
-        "tipo": "Mejora/requerimiento",
-        "project": "Web ADM",
-        "status": "No resuelto",
-        "rowIndex": 11,
-        "description": "Agregar boton para descargar tabla en excel de previsualizacion de reconducción de cartera",
-        "notes": ""
-      },
-      {
-        "rowIndex": 12,
-        "project": "Web ADM",
-        "ticket": "2469",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto",
-        "description": "Agregar opción de Descuento Global - Nuevo POS - pin 44079 - usuario: Leandro - Perfil: RESTAURANTE 2",
-        "id": "Nodgar Armando-12-1788362863177"
-      },
-      {
-        "rowIndex": 13,
-        "project": "Web ADM",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "ticket": "2481",
-        "status": "No resuelto",
-        "description": "PIN 50227 - SE MUESTRAN COSTOS EN LA FICHA DEL ARTICULO CUANDO LA CONFIGURACION ESTA AJUSTADA PARA QUE NO SE MUESTREN",
-        "id": "Nodgar Armando-13-1788362863177"
-      },
-      {
-        "id": "Nodgar Armando-14-1788362863177",
-        "notes": "",
-        "rowIndex": 14,
-        "status": "No resuelto",
-        "project": "Web ADM",
-        "tipo": "Mejora/requerimiento",
-        "description": "Estadísticas del taller",
-        "ticket": "2439"
-      },
-      {
-        "rowIndex": 15,
-        "ticket": "2421",
-        "project": "Web ADM",
-        "description": "Dashboard del Taller",
-        "notes": "",
-        "id": "Nodgar Armando-15-1788362863177",
-        "status": "No resuelto",
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "description": "Agenda integrada con la Orden de Servicio",
-        "notes": "",
-        "ticket": "2423",
-        "id": "Nodgar Armando-16-1788362863177",
-        "status": "No resuelto",
-        "project": "Web ADM",
-        "rowIndex": 16,
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "ticket": "2426",
-        "rowIndex": 17,
-        "id": "Nodgar Armando-17-1788362863177",
-        "project": "Web ADM",
-        "notes": "",
-        "description": "Aprobación de presupuestos por WhatsApp",
-        "status": "No resuelto",
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "id": "Nodgar Armando-18-1788362863177",
-        "notes": "",
-        "status": "No resuelto",
-        "project": "Web ADM",
-        "rowIndex": 18,
-        "tipo": "Mejora/requerimiento",
-        "ticket": "2438",
-        "description": "Indicadores de rentabilidad"
-      },
-      {
-        "notes": "",
-        "ticket": "2513",
-        "rowIndex": 19,
-        "id": "Nodgar Armando-19-1788362863177",
-        "description": "52397-MEGA DISPLAY SLR- Ubicar un almacen de forma mas rapida",
-        "project": "Web ADM",
-        "status": "No resuelto",
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "id": "Nodgar Armando-20-1788362863177",
-        "tipo": "Mejora/requerimiento",
-        "status": "No resuelto",
-        "description": "Cronómetro de tiempos por técnico",
-        "ticket": "2435",
-        "project": "Web ADM",
-        "notes": "",
-        "rowIndex": 20
-      },
-      {
-        "notes": "",
-        "id": "Nodgar Armando-21-1788362863177",
-        "status": "No resuelto",
-        "project": "Web ADM",
-        "description": "Arrastre automático de datos técnicos hacia la factura",
-        "tipo": "Mejora/requerimiento",
-        "rowIndex": 21,
-        "ticket": "2419"
-      },
-      {
-        "status": "No resuelto",
-        "notes": "",
-        "rowIndex": 22,
-        "description": "Notificaciones automáticas por WhatsApp (citas)",
-        "ticket": "2427",
-        "tipo": "Mejora/requerimiento",
-        "id": "Nodgar Armando-22-1788362863177",
-        "project": "Web ADM"
-      },
-      {
-        "notes": "",
-        "status": "No resuelto",
-        "rowIndex": 23,
-        "description": "Generación y compresión automática de archivos XML en formato .ZIP para carga de ATS al portal de la SRI (ECUADOR)",
-        "ticket": "2398",
-        "id": "Nodgar Armando-23-1788362863177",
-        "project": "Web ADM",
-        "tipo": "Mejora/requerimiento"
-      },
-      {
-        "id": "Nodgar Armando-24-1788362863177",
-        "project": "Web ADM",
-        "rowIndex": 24,
-        "status": "No resuelto",
-        "ticket": "2580",
-        "notes": "",
-        "tipo": "Mejora/requerimiento",
-        "description": "Agregar una columna de \"Nro. de Comprobante\" (el que entrega el cliente) en el reporte de Auxiliar de Retenciones en Ventas"
-      },
-      {
-        "description": "Ajuste final de orden en Auxiliar de Retenciones de Ventas",
-        "status": "No resuelto",
-        "tipo": "Mejora/requerimiento",
-        "ticket": "2581",
-        "project": "Web ADM",
-        "id": "Nodgar Armando-25-1788362863177",
-        "rowIndex": 25,
-        "notes": ""
-      },
-      {
-        "status": "No resuelto",
-        "tipo": "Mejora/requerimiento",
-        "description": "IMPRESION DE PUNTOS FIDELIDAD EN TICKET DE FACTURACION",
-        "notes": "",
-        "id": "Nodgar Armando-26-1788362863177",
-        "project": "Web ADM",
-        "rowIndex": 26,
-        "ticket": "2592"
-      },
-      {
-        "description": "Solicitud de Mejora para Múltiples Agencias / Almacenes en Eshop",
-        "ticket": "2561",
-        "tipo": "Mejora/requerimiento",
-        "id": "Nodgar Armando-27-1788362863177",
-        "notes": "",
-        "status": "No resuelto",
-        "project": "Web ADM",
-        "rowIndex": 27
-      },
-      {
-        "ticket": "2600",
-        "rowIndex": 28,
-        "id": "Nodgar Armando-28-1788362863177",
-        "project": "Web ADM",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "description": "41871- SERVICIO AGROINDUSTRIAL SG- Agregar al reporte desglose de pagos en devoluciones",
-        "status": "No resuelto"
-      },
-      {
-        "ticket": "2602",
-        "id": "Nodgar Armando-29-1788362863177",
-        "description": "52993- GRUPO TRIFINIO SRL,- Agregar boton de cerrar el traslado en permisologia de usuario",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "project": "Web ADM",
-        "rowIndex": 29,
-        "status": "No resuelto"
-      },
-      {
-        "description": "Todos los pines - Cambio obligatorio de contraseña en el primer ingreso de licencias nuevas (PINs) Usuario: PREMIUM",
-        "ticket": "2609",
-        "id": "Nodgar Armando-30-1788362863177",
-        "project": "Web ADM",
-        "notes": "",
-        "tipo": "Mejora/requerimiento",
-        "rowIndex": 30,
-        "status": "No resuelto"
-      },
-      {
-        "tipo": "Mejora/requerimiento",
-        "status": "No resuelto",
-        "id": "Nodgar Armando-31-1788362863177",
-        "description": "Agregar en la búsqueda de artículos, para poder ubicar por referencia en el modo touchscreen.",
-        "project": "Web ADM",
-        "ticket": "2627",
-        "rowIndex": 31,
-        "notes": ""
-      },
-      {
-        "status": "No resuelto",
-        "id": "Nodgar Armando-32-1788362863177",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "rowIndex": 32,
-        "description": "Agregar nota en la comanda cuando el pedido sea para llevar - Nuevo POS",
-        "project": "Web ADM",
-        "ticket": "2638"
-      },
-      {
-        "notes": "",
-        "status": "No resuelto",
-        "id": "Nodgar Armando-33-1788362863177",
-        "project": "Web ADM",
-        "rowIndex": 33,
-        "tipo": "Mejora/requerimiento",
-        "description": "Posibilidad de ver mapa de mesas en el Nuevo POS",
-        "ticket": "2636"
-      },
-      {
-        "project": "Web ADM",
-        "status": "No resuelto",
-        "rowIndex": 34,
-        "ticket": "2644",
-        "notes": "",
-        "id": "Nodgar Armando-34-1788362863177",
-        "tipo": "Mejora/requerimiento",
-        "description": "Agregar característica de mesa flotante para el Nuevo POS"
-      },
-      {
-        "status": "No resuelto",
-        "rowIndex": 35,
-        "tipo": "Mejora/requerimiento",
-        "description": "Arreglar manejo de artículos integrados en el Nuevo POS",
-        "id": "Nodgar Armando-35-1788362863177",
-        "ticket": "2647",
-        "project": "Web ADM",
-        "notes": ""
-      },
-      {
-        "id": "Nodgar Armando-36-1788362863177",
-        "project": "Web ADM",
-        "status": "No resuelto",
-        "notes": "",
-        "ticket": "2645",
-        "tipo": "Mejora/requerimiento",
-        "rowIndex": 36,
-        "description": "Agregar una columna donde se visualice el total en moneda extranjera por ítem agregado en la facturación. (mejora)"
-      },
-      {
-        "notes": "",
-        "status": "No resuelto",
-        "description": "todos los pines - Para los documentos offline agregar la unidad de medida UND o la que tenga el articulo",
-        "rowIndex": 37,
-        "tipo": "Mejora/requerimiento",
-        "id": "Nodgar Armando-37-1788362863177",
-        "ticket": "2655",
-        "project": "Web ADM"
-      },
-      {
-        "ticket": "2657",
-        "project": "Web ADM",
-        "rowIndex": 38,
-        "id": "Nodgar Armando-38-1788362863177",
-        "description": "Todos los pines como configurar la impresion automatica asi como lo hace la version adm web",
-        "tipo": "Mejora/requerimiento",
-        "notes": "",
-        "status": "No resuelto"
-      },
-      {
-        "rowIndex": 39,
-        "notes": "",
-        "ticket": "2656",
-        "id": "Nodgar Armando-39-1788362863177",
-        "tipo": "Mejora/requerimiento",
-        "description": "Todos los pines: consulta como dejar las facturas a creditos por cuentas por cobrar",
-        "status": "No resuelto",
-        "project": "Web ADM"
-      },
-      {
-        "description": "Todos los pines - POS- Timbrado automático de facturas offline al recuperar conexión",
-        "notes": "",
-        "id": "Nodgar Armando-40-1788362863177",
-        "status": "No resuelto",
-        "tipo": "Mejora/requerimiento",
-        "ticket": "2658",
-        "project": "Web ADM",
-        "rowIndex": 40
-      },
-      {
-        "ticket": "2660",
-        "project": "Web ADM",
-        "rowIndex": 41,
-        "tipo": "Mejora/requerimiento",
-        "description": "Se pide para el Pos que en la búsqueda del articulo se pueda buscar tambien por referencia",
-        "status": "No resuelto",
-        "notes": "",
-        "id": "Nodgar Armando-41-1788362863177"
-      },
-      {
-        "ticket": "2671",
-        "tipo": "Mejora/requerimiento",
-        "description": "MOSTRAR SOLO GRUPOS DE INVENTARIO ACTIVOS - POS WEB",
-        "id": "Nodgar Armando-42-1788362863177",
-        "project": "Web ADM",
-        "rowIndex": 42,
-        "status": "No resuelto",
-        "notes": ""
-      }
-    ]
+    "Leandro caicedo": []
   },
   "profiles": {
     "Ángel Mata": "desarrollador",
     "Carolina Rivera": "evaluacion",
     "Edgar Sanchez": "desarrollador",
     "Erika Molina": "lider",
-    "Leandro caicedo": "evaluacion",
-    "Nodgar Armando": "desarrollador"
+    "Leandro caicedo": "evaluacion"
   },
   "periodName": "Agosto 2026",
   "loadedAt": "2026-09-03T18:10:39.052Z",
@@ -5038,5 +4615,5 @@
       }
     ]
   },
-  "backedUpAt": "2026-09-05T23:25:12.830Z"
+  "backedUpAt": "2026-09-11T23:36:40.110Z"
 }
