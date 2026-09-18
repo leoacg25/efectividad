@@ -2,264 +2,264 @@
   "programmers": {
     "Ángel Mata": [
       {
-        "ticket": "1124",
-        "description": "TIMBRADO DE DOCUMENTOS EXONERADOS/EXENTOS - FEL COSTA RICA",
         "rowIndex": 1,
-        "project": "ADM",
-        "tipo": "Mejora/requerimiento",
-        "status": "Información Adicional",
         "id": "Ángel Mata-1-1788459039052",
-        "notes": "Se requieren credenciales"
+        "notes": "Se requieren credenciales",
+        "status": "Información Adicional",
+        "ticket": "1124",
+        "tipo": "Mejora/requerimiento",
+        "description": "TIMBRADO DE DOCUMENTOS EXONERADOS/EXENTOS - FEL COSTA RICA",
+        "project": "ADM"
       },
       {
         "id": "Ángel Mata-2-1788459039052",
-        "status": "Información Adicional",
         "rowIndex": 2,
         "project": "ADM",
-        "tipo": "Mejora/requerimiento",
+        "status": "Información Adicional",
         "ticket": "1418",
+        "tipo": "Mejora/requerimiento",
         "description": "Actualización para próximo instalador del administrativo sobre lista de formatos de libro de ventas, facturación y retenciones en compras",
         "notes": "En espera de instalador"
       },
       {
-        "notes": "El desarrollador indica que no aplica",
+        "project": "ADM",
         "description": "Se solicita una mejora en la opción de integrar cobros con bancos para bloquear el monto a facturar o de la venta.",
         "id": "Ángel Mata-3-1788459039052",
-        "tipo": "Mejora/requerimiento",
-        "ticket": "2058",
-        "project": "ADM",
         "status": "No Aplica",
-        "rowIndex": 3
+        "ticket": "2058",
+        "rowIndex": 3,
+        "tipo": "Mejora/requerimiento",
+        "notes": "El desarrollador indica que no aplica"
       },
       {
-        "tipo": "Mejora/requerimiento",
+        "description": "Agregar en el envió del XML de Imprenta Digital, el campo de \"Porcentaje de Descuento Lineal\" para los productos",
         "notes": "Solventado",
-        "rowIndex": 4,
+        "project": "ADM",
+        "tipo": "Mejora/requerimiento",
         "ticket": "2240",
         "status": "Solventado",
-        "project": "ADM",
-        "id": "Ángel Mata-4-1788459039052",
-        "description": "Agregar en el envió del XML de Imprenta Digital, el campo de \"Porcentaje de Descuento Lineal\" para los productos"
+        "rowIndex": 4,
+        "id": "Ángel Mata-4-1788459039052"
       },
       {
-        "id": "Ángel Mata-5-1788459039052",
-        "ticket": "2342",
-        "project": "ADM",
-        "rowIndex": 5,
         "description": "EMITIR RETENCION A CLIENTES AL MOMENTO DE FACTURAR",
+        "project": "ADM",
         "tipo": "Mejora/requerimiento",
         "status": "No Aplica",
+        "ticket": "2342",
+        "id": "Ángel Mata-5-1788459039052",
+        "rowIndex": 5,
         "notes": "En curso"
       },
       {
-        "rowIndex": 6,
-        "status": "Solventado",
-        "project": "ADM",
-        "ticket": "2533",
-        "description": "Agregar información de campos adicionales en variable de observación para factura de imprenta digital con SMART",
         "tipo": "Mejora/requerimiento",
-        "id": "Ángel Mata-6-1788459039052",
-        "notes": "Solventado, cliente particular cerrado por Carlos"
+        "ticket": "2533",
+        "status": "Solventado",
+        "rowIndex": 6,
+        "notes": "Solventado, cliente particular cerrado por Carlos",
+        "description": "Agregar información de campos adicionales en variable de observación para factura de imprenta digital con SMART",
+        "project": "ADM",
+        "id": "Ángel Mata-6-1788459039052"
       },
       {
-        "ticket": "223",
         "rowIndex": 7,
-        "project": "CLINICAS",
         "tipo": "Mejora/requerimiento",
         "id": "Ángel Mata-7-1788459039052",
-        "description": "Desarrollar el funcionamiento del Mantenimiento de resoluciones en Clinicas para Honduras.",
-        "notes": "En curso",
-        "status": "Información Adicional"
-      },
-      {
-        "ticket": "1882",
-        "tipo": "Mejora/requerimiento",
-        "rowIndex": 8,
-        "description": "Desarrollo adicional Modulo de bancos registro de lotes de cierres de puntos de ventas",
         "project": "CLINICAS",
-        "notes": "En curso",
+        "ticket": "223",
         "status": "Información Adicional",
-        "id": "Ángel Mata-8-1788459039052"
+        "notes": "En curso",
+        "description": "Desarrollar el funcionamiento del Mantenimiento de resoluciones en Clinicas para Honduras."
       },
       {
-        "id": "Ángel Mata-9-1788459039052",
+        "rowIndex": 8,
+        "status": "Información Adicional",
+        "description": "Desarrollo adicional Modulo de bancos registro de lotes de cierres de puntos de ventas",
+        "notes": "En curso",
+        "ticket": "1882",
+        "id": "Ángel Mata-8-1788459039052",
         "tipo": "Mejora/requerimiento",
+        "project": "CLINICAS"
+      },
+      {
         "description": "Desarrollo adicional Registro de compras costros en divisas el articulo",
         "status": "Información Adicional",
-        "project": "CLINICAS",
         "ticket": "1884",
+        "notes": "En curso",
+        "project": "CLINICAS",
         "rowIndex": 9,
+        "id": "Ángel Mata-9-1788459039052",
+        "tipo": "Mejora/requerimiento"
+      },
+      {
+        "notes": "En curso",
+        "tipo": "Mejora/requerimiento",
+        "description": "Desarrollar opción para generar relacion de compras para contribuyente formal en clinicas",
+        "project": "CLINICAS",
+        "status": "Información Adicional",
+        "ticket": "1956",
+        "id": "Ángel Mata-10-1788459039052",
+        "rowIndex": 10
+      },
+      {
+        "id": "Ángel Mata-11-1788459039052",
+        "rowIndex": 11,
+        "status": "Información Adicional",
+        "ticket": "1987",
+        "project": "CLINICAS",
+        "description": "Mejora a la ventana del centro de cobros de clínicas",
+        "tipo": "Mejora/requerimiento",
         "notes": "En curso"
       },
       {
-        "project": "CLINICAS",
-        "rowIndex": 10,
-        "status": "Información Adicional",
-        "id": "Ángel Mata-10-1788459039052",
-        "ticket": "1956",
-        "tipo": "Mejora/requerimiento",
-        "notes": "En curso",
-        "description": "Desarrollar opción para generar relacion de compras para contribuyente formal en clinicas"
-      },
-      {
-        "status": "Información Adicional",
-        "project": "CLINICAS",
-        "description": "Mejora a la ventana del centro de cobros de clínicas",
-        "id": "Ángel Mata-11-1788459039052",
-        "notes": "En curso",
-        "tipo": "Mejora/requerimiento",
-        "rowIndex": 11,
-        "ticket": "1987"
-      },
-      {
-        "notes": "Solventado validado con la rev 7.9.2026",
-        "tipo": "Mejora/requerimiento",
-        "status": "Solventado",
-        "description": "Mejora: que el usuario solamente pueda hacer devoluciones a las ordenes de servicio",
         "id": "Ángel Mata-12-1788459039052",
-        "ticket": "2298",
+        "tipo": "Mejora/requerimiento",
         "project": "CLINICAS",
+        "description": "Mejora: que el usuario solamente pueda hacer devoluciones a las ordenes de servicio",
+        "ticket": "2298",
+        "status": "Solventado",
+        "notes": "Solventado validado con la rev 7.9.2026",
         "rowIndex": 12
       },
       {
-        "status": "Solventado",
-        "description": "Requerimiento: mostrar las ordenes de servicio activas",
-        "project": "CLINICAS",
-        "ticket": "2299",
-        "rowIndex": 13,
         "id": "Ángel Mata-13-1788459039052",
+        "notes": "Solventado, sin embargo Carlos acevedo conversara con Angel sobre el comportamiento pos facturación de una orden de entrega",
+        "project": "CLINICAS",
+        "rowIndex": 13,
         "tipo": "Mejora/requerimiento",
-        "notes": "Solventado, sin embargo Carlos acevedo conversara con Angel sobre el comportamiento pos facturación de una orden de entrega"
+        "status": "Solventado",
+        "ticket": "2299",
+        "description": "Requerimiento: mostrar las ordenes de servicio activas"
       },
       {
-        "ticket": "2369",
-        "tipo": "Mejora/requerimiento",
-        "project": "CLINICAS",
         "rowIndex": 14,
-        "notes": "aun sigue fallando, validado con la rev 7.9.2026",
-        "description": "Relación al caso 1772 orden de servicio",
+        "tipo": "Mejora/requerimiento",
+        "ticket": "2369",
         "id": "Ángel Mata-14-1788459039052",
-        "status": "No resuelto"
+        "status": "Solventado",
+        "notes": "Solventado bajo un nuevo flujo de procesos, hay un bug con el monto de cargo a cuentas pero el proceso funciona",
+        "description": "Relación al caso 1772 orden de servicio",
+        "project": "CLINICAS"
       },
       {
-        "ticket": "2460",
-        "tipo": "Mejora/requerimiento",
-        "project": "CLINICAS",
         "notes": "Solventado",
+        "tipo": "Mejora/requerimiento",
         "rowIndex": 15,
         "description": "Se solicita agregar la opción de generar Notas de Crédito y Débito por Contingencia en el sistema de clínicas.",
         "id": "Ángel Mata-15-1788459039052",
-        "status": "Solventado"
+        "project": "CLINICAS",
+        "status": "Solventado",
+        "ticket": "2460"
       },
       {
-        "project": "CLINICAS",
+        "description": "No respeta porcentaje de honorario cuando el item es un honorario simple",
         "notes": "Solventado",
-        "ticket": "2494",
+        "tipo": "Mejora/requerimiento",
         "rowIndex": 16,
         "id": "Ángel Mata-16-1788459039052",
-        "status": "Solventado",
-        "tipo": "Mejora/requerimiento",
-        "description": "No respeta porcentaje de honorario cuando el item es un honorario simple"
+        "project": "CLINICAS",
+        "ticket": "2494",
+        "status": "Solventado"
       },
       {
         "description": "Poder registrar series de factura con los mismos números de control en clínicas",
-        "id": "Ángel Mata-17-1788459039052",
         "notes": "Solventado, validado con ejecutable 7.9.2026",
-        "ticket": "2514",
         "status": "Solventado",
+        "ticket": "2514",
         "project": "CLINICAS",
         "tipo": "Mejora/requerimiento",
-        "rowIndex": 17
+        "rowIndex": 17,
+        "id": "Ángel Mata-17-1788459039052"
       },
       {
-        "project": "ADM",
-        "status": "No Aplica",
-        "id": "Ángel Mata-18-1788459039052",
-        "tipo": "Avería/Falla",
         "ticket": "2088",
-        "description": "Falla de timbrado en Retenciones de IVA de the factory",
+        "status": "No Aplica",
+        "tipo": "Avería/Falla",
+        "project": "ADM",
+        "rowIndex": 18,
         "notes": "No aplica - Carolina Rivera publicado 20/8/26 12:04 QA\nEn conversaciones con la Licencia Vanessa Diaz este ticket no aplica por lo siguiente:\n\nEl caso no está claro, el problema es que se está mezclando retenciones de Iva con retenciones de Islr y por otro lado, también de valores exentos... de IVA? eso no lleva retención. En lo que se refiere a retenciones de ISRL hay montos exentos de IVA que si deben llevar retención de ISLR. Se debe aclarar cuál es el problema y respecto de qué impuesto es. \n\nSe sugiere crear un nuevo ticket con el caso especifico.",
-        "rowIndex": 18
+        "description": "Falla de timbrado en Retenciones de IVA de the factory",
+        "id": "Ángel Mata-18-1788459039052"
       },
       {
-        "status": "Información Adicional",
         "id": "Ángel Mata-19-1788459039052",
         "description": "El sistema administrativo FOX Muestra días de crédito errados en FE y no imprime documento electrónico sino la factura interna",
-        "notes": "El desarrollador lo marco como información Adicional",
-        "rowIndex": 19,
         "project": "ADM",
+        "status": "Información Adicional",
+        "ticket": "2268",
         "tipo": "Avería/Falla",
-        "ticket": "2268"
+        "notes": "El desarrollador lo marco como información Adicional",
+        "rowIndex": 19
       },
       {
-        "tipo": "Avería/Falla",
-        "project": "ADM",
+        "id": "Ángel Mata-20-1788459039052",
+        "description": "Cuando se registra un abono en cuentas por pagar y se paga por transferencia en la ventana para generar el asiento contable no trae el monto",
+        "notes": "Validar con el siguiente ejecutable",
         "status": "Solventado",
         "ticket": "2286",
+        "project": "ADM",
         "rowIndex": 20,
-        "notes": "Validar con el siguiente ejecutable",
-        "id": "Ángel Mata-20-1788459039052",
-        "description": "Cuando se registra un abono en cuentas por pagar y se paga por transferencia en la ventana para generar el asiento contable no trae el monto"
-      },
-      {
-        "tipo": "Avería/Falla",
-        "description": "Al consumir un Lote por factura, cuando emitimos un presupuesto esta trayendo el Lote ya consumido, se valida por fecha de vencimiento",
-        "rowIndex": 21,
-        "id": "Ángel Mata-21-1788459039052",
-        "status": "Solventado",
-        "ticket": "2368",
-        "notes": "Solventado en producción",
-        "project": "ADM"
-      },
-      {
-        "status": "Información Adicional",
-        "project": "CLINICAS",
-        "notes": "El programador solicita mas información",
-        "rowIndex": 22,
-        "tipo": "Avería/Falla",
-        "ticket": "2227",
-        "id": "Ángel Mata-22-1788459039052",
-        "description": "Relación al caso 1772 Al importar un presupuesto generado el sistema no origina la orden de servicio validar los lotes y vecimientos"
-      },
-      {
-        "ticket": "2480",
-        "description": "Se detectó un error ﻿en la cuentas por pagar al cancelar la operación por transferencia",
-        "tipo": "Avería/Falla",
-        "id": "Ángel Mata-23-1788459039052",
-        "rowIndex": 23,
-        "project": "CLINICAS",
-        "notes": "validar con el siguiente ejecutable",
-        "status": "Solventado"
-      },
-      {
-        "id": "Ángel Mata-24-1788459039052",
-        "status": "Solventado",
-        "project": "CLINICAS",
-        "ticket": "2564",
-        "rowIndex": 24,
-        "description": "Reporte de master de ventas no contempla las notas de créditos cuando se selecciona un medico en especifico",
-        "notes": "Solventado con un QRY",
         "tipo": "Avería/Falla"
       },
       {
-        "ticket": "2565",
-        "rowIndex": 25,
+        "description": "Al consumir un Lote por factura, cuando emitimos un presupuesto esta trayendo el Lote ya consumido, se valida por fecha de vencimiento",
+        "notes": "Solventado en producción",
         "tipo": "Avería/Falla",
-        "project": "CLINICAS",
-        "notes": "Solventado - soporte debe realizar la edición del formato",
-        "description": "Reporte ventas por departamento no considera las devoluciones",
-        "id": "Ángel Mata-25-1788459039052",
-        "status": "Solventado"
+        "rowIndex": 21,
+        "project": "ADM",
+        "status": "Solventado",
+        "ticket": "2368",
+        "id": "Ángel Mata-21-1788459039052"
       },
       {
-        "id": "Ángel Mata-26-1788459039052",
-        "status": "Solventado",
-        "rowIndex": 26,
-        "description": "Validación de solicitar cedula al guardar paciente en historias medicas",
-        "ticket": "2284",
+        "project": "CLINICAS",
+        "id": "Ángel Mata-22-1788459039052",
+        "rowIndex": 22,
         "tipo": "Avería/Falla",
+        "description": "Relación al caso 1772 Al importar un presupuesto generado el sistema no origina la orden de servicio validar los lotes y vecimientos",
+        "notes": "El programador solicita mas información",
+        "ticket": "2227",
+        "status": "Información Adicional"
+      },
+      {
+        "id": "Ángel Mata-23-1788459039052",
+        "description": "Se detectó un error ﻿en la cuentas por pagar al cancelar la operación por transferencia",
+        "tipo": "Avería/Falla",
+        "rowIndex": 23,
+        "ticket": "2480",
+        "status": "Solventado",
+        "project": "CLINICAS",
+        "notes": "validar con el siguiente ejecutable"
+      },
+      {
+        "rowIndex": 24,
+        "status": "Solventado",
+        "id": "Ángel Mata-24-1788459039052",
+        "ticket": "2564",
+        "project": "CLINICAS",
+        "description": "Reporte de master de ventas no contempla las notas de créditos cuando se selecciona un medico en especifico",
+        "tipo": "Avería/Falla",
+        "notes": "Solventado con un QRY"
+      },
+      {
+        "description": "Reporte ventas por departamento no considera las devoluciones",
+        "tipo": "Avería/Falla",
+        "project": "CLINICAS",
+        "status": "Solventado",
+        "ticket": "2565",
+        "notes": "Solventado - soporte debe realizar la edición del formato",
+        "id": "Ángel Mata-25-1788459039052",
+        "rowIndex": 25
+      },
+      {
+        "rowIndex": 26,
         "notes": "Solventado",
-        "project": "MEDICO"
+        "ticket": "2284",
+        "status": "Solventado",
+        "tipo": "Avería/Falla",
+        "id": "Ángel Mata-26-1788459039052",
+        "project": "MEDICO",
+        "description": "Validación de solicitar cedula al guardar paciente en historias medicas"
       }
     ],
     "Carolina Rivera": [],
@@ -5727,5 +5727,5 @@
       }
     ]
   },
-  "backedUpAt": "2026-09-17T23:45:47.749Z"
+  "backedUpAt": "2026-09-18T23:41:27.037Z"
 }
