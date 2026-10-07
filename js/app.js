@@ -15,6 +15,11 @@
 // ----------------------------------------------------------------
 const UI = (() => {
 
+  // Estado del arranque: el overlay de carga se muestra en el HTML inicial
+  // y se oculta recién cuando se decide la primera pantalla real.
+  let _booted = false;
+  let _bootTimer = null;
+
   /**
    * Muestra u oculta el overlay de carga.
    * @param {boolean} show
@@ -28,7 +33,7 @@ const UI = (() => {
 
   /**
    * Muestra una pantalla y oculta las demás.
-   * @param {'screen-upload'|'screen-app'} screenId
+   * @param {'screen-upload'|'screen-login'|'screen-app'} screenId
    */
   function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => {
@@ -39,6 +44,16 @@ const UI = (() => {
     if (target) {
       target.classList.remove('hidden');
       target.classList.add('active');
+    }
+    // Fin del arranque: se decidió la pantalla real, se apaga el overlay inicial.
+    if (!_booted) {
+      _booted = true;
+      if (_bootTimer) {
+        clearTimeout(_bootTimer);
+        _bootTimer = null;
+      }
+      const overlay = document.getElementById('loading-overlay');
+      if (overlay) overlay.classList.add('hidden');
     }
   }
 
@@ -198,6 +213,12 @@ const UI = (() => {
       document.addEventListener('keydown', onKeydown);
     });
   }
+
+  // Respaldo del arranque: si ninguna pantalla se decide (Firebase/red caído),
+  // mostrar la de carga de datos en lugar de un spinner infinito.
+  _bootTimer = setTimeout(() => {
+    if (!_booted) showScreen('screen-upload');
+  }, 10000);
 
   return { setLoading, showScreen, showView, showUploadError, hideUploadError, showToast, confirm, confirmImportPlan };
 
@@ -427,7 +448,8 @@ const App = (() => {
     Auth.onAuthChange((user) => {
       if (user) {
         document.getElementById('btn-logout').classList.remove('hidden');
-        UI.showScreen('screen-upload');
+        // No mostrar ninguna pantalla aún: initApp() decide al cargar los datos
+        // (evita el parpadeo de la pantalla de carga de Excel).
         initApp();
       } else {
         UI.showScreen('screen-login');
