@@ -2,6 +2,7 @@ Registro de cambios del proyecto
 ===========================
 
 
+- 2026-10-08 - Al importar Excel se eliminan los tickets repetidos (mismo número ignorando ceros a la izquierda, ej. 0001617 = 1617): se conserva la fila con notas o con estatus distinto de "No resuelto"; si ninguna tiene cambios, la última. Se avisa al usuario cuántos se omitieron
 - 2026-10-07 - Corregir parpadeo de la pantalla "Cargar nueva efectividad" al abrir o actualizar la app y los enlaces compartidos: se inicia con overlay "Cargando..." que desaparece recién al mostrar la vista real (con respaldo a los 10 s si Firebase no responde)
 - 2026-08-07 - Botón "Nuevo Programador" destacado en el dashboard (también en sidebar), con modal elegante en lugar de prompt()
 - 2026-08-07 - Importar/exportar planilla por programador: botones en la vista individual (Exportar Excel con una hoja, Importar Excel con opción Reemplazar/Añadir)

@@ -600,6 +600,9 @@ const App = (() => {
         'success',
         4000
       );
+      if (data.duplicatesRemoved > 0) {
+        UI.showToast(`Se omitieron ${data.duplicatesRemoved} ticket(s) repetido(s)`, 'info', 5000);
+      }
 
       goToDashboard();
 
@@ -989,6 +992,10 @@ const App = (() => {
             return;
           }
 
+          if (result.data.duplicatesRemoved > 0) {
+            UI.showToast(`Se omitieron ${result.data.duplicatesRemoved} ticket(s) repetido(s) en el archivo`, 'info', 5000);
+          }
+
           UI.setLoading(false);
 
           const currentCount = (appData.programmers[programmerName] || []).length;
@@ -1093,6 +1100,9 @@ const App = (() => {
         const result = await Parser.parseExcel(file);
         if (!result.data) { UI.showToast('Error al procesar el archivo', 'error'); return; }
         const imported = result.data;
+        if (imported.duplicatesRemoved > 0) {
+          UI.showToast(`Se omitieron ${imported.duplicatesRemoved} ticket(s) repetido(s) en el archivo`, 'info', 5000);
+        }
         if (!appData) {
           appData = imported;
           Storage.saveData(appData);

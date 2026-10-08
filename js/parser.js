@@ -68,10 +68,61 @@ const Parser = (() => {
   }
 
   /**
+   * Normaliza el número de ticket para comparar: recorta espacios y, si es
+   * puramente numérico, ignora los ceros a la izquierda (0001617 = 1617).
+   * @param {string} raw
+   * @returns {string} Clave de comparación ('' si no hay número de ticket)
+   */
+  function normalizeTicketKey(raw) {
+    const s = String(raw || '').trim();
+    if (!s) return '';
+    if (/^\d+$/.test(s)) return s.replace(/^0+(?=\d)/, '');
+    return s.toLowerCase();
+  }
+
+  /**
+   * Elimina tickets repetidos conservando una sola fila por número.
+   * Criterio: preferir filas con modificaciones (notas con texto o estatus
+   * distinto de "No resuelto"); entre varias modificadas, la última; si
+   * ninguna, la última fila.
+   * @param {Object[]} tickets
+   * @returns {{ tickets: Object[], removed: number }}
+   */
+  function dedupeTickets(tickets) {
+    const groups = new Map();
+    const order = [];
+
+    tickets.forEach((t, idx) => {
+      const key = normalizeTicketKey(t.ticket);
+      if (!key) return; // sin número de ticket: no se deduplica
+      if (!groups.has(key)) {
+        groups.set(key, []);
+        order.push(key);
+      }
+      groups.get(key).push(idx);
+    });
+
+    const drop = new Set();
+    order.forEach(key => {
+      const idxs = groups.get(key);
+      if (idxs.length < 2) return;
+      const modified = idxs.filter(i => tickets[i]._hasModified);
+      const winner = modified.length ? modified[modified.length - 1] : idxs[idxs.length - 1];
+      idxs.forEach(i => { if (i !== winner) drop.add(i); });
+    });
+
+    const result = tickets
+      .filter((_, idx) => !drop.has(idx))
+      .map(({ _hasModified, ...rest }) => rest);
+
+    return { tickets: result, removed: drop.size };
+  }
+
+  /**
    * Convierte una hoja de SheetJS en un array de objetos ticket.
    * @param {Object} worksheet - Hoja de SheetJS
    * @param {string} programmerName - Nombre del programador (para IDs únicos)
-   * @returns {{ tickets: Object[], errors: string[] }}
+   * @returns {{ tickets: Object[], errors: string[], duplicatesRemoved: number }}
    */
   function parseSheet(worksheet, programmerName) {
     // Convertir a array de arrays (incluyendo encabezado)
@@ -121,6 +172,10 @@ const Parser = (() => {
       }
 
       ticketCounter++;
+      const rawNotes  = map.notes  !== undefined ? String(row[map.notes]  ?? '').trim() : '';
+      const rawStatus = map.status !== undefined ? String(row[map.status] ?? '').trim() : '';
+      // El estado "No resuelto" es el valor por defecto (sin modificación).
+      const statusModified = rawStatus !== '' && normalizeStatus(rawStatus) !== 'No resuelto';
       const ticket = {
         id: `${programmerName}-${i}-${Date.now()}`,
         rowIndex: i,
@@ -128,14 +183,18 @@ const Parser = (() => {
         description: String(row[map.description] ?? '').trim(),
         project:     String(row[map.project]     ?? '').trim(),
         tipo:        map.tipo  !== undefined ? normalizeTipo(row[map.tipo])    : 'Mejora/requerimiento',
-        notes:       String(row[map.notes]       ?? '').trim(),
+        notes:       rawNotes,
         status:      map.status !== undefined ? normalizeStatus(row[map.status]) : 'No resuelto',
+        _hasModified: rawNotes !== '' || statusModified,
       };
 
       tickets.push(ticket);
     }
 
-    return { tickets, errors: [] };
+    // Deduplicar tickets repetidos conservando la fila con modificaciones.
+    const { tickets: deduped, removed } = dedupeTickets(tickets);
+
+    return { tickets: deduped, errors: [], duplicatesRemoved: removed };
   }
 
   /**
@@ -162,6 +221,7 @@ const Parser = (() => {
 
           const programmers = {};
           const sheetErrors = {};
+          let totalDuplicatesRemoved = 0;
 
           workbook.SheetNames.forEach(sheetName => {
             // Saltar hojas con nombres reservados o vacíos
@@ -170,7 +230,8 @@ const Parser = (() => {
             const worksheet = workbook.Sheets[sheetName];
             if (!worksheet) return;
 
-            const { tickets, errors } = parseSheet(worksheet, sheetName);
+            const { tickets, errors, duplicatesRemoved } = parseSheet(worksheet, sheetName);
+            totalDuplicatesRemoved += duplicatesRemoved || 0;
 
             if (errors.length > 0) {
               sheetErrors[sheetName] = errors;
@@ -198,6 +259,7 @@ const Parser = (() => {
             data: {
               programmers,
               loadedAt: new Date().toISOString(),
+              duplicatesRemoved: totalDuplicatesRemoved,
             },
             errors: sheetErrors
           });
