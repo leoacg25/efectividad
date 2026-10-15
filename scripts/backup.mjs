@@ -77,13 +77,14 @@ const files = readdirSync(backupDir)
   .filter(f => /^efectividad_\d{4}-\d{2}-\d{2}\.json$/.test(f))
   .sort();
 
-if (files.length >= 7) {
-  const toDelete = files.slice(0, -1);
+const RETAIN = 7;
+if (files.length > RETAIN) {
+  const toDelete = files.slice(0, -RETAIN);
   for (const f of toDelete) {
     unlinkSync(join(backupDir, f));
     console.log(`Deleted old backup: ${f}`);
   }
-  console.log(`Rotation: kept 1 (${files[files.length - 1]}), deleted ${toDelete.length} old backups`);
+  console.log(`Rotation: kept ${RETAIN} newest, deleted ${toDelete.length} old backups`);
 } else {
-  console.log(`No rotation needed (${files.length}/7 backups)`);
+  console.log(`No rotation needed (${files.length}/${RETAIN} backups)`);
 }
