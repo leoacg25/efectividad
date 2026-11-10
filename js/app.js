@@ -555,12 +555,13 @@ const App = (() => {
   }
 
   /**
-   * Procesa el archivo seleccionado o arrastrado.
+   * Procesa el archivo seleccionado o arrastrado con el módulo de carga
+   * inteligente (xlsx, csv, pdf, docx...) y su previsualización.
    * @param {File} file
    */
   async function handleFileSelected(file) {
     // 1. Validar el archivo antes de procesarlo
-    const { valid, error } = Parser.validateFile(file);
+    const { valid, error } = SmartImport.validateFile(file);
     if (!valid) {
       UI.showUploadError(error);
       return;
@@ -570,24 +571,17 @@ const App = (() => {
     UI.setLoading(true);
 
     try {
-      // 2. Parsear el Excel con SheetJS
-      const { data, errors } = await Parser.parseExcel(file);
-
-      // 3. Informar sobre hojas con errores estructurales (no fatales)
-      const errorSheets = Object.keys(errors);
-      if (errorSheets.length > 0) {
-        const msg = `Advertencia: Las hojas "${errorSheets.join('", "')}" fueron omitidas por formato incorrecto.`;
-        console.warn('[App]', msg);
-        UI.showToast(msg, 'info', 5000);
-      }
-
-      // 4. Verificar que haya al menos un programador con datos
-      const totalProgrammers = Object.keys(data.programmers).length;
-      if (totalProgrammers === 0) {
-        throw new Error('No se encontraron hojas con datos válidos en el archivo.');
-      }
+      // 2. Leer, detectar estructura y previsualizar (null si el usuario cancela)
+      const data = await SmartImport.open(file);
+      if (!data) return;
 
       if (!data.profiles) data.profiles = {};
+
+      // 3. Verificar que haya al menos un programador con datos
+      const totalProgrammers = Object.keys(data.programmers).length;
+      if (totalProgrammers === 0) {
+        throw new Error('No se detectaron programadores con tickets en el archivo.');
+      }
 
       data.periodName = appData?.periodName || '';
       data.archives   = appData?.archives || [];
@@ -960,11 +954,11 @@ const App = (() => {
       }
     });
 
-    // --- Programador: Importar Excel Individual ---
+    // --- Programador: Importar Excel Individual (carga inteligente) ---
     document.getElementById('btn-import-excel-prog')?.addEventListener('click', () => {
       const progExcelInput = document.createElement('input');
       progExcelInput.type = 'file';
-      progExcelInput.accept = '.xlsx,.xls';
+      progExcelInput.accept = '.xlsx,.xls,.xlsm,.csv,.pdf,.docx,.doc';
       progExcelInput.style.display = 'none';
       document.body.appendChild(progExcelInput);
       progExcelInput.addEventListener('change', async (e) => {
@@ -979,29 +973,35 @@ const App = (() => {
         }
 
         try {
-          const valid = Parser.validateFile(file);
+          const valid = SmartImport.validateFile(file);
           if (!valid.valid) { UI.showToast(valid.error, 'error'); progExcelInput.remove(); return; }
 
           UI.setLoading(true);
-          const result = await Parser.parseExcel(file);
-          if (!result.data) { UI.showToast('Error al procesar el archivo', 'error'); return; }
+          const result = await SmartImport.open(file);
+          if (!result) { progExcelInput.remove(); return; }
 
-          const importedTickets = result.data.programmers[programmerName];
-          if (!Array.isArray(importedTickets)) {
-            UI.showToast(`El archivo no contiene tickets para "${programmerName}". Nombra la hoja igual que el programador.`, 'error');
-            return;
+          // Buscar los tickets del programador actual; si el archivo detectó
+          // otro nombre, permitir aplicarlos a la vista actual (con aviso)
+          let importedTickets = result.programmers[programmerName];
+          let detectedName = programmerName;
+          if (!importedTickets) {
+            const names = Object.keys(result.programmers).filter(n => result.programmers[n].length > 0);
+            if (names.length === 0) { UI.showToast('El archivo no contiene tickets detectables', 'error'); return; }
+            detectedName = names[0];
+            importedTickets = result.programmers[detectedName];
           }
 
-          if (result.data.duplicatesRemoved > 0) {
-            UI.showToast(`Se omitieron ${result.data.duplicatesRemoved} ticket(s) repetido(s) en el archivo`, 'info', 5000);
+          if (result.duplicatesRemoved > 0) {
+            UI.showToast(`Se omitieron ${result.duplicatesRemoved} ticket(s) repetido(s) en el archivo`, 'info', 5000);
           }
-
-          UI.setLoading(false);
 
           const currentCount = (appData.programmers[programmerName] || []).length;
+          const originNote = detectedName !== programmerName
+            ? ` El archivo detectó a "${detectedName}".`
+            : '';
           const mode = await UI.confirmImportPlan(
             'Importar planilla',
-            `El archivo tiene ${importedTickets.length} tickets para "${programmerName}", que actualmente tiene ${currentCount}. ¿Cómo deseas aplicarlos?`
+            `El archivo tiene ${importedTickets.length} tickets, que actualmente tiene ${currentCount}.${originNote} ¿Cómo deseas aplicarlos?`
           );
           if (!mode) { progExcelInput.remove(); return; }
 
@@ -1017,7 +1017,7 @@ const App = (() => {
           } else {
             appData.programmers[programmerName] = newTickets;
           }
-          appData.loadedAt = result.data.loadedAt || appData.loadedAt || new Date().toISOString();
+          appData.loadedAt = result.loadedAt || appData.loadedAt || new Date().toISOString();
           if (!appData.profiles) appData.profiles = {};
           Storage.saveData(appData);
 
@@ -1085,7 +1085,7 @@ const App = (() => {
       e.target.value = '';
     });
 
-    // --- Importar Excel a datos existentes ---
+    // --- Importar archivo a datos existentes (carga inteligente) ---
     const excelInput = document.getElementById('file-excel-input');
     document.getElementById('btn-import-excel')?.addEventListener('click', () => {
       excelInput?.click();
@@ -1094,17 +1094,18 @@ const App = (() => {
       const file = e.target.files[0];
       if (!file) return;
       try {
-        const valid = Parser.validateFile(file);
+        const valid = SmartImport.validateFile(file);
         if (!valid.valid) { UI.showToast(valid.error, 'error'); return; }
         UI.setLoading(true);
-        const result = await Parser.parseExcel(file);
-        if (!result.data) { UI.showToast('Error al procesar el archivo', 'error'); return; }
-        const imported = result.data;
+        const imported = await SmartImport.open(file);
+        if (!imported) return; // cancelado en la previsualización
+
         if (imported.duplicatesRemoved > 0) {
           UI.showToast(`Se omitieron ${imported.duplicatesRemoved} ticket(s) repetido(s) en el archivo`, 'info', 5000);
         }
         if (!appData) {
           appData = imported;
+          if (!appData.profiles) appData.profiles = {};
           Storage.saveData(appData);
         } else {
           Object.entries(imported.programmers).forEach(([name, tickets]) => {
@@ -1121,7 +1122,7 @@ const App = (() => {
         UI.showToast('Tickets importados correctamente', 'success');
         goToDashboard();
       } catch (err) {
-        UI.showToast('Error al importar Excel: ' + err.message, 'error');
+        UI.showToast('Error al importar el archivo: ' + err.message, 'error');
       } finally {
         UI.setLoading(false);
         e.target.value = '';

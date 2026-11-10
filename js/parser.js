@@ -70,14 +70,45 @@ const Parser = (() => {
   /**
    * Normaliza el número de ticket para comparar: recorta espacios y, si es
    * puramente numérico, ignora los ceros a la izquierda (0001617 = 1617).
+   * Los marcadores "sin ticket" ('-', 'N/A', etc.) se tratan como vacío para
+   * que filas distintas no colapsen entre sí al deduplicar.
    * @param {string} raw
    * @returns {string} Clave de comparación ('' si no hay número de ticket)
    */
   function normalizeTicketKey(raw) {
     const s = String(raw || '').trim();
     if (!s) return '';
+    if (['-', '—', '–', '--', 'n/a', 'na', 'sin ticket', 'sin numero', '?'].includes(s.toLowerCase())) return '';
     if (/^\d+$/.test(s)) return s.replace(/^0+(?=\d)/, '');
     return s.toLowerCase();
+  }
+
+  /**
+   * Normaliza el valor de la columna "Tipo" a los valores del sistema.
+   * @param {*} v
+   * @returns {string}
+   */
+  function normalizeTipo(v) {
+    const s = String(v || '').trim().toLowerCase();
+    if (!s) return 'Mejora/requerimiento';
+    if (s.includes('mejora') || s.includes('requerimiento')) return 'Mejora/requerimiento';
+    if (s.includes('averia') || s.includes('falla')) return 'Avería/Falla';
+    return String(v).trim();
+  }
+
+  /**
+   * Normaliza el valor de la columna "Estado/Estatus" a los valores del sistema.
+   * @param {*} v
+   * @returns {string}
+   */
+  function normalizeStatus(v) {
+    const s = String(v || '').trim().toLowerCase();
+    if (!s) return 'No resuelto';
+    if (s.includes('solventado') || s === 'solventado') return 'Solventado';
+    if (s.includes('proceso')) return 'En proceso';
+    if (s.includes('aplica')) return 'No Aplica';
+    if (s.includes('informacion') || s.includes('información') || s.includes('adicional')) return 'Información Adicional';
+    return 'No resuelto';
   }
 
   /**
@@ -153,23 +184,6 @@ const Parser = (() => {
       // Saltar filas completamente vacías
       const allEmpty = row.every(cell => String(cell).trim() === '');
       if (allEmpty) continue;
-
-      function normalizeTipo(v) {
-        const s = String(v || '').trim().toLowerCase();
-        if (!s) return 'Mejora/requerimiento';
-        if (s.includes('mejora') || s.includes('requerimiento')) return 'Mejora/requerimiento';
-        if (s.includes('averia') || s.includes('falla')) return 'Avería/Falla';
-        return String(v).trim();
-      }
-      function normalizeStatus(v) {
-        const s = String(v || '').trim().toLowerCase();
-        if (!s) return 'No resuelto';
-        if (s.includes('solventado') || s === 'solventado') return 'Solventado';
-        if (s.includes('proceso')) return 'En proceso';
-        if (s.includes('aplica')) return 'No Aplica';
-        if (s.includes('informacion') || s.includes('información') || s.includes('adicional')) return 'Información Adicional';
-        return 'No resuelto';
-      }
 
       ticketCounter++;
       const rawNotes  = map.notes  !== undefined ? String(row[map.notes]  ?? '').trim() : '';
@@ -316,6 +330,11 @@ const Parser = (() => {
   return {
     parseExcel,
     validateFile,
+    // Expuestos para reutilización por el módulo de carga inteligente (smart-import.js)
+    normalizeTicketKey,
+    normalizeTipo,
+    normalizeStatus,
+    dedupeTickets,
   };
 
 })();

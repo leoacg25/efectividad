@@ -48,11 +48,11 @@
           de Efectividad
         </h1>
         <p class="upload-hero__subtitle">
-          Carga tu archivo Excel con los tickets asignados a cada programador y obtén métricas de efectividad en tiempo real.
+          Carga tu planilla (Excel, CSV, PDF o Word) con los tickets de cada programador: el sistema detecta las columnas y te muestra una previsualización antes de importar.
         </p>
 
         <!-- Zona de carga -->
-        <div class="upload-zone" id="upload-zone" role="button" tabindex="0" aria-label="Zona para subir archivo Excel">
+        <div class="upload-zone" id="upload-zone" role="button" tabindex="0" aria-label="Zona para subir archivo de tickets">
           <div class="upload-zone__icon">
             <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="64" height="64" rx="16" fill="url(#grad)" fill-opacity="0.15"/>
@@ -66,9 +66,9 @@
               </defs>
             </svg>
           </div>
-          <p class="upload-zone__text">Arrastra tu archivo <strong>.xlsx</strong> aquí</p>
+          <p class="upload-zone__text">Arrastra tu archivo <strong>.xlsx</strong>, <strong>.csv</strong>, <strong>.pdf</strong> o <strong>.docx</strong> aquí</p>
           <p class="upload-zone__subtext">o haz clic para seleccionar</p>
-          <input type="file" id="file-input" accept=".xlsx,.xls" aria-label="Seleccionar archivo Excel" />
+          <input type="file" id="file-input" accept=".xlsx,.xls,.xlsm,.csv,.pdf,.docx,.doc" aria-label="Seleccionar archivo de tickets" />
         </div>
 
         <!-- Mensaje de error -->
@@ -76,10 +76,12 @@
 
         <!-- Instrucciones del formato -->
         <div class="format-hint">
-          <h3>Formato esperado del Excel</h3>
+          <h3>Carga inteligente</h3>
           <ul>
-            <li>Cada <strong>hoja</strong> = un programador (el nombre de la hoja es el nombre)</li>
-            <li>Columnas requeridas: <code>N° Ticket</code> · <code>Descripcion</code> · <code>Proyecto</code> · <code>Notas</code></li>
+            <li>Soporta <strong>.xlsx</strong>, <strong>.csv</strong>, <strong>.pdf</strong>, <strong>.docx</strong> (y .xls / .doc)</li>
+            <li>Detecta <strong>filas y columnas</strong> automáticamente, aunque el formato varíe</li>
+            <li>Antes de cargar verás una <strong>previsualización editable</strong> del resultado</li>
+            <li>Las filas sin número de ticket se cargan como <strong>«Despacho 1, 2, 3…»</strong></li>
           </ul>
         </div>
       </div>
@@ -329,15 +331,15 @@
                 </svg>
                 Importar JSON
               </button>
-              <button class="btn btn--ghost btn--sm" id="btn-import-excel" title="Importar Excel con tickets">
+              <button class="btn btn--ghost btn--sm" id="btn-import-excel" title="Importar planilla (xlsx, csv, pdf, docx) con carga inteligente">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
                   <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/>
                   <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
                 </svg>
-                Importar Excel
+                Importar planilla
               </button>
               <input type="file" id="file-json-input" accept=".json" style="display:none" />
-              <input type="file" id="file-excel-input" accept=".xlsx,.xls" style="display:none" />
+              <input type="file" id="file-excel-input" accept=".xlsx,.xls,.xlsm,.csv,.pdf,.docx,.doc" style="display:none" />
             </div>
           </div>
           <div class="table-wrapper">
@@ -498,11 +500,11 @@
             </svg>
             Nuevo Ticket
           </button>
-          <button class="btn btn--outline btn--sm" id="btn-import-excel-prog">
+          <button class="btn btn--outline btn--sm" id="btn-import-excel-prog" title="Importar planilla (xlsx, csv, pdf, docx) con carga inteligente">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M16 12l-4 4-4-4M12 3v13"/>
             </svg>
-            Importar Excel
+            Importar planilla
           </button>
           <button class="btn btn--outline btn--sm" id="btn-export-excel-prog">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -746,6 +748,39 @@
       <div class="modal__actions">
         <button class="btn btn--ghost" id="modal-cancel">Cancelar</button>
         <button class="btn btn--danger" id="modal-confirm">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL CARGA INTELIGENTE (PREVISUALIZACIÓN DE IMPORTACIÓN)
+   ============================================================ -->
+  <div id="smart-import-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="smart-import-title">
+    <div class="smart-modal">
+      <div class="form-modal__header">
+        <div class="form-modal__header-left">
+          <div class="form-modal__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20">
+              <path d="M12 3v3M12 3l3 3M12 3L9 6M4 13h16M6 13V7a2 2 0 012-2h8a2 2 0 012 2v6M6 13l1.5 8h9L18 13"/>
+              <path d="M9 17h2M13 17h2"/>
+            </svg>
+          </div>
+          <div>
+            <h3 id="smart-import-title">Carga inteligente</h3>
+            <p class="form-modal__subtitle" id="smart-import-file">archivo</p>
+          </div>
+        </div>
+        <button type="button" class="form-modal__close" id="smart-import-close" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="form-modal__body" id="smart-import-body"></div>
+      <div class="form-modal__footer">
+        <span class="smart-import__summary" id="smart-import-summary"></span>
+        <button type="button" class="btn btn--ghost" id="smart-import-cancel">Cancelar</button>
+        <button type="button" class="btn btn--primary" id="smart-import-confirm">Importar</button>
       </div>
     </div>
   </div>
@@ -1003,6 +1038,7 @@
   <!-- SCRIPTS MODULARES -->
   <script src="js/storage.js"></script>
   <script src="js/parser.js"></script>
+  <script src="js/smart-import.js"></script>
   <script src="js/exporter.js"></script>
   <script src="js/firebase-db.js"></script>
   <script src="js/auth.js"></script>
