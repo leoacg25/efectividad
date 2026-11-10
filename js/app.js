@@ -1000,7 +1000,7 @@ const App = (() => {
             ? ` El archivo detectó a "${detectedName}".`
             : '';
           const mode = await UI.confirmImportPlan(
-            'Importar planilla',
+            'Carga Inteligente',
             `El archivo tiene ${importedTickets.length} tickets, que actualmente tiene ${currentCount}.${originNote} ¿Cómo deseas aplicarlos?`
           );
           if (!mode) { progExcelInput.remove(); return; }
