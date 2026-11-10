@@ -1369,6 +1369,9 @@ img { display: block; max-width: 100%; }
 
 .btn svg { width: 15px; height: 15px; flex-shrink: 0; }
 
+.btn img.btn__icon { width: 15px; height: 15px; flex-shrink: 0; object-fit: contain; }
+.btn--sm img.btn__icon { width: 14px; height: 14px; }
+
 .btn--primary {
   background: var(--accent-1);
   color: white;
