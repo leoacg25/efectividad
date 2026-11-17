@@ -87,6 +87,174 @@ const Exporter = (() => {
   }
 
   // ----------------------------------------------------------------
+  // IMÁGENES ADJUNTAS PARA PDF
+  // ----------------------------------------------------------------
+
+  /**
+   * Carga una imagen desde un dataURL.
+   * @param {string} dataUrl
+   * @returns {Promise<HTMLImageElement>}
+   */
+  function loadImageElement(dataUrl) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error('No se pudo leer la imagen adjunta'));
+      img.src = dataUrl;
+    });
+  }
+
+  /**
+   * Convierte un adjunto a JPEG (máx. 1000 px) para incrustarlo en el PDF
+   * con un tamaño razonable.
+   * @param {{dataUrl:string, name?:string}} attachment
+   * @returns {Promise<{dataUrl:string, format:string, width:number, height:number, name:string}>}
+   */
+  async function prepareImageForPdf(attachment) {
+    const img = await loadImageElement(attachment.dataUrl);
+    const srcW = img.naturalWidth || img.width || 1;
+    const srcH = img.naturalHeight || img.height || 1;
+    const maxDim = 1000;
+    const scale = Math.min(1, maxDim / Math.max(srcW, srcH));
+    const width = Math.max(1, Math.round(srcW * scale));
+    const height = Math.max(1, Math.round(srcH * scale));
+
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, width, height);
+    ctx.drawImage(img, 0, 0, width, height);
+
+    return {
+      dataUrl: canvas.toDataURL('image/jpeg', 0.82),
+      format: 'JPEG',
+      width,
+      height,
+      name: attachment.name || 'imagen.jpg',
+    };
+  }
+
+  /**
+   * Devuelve los adjuntos válidos de un ticket.
+   * @param {Object} ticket
+   * @returns {Array}
+   */
+  function getTicketImages(ticket) {
+    const list = ticket && Array.isArray(ticket.attachments) ? ticket.attachments : [];
+    return list.filter(a => a && typeof a.dataUrl === 'string'
+      && /^data:image\/(webp|jpeg|jpg|png)/i.test(a.dataUrl));
+  }
+
+  /**
+   * Prepara las imágenes de todos los tickets que tengan adjuntos.
+   * @param {Array} tickets
+   * @returns {Promise<Array<{ticket:Object, images:Array}>>}
+   */
+  async function prepareAttachmentGroups(tickets) {
+    const groups = [];
+    for (const ticket of tickets || []) {
+      const images = getTicketImages(ticket);
+      if (!images.length) continue;
+
+      const prepared = [];
+      for (const attachment of images) {
+        try {
+          prepared.push(await prepareImageForPdf(attachment));
+        } catch (err) {
+          console.warn('[Exporter] No se pudo preparar una imagen adjunta:', err);
+        }
+      }
+      if (prepared.length) groups.push({ ticket, images: prepared });
+    }
+    return groups;
+  }
+
+  /**
+   * Dibuja la sección de anexos con las imágenes adjuntas.
+   * @param {jsPDF} doc
+   * @param {Array<{ticket:Object, images:Array}>} groups
+   * @param {number} startY
+   * @returns {number} cursor Y final
+   */
+  function drawAttachmentsAnnex(doc, groups, startY) {
+    const margin = 14;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const contentW = pageWidth - margin * 2;
+    const cols = 2;
+    const gap = 5;
+    const cellW = (contentW - gap) / cols;
+    const imageBoxH = 52;
+    const captionH = 7;
+    const rowH = imageBoxH + captionH;
+    const bottomLimit = pageHeight - 20;
+    let y = startY;
+
+    const addContinuationPage = () => {
+      doc.addPage();
+      y = drawPdfHeader(doc, 'Anexos — Imágenes adjuntas (continuación)', '');
+    };
+
+    groups.forEach(group => {
+      // Encabezado del ticket + al menos una fila de imágenes
+      if (y + 12 + rowH > bottomLimit) addContinuationPage();
+
+      doc.setFillColor(99, 102, 241);
+      doc.roundedRect(margin, y, contentW, 9, 2, 2, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(255, 255, 255);
+
+      const ticketLabel = `Ticket ${group.ticket.ticket || '—'}`;
+      const desc = group.ticket.description ? `  ·  ${group.ticket.description}` : '';
+      const heading = doc.splitTextToSize(ticketLabel + desc, contentW - 6)[0] || ticketLabel;
+      doc.text(heading, margin + 3, y + 6);
+      y += 12;
+
+      group.images.forEach((image, index) => {
+        const col = index % cols;
+        if (col === 0 && y + rowH > bottomLimit) addContinuationPage();
+
+        const cellX = margin + col * (cellW + gap);
+        const fit = Math.min(cellW / image.width, imageBoxH / image.height);
+        const drawW = Math.max(1, image.width * fit);
+        const drawH = Math.max(1, image.height * fit);
+        const imgX = cellX + (cellW - drawW) / 2;
+        const imgY = y + (imageBoxH - drawH) / 2;
+
+        try {
+          doc.addImage(image.dataUrl, image.format, imgX, imgY, drawW, drawH);
+          doc.setDrawColor(210, 210, 225);
+          doc.setLineWidth(0.3);
+          doc.rect(imgX, imgY, drawW, drawH);
+        } catch (err) {
+          console.warn('[Exporter] No se pudo incrustar una imagen en el PDF:', err);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8);
+          doc.setTextColor(200, 60, 60);
+          doc.text('No se pudo incrustar la imagen', cellX + 2, y + imageBoxH / 2);
+        }
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7);
+        doc.setTextColor(100, 100, 120);
+        const caption = doc.splitTextToSize(image.name || 'imagen', cellW)[0] || 'imagen';
+        doc.text(caption, cellX + 1, y + imageBoxH + 4.5);
+
+        if (col === cols - 1 || index === group.images.length - 1) {
+          y += rowH;
+        }
+      });
+
+      y += 4;
+    });
+
+    return y;
+  }
+
+  // ----------------------------------------------------------------
   // ENCABEZADO PDF CORPORATIVO
   // ----------------------------------------------------------------
 
@@ -227,14 +395,20 @@ const Exporter = (() => {
 
   /**
    * Exporta un reporte PDF individual de un programador.
+   * Incluye un anexo con las imágenes adjuntas a las notas de cada ticket.
    * @param {string} programmerName
    * @param {Array} tickets
+   * @returns {Promise<void>}
    */
-  function exportPDFIndividual(programmerName, tickets) {
+  async function exportPDFIndividual(programmerName, tickets) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
     const stats = calcStats(tickets);
     const effColor = effectivenessColor(stats.pct);
+
+    // Preparar imágenes adjuntas antes de construir el documento (requiere decodificarlas)
+    const attachmentGroups = await prepareAttachmentGroups(tickets);
+    const imageCount = attachmentGroups.reduce((sum, group) => sum + group.images.length, 0);
 
     // Encabezado
     let cursorY = drawPdfHeader(doc, `Reporte Individual: ${programmerName}`, `Efectividad: ${stats.pct}%`);
@@ -366,6 +540,32 @@ const Exporter = (() => {
         }
       }
     });
+
+    const tableEndY = (doc.lastAutoTable && doc.lastAutoTable.finalY) || cursorY;
+
+    // Nota sobre las imágenes adjuntas
+    if (imageCount > 0) {
+      const noteY = Math.min(tableEndY + 7, doc.internal.pageSize.getHeight() - 24);
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(8);
+      doc.setTextColor(110, 110, 130);
+      doc.text(
+        `${imageCount} imagen(es) adjunta(s) a las notas se incluyen en el Anexo de imágenes.`,
+        margin,
+        noteY
+      );
+    }
+
+    // Anexo de imágenes adjuntas
+    if (imageCount > 0) {
+      doc.addPage();
+      const annexY = drawPdfHeader(
+        doc,
+        'Anexo — Imágenes adjuntas',
+        `${programmerName} · ${imageCount} imagen(es) · ${attachmentGroups.length} ticket(s)`
+      );
+      drawAttachmentsAnnex(doc, attachmentGroups, annexY);
+    }
 
     drawPdfFooter(doc);
 

@@ -929,11 +929,11 @@ const App = (() => {
     });
 
     // --- Programador: Exportar PDF Individual ---
-    document.getElementById('btn-export-pdf-prog')?.addEventListener('click', () => {
+    document.getElementById('btn-export-pdf-prog')?.addEventListener('click', async () => {
       const { name, tickets } = Tickets.getCurrentData();
       if (!name) return;
       try {
-        Exporter.exportPDFIndividual(name, tickets);
+        await Exporter.exportPDFIndividual(name, tickets);
         UI.showToast(`PDF de ${name} descargado`, 'success');
       } catch (err) {
         console.error(err);
