@@ -17,6 +17,9 @@ const Tickets = (() => {
   let activeFilter = 'all';
   let searchQuery = '';
   let currentTicketIdForNotes = null;
+  let notesAttachments = [];
+  let notesReadOnly = false;
+  let notesAttachmentsBusy = false;
   let notesModalSetup = false;
   let readOnly = false;
 
@@ -334,6 +337,7 @@ const Tickets = (() => {
                     title="Ver notas" tabindex="0">
                 ${escHtml(ticket.notes ? (readOnly ? ticket.notes : (ticket.notes.length > 120 ? ticket.notes.substring(0, 120) + '...' : ticket.notes)) : 'Sin notas')}
               </span>
+              ${Attachments.renderBadge(ticket.attachments)}
               ${notesOpenBtn}
             </div>
           </td>
@@ -473,13 +477,19 @@ const Tickets = (() => {
     const cancelBtn = document.getElementById('notes-modal-cancel');
     const clearBtn = document.getElementById('notes-modal-clear');
     const closeBtn = document.getElementById('notes-modal-close');
+    const addImagesBtn = document.getElementById('notes-attachments-add');
+    const fileInput = document.getElementById('notes-attachments-input');
+    const dropZone = document.getElementById('notes-attachments-drop');
+    const grid = document.getElementById('notes-attachments-grid');
 
     saveBtn?.addEventListener('click', saveNotesChanges);
     cancelBtn?.addEventListener('click', closeNotesModal);
     closeBtn?.addEventListener('click', closeNotesModal);
     clearBtn?.addEventListener('click', () => {
       if (textarea) textarea.value = '';
+      notesAttachments = [];
       updateNotesCharCount();
+      renderNotesAttachments();
       textarea?.focus();
     });
 
@@ -500,11 +510,207 @@ const Tickets = (() => {
       }
     });
 
+    // --- Adjuntos: selector de archivos ---
+    addImagesBtn?.addEventListener('click', () => fileInput?.click());
+    fileInput?.addEventListener('change', async (e) => {
+      const files = e.target.files;
+      e.target.value = '';
+      await addAttachmentFiles(files);
+    });
+
+    // --- Adjuntos: arrastrar y soltar ---
+    if (dropZone) {
+      ['dragenter', 'dragover'].forEach(evt => {
+        dropZone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (!notesReadOnly) dropZone.classList.add('is-dragover');
+        });
+      });
+      ['dragleave', 'dragend'].forEach(evt => {
+        dropZone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.classList.remove('is-dragover');
+        });
+      });
+      dropZone.addEventListener('drop', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropZone.classList.remove('is-dragover');
+        await addAttachmentFiles(e.dataTransfer?.files);
+      });
+    }
+
+    // --- Adjuntos: pegar desde el portapapeles (Ctrl+V) ---
+    document.addEventListener('paste', (e) => {
+      if (modal?.classList.contains('hidden')) return;
+      if (notesReadOnly) return;
+      if (!document.getElementById('image-lightbox')?.classList.contains('hidden')) return;
+      const files = getClipboardImageFiles(e.clipboardData);
+      if (!files.length) return;
+      e.preventDefault();
+      addAttachmentFiles(files);
+    });
+
+    // --- Adjuntos: abrir vista previa / quitar ---
+    grid?.addEventListener('click', (e) => {
+      const removeBtn = e.target.closest('[data-att-remove]');
+      if (removeBtn) {
+        const index = Number(removeBtn.getAttribute('data-att-remove'));
+        if (Number.isInteger(index) && index >= 0 && index < notesAttachments.length) {
+          notesAttachments.splice(index, 1);
+          renderNotesAttachments();
+        }
+        return;
+      }
+      const openBtn = e.target.closest('[data-att-open]');
+      if (openBtn) {
+        const index = Number(openBtn.getAttribute('data-att-open'));
+        const att = notesAttachments[index];
+        if (att) Attachments.openPreview(att);
+      }
+    });
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !document.getElementById('notes-modal')?.classList.contains('hidden')) {
         closeNotesModal();
       }
     });
+  }
+
+  /**
+   * Extrae las imágenes disponibles en un evento de portapapeles.
+   * @param {DataTransfer|null} clipboardData
+   * @returns {File[]}
+   */
+  function getClipboardImageFiles(clipboardData) {
+    const files = [];
+    if (!clipboardData) return files;
+
+    if (clipboardData.items) {
+      Array.from(clipboardData.items).forEach(item => {
+        if (item.kind === 'file' && /^image\//i.test(item.type)) {
+          const file = item.getAsFile();
+          if (file) files.push(file);
+        }
+      });
+    }
+
+    if (!files.length && clipboardData.files) {
+      Array.from(clipboardData.files).forEach(file => {
+        if (file && /^image\//i.test(file.type)) files.push(file);
+      });
+    }
+
+    return files;
+  }
+
+  /**
+   * Procesa y añade imágenes al ticket abierto en el modal.
+   * @param {FileList|File[]} fileList
+   */
+  async function addAttachmentFiles(fileList) {
+    if (notesReadOnly || notesAttachmentsBusy) return;
+
+    const files = Array.from(fileList || []).filter(Boolean);
+    if (!files.length) return;
+
+    const max = Attachments.MAX_PER_TICKET;
+    if (notesAttachments.length >= max) {
+      UI.showToast(`Máximo ${max} imágenes por ticket`, 'warning');
+      return;
+    }
+
+    setNotesAttachmentsBusy(true);
+    try {
+      const result = await Attachments.processFiles(files, {
+        existing: notesAttachments,
+        max,
+      });
+
+      if (result.added.length) {
+        notesAttachments = notesAttachments.concat(result.added);
+        renderNotesAttachments();
+        UI.showToast(
+          result.added.length === 1 ? 'Imagen adjuntada' : `${result.added.length} imágenes adjuntadas`,
+          'success'
+        );
+      }
+
+      result.errors.forEach(msg => UI.showToast(msg, 'error', 6000));
+      if (result.skipped) {
+        UI.showToast(`Solo se permiten ${max} imágenes por ticket`, 'warning');
+      }
+    } finally {
+      setNotesAttachmentsBusy(false);
+    }
+  }
+
+  function setNotesAttachmentsBusy(busy) {
+    notesAttachmentsBusy = !!busy;
+    const dropZone = document.getElementById('notes-attachments-drop');
+    const addBtn = document.getElementById('notes-attachments-add');
+    if (dropZone) dropZone.classList.toggle('is-busy', !!busy);
+    if (addBtn) addBtn.disabled = !!busy;
+  }
+
+  /**
+   * Renderiza las miniaturas y el estado del área de adjuntos.
+   */
+  function renderNotesAttachments() {
+    const grid = document.getElementById('notes-attachments-grid');
+    const size = document.getElementById('notes-attachments-size');
+    const dropZone = document.getElementById('notes-attachments-drop');
+    const section = document.getElementById('notes-attachments');
+    if (!grid) return;
+
+    const totalBytes = notesAttachments.reduce((sum, a) => sum + (Number(a.bytes) || 0), 0);
+    if (size) {
+      size.textContent = notesAttachments.length
+        ? `${notesAttachments.length}/${Attachments.MAX_PER_TICKET} · ${Attachments.formatBytes(totalBytes)}`
+        : '';
+    }
+
+    grid.innerHTML = notesAttachments.map((att, index) => `
+      <figure class="attachment-thumb">
+        <button type="button" class="attachment-thumb__open" data-att-open="${index}" title="Ver imagen" aria-label="Ver ${escHtml(att.name)}">
+          <img src="${att.dataUrl}" alt="${escHtml(att.name)}" loading="lazy">
+        </button>
+        ${notesReadOnly ? '' : `<button type="button" class="attachment-thumb__remove" data-att-remove="${index}" title="Quitar imagen" aria-label="Quitar ${escHtml(att.name)}">×</button>`}
+        <figcaption>${escHtml(att.name)} · ${Attachments.formatBytes(att.bytes)}</figcaption>
+      </figure>
+    `).join('');
+
+    if (dropZone) {
+      const atLimit = notesAttachments.length >= Attachments.MAX_PER_TICKET;
+      dropZone.classList.toggle('hidden', notesReadOnly || atLimit);
+      const hint = dropZone.querySelector('.notes-attachments__drop-hint');
+      if (hint) {
+        hint.textContent = atLimit
+          ? `Máximo ${Attachments.MAX_PER_TICKET} imágenes por ticket`
+          : 'Arrastra imágenes o pégalas desde el portapapeles';
+      }
+    }
+
+    if (section) section.classList.toggle('hidden', notesReadOnly && notesAttachments.length === 0);
+    const pasteHint = section?.querySelector('.notes-attachments__hint');
+    if (pasteHint) pasteHint.classList.toggle('hidden', notesReadOnly);
+  }
+
+  /**
+   * Define los adjuntos del ticket abierto (usado también por Pos Web).
+   * @param {Array} list
+   * @param {boolean} [isReadOnly=false]
+   */
+  function setNotesAttachments(list, isReadOnly = false) {
+    notesReadOnly = !!isReadOnly;
+    notesAttachments = Attachments.sanitize(list);
+    renderNotesAttachments();
+  }
+
+  function getNotesAttachments() {
+    return notesAttachments.slice();
   }
 
   function openNotesModal(ticketId) {
@@ -537,6 +743,10 @@ const Tickets = (() => {
     textarea.value = ticket.notes || '';
     updateNotesCharCount();
 
+    notesReadOnly = readOnly;
+    notesAttachments = Attachments.sanitize(ticket.attachments);
+    renderNotesAttachments();
+
     if (readOnly) {
       textarea.disabled = true;
       document.getElementById('notes-modal-save').style.display = 'none';
@@ -561,6 +771,8 @@ const Tickets = (() => {
     modal.classList.add('hidden');
     modal.classList.remove('active');
     currentTicketIdForNotes = null;
+    notesAttachments = [];
+    notesReadOnly = false;
     if (window._posWebNotesCleanup) window._posWebNotesCleanup();
   }
 
@@ -574,13 +786,44 @@ const Tickets = (() => {
     const textarea = document.getElementById('notes-textarea');
     const newValue = textarea.value.trim();
     const ticket = currentTickets.find(t => t.id === currentTicketIdForNotes);
+    if (!ticket) {
+      closeNotesModal();
+      return;
+    }
 
-    if (ticket && newValue !== ticket.notes) {
-      ticket.notes = newValue;
-      Storage.updateTicketField(currentProgrammer, currentTicketIdForNotes, 'notes', newValue);
-      UI.showToast('Notas guardadas correctamente', 'success');
+    const nextAttachments = notesAttachments.slice();
+    const notesChanged = newValue !== (ticket.notes || '');
+    const attachmentsChanged = JSON.stringify(nextAttachments)
+      !== JSON.stringify(Attachments.sanitize(ticket.attachments));
 
-      renderTicketsTable();
+    if (notesChanged || attachmentsChanged) {
+      const fields = { notes: newValue, attachments: nextAttachments };
+
+      // Evitar que el documento del programador supere el límite de Firestore.
+      const projected = currentTickets.map(t => t.id === ticket.id ? Object.assign({}, t, fields) : t);
+      if (Attachments.estimateChars(projected) > Attachments.MAX_PROGRAMMER_CHARS) {
+        UI.showToast(
+          'No hay espacio suficiente para guardar estas imágenes. Elimina algunas o reduce su cantidad.',
+          'error',
+          7000
+        );
+        return;
+      }
+
+      try {
+        const ok = Storage.updateTicketFields(currentProgrammer, currentTicketIdForNotes, fields);
+        if (!ok) throw new Error('No se pudo guardar el ticket.');
+
+        Object.assign(ticket, fields);
+        UI.showToast(
+          notesChanged ? 'Notas guardadas correctamente' : 'Imágenes guardadas correctamente',
+          'success'
+        );
+        renderTicketsTable();
+      } catch (err) {
+        UI.showToast(err.message || 'Error al guardar las notas.', 'error', 6000);
+        return;
+      }
     }
 
     closeNotesModal();
@@ -943,6 +1186,8 @@ const Tickets = (() => {
     deleteTicket,
     openTransferModal,
     setupNotesModalEvents,
+    getNotesAttachments,
+    setNotesAttachments,
   };
 
 })();

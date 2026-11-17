@@ -1641,6 +1641,7 @@ const App = (() => {
             <span class="notes-preview ${item.notes ? '' : 'notes-preview--empty'}"
                   onclick="window._openPosWebNotesModal('${escHtml(item.id)}')"
                   tabindex="0">${escHtml(item.notes || 'Sin notas')}</span>
+            ${Attachments.renderBadge(item.attachments)}
             <button class="notes-open-btn ${item.notes ? 'has-content' : ''}"
                     onclick="window._openPosWebNotesModal('${escHtml(item.id)}')"
                     title="Editar notas">
@@ -1749,6 +1750,10 @@ const App = (() => {
     document.getElementById('notes-char-count').style.display = '';
     document.getElementById('notes-char-count').textContent = (c.notes || '').length;
 
+    if (Tickets.setNotesAttachments) {
+      Tickets.setNotesAttachments(c.attachments || []);
+    }
+
     const modal = document.getElementById('notes-modal');
     modal.classList.remove('hidden');
     modal.classList.add('active');
@@ -1767,11 +1772,44 @@ const App = (() => {
     const newVal = textarea.value.trim();
     const state = getPosWebState();
     const c = state.cases.find(x => String(x.id) === String(caseId));
-    if (c && newVal !== (c.notes || '')) {
-      c.notes = newVal;
-      savePosWebState(state);
-      UI.showToast('Notas guardadas', 'success');
+    if (!c) {
+      window._posWebNotesCleanup();
+      Tickets.closeNotesModal();
+      return true;
     }
+
+    const attachments = Tickets.getNotesAttachments ? Tickets.getNotesAttachments() : [];
+    const notesChanged = newVal !== (c.notes || '');
+    const attachmentsChanged = JSON.stringify(attachments)
+      !== JSON.stringify(Attachments.sanitize(c.attachments || []));
+
+    if (notesChanged || attachmentsChanged) {
+      const projected = state.cases.map(x => String(x.id) === String(caseId)
+        ? Object.assign({}, x, { notes: newVal, attachments })
+        : x);
+      if (Attachments.estimateChars(projected) > Attachments.MAX_PROGRAMMER_CHARS) {
+        UI.showToast(
+          'No hay espacio suficiente para guardar estas imágenes. Elimina algunas o reduce su cantidad.',
+          'error',
+          7000
+        );
+        return true;
+      }
+
+      try {
+        c.notes = newVal;
+        c.attachments = attachments;
+        savePosWebState(state);
+        UI.showToast(
+          notesChanged ? 'Notas guardadas' : 'Imágenes guardadas',
+          'success'
+        );
+      } catch (err) {
+        UI.showToast(err.message || 'Error al guardar las notas.', 'error', 6000);
+        return true;
+      }
+    }
+
     window._posWebNotesCleanup();
     Tickets.closeNotesModal();
     return true;
@@ -2237,7 +2275,7 @@ const App = (() => {
         if (!appData.archives) appData.archives = [];
         appData.archives.push({
           periodName: appData.periodName || '(sin nombre)',
-          programmers: JSON.parse(JSON.stringify(appData.programmers)),
+          programmers: Storage.cloneProgrammersForSnapshot(appData.programmers),
           profiles: JSON.parse(JSON.stringify(appData.profiles || {})),
           loadedAt: appData.loadedAt,
         });

@@ -131,9 +131,48 @@ const Storage = (() => {
     return true;
   }
 
+  /**
+   * Actualiza varios campos de un ticket y persiste una sola vez.
+   * @param {string} programmerName
+   * @param {string|number} ticketId
+   * @param {Object} fields - Pares campo/valor a actualizar
+   * @returns {boolean} true si la actualización fue exitosa
+   */
+  function updateTicketFields(programmerName, ticketId, fields) {
+    const data = loadData();
+    if (!data || !data.programmers[programmerName]) return false;
+
+    const tickets = data.programmers[programmerName];
+    const ticket = tickets.find(t => t.id === ticketId);
+    if (!ticket) return false;
+
+    Object.keys(fields || {}).forEach(key => {
+      ticket[key] = fields[key];
+    });
+    saveData(data);
+    return true;
+  }
+
   // ----------------------------------------------------------------
   // PLANIFICACIONES (snapshots históricos)
   // ----------------------------------------------------------------
+
+  /**
+   * Copia los programadores para un snapshot histórico sin las imágenes
+   * adjuntas (evita superar el límite de 1 MB por documento en Firestore).
+   * @param {Object} programmers
+   * @returns {Object}
+   */
+  function cloneProgrammersForSnapshot(programmers) {
+    const copy = JSON.parse(JSON.stringify(programmers || {}));
+    Object.values(copy).forEach(tickets => {
+      if (!Array.isArray(tickets)) return;
+      tickets.forEach(ticket => {
+        if (ticket && ticket.attachments) delete ticket.attachments;
+      });
+    });
+    return copy;
+  }
 
   function savePlanification(name) {
     const data = loadData();
@@ -143,7 +182,10 @@ const Storage = (() => {
       id: 'plan_' + Date.now(),
       name: String(name).trim(),
       timestamp: new Date().toISOString(),
-      data: JSON.parse(JSON.stringify({ programmers: data.programmers, profiles: data.profiles || {} })),
+      data: {
+        programmers: cloneProgrammersForSnapshot(data.programmers),
+        profiles: JSON.parse(JSON.stringify(data.profiles || {})),
+      },
     };
     data.planifications.push(plan);
     saveData(data);
@@ -181,8 +223,10 @@ const Storage = (() => {
     clearPosWebData,
     updateTicketStatus,
     updateTicketField,
+    updateTicketFields,
     setOnSaveCallback,
     savePlanification,
+    cloneProgrammersForSnapshot,
     deletePlanification,
     getPlanification,
     getAllPlanifications,

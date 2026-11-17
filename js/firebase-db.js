@@ -36,6 +36,22 @@ const FirebaseDB = (() => {
   const LEGACY_COLLECTION = 'dashboard';
   const LEGACY_DOC = 'data';
 
+  // Límite de Firestore: 1 MB por documento. Se deja margen para metadatos.
+  const MAX_DOC_CHARS = 900000;
+
+  /**
+   * Indica si un payload supera el tamaño máximo permitido por documento.
+   * @param {*} payload
+   * @returns {boolean}
+   */
+  function isOversized(payload) {
+    try {
+      return JSON.stringify(payload).length > MAX_DOC_CHARS;
+    } catch (_) {
+      return false;
+    }
+  }
+
   // Cache del último estado conocido (local + remoto). Sirve para:
   //   - Calcular qué documentos cambiaron y escribir solo esos.
   //   - Reconstruir el objeto completo al recibir snapshots.
@@ -257,6 +273,17 @@ const FirebaseDB = (() => {
 
       const writes = computeWrites(data);
       if (writes.length === 0) return true;
+
+      // No intentar escribir documentos que superen el límite de Firestore.
+      const oversized = writes.find(w => w.type === 'set' && isOversized(w.payload));
+      if (oversized) {
+        console.error(
+          '[FirebaseDB] El documento supera el límite de Firestore (~900 KB). ' +
+          'Reduce las imágenes adjuntas de este programador.',
+          oversized.ref && oversized.ref.path
+        );
+        return false;
+      }
 
       // Guardar previo estado por si falla alguna escritura
       const prevProgrammers = cached.programmers;

@@ -2047,6 +2047,222 @@ img { display: block; max-width: 100%; }
 
 .notes-modal__counter.warn { color: var(--accent-warning); }
 
+/* --- Adjuntos de imágenes --- */
+.notes-attachments {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.notes-attachments__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.notes-attachments__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
+.notes-attachments__title svg { color: var(--accent-1); flex-shrink: 0; }
+
+.notes-attachments__hint {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.notes-attachments__size {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.notes-attachments__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: var(--space-sm);
+}
+
+.notes-attachments__grid:empty { display: none; }
+
+.attachment-thumb {
+  position: relative;
+  margin: 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-input);
+}
+
+.attachment-thumb__open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  line-height: 0;
+}
+
+.attachment-thumb__open img {
+  width: 100%;
+  height: 78px;
+  object-fit: cover;
+  display: block;
+  transition: transform .2s ease;
+}
+
+.attachment-thumb:hover .attachment-thumb__open img { transform: scale(1.04); }
+
+.attachment-thumb figcaption {
+  font-size: 10px;
+  color: var(--text-muted);
+  padding: 3px 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.attachment-thumb__remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(0, 0, 0, .65);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity .15s ease, background .15s ease;
+}
+
+.attachment-thumb:hover .attachment-thumb__remove,
+.attachment-thumb__remove:focus-visible { opacity: 1; }
+
+.attachment-thumb__remove:hover { background: var(--accent-danger); }
+
+.notes-attachments__drop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  border: 1.5px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  transition: border-color .2s ease, background .2s ease;
+}
+
+.notes-attachments__drop.is-dragover {
+  border-color: var(--accent-1);
+  background: rgba(99, 102, 241, .08);
+}
+
+.notes-attachments__drop.is-busy {
+  opacity: .6;
+  pointer-events: none;
+}
+
+.notes-attachments__drop-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.notes-attachments__drop .btn svg { width: 13px; height: 13px; }
+
+/* Badge de adjuntos en la celda de notas */
+.notes-attach-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-1);
+  background: rgba(99, 102, 241, .1);
+  border: 1px solid rgba(99, 102, 241, .25);
+}
+
+/* --- Lightbox de imágenes --- */
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: 64px 24px 24px;
+  background: rgba(4, 6, 18, .86);
+  backdrop-filter: blur(6px);
+}
+
+.image-lightbox__img {
+  max-width: min(1100px, 94vw);
+  max-height: calc(100vh - 170px);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  background: #fff;
+}
+
+.image-lightbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.image-lightbox__caption {
+  font-size: 12px;
+  color: rgba(255, 255, 255, .78);
+}
+
+.image-lightbox__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+
+.image-lightbox__close svg { width: 18px; height: 18px; }
+
+.image-lightbox__close:hover {
+  background: rgba(239, 68, 68, .75);
+  transform: rotate(90deg);
+}
+
 /* --- Footer --- */
 .notes-modal__footer {
   display: flex;
