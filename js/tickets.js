@@ -1012,6 +1012,7 @@ const Tickets = (() => {
 
     setupNotesModalEvents();
     setupAddTicketModal();
+    setupDuplicatesCleanup();
   }
 
   /**
@@ -1041,6 +1042,141 @@ const Tickets = (() => {
    */
   function getCurrentData() {
     return { name: currentProgrammer, tickets: currentTickets };
+  }
+
+  // ----------------------------------------------------------------
+  // ELIMINAR DUPLICADOS SIN NOTA
+  // ----------------------------------------------------------------
+
+  /**
+   * Indica si un ticket tiene contenido en la nota (texto o imágenes adjuntas).
+   * @param {Object} ticket
+   * @returns {boolean}
+   */
+  function ticketHasNote(ticket) {
+    if (String((ticket && ticket.notes) || '').trim() !== '') return true;
+    return Array.isArray(ticket && ticket.attachments)
+      && ticket.attachments.some(a => a && typeof a.dataUrl === 'string');
+  }
+
+  /**
+   * Detecta repeticiones de un mismo ticket que no tienen nota, siempre que
+   * otra repetición del mismo número sí la tenga. Se usa la misma
+   * normalización de número que la importación (0003125 = 3125).
+   * @param {Object[]} list
+   * @returns {{ tickets: Object[], keys: string[] }} tickets restantes y números afectados
+   */
+  function findDuplicatesWithoutNotes(list) {
+    const tickets = Array.isArray(list) ? list : [];
+    const groups = new Map();
+
+    tickets.forEach((ticket, index) => {
+      const key = typeof Parser !== 'undefined' && Parser.normalizeTicketKey
+        ? Parser.normalizeTicketKey(ticket && ticket.ticket)
+        : String((ticket && ticket.ticket) || '').trim().toLowerCase();
+      if (!key) return;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(index);
+    });
+
+    const drop = new Set();
+    const keys = [];
+
+    groups.forEach((indexes, key) => {
+      if (indexes.length < 2) return;
+      // Si ninguna repetición tiene nota, no se elimina nada: no hay información
+      // que permita decidir cuál conservar.
+      if (!indexes.some(i => ticketHasNote(tickets[i]))) return;
+
+      const withoutNote = indexes.filter(i => !ticketHasNote(tickets[i]));
+      if (!withoutNote.length) return;
+      withoutNote.forEach(i => drop.add(i));
+      keys.push(key);
+    });
+
+    return {
+      tickets: tickets.filter((_, index) => !drop.has(index)),
+      keys,
+    };
+  }
+
+  /**
+   * Actualiza anillo, subtítulo y badge de la vista con los tickets vigentes.
+   */
+  function refreshProgrammerSummary() {
+    const stats = Dashboard.calcStats(currentTickets);
+    updateRing(stats.pct);
+
+    const subtitle = document.getElementById('prog-subtitle');
+    if (subtitle) {
+      subtitle.textContent = `${stats.total} tickets · ${stats.solved} solventados · ${stats.noAplica} no aplica · ${stats.infoAdicional} informaci\u00f3n adicional · ${stats.inProgress} en proceso · ${stats.unsolved} sin resolver`;
+    }
+    updateSidebarBadge(currentProgrammer, stats.pct);
+  }
+
+  /**
+   * Elimina los tickets repetidos sin nota del programador actual, conservando
+   * la repetición que sí tiene comentario o imágenes en la nota.
+   */
+  function removeDuplicatesWithoutNotes() {
+    if (readOnly || !currentProgrammer || !currentTickets.length) return;
+
+    const preview = findDuplicatesWithoutNotes(currentTickets);
+    const previewCount = currentTickets.length - preview.tickets.length;
+    if (!previewCount) {
+      UI.showToast('No hay tickets repetidos sin nota para eliminar', 'info');
+      return;
+    }
+
+    const list = preview.keys.slice(0, 6).join(', ') + (preview.keys.length > 6 ? '…' : '');
+    UI.confirm(
+      'Eliminar tickets repetidos sin nota',
+      `Se eliminarán ${previewCount} ticket(s) repetido(s) sin nota de ${currentProgrammer} (${list}). Se conservarán los que tienen comentario o imágenes en la nota. ¿Continuar?`
+    ).then(confirmed => {
+      if (!confirmed) return;
+
+      const data = Storage.loadData();
+      if (!data || !data.programmers) {
+        UI.showToast('No se pudo acceder a los datos guardados', 'error');
+        return;
+      }
+
+      // Recalcular sobre lo guardado por si cambió mientras se confirmaba
+      const result = findDuplicatesWithoutNotes(data.programmers[currentProgrammer] || currentTickets);
+      const removed = (data.programmers[currentProgrammer] || currentTickets).length - result.tickets.length;
+      if (!removed) {
+        UI.showToast('No quedaron duplicados sin nota para eliminar', 'info');
+        return;
+      }
+
+      const previousTickets = currentTickets;
+      currentTickets = result.tickets;
+      data.programmers[currentProgrammer] = currentTickets;
+
+      try {
+        Storage.saveData(data);
+      } catch (err) {
+        currentTickets = previousTickets; // No mostrar cambios que no se pudieron guardar
+        UI.showToast('No se pudieron guardar los cambios: ' + err.message, 'error');
+        return;
+      }
+
+      refreshProgrammerSummary();
+      if (typeof App !== 'undefined' && App.syncProgrammerFromStorage) {
+        App.syncProgrammerFromStorage(currentProgrammer);
+        if (App.refreshProfiles) App.refreshProfiles();
+      }
+      renderTicketsTable();
+      UI.showToast(`Se eliminaron ${removed} ticket(s) repetido(s) sin nota`, 'success');
+    });
+  }
+
+  let duplicatesSetup = false;
+
+  function setupDuplicatesCleanup() {
+    if (duplicatesSetup) return;
+    duplicatesSetup = true;
+    document.getElementById('btn-remove-duplicates-prog')?.addEventListener('click', removeDuplicatesWithoutNotes);
   }
 
   // ----------------------------------------------------------------
@@ -1184,6 +1320,8 @@ const Tickets = (() => {
     openNotesModal,
     closeNotesModal,
     deleteTicket,
+    removeDuplicatesWithoutNotes,
+    findDuplicatesWithoutNotes,
     openTransferModal,
     setupNotesModalEvents,
     getNotesAttachments,
